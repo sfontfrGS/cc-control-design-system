@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CC Control — Design System</title>
+<link rel="stylesheet" href="tokens/tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--hz-font-family); background: var(--hz-control-bg-base); color: var(--hz-text-color-primary); }
+
+  .site-header {
+    background: var(--hz-bg-color-strong);
+    padding: 32px 48px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .site-header__logo { color: #E85D9A; font-weight: 700; font-size: 28px; }
+  .site-header__title { color: #fff; }
+  .site-header__title h1 { margin: 0; font-size: 20px; font-weight: 600; }
+  .site-header__title p  { margin: 4px 0 0; font-size: 13px; color: rgba(255,255,255,.55); }
+
+  .site-body { max-width: 960px; margin: 0 auto; padding: 48px 32px 80px; }
+
+  .status-bar {
+    background: #ebfbee; border: 1px solid #98e7b1; border-radius: 6px;
+    padding: 12px 16px; font-size: 13px; color: #0f7d4e; margin-bottom: 40px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 48px; }
+
+  .card {
+    background: #fff; border-radius: 8px; padding: 24px;
+    box-shadow: rgba(52,56,58,.06) 0 2px 4px 0, rgba(52,56,58,.18) 0 0 1px 0;
+    text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;
+    transition: box-shadow .15s;
+  }
+  .card:hover { box-shadow: rgba(52,56,58,.1) 0 4px 12px 0, rgba(52,56,58,.22) 0 0 1px 0; }
+
+  .card__eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--hz-text-color-secondary); }
+  .card__title   { font-size: 16px; font-weight: 600; color: var(--hz-text-color-primary); }
+  .card__desc    { font-size: 13px; color: var(--hz-text-color-secondary); line-height: 1.5; flex: 1; }
+  .card__badge   { align-self: flex-start; margin-top: 4px; display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .card__badge--live   { background: #ebfbee; color: #0f7d4e; }
+  .card__badge--wip    { background: #fffaeb; color: #a04406; }
+  .card__badge--ref    { background: #e6f0fd; color: #035bc6; }
+
+  h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--hz-text-color-secondary); margin: 0 0 16px; }
+
+  .divider { height: 1px; background: var(--hz-border-color-light); margin: 0 0 40px; }
+
+  footer { text-align: center; font-size: 12px; color: var(--hz-text-color-secondary); padding-bottom: 40px; }
+  footer a { color: var(--hz-primary-color); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__logo">CC</div>
+  <div class="site-header__title">
+    <h1>Control Design System</h1>
+    <p>Live-verified against dchdesign-en.insided.com &nbsp;·&nbsp; v0.1</p>
+  </div>
+</header>
+
+<div class="site-body">
+
+  <div class="status-bar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    All components verified against the live platform. Open via <strong>GitHub Pages</strong> or a local HTTP server — HTML includes don't work on <code>file://</code>.
+  </div>
+
+  <h2>Foundations</h2>
+  <div class="grid">
+    <a class="card" href="tokens/tokens.css">
+      <div class="card__eyebrow">Tokens</div>
+      <div class="card__title">Design Tokens</div>
+      <div class="card__desc">All <code>--hz-*</code> CSS custom properties — colors, typography, spacing, border radii. Source of truth for every component.</div>
+      <span class="card__badge card__badge--live">Live-verified</span>
+    </a>
+    <a class="card" href="components/components.html">
+      <div class="card__eyebrow">Components</div>
+      <div class="card__title">Component Library</div>
+      <div class="card__desc">Visual catalog of every component with HTML markup and CSS classes. Three button generations documented (Horizon, Mid, Legacy).</div>
+      <span class="card__badge card__badge--live">Live-verified</span>
+    </a>
+    <a class="card" href="tokens/icons.html">
+      <div class="card__eyebrow">Icons</div>
+      <div class="card__title">Icon Reference</div>
+      <div class="card__desc">Material Symbols Outlined reference grid with click-to-copy. Note: the live product uses a custom stroke icon set — see shell/nav-rail.html for real SVGs.</div>
+      <span class="card__badge card__badge--ref">Reference</span>
+    </a>
+  </div>
+
+  <div class="divider"></div>
+  <h2>Shell &amp; Layout</h2>
+  <div class="grid">
+    <a class="card" href="shell/shell.html">
+      <div class="card__eyebrow">Shell</div>
+      <div class="card__title">Full Shell Template</div>
+      <div class="card__desc">Complete page shell with icon rail, Settings flyout nav, topbar, and content area. Reference for the overall layout structure.</div>
+      <span class="card__badge card__badge--live">Live-verified</span>
+    </a>
+    <a class="card" href="components/components.css">
+      <div class="card__eyebrow">CSS</div>
+      <div class="card__title">Shared Stylesheet</div>
+      <div class="card__desc">Single CSS file with all component + shell layout styles. Link this in every prototype instead of inlining styles.</div>
+      <span class="card__badge card__badge--live">Shared</span>
+    </a>
+    <a class="card" href="interactions/design-system.js">
+      <div class="card__eyebrow">JavaScript</div>
+      <div class="card__title">Interactions</div>
+      <div class="card__desc">HTML includes (data-include), nav toggle, tabs, toggle switch, modals, and kebab menus. One script tag handles all shared behavior.</div>
+      <span class="card__badge card__badge--live">Shared</span>
+    </a>
+  </div>
+
+  <div class="divider"></div>
+  <h2>Prototypes</h2>
+  <div class="grid">
+    <a class="card" href="prototypes/_template.html">
+      <div class="card__eyebrow">Template</div>
+      <div class="card__title">New Prototype Starter</div>
+      <div class="card__desc">Copy this file to start any new screen. Includes all shared links and commented setup instructions.</div>
+      <span class="card__badge card__badge--ref">Template</span>
+    </a>
+    <a class="card" href="prototypes/users-overview.html">
+      <div class="card__eyebrow">Prototype · Users</div>
+      <div class="card__title">Users Overview</div>
+      <div class="card__desc">Bulk-select table with real toolbar, pagination, avatar cells, and row selection state.</div>
+      <span class="card__badge card__badge--live">Live screen</span>
+    </a>
+    <a class="card" href="prototypes/ai-settings.html">
+      <div class="card__eyebrow">Prototype · AI</div>
+      <div class="card__title">AI Settings</div>
+      <div class="card__desc">Settings card pattern with toggle switches, BETA badge, select triggers, and AI panel gradient border.</div>
+      <span class="card__badge card__badge--live">Live screen</span>
+    </a>
+    <a class="card" href="prototypes/moderate-topic.html">
+      <div class="card__eyebrow">Prototype · Content</div>
+      <div class="card__title">Moderate Topic</div>
+      <div class="card__desc">Topic thread view with card-wrapper pattern and sidebar moderation panels.</div>
+      <span class="card__badge card__badge--live">Live screen</span>
+    </a>
+    <a class="card" href="prototypes/ideation-status.html">
+      <div class="card__eyebrow">Prototype · Settings</div>
+      <div class="card__title">Ideation Status</div>
+      <div class="card__desc">Settings table with status pills, color swatches, and inline edit actions.</div>
+      <span class="card__badge card__badge--live">Live screen</span>
+    </a>
+  </div>
+
+  <footer>
+    <a href="https://github.com/sfontfrGS/cc-control-design-system">github.com/sfontfrGS/cc-control-design-system</a>
+    &nbsp;·&nbsp; Reverse-engineered from the live platform, 2026-09-08
+  </footer>
+
+</div>
+
+</body>
+</html>
