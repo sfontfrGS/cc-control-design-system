@@ -83,8 +83,8 @@
 
             <!-- Save row -->
             <div class="dirty-section__save-row">
-              <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">Cancel</button>
-              <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">Save</button>
+              <button class="button-control-new button-control-new--small button-control-new--secondary" type="button">Cancel</button>
+              <button class="button-control-new button-control-new--small button-control-new--primary" type="button">Save</button>
             </div>
 
           </div>
@@ -121,12 +121,10 @@
                 <p class="dirty-section__field-description">Enable or disable this feature across the community. Changes take effect immediately.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="switch is-on" role="switch" aria-checked="true" tabindex="0">
-                  <div class="switch__side">
-                    <span class="switch__on-half">ON</span>
-                    <span class="switch__off-half">OFF</span>
-                  </div>
-                  <div class="switch__knob"></div>
+                <div class="control-switcher on" role="switch" aria-checked="true">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
                 </div>
               </div>
             </div>
@@ -138,12 +136,10 @@
                 <p class="dirty-section__field-description">This feature is in beta. Enable it to try it out and share feedback with the team.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="switch is-off" role="switch" aria-checked="false" tabindex="0">
-                  <div class="switch__side">
-                    <span class="switch__on-half">ON</span>
-                    <span class="switch__off-half">OFF</span>
-                  </div>
-                  <div class="switch__knob"></div>
+                <div class="control-switcher off" role="switch" aria-checked="false">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
                 </div>
               </div>
             </div>
@@ -155,20 +151,18 @@
                 <p class="dirty-section__field-description">Newly released option. Turn it on to activate this capability for your community.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="switch is-off" role="switch" aria-checked="false" tabindex="0">
-                  <div class="switch__side">
-                    <span class="switch__on-half">ON</span>
-                    <span class="switch__off-half">OFF</span>
-                  </div>
-                  <div class="switch__knob"></div>
+                <div class="control-switcher off" role="switch" aria-checked="false">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
                 </div>
               </div>
             </div>
 
             <!-- Save row -->
             <div class="dirty-section__save-row">
-              <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">Cancel</button>
-              <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">Save</button>
+              <button class="button-control-new button-control-new--small button-control-new--secondary" type="button">Cancel</button>
+              <button class="button-control-new button-control-new--small button-control-new--primary" type="button">Save</button>
             </div>
 
           </div>
@@ -180,11 +174,12 @@
 
   <script>
     // Toggle switch click handler
-    document.querySelectorAll('.switch').forEach(sw => {
-      sw.addEventListener('click', () => {
-        const isOn = sw.classList.contains('is-on');
-        sw.classList.toggle('is-on', !isOn);
-        sw.classList.toggle('is-off', isOn);
+    document.querySelectorAll('.control-switcher').forEach(sw => {
+      sw.addEventListener('click', e => {
+        e.preventDefault();
+        const isOn = sw.classList.contains('on');
+        sw.classList.toggle('on', !isOn);
+        sw.classList.toggle('off', isOn);
         sw.setAttribute('aria-checked', String(!isOn));
       });
     });

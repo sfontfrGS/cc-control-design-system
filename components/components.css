@@ -93,7 +93,7 @@ body { display: flex; font-family: var(--hz-font-family); }
 }
 
 /* Page header */
-.page-header { padding: 20px 24px 0; background: #fff; }
+.page-header { padding: 20px 24px 0; background: #fff; border-bottom: 1px solid var(--hz-border-color-light); }
 .page-header h1 {
   font-size: var(--hz-heading-2-size);
   font-weight: var(--hz-font-weight-semibold);
@@ -264,15 +264,7 @@ body { display: flex; font-family: var(--hz-font-family); }
 .opt-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 14px; }
 input[type="checkbox"], input[type="radio"] { width: 14px; height: 14px; accent-color: var(--hz-primary-color); }
 
-/* Toggle switch (.control-switcher — live) */
-.switch { position: relative; width: 51px; height: 24px; display: inline-block; cursor: pointer; }
-.switch__track { position: absolute; inset: 0; border-radius: 3px; display: flex; }
-.switch__side  { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; }
-.switch__side.on-half  { background: var(--hz-primary-color); border-radius: 3px 0 0 3px; }
-.switch__side.off-half { background: var(--hz-border-color-base); color: #aeacac; border-radius: 0 3px 3px 0; }
-.switch__knob { position: absolute; top: 0; width: 26px; height: 24px; background: #fff; border: 1px solid #aeacac; border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,.15); transition: left .1s; }
-.switch.is-on  .switch__knob { left: 25px; }
-.switch.is-off .switch__knob { left: 0; }
+/* Toggle switch — removed, see .control-switcher below */
 
 /* Permission toggle */
 .perm-toggle { display: inline-flex; border: 1px solid var(--hz-border-color-base); border-radius: 4px; overflow: hidden; }
@@ -442,21 +434,45 @@ code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-famil
 .btn-sm:hover { background: var(--hz-bg-color-base-hover); }
 .btn-sm svg { width: 16px; height: 16px; }
 
-/* ===== TOGGLE SWITCH — updated to match live HTML structure ===== */
-/* Supports both the old track/side pattern and the live side/on-half/off-half pattern */
-.switch { position: relative; width: 51px; height: 24px; display: inline-block; cursor: pointer; flex: none; }
-/* Pattern A — .switch__track > .switch__side.on-half / .switch__side.off-half */
-.switch__track { position: absolute; inset: 0; border-radius: 3px; display: flex; }
-.switch__side  { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; }
-.switch__side.on-half  { background: var(--hz-primary-color); border-radius: 3px 0 0 3px; }
-.switch__side.off-half { background: var(--hz-border-color-base); color: #aeacac; border-radius: 0 3px 3px 0; }
-/* Pattern B — .switch__side (container) > .switch__on-half / .switch__off-half (live pattern) */
-div.switch__side { position: absolute; inset: 0; display: flex; border-radius: 3px; overflow: hidden; }
-.switch__on-half  { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; background: var(--hz-primary-color); }
-.switch__off-half { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #aeacac; background: var(--hz-border-color-base); }
-.switch__knob { position: absolute; top: 0; width: 26px; height: 24px; background: #fff; border: 1px solid #aeacac; border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,.15); transition: left .1s; }
-.switch.is-on  .switch__knob { left: 25px; }
-.switch.is-off .switch__knob { left: 0; }
+/* ===== TOGGLE SWITCH — .control-switcher (live class names, live computed styles) ===== */
+/* Real HTML (from dchdesign-en.insided.com):
+   <div class="control-switcher on">
+     <a class="toggle" href="#">[handle icon]</a>
+     <a class="ui-on"  href="#">[checkmark icon]</a>
+     <a class="ui-off" href="#">[cross icon]</a>
+   </div>
+   Real product uses the insided icon font for icons.
+   Design system uses inline SVGs for portability (see template-settings.html).
+*/
+.control-switcher {
+  position: relative; display: inline-flex; align-items: center;
+  width: 51px; height: 24px; cursor: pointer; flex: none;
+}
+.control-switcher .ui-on {
+  position: relative; z-index: 1; flex: none;
+  width: 25px; height: 20px;
+  background: #0369E9; border-radius: 2px 0 0 2px;
+  display: flex; align-items: center; justify-content: center;
+}
+.control-switcher .ui-off {
+  position: absolute; left: 25px; top: 50%; transform: translateY(-50%);
+  width: 25px; height: 20px;
+  background: #D5D9DE; border-radius: 0 2px 2px 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.control-switcher .toggle {
+  position: absolute; top: 0; z-index: 3;
+  width: 26px; height: 24px;
+  background: #fff; border: 1px solid #aeacac; border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.15); transition: left .1s;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+}
+.control-switcher.on  .toggle { left: 25px; }
+.control-switcher.off .toggle { left: 0; }
+.control-switcher .ui-on svg  { width: 10px; height: 10px; color: #fff; }
+.control-switcher .ui-off svg { width: 10px; height: 10px; color: #fff; }
+.control-switcher .toggle svg { width: 14px; height: 14px; color: #888; }
 
 /* ===== BADGE LABELS ===== */
 .badge-beta { display: inline-block; color: var(--hz-primary-color); border: 1px solid var(--hz-primary-color); border-radius: 4px; padding: 0 4px; font-size: 11px; font-weight: 600; }
@@ -622,3 +638,25 @@ td.col-xs-right, td.col-s-right { text-align: right; }
 .status-pill--published { background: #ebfbee; color: #0f7d4e; }
 .status-pill--draft     { background: #fffaeb; color: #a04406; }
 .status-pill--pending   { background: #e6f0fd; color: #035bc6; }
+
+/* Header inline search — used in topic/moderation page header (screenshot-verified) */
+.header-search { position: relative; display: inline-flex; align-items: center; }
+.header-search input {
+  height: 32px; width: 200px;
+  border: 1px solid var(--hz-border-color-base); border-radius: 4px;
+  padding: 0 28px 0 10px; font-size: 12px; font-family: var(--hz-font-family);
+  color: var(--hz-text-color-primary);
+}
+.header-search input::placeholder { color: var(--hz-text-color-placeholder); }
+.header-search__clear {
+  position: absolute; right: 4px;
+  border: none; background: none; padding: 4px; cursor: pointer;
+  color: var(--hz-text-color-secondary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; line-height: 1;
+}
+
+/* Post title + meta (inside .topic-wrapper, between author and body) */
+.post-category { margin-bottom: 8px; }
+.post-title { font-size: 18px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0 0 4px; line-height: 1.3; }
+.post-stats  { font-size: 12px; color: var(--hz-text-color-secondary); margin: 0 0 14px; }

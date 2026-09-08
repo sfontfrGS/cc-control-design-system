@@ -44,12 +44,15 @@
       <div class="control-header__row">
         <h2>Moderate Topic</h2>
         <div class="control-header__buttons">
-          <button class="btn-sm" type="button">Version History</button>
-          <button class="btn-sm" type="button">Mark as unread by team</button>
-          <button class="btn-sm" type="button">
-            Assign moderator
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+          <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Version History</span></div></div></button>
+          <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Mark as unread by team</span></div></div></button>
+          <button class="button-control-new button-control-new--small button-control-new--secondary button-control-new--endIcon" type="button">
+            <div><div><span class="button-control__title-text">Assign moderator</span></div><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg></div>
           </button>
+          <div class="header-search">
+            <input type="text" placeholder="Search topic…">
+            <button class="header-search__clear" type="button" aria-label="Clear search">×</button>
+          </div>
         </div>
       </div>
     </div>
@@ -137,8 +140,8 @@
                 <textarea id="field-notes" placeholder="Add a note visible only to team members…"></textarea>
               </div>
               <div class="details-save-row">
-                <button class="btn-sm" type="button">Cancel</button>
-                <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">Save</button>
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Save</span></div></div></button>
               </div>
             </div>
           </div>
@@ -187,6 +190,12 @@
                   <button class="kebab-btn" type="button" aria-label="Topic actions">⋮</button>
                 </div>
               </div>
+
+              <div class="post-category">
+                <span class="pill pill--info-bold">CONTACT SUPPORT</span>
+              </div>
+              <h3 class="post-title">How to contact support (when it's really needed!)</h3>
+              <p class="post-stats">0 replies · 0 views</p>
 
               <div class="post-body">
                 <p>If you ever find yourself in a situation where you need to escalate an issue to our support team, here's the best way to do it so we can help you quickly.</p>
@@ -248,8 +257,8 @@
           <div class="reply-composer">
             <textarea placeholder="Write a reply…"></textarea>
             <div class="reply-composer__footer">
-              <button class="btn-sm" type="button">Cancel</button>
-              <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">Post reply</button>
+              <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+              <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Post reply</span></div></div></button>
             </div>
           </div>
 

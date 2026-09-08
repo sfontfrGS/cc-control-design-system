@@ -88,7 +88,11 @@
                 <p class="dirty-section__field-description">Easily write community content or email campaigns with generative AI in Control. This also enables Community Recap and Topic Summary features.</p>
               </div>
               <div class="dirty-section__control">
-                <span class="switch is-on"><span class="switch__side"><span class="switch__on-half">✓</span><span class="switch__off-half">✕</span></span><span class="switch__knob"></span></span>
+                <div class="control-switcher on" role="switch" aria-checked="true">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                </div>
               </div>
             </div>
             <div class="dirty-section__field-row">
@@ -97,16 +101,24 @@
                 <p class="dirty-section__field-description">Adds suggested public tags to user-generated content. When enabled, new public tags may be created even if "Allow end users to add new public tags" is turned off.</p>
               </div>
               <div class="dirty-section__control">
-                <span class="switch is-off"><span class="switch__side"><span class="switch__on-half">✓</span><span class="switch__off-half">✕</span></span><span class="switch__knob"></span></span>
+                <div class="control-switcher off" role="switch" aria-checked="false">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                </div>
               </div>
             </div>
             <div class="dirty-section__field-row">
               <div class="dirty-section__field-info">
-                <p class="dirty-section__field-label">Community MCP <span class="beta-label">BETA</span></p>
+                <p class="dirty-section__field-label">Community MCP <span class="badge-beta">BETA</span></p>
                 <p class="dirty-section__field-description">Allow your external AI assistants to access and perform actions on your community through the Model Context Protocol (MCP).</p>
               </div>
               <div class="dirty-section__control">
-                <span class="switch is-off"><span class="switch__side"><span class="switch__on-half">✓</span><span class="switch__off-half">✕</span></span><span class="switch__knob"></span></span>
+                <div class="control-switcher off" role="switch" aria-checked="false">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                </div>
               </div>
             </div>
           </div>
@@ -117,11 +129,13 @@
   </div>
 
   <script>
-    document.querySelectorAll('.switch').forEach(sw => {
-      sw.style.cursor = 'pointer';
-      sw.addEventListener('click', () => {
-        sw.classList.toggle('is-on');
-        sw.classList.toggle('is-off');
+    document.querySelectorAll('.control-switcher').forEach(sw => {
+      sw.addEventListener('click', e => {
+        e.preventDefault();
+        const isOn = sw.classList.contains('on');
+        sw.classList.toggle('on', !isOn);
+        sw.classList.toggle('off', isOn);
+        sw.setAttribute('aria-checked', String(!isOn));
       });
     });
   </script>
