@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Screen Name — Prototype</title>
+<!--
+  Design System prototype template
+  ─────────────────────────────────────────────────────────────────────────────
+  SETUP
+  1. Rename this file (e.g. my-screen.html)
+  2. Update <title> and the <h1> below
+  3. Set data-active-item on <body> to match a rail icon title:
+       "Add" | "Home" | "Content" | "Email" | "Users" |
+       "Analytics" | "Platform" | "Gamification" | "Customization" |
+       "Integrations" | "AI" | "Settings"
+  4. If the section has a nav panel, add .nav-panel HTML after the rail include
+  5. Replace the placeholder-card with your screen content
+  6. Open via HTTP server (npx serve . / VS Code Live Server / GitHub Pages)
+     HTML includes do NOT work on file:// protocol
+  ─────────────────────────────────────────────────────────────────────────────
+-->
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/components.css">
+<style>
+  /* Prototype-specific styles go here */
+</style>
+</head>
+<body data-active-item="Home">
+
+  <!-- Icon rail (12 icons, live-extracted SVGs) -->
+  <div data-include="../shell/nav-rail.html"></div>
+
+  <!--
+    Optional: add a nav panel for sections that have one.
+    Example — Settings:
+
+    <aside class="nav-panel" aria-label="Section">
+      <div class="nav-panel__title">Settings</div>
+      <div class="nav-panel__section">
+        <div class="nav-panel__group-label">Platform</div>
+        <a class="nav-panel__link active" href="#">Ideation Status</a>
+        <a class="nav-panel__link" href="#">Event Types</a>
+      </div>
+    </aside>
+  -->
+
+  <!-- Main column -->
+  <div class="main">
+
+    <div data-include="../shell/topbar.html"></div>
+
+    <div class="page-header">
+      <h1>Screen title</h1>
+    </div>
+
+    <main class="content">
+      <div class="placeholder-card">
+        Replace this block with your screen content.<br>
+        Components are in <a href="../components/components.html">components/components.html</a>.
+      </div>
+    </main>
+
+  </div><!-- /.main -->
+
+  <script src="../interactions/design-system.js"></script>
+</body>
+</html>

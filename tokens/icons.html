@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Icon Set — Google Material Symbols</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0&display=block" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 40px 120px; background: #fff; color: var(--hz-text-color-primary); font-family: var(--hz-font-family); }
+  h1 { font-size: 28px; margin-bottom: 4px; }
+  .subtitle { color: var(--hz-text-color-secondary); margin-bottom: 24px; max-width: 700px; }
+  .note {
+    background: var(--hz-bg-color-warning); border: 1px solid var(--hz-border-color-warning);
+    border-radius: var(--hz-border-radius-small); padding: 16px; font-size: 14px; margin-bottom: 32px; max-width: 800px;
+  }
+  .note code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 4px; font-family: var(--hz-code-family); font-size: 13px; }
+
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  section { margin-bottom: 40px; }
+  section > h2 { font-size: var(--hz-heading-3-size); border-bottom: 1px solid var(--hz-border-color-light); padding-bottom: 8px; margin-bottom: 16px; }
+
+  .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
+  .icon-cell {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    border: 1px solid var(--hz-border-color-light); border-radius: var(--hz-border-radius-small);
+    padding: 16px 8px; text-align: center; cursor: pointer; background: #fff;
+  }
+  .icon-cell:hover { background: var(--hz-bg-color-base-hover); border-color: var(--hz-border-color-base); }
+  .icon-cell .material-symbols-outlined { color: var(--hz-icon-color-normal); }
+  .icon-cell__name { font-size: 11px; color: var(--hz-text-color-secondary); word-break: break-word; }
+  .icon-cell.copied { border-color: var(--hz-success-color); background: var(--hz-bg-color-success); }
+
+  code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-family: var(--hz-code-family); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Icon Set — Google Material Symbols</h1>
+<p class="subtitle">The whole Material Symbols Outlined family (~2,500 icons) is loaded via Google Fonts below, so <strong>any</strong> icon name works immediately — not just the ones shown here. This page curates the ones actually used across our prototypes so far, for quick copy-paste, plus the pattern for pulling any other icon from the full set.</p>
+
+<div class="note">
+  <strong>How to use any icon, including ones not shown below:</strong><br>
+  1. Find its name at <a href="https://fonts.google.com/icons" target="_blank" rel="noreferrer">fonts.google.com/icons</a> (use the "Outlined" style to match this design system).<br>
+  2. Add this markup: <code>&lt;span class="material-symbols-outlined"&gt;icon_name&lt;/span&gt;</code><br>
+  3. Make sure the page <code>&lt;head&gt;</code> includes the font link from the top of this file's source.<br>
+  Size via <code>font-size</code>, color via <code>color</code> — same as any inline text.
+</div>
+
+<section>
+  <h2>Navigation &amp; layout</h2>
+  <div class="icon-grid">
+    <div class="icon-cell"><span class="material-symbols-outlined">add</span><span class="icon-cell__name">add</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">home</span><span class="icon-cell__name">home</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">description</span><span class="icon-cell__name">description</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">mail</span><span class="icon-cell__name">mail</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">group</span><span class="icon-cell__name">group</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">bar_chart</span><span class="icon-cell__name">bar_chart</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">grid_view</span><span class="icon-cell__name">grid_view</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">star</span><span class="icon-cell__name">star</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">trending_up</span><span class="icon-cell__name">trending_up</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">hub</span><span class="icon-cell__name">hub</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">auto_awesome</span><span class="icon-cell__name">auto_awesome</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">settings</span><span class="icon-cell__name">settings</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">arrow_back</span><span class="icon-cell__name">arrow_back</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">chevron_right</span><span class="icon-cell__name">chevron_right</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">expand_more</span><span class="icon-cell__name">expand_more</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">keyboard_arrow_up</span><span class="icon-cell__name">keyboard_arrow_up</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">more_horiz</span><span class="icon-cell__name">more_horiz</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">more_vert</span><span class="icon-cell__name">more_vert</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">drag_indicator</span><span class="icon-cell__name">drag_indicator</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">close</span><span class="icon-cell__name">close</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Actions</h2>
+  <div class="icon-grid">
+    <div class="icon-cell"><span class="material-symbols-outlined">search</span><span class="icon-cell__name">search</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">filter_list</span><span class="icon-cell__name">filter_list</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">refresh</span><span class="icon-cell__name">refresh</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">edit</span><span class="icon-cell__name">edit</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">delete</span><span class="icon-cell__name">delete</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">content_copy</span><span class="icon-cell__name">content_copy</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">upload</span><span class="icon-cell__name">upload</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">download</span><span class="icon-cell__name">download</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">photo_camera</span><span class="icon-cell__name">photo_camera</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">open_in_new</span><span class="icon-cell__name">open_in_new</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">link</span><span class="icon-cell__name">link</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">share</span><span class="icon-cell__name">share</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">thumb_up</span><span class="icon-cell__name">thumb_up</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">chat_bubble</span><span class="icon-cell__name">chat_bubble</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">notifications</span><span class="icon-cell__name">notifications</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">notifications_off</span><span class="icon-cell__name">notifications_off</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">visibility</span><span class="icon-cell__name">visibility</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">visibility_off</span><span class="icon-cell__name">visibility_off</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">bookmark</span><span class="icon-cell__name">bookmark</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">calendar_today</span><span class="icon-cell__name">calendar_today</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Status &amp; feedback</h2>
+  <div class="icon-grid">
+    <div class="icon-cell"><span class="material-symbols-outlined">check_circle</span><span class="icon-cell__name">check_circle</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">cancel</span><span class="icon-cell__name">cancel</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">error</span><span class="icon-cell__name">error</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">warning</span><span class="icon-cell__name">warning</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">info</span><span class="icon-cell__name">info</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">help</span><span class="icon-cell__name">help</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">lock</span><span class="icon-cell__name">lock</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">add_circle</span><span class="icon-cell__name">add_circle</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">remove_circle</span><span class="icon-cell__name">remove_circle</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">sentiment_satisfied</span><span class="icon-cell__name">sentiment_satisfied</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">sentiment_neutral</span><span class="icon-cell__name">sentiment_neutral</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">sentiment_dissatisfied</span><span class="icon-cell__name">sentiment_dissatisfied</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">schedule</span><span class="icon-cell__name">schedule</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">flag</span><span class="icon-cell__name">flag</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>People &amp; identity</h2>
+  <div class="icon-grid">
+    <div class="icon-cell"><span class="material-symbols-outlined">person</span><span class="icon-cell__name">person</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">group_add</span><span class="icon-cell__name">group_add</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">shield</span><span class="icon-cell__name">shield</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">verified</span><span class="icon-cell__name">verified</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">badge</span><span class="icon-cell__name">badge</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">military_tech</span><span class="icon-cell__name">military_tech</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">emoji_events</span><span class="icon-cell__name">emoji_events</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Config &amp; system</h2>
+  <div class="icon-grid">
+    <div class="icon-cell"><span class="material-symbols-outlined">palette</span><span class="icon-cell__name">palette</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">code</span><span class="icon-cell__name">code</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">integration_instructions</span><span class="icon-cell__name">integration_instructions</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">key</span><span class="icon-cell__name">key</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">language</span><span class="icon-cell__name">language</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">public</span><span class="icon-cell__name">public</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">tune</span><span class="icon-cell__name">tune</span></div>
+    <div class="icon-cell"><span class="material-symbols-outlined">science</span><span class="icon-cell__name">science</span></div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.icon-cell').forEach(cell => {
+    cell.addEventListener('click', () => {
+      const name = cell.querySelector('.icon-cell__name').textContent;
+      navigator.clipboard?.writeText(`<span class="material-symbols-outlined">${name}</span>`);
+      cell.classList.add('copied');
+      setTimeout(() => cell.classList.remove('copied'), 700);
+    });
+  });
+</script>
+
+</body>
+</html>
