@@ -56,13 +56,13 @@ body { display: flex; font-family: var(--hz-font-family); }
   transition: width .15s ease, flex-basis .15s ease;
 }
 .nav-panel.is-hidden { width: 0; flex: 0 0 0; overflow: hidden; padding: 0; }
-.nav-panel__title { font-size: 18px; font-weight: 600; color: #181F26; padding: 0 24px; }
+.nav-panel__title { font-size: 18px; font-weight: 700; color: #181F26; padding: 0 24px; }
 .nav-panel__section { display: flex; flex-direction: column; }
 .nav-panel__group-label {
   font-size: 12px; font-weight: 400; letter-spacing: 1px;
   text-transform: uppercase; color: #3C4A57; padding: 0 24px 8px;
 }
-.nav-panel__link { display: block; padding: 8px 24px; font-size: 14px; color: #181F26; text-decoration: none; }
+.nav-panel__link { display: block; padding: 8px 24px; margin: 0 8px; border-radius: 2px; font-size: 14px; color: #181F26; text-decoration: none; }
 .nav-panel__link:hover { background: var(--hz-bg-color-base-hover); }
 .nav-panel__link.active {
   background: var(--hz-bg-color-secondary);
@@ -92,12 +92,15 @@ body { display: flex; font-family: var(--hz-font-family); }
   font-size: 11px; font-weight: 600;
 }
 
-/* Page header — deprecated, use .control-header instead */
-.page-header { padding: 0 20px; background: #fff; border-bottom: 1px solid #c7c7c7; display: flex; align-items: center; min-height: 56px; flex: none; }
-.page-header h1, .page-header h2 { font-size: 21px; font-weight: 400; line-height: 32px; color: #181F26; margin: 0 8px 0 0; }
+/* Page header — large standalone heading used on settings/detail pages */
+.page-header { padding: 28px 40px 4px; background: #fff; flex: none; }
+.page-header h1 { font-size: 26px; font-weight: 700; color: #181F26; margin: 0; line-height: 1.3; }
 
 /* Content area */
 .content { flex: 1; overflow-y: auto; padding: 24px; background: var(--hz-control-bg-base); }
+/* Settings page variant: white bg, centered 720px column */
+.content--settings { background: #fff; padding: 24px 40px 60px; }
+.content--settings .dirty-section { max-width: 720px; }
 
 .placeholder-card {
   background: var(--hz-component-background);
@@ -468,6 +471,21 @@ code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-famil
 .control-switcher .ui-on svg  { width: 10px; height: 10px; color: #fff; }
 .control-switcher .ui-off svg { width: 10px; height: 10px; color: #fff; }
 .control-switcher .toggle svg { width: 14px; height: 14px; color: #888; }
+
+/* ===== FEAT-TOGGLE — two-button segmented on/off control (settings pages) ===== */
+.feat-toggle { display: inline-flex; border: 1px solid var(--hz-border-color-base); border-radius: 6px; overflow: hidden; }
+.feat-toggle__btn {
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  border: none; background: #fff; color: #aeb4bb; cursor: pointer; padding: 0;
+}
+.feat-toggle__btn svg { width: 14px; height: 14px; display: block; }
+.feat-toggle__btn--on[aria-pressed="true"]  { background: #0369e9; color: #fff; }
+.feat-toggle__btn--off[aria-pressed="true"] { background: #5b6472; color: #fff; }
+.feat-toggle__btn .feat-icon--neutral { display: block; }
+.feat-toggle__btn .feat-icon--real    { display: none; }
+.feat-toggle__btn[aria-pressed="true"] .feat-icon--neutral { display: none; }
+.feat-toggle__btn[aria-pressed="true"] .feat-icon--real    { display: block; }
 
 /* ===== BADGE LABELS ===== */
 .badge-beta { display: inline-block; color: var(--hz-primary-color); border: 1px solid var(--hz-primary-color); border-radius: 4px; padding: 0 4px; font-size: 11px; font-weight: 600; }
