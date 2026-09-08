@@ -6,21 +6,7 @@
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../components/components.css">
 <style>
-
   .avatar-initial { width: 28px; height: 28px; border-radius: 50%; color: #fff; display: inline-flex; align-items:center; justify-content:center; font-size: 12px; flex: none; background:#9ADBD5; }
-
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--hz-font-family); font-weight: 600; border-radius: 4px; cursor: pointer; border: 1px solid var(--hz-border-color-base); background: #fff; color: var(--hz-text-color-primary); height: 32px; padding: 0 12px; font-size: 12px; white-space: nowrap; }
-  .btn--primary { background: var(--hz-primary-color); color: #fff; border-color: var(--hz-primary-color); }
-  .btn--secondary-sm { height: 32px; padding: 0 12px; font-size: 12px; }
-
-  /* ============ Table ============ */
-  .table-card { background: #fff; border: 1px solid var(--hz-border-color-light); border-radius: var(--hz-border-radius-base); overflow: hidden; }
-  /* real: table-layout fixed, 5 equal-width data columns, NO row divider borders at all */
-  table.dt { border-collapse: collapse; width: 100%; font-size: 14px; table-layout: fixed; }
-  table.dt th { text-align: left; padding: 8px 12px; font-weight: 700; white-space: nowrap; }
-  table.dt th:first-child { width: 24px; }
-  table.dt td { padding: 8px 12px; vertical-align: middle; height: 49px; }
-  table.dt td:first-child { width: 24px; }
   .th-info { display: inline-flex; align-items: center; gap: 4px; }
   .drag-handle { color: var(--hz-text-color-disabled); cursor: grab; width: 24px; text-align: center; }
 
@@ -74,7 +60,7 @@
 
     <div class="page-header">
       <h1>Ideation Status</h1>
-      <button class="btn btn--primary">Add new status</button>
+      <button class="button-control-new button-control-new--medium button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Add new status</span></div></div></button>
     </div>
 
     <main class="content">
@@ -100,7 +86,7 @@
               <td>Open</td>
               <td><span class="color-cell"><span class="color-swatch-round" style="background:#0C66E4;"></span>#0c66e4</span></td>
               <td><span class="color-cell"><span class="color-swatch-round" style="background:#FFFFFF;"></span>#ffffff</span></td>
-              <td><button class="btn btn--secondary-sm">Edit</button></td>
+              <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
             </tr>
             <tr>
               <td class="drag-handle">⠿</td>
@@ -108,7 +94,7 @@
               <td>Open</td>
               <td><span class="color-cell"><span class="color-swatch-round" style="background:#C26400;"></span>#c26400</span></td>
               <td><span class="color-cell"><span class="color-swatch-round" style="background:#FFFFFF;"></span>#ffffff</span></td>
-              <td><button class="btn btn--secondary-sm">Edit</button> <button class="btn btn--secondary-sm">Delete</button></td>
+              <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button> <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Delete</span></div></div></button></td>
             </tr>
             <tr>
               <td class="drag-handle">⠿</td>
@@ -116,7 +102,7 @@
               <td>Delivered</td>
               <td><span class="color-cell"><span class="color-swatch-round" style="background:#1F8444;"></span>#1f8444</span></td>
               <td><span class="color-cell"><span class="color-swatch-round" style="background:#FFFFFF;"></span>#ffffff</span></td>
-              <td><button class="btn btn--secondary-sm">Edit</button> <button class="btn btn--secondary-sm">Delete</button></td>
+              <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button> <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Delete</span></div></div></button></td>
             </tr>
             <tr>
               <td class="drag-handle">⠿</td>
@@ -124,7 +110,7 @@
               <td>Closed</td>
               <td><span class="color-cell"><span class="color-swatch-round" style="background:#696E7C;"></span>#696e7c</span></td>
               <td><span class="color-cell"><span class="color-swatch-round" style="background:#FFFFFF;"></span>#ffffff</span></td>
-              <td><button class="btn btn--secondary-sm">Edit</button> <button class="btn btn--secondary-sm">Delete</button></td>
+              <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button> <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Delete</span></div></div></button></td>
             </tr>
           </tbody>
         </table>

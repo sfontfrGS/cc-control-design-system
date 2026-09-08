@@ -26,11 +26,11 @@
   <div class="main">
     <div data-include="../shell/topbar.html"></div>
 
-    <div class="control-header">
-      <h2 class="control-header__title">Moderation AI Agent</h2>
+    <div class="page-header">
+      <h1>Moderation AI Agent</h1>
     </div>
 
-    <main class="content">
+    <main class="content content--settings">
 
       <!-- ──────────────────────────────────────────────────────────────
            SECTION HEADER: AI Moderation ON badge
@@ -52,10 +52,15 @@
                 <p class="dirty-section__field-description">Automatically review new posts and replies using AI before they are published. Posts that violate your community rules will be flagged or hidden pending human review.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="control-switcher on js-main-toggle" id="mainToggle" role="switch" aria-checked="true">
-                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
-                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
-                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                <div class="feat-toggle" id="mainToggle" role="group" aria-label="Enable AI Moderation">
+                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="true" title="Enable">
+                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
+                  </button>
+                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="false" title="Disable">
+                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -106,10 +111,15 @@
                 <p class="dirty-section__field-description">Apply AI moderation to replies in addition to top-level posts.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="control-switcher on" role="switch" aria-checked="true">
-                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
-                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
-                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                <div class="feat-toggle" role="group" aria-label="Moderate replies">
+                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="true" title="Enable">
+                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
+                  </button>
+                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="false" title="Disable">
+                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -189,10 +199,15 @@
                 <p class="dirty-section__field-description">Send an in-platform notification to moderators when the AI flags a post for review.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="control-switcher on" role="switch" aria-checked="true">
-                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
-                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
-                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                <div class="feat-toggle" role="group" aria-label="Notify moderators on flag">
+                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="true" title="Enable">
+                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
+                  </button>
+                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="false" title="Disable">
+                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -204,10 +219,15 @@
                 <p class="dirty-section__field-description">Send a daily email digest to moderators summarising AI-flagged content from the previous 24 hours.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="control-switcher off" role="switch" aria-checked="false">
-                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
-                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
-                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                <div class="feat-toggle" role="group" aria-label="Daily moderation summary email">
+                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="false" title="Enable">
+                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
+                  </button>
+                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="true" title="Disable">
+                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -225,33 +245,35 @@
   </div>
 
   <script>
-    // All toggle switches
-    document.querySelectorAll('.control-switcher').forEach(sw => {
-      sw.addEventListener('click', e => {
-        e.preventDefault();
-        const isOn = sw.classList.contains('on');
-        sw.classList.toggle('on', !isOn);
-        sw.classList.toggle('off', isOn);
-        sw.setAttribute('aria-checked', String(!isOn));
+    document.querySelectorAll('.feat-toggle').forEach(function(group) {
+      var btns = group.querySelectorAll('.feat-toggle__btn');
+      btns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          btns.forEach(function(b) { b.setAttribute('aria-pressed', String(b === btn)); });
+        });
       });
     });
 
     // Main toggle also updates the ON/OFF section badge
-    document.getElementById('mainToggle').addEventListener('click', () => {
-      const badge = document.getElementById('sectionBadge');
-      const isNowOn = document.getElementById('mainToggle').classList.contains('on');
-      badge.textContent = isNowOn ? 'ON' : 'OFF';
-      badge.className = 'moderation-agent__badge ' + (isNowOn ? 'moderation-agent__badge--on' : 'moderation-agent__badge--off');
-    });
+    const mainToggleGroup = document.getElementById('mainToggle');
+    if (mainToggleGroup) {
+      mainToggleGroup.querySelectorAll('.feat-toggle__btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const isOn = btn.classList.contains('feat-toggle__btn--on');
+          const badge = document.getElementById('sectionBadge');
+          if (badge) {
+            badge.textContent = isOn ? 'ON' : 'OFF';
+            badge.className = 'moderation-agent__badge ' + (isOn ? 'moderation-agent__badge--on' : 'moderation-agent__badge--off');
+          }
+        });
+      });
+    }
 
-    // Code of conduct char counter
     const cocTextarea = document.getElementById('cocTextarea');
     const cocCharCount = document.getElementById('cocCharCount');
     if (cocTextarea) {
       cocTextarea.addEventListener('input', () => { cocCharCount.textContent = cocTextarea.value.length; });
     }
-
-    // Tag field — remove tags
     document.querySelectorAll('.tag-field__tag-remove').forEach(btn => {
       btn.addEventListener('click', () => {
         btn.closest('.tag-field__tag').remove();
