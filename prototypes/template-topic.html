@@ -166,6 +166,61 @@
         <!-- ── RIGHT: Posts thread ── -->
         <section class="topic-moderation-section" aria-label="Topic content">
 
+          <!-- AI Summary card — rendered above the thread when AI summary is available -->
+          <div class="ts-card" data-expanded="false" data-state="fresh" data-collapsed="false">
+            <div class="ts-head">
+              <div class="ts-head__left">
+                <div class="ts-title">
+                  <svg class="ts-star" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="ts-star-grad" x1="0" y1="1" x2="1" y2="0">
+                        <stop offset="0" stop-color="#e879c6"/>
+                        <stop offset="0.55" stop-color="#a855f7"/>
+                        <stop offset="1" stop-color="#7c6cf5"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M10 1.5l2.39 4.84 5.35.78-3.87 3.77.91 5.32L10 13.77l-4.78 2.44.91-5.32L2.26 7.12l5.35-.78L10 1.5z" fill="url(#ts-star-grad)"/>
+                  </svg>
+                  <span>AI Summary</span>
+                </div>
+                <p class="ts-sub">Generated 1 hour ago from the original post and 2 replies. AI summaries can make mistakes.</p>
+              </div>
+              <div class="ts-head__right">
+                <button class="ts-refresh" type="button" aria-label="Refresh summary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                  <span class="ts-refresh__dot"></span>
+                </button>
+                <button class="ts-collapse" type="button" aria-label="Collapse summary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="ts-strip">
+              <span class="ts-pill ts-pill--positive">Positive</span>
+              <span class="ts-pill ts-pill--resolved">Resolved</span>
+              <span class="ts-strip__stale">Summary may be outdated</span>
+            </div>
+            <p class="ts-lede"><a class="ts-mention" href="#">@Dana</a> explains how to contact support effectively, covering self-service steps and escalation paths for unresolved issues.</p>
+            <p class="ts-subtitle">Discussion</p>
+            <div class="ts-body">
+              <p>The article received positive feedback — <a class="ts-mention" href="#">@Anna</a> confirmed the Contact Support flow was straightforward and found the account ID tip particularly useful.</p>
+              <p>No unresolved concerns surfaced in the replies. The thread is considered settled with no further action required by the moderation team.</p>
+            </div>
+            <div class="ts-foot">
+              <button class="ts-toggle" type="button">Show more details</button>
+            </div>
+            <div class="ts-verdict">
+              <div class="ts-verdict__item">
+                <span class="ts-metric__label">Sentiment</span>
+                <span class="ts-pill ts-pill--positive">Positive</span>
+              </div>
+              <div class="ts-verdict__item">
+                <span class="ts-metric__label">Outcome</span>
+                <span class="ts-pill ts-pill--resolved">Resolved</span>
+              </div>
+            </div>
+          </div>
+
           <!-- Opening post -->
           <div class="box qa-topic-first-post">
             <article class="topic-wrapper">
@@ -272,6 +327,28 @@
     document.querySelectorAll('.m-section-header').forEach(header => {
       header.addEventListener('click', () => {
         header.closest('.m-section').classList.toggle('is-collapsed');
+      });
+    });
+
+    // ts-card: collapse toggle
+    document.querySelectorAll('.ts-collapse').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.ts-card');
+        const collapsed = card.dataset.collapsed === 'true';
+        card.dataset.collapsed = collapsed ? 'false' : 'true';
+        btn.querySelector('svg path').setAttribute('d', collapsed
+          ? 'M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z'
+          : 'M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z');
+      });
+    });
+
+    // ts-card: show more / show less
+    document.querySelectorAll('.ts-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.ts-card');
+        const expanded = card.dataset.expanded === 'true';
+        card.dataset.expanded = expanded ? 'false' : 'true';
+        btn.textContent = expanded ? 'Show more details' : 'Show less';
       });
     });
   </script>
