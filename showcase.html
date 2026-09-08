@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Component Showcase — CC Design System</title>
+<link rel="stylesheet" href="tokens/tokens.css">
+<link rel="stylesheet" href="components/components.css">
+<style>
+  /* Showcase layout only */
+  body { background: #F5F7F9; font-family: var(--hz-font-family); margin: 0; padding: 0; }
+  .sc-wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 96px; }
+  .sc-page-title { font-size: 28px; font-weight: 700; color: #181F26; margin: 0 0 4px; }
+  .sc-page-sub { font-size: 14px; color: var(--hz-text-color-secondary); margin: 0 0 48px; }
+  .sc-section { margin-bottom: 56px; }
+  .sc-section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #5F6C7A; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--hz-border-color-light); }
+  .sc-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+  .sc-row--col { flex-direction: column; gap: 8px; }
+  .sc-label { font-size: 11px; color: var(--hz-text-color-secondary); margin-bottom: 4px; }
+  .sc-block { background: #fff; border: 1px solid var(--hz-border-color-light); border-radius: 6px; padding: 20px; margin-bottom: 12px; }
+  .sc-block--dark { background: #2B3440; }
+  code { font-family: var(--hz-code-family, monospace); font-size: 11px; background: #F0F2F4; padding: 2px 6px; border-radius: 3px; color: #5F6C7A; display: inline-block; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="sc-wrap">
+
+  <h1 class="sc-page-title">Component Showcase</h1>
+  <p class="sc-page-sub">CC Control Design System · All live-verified components from dchdesign-en.insided.com</p>
+
+  <!-- ══════════════════════════════════════════════════
+       BUTTONS
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Buttons — button-control-new (Horizon / current)</div>
+
+    <div class="sc-label">Secondary (default)</div>
+    <div class="sc-row">
+      <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Small</span></div></div></button>
+      <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Medium</span></div></div></button>
+    </div>
+
+    <div class="sc-label">Primary</div>
+    <div class="sc-row">
+      <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Small</span></div></div></button>
+      <button class="button-control-new button-control-new--medium button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Medium</span></div></div></button>
+    </div>
+
+    <div class="sc-label">Danger</div>
+    <div class="sc-row">
+      <button class="button-control-new button-control-new--small button-control-new--danger" type="button"><div><div><span class="button-control__title-text">Small</span></div></div></button>
+      <button class="button-control-new button-control-new--medium button-control-new--danger" type="button"><div><div><span class="button-control__title-text">Medium</span></div></div></button>
+    </div>
+
+    <div class="sc-label">With end icon (endIcon variant)</div>
+    <div class="sc-row">
+      <button class="button-control-new button-control-new--small button-control-new--secondary button-control-new--endIcon" type="button">
+        <div><div><span class="button-control__title-text">OpenAI</span></div><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg></div>
+      </button>
+      <button class="button-control-new button-control-new--medium button-control-new--secondary button-control-new--endIcon" type="button">
+        <div><div><span class="button-control__title-text">Assign moderator</span></div><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       TOGGLE SWITCH
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Toggle Switch — .control-switcher</div>
+    <div class="sc-block">
+      <div class="sc-row">
+        <div>
+          <div class="sc-label">ON state</div>
+          <div class="control-switcher on" role="switch" aria-checked="true">
+            <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+            <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+            <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <div class="sc-label">OFF state</div>
+          <div class="control-switcher off" role="switch" aria-checked="false">
+            <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+            <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+            <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <div class="sc-label">Interactive (click to toggle)</div>
+          <div class="control-switcher off js-toggle" role="switch" aria-checked="false">
+            <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+            <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+            <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       PILLS / BADGES
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Pills — .pill</div>
+    <div class="sc-block">
+      <div class="sc-row">
+        <span class="pill pill--default">Default</span>
+        <span class="pill pill--info">Info</span>
+        <span class="pill pill--info-bold">Info bold</span>
+        <span class="pill pill--success">Success</span>
+        <span class="pill pill--success-bold">Success bold</span>
+        <span class="pill pill--warning">Warning</span>
+        <span class="pill pill--danger">Danger</span>
+      </div>
+    </div>
+    <div class="sc-section-title" style="margin-top:24px;">Badge Labels — .badge-beta / .badge-new</div>
+    <div class="sc-block">
+      <div class="sc-row">
+        <span class="badge-beta">BETA</span>
+        <span class="badge-new">NEW</span>
+      </div>
+    </div>
+    <div class="sc-section-title" style="margin-top:24px;">Status Pills — .status-pill (topic/post)</div>
+    <div class="sc-block">
+      <div class="sc-row">
+        <span class="status-pill status-pill--published">Published</span>
+        <span class="status-pill status-pill--draft">Draft</span>
+        <span class="status-pill status-pill--pending">Pending</span>
+      </div>
+    </div>
+    <div class="sc-section-title" style="margin-top:24px;">Section Status Badge — .moderation-agent__badge</div>
+    <div class="sc-block">
+      <div class="sc-row">
+        <div class="moderation-agent__section-header">
+          <h3 class="moderation-agent__section-title">AI Moderation</h3>
+          <span class="moderation-agent__badge moderation-agent__badge--on">ON</span>
+        </div>
+        <div class="moderation-agent__section-header">
+          <h3 class="moderation-agent__section-title">AI Moderation</h3>
+          <span class="moderation-agent__badge moderation-agent__badge--off">OFF</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       FORM CONTROLS
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Form Controls</div>
+    <div class="sc-block">
+      <div style="max-width:480px; display:flex; flex-direction:column; gap:16px;">
+        <div class="field">
+          <label>Text input</label>
+          <input class="input" type="text" placeholder="Placeholder text…">
+        </div>
+        <div class="field">
+          <label>Textarea</label>
+          <textarea class="textarea" placeholder="Enter text…" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Select trigger (dropdown)</label><br>
+          <button class="select-trigger" type="button">
+            Option A
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+          </button>
+        </div>
+        <div>
+          <div class="sc-label">Multi-select tag field (.tag-field)</div>
+          <div class="tag-field">
+            <span class="tag-field__tag">Administrators <button class="tag-field__tag-remove" type="button">×</button></span>
+            <span class="tag-field__tag">Moderators <button class="tag-field__tag-remove" type="button">×</button></span>
+            <span class="tag-field__placeholder">Select roles…</span>
+          </div>
+        </div>
+        <div class="opt-row">
+          <input type="checkbox" id="cb1" checked>
+          <label for="cb1">Checkbox checked</label>
+        </div>
+        <div class="opt-row">
+          <input type="checkbox" id="cb2">
+          <label for="cb2">Checkbox unchecked</label>
+        </div>
+        <div class="opt-row">
+          <input type="radio" name="r" id="r1" checked>
+          <label for="r1">Radio selected</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       DIRTY-SECTION (Settings card pattern)
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Settings Card Pattern — .dirty-section</div>
+    <div class="dirty-section">
+      <h3 class="dirty-section__title">Section Title</h3>
+      <div class="dirty-section__card">
+        <div class="dirty-section__card-body">
+          <div class="dirty-section__field">
+            <p class="dirty-section__field-label">Type A — vertical field</p>
+            <p class="dirty-section__field-description">Label and description above a full-width control.</p>
+            <input class="dirty-section__input" type="text" placeholder="Input value…">
+          </div>
+          <div class="dirty-section__field-row">
+            <div class="dirty-section__field-info">
+              <p class="dirty-section__field-label">Type B — horizontal row</p>
+              <p class="dirty-section__field-description">Info on left, control on right. Used for toggles and dropdowns.</p>
+            </div>
+            <div class="dirty-section__control">
+              <div class="control-switcher on js-toggle" role="switch" aria-checked="true">
+                <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+              </div>
+            </div>
+          </div>
+          <div class="dirty-section__save-row">
+            <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+            <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Save</span></div></div></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION MESSAGE
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Section Messages — .section-msg</div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div class="section-msg section-msg--info">
+        <svg class="section-msg__icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+        <span>Info — this is an informational message for the user.</span>
+      </div>
+      <div class="section-msg section-msg--success">
+        <svg class="section-msg__icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <span>Success — changes saved successfully.</span>
+      </div>
+      <div class="section-msg section-msg--warning">
+        <svg class="section-msg__icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+        <span>Warning — please review before continuing.</span>
+      </div>
+      <div class="section-msg section-msg--danger">
+        <svg class="section-msg__icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+        <span>Danger — this action cannot be undone.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       NAV PANEL LINKS
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Nav Panel — .nav-panel</div>
+    <div class="sc-block" style="width:239px; padding:0; overflow:hidden; border-radius:6px;">
+      <div style="background:#F6F6F6; padding:16px 0;">
+        <div class="nav-panel__title">Section Name</div>
+        <a class="nav-panel__link active" href="#">Active Link</a>
+        <a class="nav-panel__link" href="#">Link Two</a>
+        <a class="nav-panel__link" href="#">Link Three</a>
+        <div class="nav-panel__group-label">GROUP LABEL</div>
+        <a class="nav-panel__link" href="#">Link Four</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       MODAL
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Modal — .modal</div>
+    <div class="sc-block">
+      <div class="modal" style="width:100%; box-sizing:border-box; border: 1px solid var(--hz-border-color-light); border-radius:6px;">
+        <div class="modal__header">
+          <span class="modal__title">Modal title</span>
+          <button class="modal__close" type="button">✕</button>
+        </div>
+        <div class="modal__body">Modal body text. Explain what this modal does and what the user needs to decide.</div>
+        <div class="modal__footer">
+          <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+          <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Confirm</span></div></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       TOAST / PAGE BANNER
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Toast — .toast</div>
+    <div class="sc-row">
+      <span class="toast">Changes saved successfully</span>
+      <span class="toast toast--error">Something went wrong, please try again</span>
+    </div>
+    <div class="sc-section-title" style="margin-top:24px;">Page Banner — .page-banner</div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div class="page-banner page-banner--info">
+        <svg class="page-banner__icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+        <span class="page-banner__msg">This community is in read-only mode until the upgrade is complete.</span>
+        <button class="page-banner__close" type="button">✕</button>
+      </div>
+      <div class="page-banner page-banner--warning">
+        <svg class="page-banner__icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+        <span class="page-banner__msg">Your subscription expires in 7 days. Renew to avoid service interruption.</span>
+        <button class="page-banner__close" type="button">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SPINNER / SKELETON
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Spinner — .spinner</div>
+    <div class="sc-row" style="align-items:center;">
+      <span class="spinner spinner--xs"></span>
+      <span class="spinner spinner--sm"></span>
+      <span class="spinner spinner--md"></span>
+      <span class="spinner spinner--lg"></span>
+    </div>
+    <div class="sc-section-title" style="margin-top:24px;">Skeleton — .skeleton</div>
+    <div class="sc-block" style="display:flex; flex-direction:column; gap:8px;">
+      <span class="skeleton skeleton--title" style="width:240px;"></span>
+      <span class="skeleton skeleton--text" style="width:100%;"></span>
+      <span class="skeleton skeleton--text" style="width:80%;"></span>
+      <span class="skeleton skeleton--text" style="width:60%;"></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       TABS
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Tabs — .tabs</div>
+    <div class="sc-block">
+      <div class="tabs">
+        <div class="tab active">Overview</div>
+        <div class="tab">Activity</div>
+        <div class="tab">Settings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       EMPTY STATE
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Empty State — .empty-state</div>
+    <div class="sc-block">
+      <div class="empty-state">
+        <div class="empty-state__title">No results found</div>
+        <div class="empty-state__desc">Try adjusting your filters or search terms to find what you're looking for.</div>
+        <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Clear filters</span></div></div></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       TOOLTIP
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Tooltip — .has-tooltip</div>
+    <div class="sc-block">
+      <div class="sc-row">
+        <span class="has-tooltip">
+          <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Hover me</span></div></div></button>
+          <span class="tooltip-tip">Tooltip text</span>
+        </span>
+        <span class="has-tooltip">
+          <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Bottom tooltip</span></div></div></button>
+          <span class="tooltip-tip tooltip-tip--bottom">Appears below</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       POST CARD
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Post Card — .box .topic-wrapper</div>
+    <div class="box">
+      <article class="topic-wrapper">
+        <div class="topic-header">
+          <div class="topic-header__author-info">
+            <div class="avatar"><span class="avatar-initial-40" style="background:#9ADBD5;">D</span></div>
+            <div class="author-info-wrapper">
+              <div class="author-info"><a class="username" href="#">Dana</a></div>
+              <div class="author-info">
+                <span class="rank-title">New Participant</span>
+                <span class="post-meta">1 day ago</span>
+              </div>
+            </div>
+          </div>
+          <div class="topic-header__actions">
+            <button class="kebab-btn" type="button">⋮</button>
+          </div>
+        </div>
+        <div class="post-category"><span class="pill pill--info-bold">CONTACT SUPPORT</span></div>
+        <h3 class="post-title">How to contact support (when it's really needed!)</h3>
+        <p class="post-stats">0 replies · 0 views</p>
+        <div class="post-body">
+          <p>This is the opening post body text. It describes the topic in detail.</p>
+        </div>
+        <div class="post-footer">
+          <button class="post-action" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            3 likes
+          </button>
+          <button class="post-action" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Reply
+          </button>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       M-SECTION (collapsible sidebar panel)
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Collapsible Panel — .m-section</div>
+    <div style="max-width:340px;">
+      <div class="m-section">
+        <div class="m-section-header">
+          <span class="a-section-title">Overview</span>
+          <span class="m-section-header__toggle">
+            <button type="button" aria-label="Collapse">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+            </button>
+          </span>
+        </div>
+        <div class="m-section-body">
+          <div class="topic-overview__content">
+            <div class="topic-overview__item"><span class="topic-overview__label">Type:</span><span class="topic-overview__value">Article</span></div>
+            <div class="topic-overview__item"><span class="topic-overview__label">Created:</span><span class="topic-overview__value">8 Sep 2026</span></div>
+            <div class="topic-overview__item"><span class="topic-overview__label">Status:</span><span class="topic-overview__value"><span class="status-pill status-pill--published">Published</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="m-section is-collapsed">
+        <div class="m-section-header">
+          <span class="a-section-title">Details (collapsed)</span>
+          <span class="m-section-header__toggle">
+            <button type="button" aria-label="Expand">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+            </button>
+          </span>
+        </div>
+        <div class="m-section-body"><p>Hidden content here.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       LEGACY BUTTONS (reference only)
+  ═══════════════════════════════════════════════════ -->
+  <div class="sc-section">
+    <div class="sc-section-title">Legacy Buttons (reference — do not use in new prototypes)</div>
+    <div class="sc-row">
+      <button class="btn-mid btn-mid--secondary">Mid secondary</button>
+      <button class="btn-mid btn-mid--success">Mid success</button>
+      <button class="btn-mid btn-mid--danger">Mid danger</button>
+    </div>
+    <div class="sc-row">
+      <button class="btn-legacy btn-legacy--primary">Legacy primary</button>
+      <button class="btn-legacy btn-legacy--default">Legacy default</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.js-toggle').forEach(sw => {
+    sw.addEventListener('click', e => {
+      e.preventDefault();
+      const isOn = sw.classList.contains('on');
+      sw.classList.toggle('on', !isOn);
+      sw.classList.toggle('off', isOn);
+      sw.setAttribute('aria-checked', String(!isOn));
+    });
+  });
+  document.querySelectorAll('.m-section-header').forEach(h => {
+    h.addEventListener('click', () => h.closest('.m-section').classList.toggle('is-collapsed'));
+  });
+</script>
+</body>
+</html>

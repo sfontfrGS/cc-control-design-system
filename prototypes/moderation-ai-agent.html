@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Moderation AI Agent — AI</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/components.css">
+<style>
+  .select-trigger svg { width: 16px; height: 16px; }
+  .dirty-section__input--narrow { max-width: 320px; }
+</style>
+</head>
+<body data-active-item="AI">
+
+  <div data-include="../shell/nav-rail.html"></div>
+
+  <aside class="nav-panel" aria-label="Section">
+    <div class="nav-panel__title">AI</div>
+    <a class="nav-panel__link" href="#">AI Settings</a>
+    <a class="nav-panel__link active" href="#">Moderation AI Agent</a>
+    <a class="nav-panel__link" href="#">AI Answers for Search</a>
+    <a class="nav-panel__link" href="#">AI Translations</a>
+    <a class="nav-panel__link" href="#">AI Answers Agent</a>
+  </aside>
+
+  <div class="main">
+    <div data-include="../shell/topbar.html"></div>
+
+    <div class="control-header">
+      <h2 class="control-header__title">Moderation AI Agent</h2>
+    </div>
+
+    <main class="content">
+
+      <!-- ──────────────────────────────────────────────────────────────
+           SECTION HEADER: AI Moderation ON badge
+      ─────────────────────────────────────────────────────────────── -->
+      <div class="moderation-agent__section-header">
+        <h3 class="moderation-agent__section-title">AI Moderation</h3>
+        <span class="moderation-agent__badge moderation-agent__badge--on" id="sectionBadge">ON</span>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────────────────
+           MAIN ENABLE TOGGLE
+      ─────────────────────────────────────────────────────────────── -->
+      <div class="dirty-section moderation-agent__toggle-section">
+        <div class="dirty-section__card">
+          <div class="dirty-section__card-body">
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Enable AI Moderation</p>
+                <p class="dirty-section__field-description">Automatically review new posts and replies using AI before they are published. Posts that violate your community rules will be flagged or hidden pending human review.</p>
+              </div>
+              <div class="dirty-section__control">
+                <div class="control-switcher on js-main-toggle" id="mainToggle" role="switch" aria-checked="true">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────────────────
+           SECTION: Moderation behaviour
+      ─────────────────────────────────────────────────────────────── -->
+      <div class="dirty-section">
+        <h3 class="dirty-section__title">Moderation behaviour</h3>
+        <div class="dirty-section__card">
+          <div class="dirty-section__card-body">
+
+            <!-- Action on flagged content -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Action on flagged content</p>
+                <p class="dirty-section__field-description">Choose what happens when the AI flags a post or reply as potentially violating community rules.</p>
+              </div>
+              <div class="dirty-section__control">
+                <button class="select-trigger" type="button">
+                  Hide pending review
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Confidence threshold -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Confidence threshold</p>
+                <p class="dirty-section__field-description">Minimum AI confidence score required to flag content. Lower values catch more content but may increase false positives.</p>
+              </div>
+              <div class="dirty-section__control">
+                <button class="select-trigger" type="button">
+                  Medium (70%)
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Moderate replies -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Moderate replies</p>
+                <p class="dirty-section__field-description">Apply AI moderation to replies in addition to top-level posts.</p>
+              </div>
+              <div class="dirty-section__control">
+                <div class="control-switcher on" role="switch" aria-checked="true">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="dirty-section__save-row">
+              <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+              <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Save</span></div></div></button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────────────────
+           SECTION: Code of conduct
+      ─────────────────────────────────────────────────────────────── -->
+      <div class="dirty-section">
+        <h3 class="dirty-section__title">Code of conduct</h3>
+        <div class="dirty-section__card">
+          <div class="dirty-section__card-body">
+
+            <div class="dirty-section__field">
+              <p class="dirty-section__field-label">Community rules</p>
+              <p class="dirty-section__field-description">Describe your community's code of conduct. The AI uses this text to evaluate whether content is appropriate. Be specific about what is and is not allowed.</p>
+              <textarea class="dirty-section__textarea" id="cocTextarea" maxlength="3000" rows="6" placeholder="Example: Posts must be respectful and on-topic. Do not share personal information, use offensive language, or promote external products…"></textarea>
+              <div class="char-count"><span id="cocCharCount">0</span> / 3000</div>
+            </div>
+
+            <div class="dirty-section__save-row">
+              <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+              <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Save</span></div></div></button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────────────────
+           SECTION: Excluded roles
+      ─────────────────────────────────────────────────────────────── -->
+      <div class="dirty-section">
+        <h3 class="dirty-section__title">Excluded roles</h3>
+        <div class="dirty-section__card">
+          <div class="dirty-section__card-body">
+
+            <div class="dirty-section__field">
+              <p class="dirty-section__field-label">Skip moderation for</p>
+              <p class="dirty-section__field-description">Members with these roles will bypass AI moderation. Their posts publish immediately without review.</p>
+              <div class="tag-field" id="tagField">
+                <span class="tag-field__tag">Administrators <button class="tag-field__tag-remove" type="button" aria-label="Remove Administrators">×</button></span>
+                <span class="tag-field__tag">Moderators <button class="tag-field__tag-remove" type="button" aria-label="Remove Moderators">×</button></span>
+                <span class="tag-field__placeholder" id="tagPlaceholder">Add a role…</span>
+              </div>
+            </div>
+
+            <div class="dirty-section__save-row">
+              <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+              <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Save</span></div></div></button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────────────────
+           SECTION: Notification settings
+      ─────────────────────────────────────────────────────────────── -->
+      <div class="dirty-section">
+        <h3 class="dirty-section__title">Notification settings</h3>
+        <div class="dirty-section__card">
+          <div class="dirty-section__card-body">
+
+            <!-- Notify moderators -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Notify moderators on flag</p>
+                <p class="dirty-section__field-description">Send an in-platform notification to moderators when the AI flags a post for review.</p>
+              </div>
+              <div class="dirty-section__control">
+                <div class="control-switcher on" role="switch" aria-checked="true">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Daily summary email -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Daily moderation summary email <span class="badge-new">NEW</span></p>
+                <p class="dirty-section__field-description">Send a daily email digest to moderators summarising AI-flagged content from the previous 24 hours.</p>
+              </div>
+              <div class="dirty-section__control">
+                <div class="control-switcher off" role="switch" aria-checked="false">
+                  <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
+                  <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
+                  <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="dirty-section__save-row">
+              <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+              <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Save</span></div></div></button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // All toggle switches
+    document.querySelectorAll('.control-switcher').forEach(sw => {
+      sw.addEventListener('click', e => {
+        e.preventDefault();
+        const isOn = sw.classList.contains('on');
+        sw.classList.toggle('on', !isOn);
+        sw.classList.toggle('off', isOn);
+        sw.setAttribute('aria-checked', String(!isOn));
+      });
+    });
+
+    // Main toggle also updates the ON/OFF section badge
+    document.getElementById('mainToggle').addEventListener('click', () => {
+      const badge = document.getElementById('sectionBadge');
+      const isNowOn = document.getElementById('mainToggle').classList.contains('on');
+      badge.textContent = isNowOn ? 'ON' : 'OFF';
+      badge.className = 'moderation-agent__badge ' + (isNowOn ? 'moderation-agent__badge--on' : 'moderation-agent__badge--off');
+    });
+
+    // Code of conduct char counter
+    const cocTextarea = document.getElementById('cocTextarea');
+    const cocCharCount = document.getElementById('cocCharCount');
+    if (cocTextarea) {
+      cocTextarea.addEventListener('input', () => { cocCharCount.textContent = cocTextarea.value.length; });
+    }
+
+    // Tag field — remove tags
+    document.querySelectorAll('.tag-field__tag-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.tag-field__tag').remove();
+        document.getElementById('tagPlaceholder').style.display = '';
+      });
+    });
+  </script>
+
+  <script src="../interactions/design-system.js"></script>
+</body>
+</html>
