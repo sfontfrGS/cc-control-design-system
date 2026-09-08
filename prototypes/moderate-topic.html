@@ -5,95 +5,6 @@
 <title>Moderate Topic — Prototype</title>
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../components/components.css">
-<style>
-
-  .avatar-initial { width: 28px; height: 28px; border-radius: 50%; color: #fff; display: inline-flex; align-items:center; justify-content:center; font-size: 12px; flex: none; background:#9ADBD5; }
-
-  /* header bar: breadcrumb + title + actions */
-  .control-header { padding: 20px 24px 16px; background: #fff; border-bottom: 1px solid var(--hz-border-color-light); }
-  .breadcrumb { font-size: 14px; color: #3C4A57; text-decoration: none; }
-  .control-header__row { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
-  .control-header__row h1 { font-size: 21px; font-weight: 600; margin: 0; }
-  .control-header__actions { display: flex; gap: 8px; align-items: center; }
-
-  .btn-sm { display: inline-flex; align-items: center; gap: 4px; height: 32px; padding: 2px 8px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; background: #fff; font-size: 12px; font-weight: 600; color: var(--hz-text-color-primary); cursor: pointer; }
-  .combobox { position: relative; display: inline-flex; align-items: center; height: 32px; }
-  .combobox input { height: 32px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 6px 10px; font-size: 12px; width: 220px; }
-
-  /* body layout: sidebar + post */
-  /* real ratio verified live: sidebar flex: 0 2 400px; min-width: 320px — shrinks faster than
-     main content as viewport narrows, not a rigid fixed width */
-  .body-layout { flex: 1; overflow-y: auto; display: flex; gap: 24px; background: var(--hz-control-bg-base); }
-  .sidebar { flex: 0 2 400px; min-width: 260px; padding: 20px 0 20px 20px; overflow-y: auto; }
-  .post-column { flex: 1 1 auto; min-width: 0; padding: 20px 20px 20px 0; overflow-y: auto; }
-
-  /* real card: .topic-wrapper — white, 1px border, 8px radius, 16px padding — used for the
-     opening post, the reply composer, AND every threaded reply. Not a border-indent. */
-  .card-wrapper { background: #fff; border: 1px solid var(--hz-border-color-base); border-radius: 8px; padding: 16px; margin-bottom: 16px; }
-
-  /* real .m-section: gray header strip + white body, one seamless bordered card (verified live) */
-  .panel { border-radius: 4px; margin-bottom: 16px; overflow: hidden; border: 1px solid var(--hz-border-color-base); }
-  .panel__header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; font-weight: 600; font-size: 14px; cursor: pointer; background: var(--hz-control-bg-base); }
-  .panel__body { padding: 16px 24px; font-size: 14px; background: #fff; }
-  .kv-row { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; color: var(--hz-text-color-primary); }
-  .kv-row .k { color: var(--hz-text-color-secondary); flex: none; }
-  .kv-row span:last-child { text-align: right; }
-
-  .field { margin-bottom: 16px; }
-  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-  .field .hint { font-size: 12px; color: var(--hz-text-color-secondary); margin-bottom: 6px; }
-  .input, .tags-input { width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); }
-  .tags-input::placeholder { color: var(--hz-text-color-placeholder); }
-  .select-trigger { display: inline-flex; align-items: center; justify-content: space-between; width: 100%; height: 32px; padding: 0 12px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; background: #fff; font-size: 12px; cursor: pointer; }
-
-  .label-pill { display: inline-flex; align-items: center; height: 32px; padding: 0 12px; margin: 0 6px 6px 0; border: 1px solid var(--hz-border-color-base); border-radius: 4px; background: #fff; font-size: 12px; font-weight: 600; cursor: pointer; }
-
-  .radio-row { display: flex; align-items: center; gap: 6px; font-size: 14px; margin-bottom: 6px; }
-
-  /* topic post card */
-  .topic-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-  .topic-header__author { display: flex; gap: 12px; }
-  .avatar-photo-40 { width: 40px; height: 40px; border-radius: 50%; }
-  .username { color: var(--hz-primary-color); font-size: 14px; text-decoration: none; }
-  .meta-line { font-size: 12px; color: #3C4A57; margin-top: 2px; }
-  .meta-line span + span::before { content: " · "; }
-  .kebab { border: none; background: none; font-size: 18px; color: var(--hz-text-color-secondary); cursor: pointer; }
-
-  .topic-title { font-size: 21px; font-weight: 700; margin: 0 0 4px; }
-  .topic-substats { font-size: 13px; color: var(--hz-text-color-secondary); margin-bottom: 20px; }
-  .topic-body { font-size: 15px; line-height: 1.7; color: var(--hz-text-color-primary); }
-  .topic-body h3 { font-size: 17px; margin: 20px 0 8px; }
-  .topic-body ul { margin: 8px 0 16px; padding-left: 20px; }
-
-  /* content-type flag — real class .label-component.label--brand.label--emphasis-high, reused for "New" reply pill too */
-  .type-pill { display: inline-block; background: var(--hz-primary-color); color: #fff; border-radius: 4px; padding: 0 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
-
-  .tags-row { display: flex; align-items: center; gap: 8px; margin: 16px 0; font-size: 13px; }
-  .tags-row .tag-pill { background: var(--hz-bg-color-secondary); color: var(--hz-text-color-primary); border-radius: 4px; padding: 2px 8px; }
-  .tags-row .edit-tags { color: var(--hz-primary-color); cursor: pointer; }
-
-  /* topic-footer__actions — Like / Reply / Follow / Share */
-  .topic-actions { display: flex; gap: 4px; margin: 16px 0 24px; border-bottom: 1px solid var(--hz-border-color-light); padding-bottom: 16px; }
-  .topic-actions button { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; border-radius: 8px; padding: 0 8px; height: 32px; font-size: 14px; font-weight: 500; color: #5F6C7A; cursor: pointer; }
-  .topic-actions button:hover { background: var(--hz-bg-color-base-hover); }
-  .topic-actions svg { width: 16px; height: 16px; }
-
-  /* reply composer */
-  .reply-composer-heading { font-size: 16px; font-weight: 700; margin: 0 0 12px; }
-  .reply-composer { display: flex; gap: 12px; align-items: center; }
-  .reply-composer .composer-box { flex: 1; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 10px 12px; font-size: 14px; color: var(--hz-text-color-placeholder); cursor: text; }
-
-  .replies-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
-  .replies-header h4 { font-size: 16px; margin: 0; }
-  .replies-pagination { display: flex; align-items: center; gap: 4px; font-size: 13px; color: var(--hz-text-color-primary); }
-  .replies-pagination .p-item { display: flex; align-items: center; height: 28px; padding: 0 6px; }
-  .replies-pagination .p-item.disabled { color: #959898; }
-  .replies-pagination .p-box { width: 32px; height: 24px; border: 1px solid rgba(0,0,0,.2); border-radius: 2px; text-align: center; margin: 0 4px; font-size: 13px; }
-  .replies-pagination .p-select { border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 4px 8px; font-size: 12px; font-weight: 600; background: #fff; cursor: pointer; margin-left: 4px; }
-
-  /* threaded reply — reuses .topic-header, wrapped with left+top border indent */
-  .threaded-reply .topic-actions { border-bottom: none; padding-bottom: 0; margin: 12px 0 0; }
-</style>
 </head>
 <body data-active-item="Content">
 
@@ -102,221 +13,310 @@
   <div class="main">
     <div data-include="../shell/topbar.html"></div>
 
+    <!-- Breadcrumb header — uses :has(.control-header__breadcrumb) column variant -->
     <div class="control-header">
-      <a class="breadcrumb">Back to Overview</a>
+      <div class="control-header__breadcrumb">
+        <a href="#">← Back to Overview</a>
+      </div>
       <div class="control-header__row">
-        <h1>Moderate Topic</h1>
-        <div class="control-header__actions">
-          <button class="btn-sm">Version History</button>
-          <button class="btn-sm">Mark as unread by team</button>
-          <button class="btn-sm">Assign moderator ▾</button>
-          <div class="combobox"><input type="text" placeholder="Choose a label or type a custom label"></div>
+        <h2>Moderate Topic</h2>
+        <div class="control-header__buttons">
+          <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Version History</span></div></div></button>
+          <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Mark as unread by team</span></div></div></button>
+          <button class="button-control-new button-control-new--small button-control-new--secondary button-control-new--endIcon" type="button">
+            <div><div><span class="button-control__title-text">Assign moderator</span></div><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg></div>
+          </button>
+          <div class="header-search">
+            <input type="text" placeholder="Choose a label or type a custom label">
+            <button class="header-search__clear" type="button" aria-label="Clear">×</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="body-layout">
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="panel">
-          <div class="panel__header">Overview <span>⌃</span></div>
-          <div class="panel__body">
-            <div class="kv-row"><span class="k">Type:</span><span>Articles</span></div>
-            <div class="kv-row"><span class="k">Created:</span><span>7 Sep 2026, 16:54</span></div>
-            <div class="kv-row"><span class="k">Section:</span><span>Welcome</span></div>
-            <div class="kv-row"><span class="k">Category:</span><span>Company announcements</span></div>
-            <div class="kv-row"><span class="k">Views:</span><span>0</span></div>
-            <div class="kv-row"><span class="k">Likes:</span><span>0</span></div>
-            <div class="kv-row"><span class="k">Replies:</span><span>0</span></div>
-          </div>
-        </div>
+    <!-- Two-column layout -->
+    <main class="content content--topic">
+      <div class="topic-moderation-layout">
 
-        <div class="panel">
-          <div class="panel__header">Details <span>⌃</span></div>
-          <div class="panel__body">
-            <div class="field">
-              <label>Title</label>
-              <input class="input" value="Company Investors Update: Q4 2025">
+        <!-- ── LEFT SIDEBAR ── -->
+        <aside class="topic-moderation-sidebar" aria-label="Topic details">
+
+          <!-- Overview -->
+          <div class="m-section">
+            <div class="m-section-header">
+              <span class="a-section-title">Overview</span>
+              <span class="m-section-header__toggle">
+                <button type="button" aria-label="Collapse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg></button>
+              </span>
             </div>
-            <div class="field">
-              <label>Category</label>
-              <div class="select-trigger">Company announcements <span>▾</span></div>
-            </div>
-            <div class="field">
-              <label>Public tags</label>
-              <input class="tags-input" placeholder="Add tags">
-            </div>
-            <div class="field">
-              <label>Moderator tags</label>
-              <input class="tags-input" placeholder="Add tags">
-            </div>
-            <div class="field">
-              <label>Labels</label>
-              <div>
-                <span class="label-pill">Escalation</span>
-                <span class="label-pill">Waiting for customer</span>
-                <span class="label-pill">Waiting for product team</span>
+            <div class="m-section-body">
+              <div class="topic-overview__content">
+                <div class="topic-overview__item"><span class="topic-overview__label">Type:</span><span class="topic-overview__value">Articles</span></div>
+                <div class="topic-overview__item"><span class="topic-overview__label">Created:</span><span class="topic-overview__value">7 Sep 2026, 16:54</span></div>
+                <div class="topic-overview__item"><span class="topic-overview__label">Status:</span><span class="topic-overview__value"><span class="status-pill status-pill--published">Published</span></span></div>
+                <div class="topic-overview__item"><span class="topic-overview__label">Section:</span><span class="topic-overview__value">Welcome</span></div>
+                <div class="topic-overview__item"><span class="topic-overview__label">Category:</span><span class="topic-overview__value">Company announcements</span></div>
+                <div class="topic-overview__item"><span class="topic-overview__label">Views:</span><span class="topic-overview__value">0</span></div>
+                <div class="topic-overview__item"><span class="topic-overview__label">Likes:</span><span class="topic-overview__value">0</span></div>
+                <div class="topic-overview__item"><span class="topic-overview__label">Replies:</span><span class="topic-overview__value">1</span></div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="panel">
-          <div class="panel__header">Featured image <span>⌃</span></div>
-          <div class="panel__body">
-            <p class="hint" style="margin:0 0 8px;">Max 5MB (jpg, jpeg, png, gif). Recommended resolution 1440×640px.</p>
-            <img src="https://uploads-eu-west-1.insided.com/dchdesign-en/attachment/5ffbba5a-c0c5-443d-bec4-dea8acc247b0_thumb.jpg" style="width:100%; border-radius:4px; margin-bottom:8px;">
-            <div style="font-size:12px; color:var(--hz-text-color-secondary); margin-bottom:12px;">1440px × 640px ↗</div>
-            <div style="display:flex; gap:8px; margin-bottom:16px;">
-              <button class="btn-sm">Replace</button>
-              <button class="btn-sm">Remove</button>
+          <!-- Details -->
+          <div class="m-section">
+            <div class="m-section-header">
+              <span class="a-section-title">Details</span>
+              <span class="m-section-header__toggle">
+                <button type="button" aria-label="Collapse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg></button>
+              </span>
             </div>
-            <div class="field" style="margin-bottom:0;">
-              <label>Featured Image Alt Text</label>
-              <input class="input" value="Company Investors Update: Q4 2019">
-            </div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panel__header">Team notes <span>⌃</span></div>
-          <div class="panel__body">
-            <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--hz-text-color-secondary); margin-bottom:8px;">
-              🔒 Only visible in control
-            </div>
-            <textarea class="input" style="min-height:70px; resize:vertical;" placeholder="Leave a note to your moderation team"></textarea>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panel__header">Content helpfulness <span>⌃</span></div>
-          <div class="panel__body">
-            <div class="field">
-              <label>Section visibility</label>
-              <div class="radio-row"><input type="radio" name="vis" checked> Use default</div>
-              <div class="radio-row"><input type="radio" name="vis"> Enable</div>
-              <div class="radio-row"><input type="radio" name="vis"> Disable</div>
-            </div>
-            <div class="field" style="margin-bottom:0;">
-              <label>Topic performance</label>
-              <div style="display:flex; align-items:center; gap:16px;">
-                <span style="color:#F75D4F; font-weight:700; font-size:14px;">Score 0%</span>
-                <span style="display:flex; align-items:center; gap:4px; font-size:13px;">🙂 <span>0</span></span>
-                <span style="display:flex; align-items:center; gap:4px; font-size:13px;">😐 <span>0</span></span>
-                <span style="display:flex; align-items:center; gap:4px; font-size:13px;">🙁 <span>0</span></span>
+            <div class="m-section-body">
+              <div class="details-field">
+                <label>Title</label>
+                <input type="text" value="Company Investors Update: Q4 2025">
+              </div>
+              <div class="details-field">
+                <label>Category</label>
+                <select>
+                  <option selected>Company announcements</option>
+                  <option>General</option>
+                  <option>Guides &amp; Tutorials</option>
+                </select>
+              </div>
+              <div class="details-field">
+                <label>Public tags</label>
+                <input type="text" placeholder="Add tags">
+              </div>
+              <div class="details-field">
+                <label>Moderator tags</label>
+                <input type="text" placeholder="Add tags">
+              </div>
+              <div class="details-field">
+                <label>Labels</label>
+                <div style="display:flex; flex-wrap:wrap; gap:4px;">
+                  <span class="pill pill--default">Escalation</span>
+                  <span class="pill pill--default">Waiting for customer</span>
+                  <span class="pill pill--default">Waiting for product team</span>
+                </div>
+              </div>
+              <div class="details-save-row">
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Save</span></div></div></button>
               </div>
             </div>
           </div>
-        </div>
-      </aside>
 
-      <!-- POST -->
-      <main class="post-column">
-        <!-- real class .topic-wrapper: white card, 1px border, 8px radius, 16px padding — wraps the WHOLE post -->
-        <div class="card-wrapper">
-          <div class="topic-header">
-            <div class="topic-header__author">
-              <img class="avatar-photo-40" src="https://uploads-eu-west-1.insided.com/dchdesign-en/icon/200x200/e2bc3728-8c78-4abc-9111-e1efe3616884.png">
-              <div>
-                <a class="username">Dana</a>
-                <div class="meta-line"><span>New Participant</span><span>22 hours ago</span></div>
+          <!-- Featured image -->
+          <div class="m-section">
+            <div class="m-section-header">
+              <span class="a-section-title">Featured image</span>
+              <span class="m-section-header__toggle">
+                <button type="button" aria-label="Collapse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg></button>
+              </span>
+            </div>
+            <div class="m-section-body">
+              <p style="font-size:12px; color:var(--hz-text-color-secondary); margin:0 0 8px;">Max 5MB (jpg, jpeg, png, gif). Recommended resolution 1440×640px.</p>
+              <img src="https://uploads-eu-west-1.insided.com/dchdesign-en/attachment/5ffbba5a-c0c5-443d-bec4-dea8acc247b0_thumb.jpg" style="width:100%; border-radius:4px; display:block; margin-bottom:6px;">
+              <p style="font-size:12px; color:var(--hz-text-color-secondary); margin:0 0 10px;">1440px × 640px ↗</p>
+              <div style="display:flex; gap:8px; margin-bottom:14px;">
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Replace</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Remove</span></div></div></button>
+              </div>
+              <div class="details-field" style="margin-bottom:0;">
+                <label>Alt text</label>
+                <input type="text" value="Company Investors Update: Q4 2025">
               </div>
             </div>
-            <button class="kebab">⋯</button>
           </div>
 
-          <span class="type-pill">Article</span>
-          <h2 class="topic-title">Company Investors Update: Q4 2025</h2>
-          <div class="topic-substats">1 reply · 0 views</div>
-
-          <div class="topic-body">
-            <p>Hey Team,</p>
-            <p>It's been an awesome, but intense, winter. Many things are tracking well, but there are some challenges we're working through.</p>
-            <h3>TL;DR</h3>
-            <ul>
-              <li>Revenue is up 22%</li>
-              <li>We're scaling up important product initiative Apollo.</li>
-              <li>We finally closed Microsoft for a major partnership</li>
-              <li>Big time hire — we closed Joe Bloggs as our new VP All The Things</li>
-              <li>Mrs Customer Success herself had a major life event — welcome to Baby Customer Success!</li>
-            </ul>
-            <h3>Key Metrics:</h3>
-            <p>We continue to have a ton of momentum across every important metric. From Sep to Nov we grew revenue 5%+ Every Month. From Aug to Nov we grew 17%. We are also on pace for a really huge December.</p>
-            <p>We've learned something big this quarter about our Pricing Model and by February we'll be on a $2M run rate. Needless to say I'm cautiously pumped.</p>
+          <!-- Team notes -->
+          <div class="m-section">
+            <div class="m-section-header">
+              <span class="a-section-title">Team notes</span>
+              <span class="m-section-header__toggle">
+                <button type="button" aria-label="Collapse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg></button>
+              </span>
+            </div>
+            <div class="m-section-body">
+              <p style="font-size:12px; color:var(--hz-text-color-secondary); margin:0 0 8px;">🔒 Only visible in control</p>
+              <div class="details-field" style="margin-bottom:0;">
+                <textarea rows="3" placeholder="Leave a note to your moderation team"></textarea>
+              </div>
+            </div>
           </div>
 
-          <div class="tags-row">
-            <span class="tag-pill">company-update</span>
-            <span class="edit-tags">✎ Edit tags</span>
+          <!-- Content helpfulness (collapsed) -->
+          <div class="m-section is-collapsed">
+            <div class="m-section-header">
+              <span class="a-section-title">Content helpfulness</span>
+              <span class="m-section-header__toggle">
+                <button type="button" aria-label="Expand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg></button>
+              </span>
+            </div>
+            <div class="m-section-body">
+              <div class="details-field">
+                <label>Section visibility</label>
+                <div class="opt-row"><input type="radio" name="vis" id="vis1" checked><label for="vis1">Use default</label></div>
+                <div class="opt-row"><input type="radio" name="vis" id="vis2"><label for="vis2">Enable</label></div>
+                <div class="opt-row"><input type="radio" name="vis" id="vis3"><label for="vis3">Disable</label></div>
+              </div>
+              <div class="details-field" style="margin-bottom:0;">
+                <label>Topic performance</label>
+                <div style="display:flex; align-items:center; gap:12px; font-size:13px;">
+                  <span style="color:#F75D4F; font-weight:700;">Score 0%</span>
+                  <span>🙂 0</span>
+                  <span>😐 0</span>
+                  <span>🙁 0</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <!-- topic-footer__actions — real classes: subtle-button + action-btn--like/reply/follow/share -->
-          <div class="topic-actions" style="border-bottom:none; padding-bottom:0; margin-bottom:0;">
-            <button>👍 Like</button>
-            <button>💬 Reply</button>
-            <button>🔔 Follow</button>
-            <button>↗ Share</button>
-          </div>
-        </div>
+        </aside>
 
-        <!-- reply composer — also a .card-wrapper card, real placeholder is "Leave a reply...", "Write a reply" is a visible heading above it -->
-        <div class="card-wrapper">
-          <h4 class="reply-composer-heading">Write a reply</h4>
+        <!-- ── RIGHT: Posts thread ── -->
+        <section class="topic-moderation-section" aria-label="Topic content">
+
+          <!-- Opening post -->
+          <div class="box qa-topic-first-post">
+            <article class="topic-wrapper">
+              <div class="topic-header">
+                <div class="topic-header__author-info">
+                  <div class="avatar">
+                    <img src="https://uploads-eu-west-1.insided.com/dchdesign-en/icon/200x200/e2bc3728-8c78-4abc-9111-e1efe3616884.png" class="avatar-initial-40" style="border-radius:50%;">
+                  </div>
+                  <div class="author-info-wrapper">
+                    <div class="author-info"><a class="username" href="#">Dana</a></div>
+                    <div class="author-info">
+                      <span class="rank-title">New Participant</span>
+                      <span class="post-meta">22 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="topic-header__actions">
+                  <button class="kebab-btn" type="button">⋮</button>
+                </div>
+              </div>
+
+              <span class="pill pill--info-bold" style="margin-bottom:8px; display:inline-block;">ARTICLE</span>
+              <h2 class="post-title" style="font-size:21px; font-weight:700; margin:0 0 4px;">Company Investors Update: Q4 2025</h2>
+              <p class="post-stats">1 reply · 0 views</p>
+
+              <div class="post-body">
+                <p>Hey Team,</p>
+                <p>It's been an awesome, but intense, winter. Many things are tracking well, but there are some challenges we're working through.</p>
+                <h3>TL;DR</h3>
+                <ul>
+                  <li>Revenue is up 22%</li>
+                  <li>We're scaling up important product initiative Apollo.</li>
+                  <li>We finally closed Microsoft for a major partnership</li>
+                  <li>Big time hire — we closed Joe Bloggs as our new VP All The Things</li>
+                  <li>Mrs Customer Success herself had a major life event — welcome to Baby Customer Success!</li>
+                </ul>
+                <h3>Key Metrics:</h3>
+                <p>We continue to have a ton of momentum across every important metric. From Sep to Nov we grew revenue 5%+ Every Month. From Aug to Nov we grew 17%. We are also on pace for a really huge December.</p>
+                <p>We've learned something big this quarter about our Pricing Model and by February we'll be on a $2M run rate. Needless to say I'm cautiously pumped.</p>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:8px; margin:16px 0; font-size:13px;">
+                <span class="pill pill--default">company-update</span>
+                <a href="#" style="color:var(--hz-primary-color); cursor:pointer; text-decoration:none;">✎ Edit tags</a>
+              </div>
+
+              <div class="post-footer">
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                  Like
+                </button>
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  Reply
+                </button>
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                  Follow
+                </button>
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                  Share
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- Reply composer -->
           <div class="reply-composer">
-            <span class="avatar-initial" style="background:#9ADBD5;">S</span>
-            <div class="composer-box">Leave a reply...</div>
-          </div>
-        </div>
-
-        <!-- replies header — real: .topic-moderation--replies-header, full compact pagination + rows + sort -->
-        <div class="replies-header">
-          <h4>1 Replies</h4>
-          <div class="replies-pagination">
-            <span class="p-item disabled">«</span>
-            <span class="p-item disabled">‹</span>
-            <span class="p-item">Page <input class="p-box" type="text" value="1"> of <strong>1</strong></span>
-            <span class="p-item disabled">›</span>
-            <span class="p-item disabled">»</span>
-            <span class="p-select">25 items ▾</span>
-            <span class="p-select">Oldest first ▾</span>
-          </div>
-        </div>
-
-        <!-- threaded reply — reuses .topic-header, SAME .card-wrapper card as the opening post (not an indent) -->
-        <div class="card-wrapper">
-          <div class="topic-header">
-            <div class="topic-header__author">
-              <img class="avatar-photo-40" src="https://uploads-eu-west-1.insided.com/dchdesign-en/icon/200x200/e2bc3728-8c78-4abc-9111-e1efe3616884.png">
-              <div>
-                <a class="username">Dana</a>
-                <span class="type-pill" style="margin:0 0 0 6px; vertical-align:middle;">New</span>
-                <div class="meta-line"><span>New Participant</span><span>22 hours ago</span></div>
-              </div>
+            <textarea placeholder="Leave a reply..."></textarea>
+            <div class="reply-composer__footer">
+              <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+              <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Post reply</span></div></div></button>
             </div>
           </div>
-          <div class="topic-body" style="font-size:14px;">
-            <p>Thanks for putting this together — clear submission guidelines like these make a real difference in how useful the ideas board becomes for everyone.</p>
+
+          <!-- Replies header -->
+          <div class="replies-header">
+            <h4 class="replies-header__count">1 Replies</h4>
+            <div class="replies-header__controls">
+              <div class="replies-pagination">
+                <span class="p-item disabled">«</span>
+                <span class="p-item disabled">‹</span>
+                <span class="p-item">Page <input class="p-box" type="text" value="1"> of <strong>1</strong></span>
+                <span class="p-item disabled">›</span>
+                <span class="p-item disabled">»</span>
+              </div>
+              <button class="select-trigger" style="width:auto;" type="button">25 items <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg></button>
+              <button class="select-trigger" style="width:auto;" type="button">Oldest first <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg></button>
+            </div>
           </div>
-          <div class="topic-actions" style="border-bottom:none; padding-bottom:0; margin-bottom:0; margin-top:12px;">
-            <button>👍 Like</button>
-            <button>💬 Reply</button>
+
+          <!-- Reply -->
+          <div class="box reply">
+            <article class="topic-wrapper">
+              <div class="topic-header">
+                <div class="topic-header__author-info">
+                  <div class="avatar">
+                    <span class="avatar-initial-40" style="background:#FECCAB;">A</span>
+                  </div>
+                  <div class="author-info-wrapper">
+                    <div class="author-info"><a class="username" href="#">Anna</a></div>
+                    <div class="author-info">
+                      <span class="rank-title">Registered User</span>
+                      <span class="post-meta">12 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="topic-header__actions">
+                  <button class="kebab-btn" type="button">⋮</button>
+                </div>
+              </div>
+              <div class="post-body">
+                <p>Thanks for putting this together — clear submission guidelines like these make a real difference in how useful the ideas board becomes for everyone.</p>
+              </div>
+              <div class="post-footer">
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                  1 like
+                </button>
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  Reply
+                </button>
+              </div>
+            </article>
           </div>
-        </div>
-      </main>
-    </div>
+
+        </section>
+      </div>
+    </main>
   </div>
 
   <script>
-    document.querySelectorAll('.panel__header').forEach(h => {
-      h.addEventListener('click', () => {
-        const body = h.nextElementSibling;
-        body.style.display = body.style.display === 'none' ? 'block' : 'none';
-        h.querySelector('span').textContent = body.style.display === 'none' ? '⌄' : '⌃';
-      });
+    document.querySelectorAll('.m-section-header').forEach(h => {
+      h.addEventListener('click', () => h.closest('.m-section').classList.toggle('is-collapsed'));
     });
   </script>
 
   <script src="../interactions/design-system.js"></script>
-
 </body>
 </html>
