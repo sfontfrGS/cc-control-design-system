@@ -6,13 +6,8 @@
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../components/components.css">
 <style>
-  /* Table layout, col-*, filters-row, action-bar, pagination, item-cell styles now in components.css */
-  /* .user-cell is an alias for .item-cell */
+  /* All styles in components.css */
   .user-cell { display: flex; align-items: center; gap: 8px; }
-
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--hz-font-family); font-weight: 600; border-radius: 4px; cursor: pointer; border: 1px solid var(--hz-border-color-base); background: #fff; color: var(--hz-text-color-primary); height: 40px; padding: 8px 16px; font-size: 14px; white-space: nowrap; }
-  .btn:hover { background: var(--hz-bg-color-base-hover); }
-  .btn svg { width: 12px; height: 12px; }
 </style>
 </head>
 <body data-active-item="Users">
@@ -30,15 +25,15 @@
   <div class="main">
     <div data-include="../shell/topbar.html"></div>
 
-    <div class="page-header">
-      <h1>User Overview</h1>
+    <div class="control-header">
+      <h2 class="control-header__title">User Overview</h2>
     </div>
 
     <main class="content">
 
       <!-- Row 1: Filters + Search -->
       <div class="filters-row" id="filtersRow">
-        <button class="btn"><svg viewBox="0 0 18 12" fill="currentColor"><path d="M7 12H11V10H7V12ZM0 0V2H18V0H0ZM3 7H15V5H3V7Z"/></svg>Filters</button>
+        <button class="button-control-new button-control-new--medium button-control-new--secondary"><svg viewBox="0 0 18 12" fill="currentColor"><path d="M7 12H11V10H7V12ZM0 0V2H18V0H0ZM3 7H15V5H3V7Z"/></svg>Filters</button>
         <div class="search-box--table">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"/></svg>
           <input type="text" placeholder="Search for username or email" maxlength="500">
@@ -52,15 +47,15 @@
           <button class="bulk-toolbar__clear" id="clearSelection">Clear selection</button>
         </div>
         <div class="bulk-toolbar__actions">
-          <button class="btn">Edit custom role</button>
-          <button class="btn">Award badge</button>
+          <button class="button-control-new button-control-new--medium button-control-new--secondary">Edit custom role</button>
+          <button class="button-control-new button-control-new--medium button-control-new--secondary">Award badge</button>
         </div>
       </div>
 
       <!-- Row 2: Refresh/Columns + pagination -->
       <div class="action-bar">
-        <button class="btn"><svg viewBox="0 0 12 12" fill="none"><path d="M9.76618 2.23335C8.79952 1.26669 7.47285 0.666687 5.99952 0.666687C3.05285 0.666687 0.672852 3.05335 0.672852 6.00002C0.672852 8.94669 3.05285 11.3334 5.99952 11.3334C8.48619 11.3334 10.5595 9.63335 11.1529 7.33335H9.76618C9.21952 8.88669 7.73952 10 5.99952 10C3.79285 10 1.99952 8.20669 1.99952 6.00002C1.99952 3.79335 3.79285 2.00002 5.99952 2.00002C7.10618 2.00002 8.09285 2.46002 8.81285 3.18669L6.66618 5.33335H11.3329V0.666687L9.76618 2.23335Z" fill="currentColor"/></svg>Refresh</button>
-        <button class="btn"><svg viewBox="0 0 16 16" fill="none"><path d="M14.0002 2.66699H2.00016C1.6335 2.66699 1.3335 2.96699 1.3335 3.33366V12.667C1.3335 13.0337 1.6335 13.3337 2.00016 13.3337H14.0002C14.3668 13.3337 14.6668 13.0337 14.6668 12.667V3.33366C14.6668 2.96699 14.3668 2.66699 14.0002 2.66699ZM5.3335 12.0003H2.66683V4.00033H5.3335V12.0003ZM9.3335 12.0003H6.66683V4.00033H9.3335V12.0003ZM13.3335 12.0003H10.6668V4.00033H13.3335V12.0003Z" fill="currentColor"/></svg>Columns</button>
+        <button class="button-control-new button-control-new--medium button-control-new--secondary"><svg viewBox="0 0 12 12" fill="none"><path d="M9.76618 2.23335C8.79952 1.26669 7.47285 0.666687 5.99952 0.666687C3.05285 0.666687 0.672852 3.05335 0.672852 6.00002C0.672852 8.94669 3.05285 11.3334 5.99952 11.3334C8.48619 11.3334 10.5595 9.63335 11.1529 7.33335H9.76618C9.21952 8.88669 7.73952 10 5.99952 10C3.79285 10 1.99952 8.20669 1.99952 6.00002C1.99952 3.79335 3.79285 2.00002 5.99952 2.00002C7.10618 2.00002 8.09285 2.46002 8.81285 3.18669L6.66618 5.33335H11.3329V0.666687L9.76618 2.23335Z" fill="currentColor"/></svg>Refresh</button>
+        <button class="button-control-new button-control-new--medium button-control-new--secondary"><svg viewBox="0 0 16 16" fill="none"><path d="M14.0002 2.66699H2.00016C1.6335 2.66699 1.3335 2.96699 1.3335 3.33366V12.667C1.3335 13.0337 1.6335 13.3337 2.00016 13.3337H14.0002C14.3668 13.3337 14.6668 13.0337 14.6668 12.667V3.33366C14.6668 2.96699 14.3668 2.66699 14.0002 2.66699ZM5.3335 12.0003H2.66683V4.00033H5.3335V12.0003ZM9.3335 12.0003H6.66683V4.00033H9.3335V12.0003ZM13.3335 12.0003H10.6668V4.00033H13.3335V12.0003Z" fill="currentColor"/></svg>Columns</button>
 
         <div class="pagination">
           <span class="pagination__info" id="pagInfo">1-11 of 11 results</span>
