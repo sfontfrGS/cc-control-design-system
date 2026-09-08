@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Topic / Moderation — Template</title>
+<!--
+  TOPIC / MODERATION PAGE TEMPLATE
+  ─────────────────────────────────────────────────────────────────────────────
+  Based on: Moderate Topic (dchdesign-en.insided.com/…/how-to-contact-support-…)
+  Live-verified layout: .topic-moderation-layout, .topic-moderation-sidebar,
+  .topic-moderation-section, .m-section, .box, .topic-wrapper
+
+  TO CUSTOMISE:
+  1. Update <title> and data-active-item on <body>
+  2. Update breadcrumb link text and href
+  3. Update page title (h2 inside .control-header__title)
+  4. Add/remove header action buttons
+  5. Update sidebar .m-section panels (Overview, Details, custom panels)
+  6. Replace post content in .topic-moderation-section
+  7. Add reply cards after the opening post
+  ─────────────────────────────────────────────────────────────────────────────
+-->
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/components.css">
+<style>
+  /* ── Page-level header: breadcrumb variant ── */
+  .control-header { padding: 16px 24px; background: #fff; border-bottom: 1px solid var(--hz-border-color-light); display: flex; flex-direction: column; gap: 4px; flex: none; }
+  .control-header__breadcrumb a { font-size: 13px; color: var(--hz-primary-color); text-decoration: none; }
+  .control-header__breadcrumb a:hover { text-decoration: underline; }
+  .control-header__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .control-header__row h2 { font-size: 20px; font-weight: 600; margin: 0; color: var(--hz-text-color-primary); }
+  .control-header__buttons { display: flex; gap: 8px; align-items: center; }
+
+  /* ── Small secondary button (action bar) ── */
+  .btn-sm { display: inline-flex; align-items: center; gap: 4px; height: 32px; padding: 0 12px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; background: #fff; font-size: 12px; font-weight: 600; color: var(--hz-text-color-primary); cursor: pointer; white-space: nowrap; }
+  .btn-sm:hover { background: var(--hz-bg-color-base-hover); }
+  .btn-sm svg { width: 16px; height: 16px; }
+
+  /* ── Two-column layout ── */
+  /* NOTE: .content from components.css has padding:24px — override for this page layout */
+  .content.content--topic { padding: 0; overflow: hidden; }
+  .topic-moderation-layout { flex: 1; display: flex; overflow: hidden; height: 100%; }
+
+  /* Sidebar: panels with form fields (real: flex: 0 2 400px, verified live) */
+  .topic-moderation-sidebar { flex: 0 0 340px; width: 340px; border-right: 1px solid var(--hz-border-color-light); overflow-y: auto; padding: 16px; background: #fff; }
+
+  /* Main content: posts thread */
+  .topic-moderation-section { flex: 1; min-width: 0; overflow-y: auto; padding: 20px 24px; background: var(--hz-control-bg-base); }
+
+  /* ── m-section: collapsible sidebar panel (real class from live product) ── */
+  .m-section { border: 1px solid var(--hz-border-color-base); border-radius: 4px; margin-bottom: 12px; overflow: hidden; }
+  .m-section-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--hz-control-bg-base); cursor: pointer; }
+  .a-section-title { font-size: 13px; font-weight: 600; color: var(--hz-text-color-primary); }
+  .m-section-header__toggle { line-height: 0; }
+  .m-section-header__toggle button { border: none; background: none; padding: 4px; cursor: pointer; color: var(--hz-text-color-secondary); display: flex; }
+  .m-section-header__toggle button svg { width: 20px; height: 20px; transition: transform .15s; }
+  .m-section.is-collapsed .m-section-header__toggle button svg { transform: rotate(180deg); }
+  .m-section-body { padding: 12px 16px; background: #fff; }
+  .m-section.is-collapsed .m-section-body { display: none; }
+
+  /* Overview panel: key/value rows */
+  .topic-overview__content { display: flex; flex-direction: column; gap: 6px; }
+  .topic-overview__item { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 13px; }
+  .topic-overview__label { color: var(--hz-text-color-secondary); flex: none; }
+  .topic-overview__value { color: var(--hz-text-color-primary); text-align: right; }
+
+  /* Details panel: form fields */
+  .details-field { margin-bottom: 14px; }
+  .details-field:last-child { margin-bottom: 0; }
+  .details-field label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: var(--hz-text-color-primary); }
+  .details-field input, .details-field select { width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 6px 10px; font-size: 13px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); height: 32px; }
+  .details-field textarea { width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 8px 10px; font-size: 13px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); min-height: 80px; resize: vertical; }
+  .details-save-row { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--hz-border-color-light); }
+
+  /* ── Post card: .box wraps a .topic-wrapper article ── */
+  .box { background: #fff; border: 1px solid var(--hz-border-color-base); border-radius: 8px; margin-bottom: 16px; }
+  .topic-wrapper { padding: 20px; }
+
+  /* Author row */
+  .topic-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .topic-header__author-info { display: flex; gap: 12px; align-items: flex-start; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; flex: none; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-initial-40 { width: 40px; height: 40px; border-radius: 50%; color: #fff; display: inline-flex; align-items:center; justify-content:center; font-size: 16px; font-weight: 400; flex: none; }
+  .author-info-wrapper { display: flex; flex-direction: column; gap: 2px; }
+  .author-info { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+  .username { color: var(--hz-primary-color); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .username:hover { text-decoration: underline; }
+  .rank-title { color: var(--hz-text-color-secondary); font-size: 12px; }
+  .post-meta { font-size: 12px; color: var(--hz-text-color-secondary); }
+  .post-meta span + span::before { content: " · "; }
+
+  /* Post actions (kebab menu trigger) */
+  .topic-header__actions { display: flex; gap: 4px; align-items: center; flex: none; }
+  .kebab-btn { border: none; background: none; font-size: 20px; color: var(--hz-text-color-secondary); cursor: pointer; line-height: 1; padding: 4px; border-radius: 4px; }
+  .kebab-btn:hover { background: var(--hz-bg-color-base-hover); }
+
+  /* Post body */
+  .post-body { font-size: 14px; line-height: 1.6; color: var(--hz-text-color-primary); margin-bottom: 16px; }
+  .post-body p { margin: 0 0 12px; }
+  .post-body p:last-child { margin-bottom: 0; }
+
+  /* Post footer: like / reply */
+  .post-footer { display: flex; align-items: center; gap: 16px; padding-top: 12px; border-top: 1px solid var(--hz-border-color-light); }
+  .post-action { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--hz-text-color-secondary); cursor: pointer; background: none; border: none; padding: 0; }
+  .post-action svg { width: 16px; height: 16px; }
+  .post-action:hover { color: var(--hz-text-color-primary); }
+
+  /* Reply composer box */
+  .reply-composer { background: #fff; border: 1px solid var(--hz-border-color-base); border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .reply-composer textarea { width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 10px 12px; font-size: 14px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); min-height: 80px; resize: vertical; }
+  .reply-composer__footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+
+  /* Reply thread indentation */
+  .reply { border-left: 3px solid var(--hz-border-color-light); margin-left: 24px; padding-left: 0; }
+
+  /* Status pill (used in Overview panel) */
+  .status-pill { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .status-pill--published { background: #ebfbee; color: #0f7d4e; }
+  .status-pill--draft     { background: #fffaeb; color: #a04406; }
+  .status-pill--pending   { background: #e6f0fd; color: #035bc6; }
+</style>
+</head>
+<!-- Change data-active-item: Add|Home|Content|Email|Users|Analytics|Platform|Gamification|Customization|Integrations|AI|Settings -->
+<body data-active-item="Content">
+
+  <div data-include="../shell/nav-rail.html"></div>
+
+  <!-- No section nav panel for the moderation layout — the layout is self-contained -->
+
+  <div class="main">
+    <div data-include="../shell/topbar.html"></div>
+
+    <!-- Breadcrumb header with action buttons -->
+    <div class="control-header">
+      <div class="control-header__breadcrumb">
+        <a href="#">← Back to Overview</a>
+      </div>
+      <div class="control-header__row">
+        <h2>Moderate Topic</h2>
+        <div class="control-header__buttons">
+          <button class="btn-sm" type="button">Version History</button>
+          <button class="btn-sm" type="button">Mark as unread by team</button>
+          <button class="btn-sm" type="button">
+            Assign moderator
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-column layout: sidebar (left) + posts (right) -->
+    <main class="content content--topic">
+      <div class="topic-moderation-layout">
+
+        <!-- ── LEFT SIDEBAR: collapsible m-section panels ── -->
+        <aside class="topic-moderation-sidebar" aria-label="Topic details">
+
+          <!-- Panel 1: Overview (key/value metadata) -->
+          <div class="m-section">
+            <div class="m-section-header" data-panel="overview">
+              <span class="a-section-title">Overview</span>
+              <span class="m-section-header__toggle">
+                <button type="button" aria-label="Collapse">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+                </button>
+              </span>
+            </div>
+            <div class="m-section-body">
+              <div class="topic-overview__content">
+                <div class="topic-overview__item">
+                  <span class="topic-overview__label">Type:</span>
+                  <span class="topic-overview__value">Article</span>
+                </div>
+                <div class="topic-overview__item">
+                  <span class="topic-overview__label">Created:</span>
+                  <span class="topic-overview__value">8 Sep 2026, 14:54</span>
+                </div>
+                <div class="topic-overview__item">
+                  <span class="topic-overview__label">Status:</span>
+                  <span class="topic-overview__value"><span class="status-pill status-pill--published">Published</span></span>
+                </div>
+                <div class="topic-overview__item">
+                  <span class="topic-overview__label">Author:</span>
+                  <span class="topic-overview__value">Dana</span>
+                </div>
+                <div class="topic-overview__item">
+                  <span class="topic-overview__label">Category:</span>
+                  <span class="topic-overview__value">Guides &amp; Tutorials</span>
+                </div>
+                <div class="topic-overview__item">
+                  <span class="topic-overview__label">Views:</span>
+                  <span class="topic-overview__value">142</span>
+                </div>
+                <div class="topic-overview__item">
+                  <span class="topic-overview__label">Replies:</span>
+                  <span class="topic-overview__value">2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 2: Details (editable form fields) -->
+          <div class="m-section">
+            <div class="m-section-header" data-panel="details">
+              <span class="a-section-title">Details</span>
+              <span class="m-section-header__toggle">
+                <button type="button" aria-label="Collapse">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+                </button>
+              </span>
+            </div>
+            <div class="m-section-body">
+              <div class="details-field">
+                <label for="field-title">Title</label>
+                <input id="field-title" type="text" value="How to contact support when it's really needed">
+              </div>
+              <div class="details-field">
+                <label for="field-category">Category</label>
+                <select id="field-category">
+                  <option selected>Guides &amp; Tutorials</option>
+                  <option>General</option>
+                  <option>Announcements</option>
+                </select>
+              </div>
+              <div class="details-field">
+                <label for="field-tags">Tags</label>
+                <input id="field-tags" type="text" placeholder="Add tags…" value="support, contact">
+              </div>
+              <div class="details-field">
+                <label for="field-notes">Team notes</label>
+                <textarea id="field-notes" placeholder="Add a note visible only to team members…"></textarea>
+              </div>
+              <div class="details-save-row">
+                <button class="btn-sm" type="button">Cancel</button>
+                <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">Save</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 3: Additional panel (duplicate/remove as needed) -->
+          <div class="m-section is-collapsed">
+            <div class="m-section-header" data-panel="extra">
+              <span class="a-section-title">Content helpfulness</span>
+              <span class="m-section-header__toggle">
+                <button type="button" aria-label="Expand">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+                </button>
+              </span>
+            </div>
+            <div class="m-section-body">
+              <p style="font-size:13px; color: var(--hz-text-color-secondary); margin:0;">Helpfulness rating settings go here.</p>
+            </div>
+          </div>
+
+        </aside>
+
+        <!-- ── RIGHT: Posts thread ── -->
+        <section class="topic-moderation-section" aria-label="Topic content">
+
+          <!-- Opening post -->
+          <div class="box qa-topic-first-post">
+            <article class="topic-wrapper">
+
+              <div class="topic-header">
+                <div class="topic-header__author-info">
+                  <div class="avatar">
+                    <!-- Use <img src="…"> for real avatars or avatar-initial-40 for initials -->
+                    <span class="avatar-initial-40" style="background:#9ADBD5;">D</span>
+                  </div>
+                  <div class="author-info-wrapper">
+                    <div class="author-info">
+                      <a class="username" href="#">Dana</a>
+                    </div>
+                    <div class="author-info">
+                      <span class="rank-title">Super User</span>
+                      <span class="post-meta">1 day ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="topic-header__actions">
+                  <button class="kebab-btn" type="button" aria-label="Topic actions">⋮</button>
+                </div>
+              </div>
+
+              <div class="post-body">
+                <p>If you ever find yourself in a situation where you need to escalate an issue to our support team, here's the best way to do it so we can help you quickly.</p>
+                <p>First, check the knowledge base — most common questions are already answered there. If you still can't find what you need, use the <strong>Contact Support</strong> button on any page.</p>
+                <p>Please include your account ID, the steps you took, and a screenshot if possible. This helps us resolve your issue much faster.</p>
+              </div>
+
+              <div class="post-footer">
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                  3 likes
+                </button>
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  Reply
+                </button>
+              </div>
+
+            </article>
+          </div>
+
+          <!-- Reply card (repeat this block for each reply) -->
+          <div class="box reply">
+            <article class="topic-wrapper">
+              <div class="topic-header">
+                <div class="topic-header__author-info">
+                  <div class="avatar">
+                    <span class="avatar-initial-40" style="background:#FECCAB;">A</span>
+                  </div>
+                  <div class="author-info-wrapper">
+                    <div class="author-info"><a class="username" href="#">Anna</a></div>
+                    <div class="author-info">
+                      <span class="rank-title">Registered User</span>
+                      <span class="post-meta">12 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="topic-header__actions">
+                  <button class="kebab-btn" type="button" aria-label="Reply actions">⋮</button>
+                </div>
+              </div>
+              <div class="post-body">
+                <p>Thanks Dana! Just used the Contact Support flow and it was very straightforward. The account ID tip was especially helpful.</p>
+              </div>
+              <div class="post-footer">
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                  1 like
+                </button>
+                <button class="post-action" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  Reply
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- Reply composer -->
+          <div class="reply-composer">
+            <textarea placeholder="Write a reply…"></textarea>
+            <div class="reply-composer__footer">
+              <button class="btn-sm" type="button">Cancel</button>
+              <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">Post reply</button>
+            </div>
+          </div>
+
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Collapsible m-section panels
+    document.querySelectorAll('.m-section-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.closest('.m-section').classList.toggle('is-collapsed');
+      });
+    });
+  </script>
+
+  <script src="../interactions/design-system.js"></script>
+</body>
+</html>

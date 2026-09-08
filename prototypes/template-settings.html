@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Settings Page — Template</title>
+<!--
+  SETTINGS PAGE TEMPLATE
+  ─────────────────────────────────────────────────────────────────────────────
+  Based on: AI Settings (dchdesign-en.insided.com/ai/settings)
+  Live-verified class names: dirty-section, dirty-section__card, field patterns.
+
+  TO CUSTOMISE:
+  1. Update <title> and data-active-item on <body>
+  2. Update .nav-panel__title + links for the actual section
+  3. Update the page-header <h1>
+  4. Replace dirty-section blocks with the actual settings groups
+  5. Remove unused field type examples
+
+  FIELD TYPES:
+  A. Vertical  (.dirty-section__field)         — label + description stacked above input/textarea
+  B. Horizontal (.dirty-section__field-row)    — info (label+desc) on the left, control on the right
+     Controls for horizontal rows: toggle switch, dropdown trigger, badge
+
+  SAVE PATTERN:
+  Each dirty-section has its own save button (appears after edits in the real product).
+  Add a .dirty-section__save-row at the bottom of each .dirty-section__card-body.
+  ─────────────────────────────────────────────────────────────────────────────
+-->
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/components.css">
+<style>
+  /* ── dirty-section: top-level settings group ── */
+  .dirty-section { width: 720px; max-width: 100%; margin-bottom: 32px; }
+  .dirty-section__title { font-size: 18px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0 0 12px; }
+  .dirty-section__card { background: #fff; border: 1px solid var(--hz-border-color-base); border-radius: 8px; padding: 24px; box-shadow: rgba(0,0,0,.16) 0 1px 2px 0; }
+  .dirty-section__card-body { display: flex; flex-direction: column; gap: 24px; }
+
+  /* Type A: vertical field — label/desc above, full-width control below */
+  .dirty-section__field { display: flex; flex-direction: column; gap: 8px; }
+  .dirty-section__field-label { font-size: 14px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0; display: flex; align-items: center; gap: 8px; }
+  .dirty-section__field-description { font-size: 14px; color: #3C4A57; margin: 0; }
+  .dirty-section__input  { width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 6px 10px; font-size: 14px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); }
+  .dirty-section__textarea { width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 12px; font-size: 14px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); min-height: 96px; resize: vertical; }
+  .char-count { text-align: right; font-size: 11px; color: var(--hz-text-color-placeholder); margin-top: 4px; }
+
+  /* Type B: horizontal field-row — info left, control right */
+  .dirty-section__field-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+  .dirty-section__field-row + .dirty-section__field-row { padding-top: 24px; border-top: 1px solid var(--hz-border-color-light); }
+  .dirty-section__field-info { flex: 1; }
+  .dirty-section__control { flex: none; }
+
+  /* Save row at bottom of a dirty-section card */
+  .dirty-section__save-row { display: flex; justify-content: flex-end; padding-top: 16px; border-top: 1px solid var(--hz-border-color-light); margin-top: 4px; gap: 8px; }
+
+  /* Toggle switch (real .control-switcher pattern from live product) */
+  .switch { position: relative; width: 51px; height: 24px; display: inline-block; flex: none; cursor: pointer; }
+  .switch__side { position: absolute; inset: 0; display: flex; border-radius: 3px; overflow: hidden; }
+  .switch__on-half  { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; background: var(--hz-primary-color); }
+  .switch__off-half { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #aeacac; background: var(--hz-border-color-base); }
+  .switch__knob { position: absolute; top: 0; width: 26px; height: 24px; background: #fff; border: 1px solid #aeacac; border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,.15); transition: left .1s; }
+  .switch.is-on  .switch__knob { left: 25px; }
+  .switch.is-off .switch__knob { left: 0; }
+
+  /* Dropdown trigger button */
+  .select-trigger { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; background: #fff; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .select-trigger svg { width: 16px; height: 16px; }
+
+  /* Badge labels */
+  .badge-beta { display: inline-block; color: var(--hz-primary-color); border: 1px solid var(--hz-primary-color); border-radius: 4px; padding: 0 4px; font-size: 11px; font-weight: 600; }
+  .badge-new  { display: inline-block; background: var(--hz-primary-color); color: #fff; border-radius: 4px; padding: 0 4px; font-size: 11px; font-weight: 600; }
+</style>
+</head>
+<!-- Change data-active-item: Add|Home|Content|Email|Users|Analytics|Platform|Gamification|Customization|Integrations|AI|Settings -->
+<body data-active-item="AI">
+
+  <div data-include="../shell/nav-rail.html"></div>
+
+  <!-- Section nav panel — real AI section nav extracted from live product -->
+  <aside class="nav-panel" aria-label="Section">
+    <div class="nav-panel__title">AI</div>
+    <a class="nav-panel__link active" href="#">AI Settings</a>
+    <a class="nav-panel__link" href="#">Moderation AI Agent</a>
+    <a class="nav-panel__link" href="#">AI Answers for Search</a>
+    <a class="nav-panel__link" href="#">AI Translations</a>
+    <a class="nav-panel__link" href="#">AI Answers Agent</a>
+  </aside>
+
+  <div class="main">
+    <div data-include="../shell/topbar.html"></div>
+
+    <div class="page-header">
+      <h1>Settings Page</h1>
+    </div>
+
+    <main class="content">
+
+      <!-- ─────────────────────────────────────────────────────────────────
+           SECTION A — Vertical fields (inputs / textareas)
+           Use when the control spans full width below the label
+      ───────────────────────────────────────────────────────────────────── -->
+      <div class="dirty-section">
+        <h3 class="dirty-section__title">Section Title</h3>
+        <div class="dirty-section__card">
+          <div class="dirty-section__card-body">
+
+            <!-- Type A example 1: text input -->
+            <div class="dirty-section__field">
+              <p class="dirty-section__field-label">Field label</p>
+              <p class="dirty-section__field-description">Short description explaining what this field does and how it affects the experience.</p>
+              <input class="dirty-section__input" type="text" placeholder="Placeholder text…">
+            </div>
+
+            <!-- Type A example 2: textarea with char count -->
+            <div class="dirty-section__field">
+              <p class="dirty-section__field-label">Long text field</p>
+              <p class="dirty-section__field-description">A longer explanation that may span two lines. Tells the user what format or content is expected here.</p>
+              <textarea class="dirty-section__textarea" maxlength="1000" placeholder="Write something…"></textarea>
+              <div class="char-count"><span id="charCount">0</span> / 1000</div>
+            </div>
+
+            <!-- Save row -->
+            <div class="dirty-section__save-row">
+              <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">Cancel</button>
+              <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">Save</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────────────────
+           SECTION B — Horizontal field-rows (toggle switches, dropdowns)
+           Use when the control is compact and sits to the right of the label
+      ───────────────────────────────────────────────────────────────────── -->
+      <div class="dirty-section">
+        <h3 class="dirty-section__title">Another Section</h3>
+        <div class="dirty-section__card">
+          <div class="dirty-section__card-body">
+
+            <!-- Type B example 1: dropdown trigger -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Pick an option</p>
+                <p class="dirty-section__field-description">Select a value from the dropdown list. Current selection is shown on the button.</p>
+              </div>
+              <div class="dirty-section__control">
+                <button class="select-trigger" type="button">
+                  Option A
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Type B example 2: toggle ON, plain label -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Feature toggle</p>
+                <p class="dirty-section__field-description">Enable or disable this feature across the community. Changes take effect immediately.</p>
+              </div>
+              <div class="dirty-section__control">
+                <div class="switch is-on" role="switch" aria-checked="true" tabindex="0">
+                  <div class="switch__side">
+                    <span class="switch__on-half">ON</span>
+                    <span class="switch__off-half">OFF</span>
+                  </div>
+                  <div class="switch__knob"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Type B example 3: toggle OFF, BETA badge -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Beta feature <span class="badge-beta">BETA</span></p>
+                <p class="dirty-section__field-description">This feature is in beta. Enable it to try it out and share feedback with the team.</p>
+              </div>
+              <div class="dirty-section__control">
+                <div class="switch is-off" role="switch" aria-checked="false" tabindex="0">
+                  <div class="switch__side">
+                    <span class="switch__on-half">ON</span>
+                    <span class="switch__off-half">OFF</span>
+                  </div>
+                  <div class="switch__knob"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Type B example 4: toggle OFF, NEW badge -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">New capability <span class="badge-new">NEW</span></p>
+                <p class="dirty-section__field-description">Newly released option. Turn it on to activate this capability for your community.</p>
+              </div>
+              <div class="dirty-section__control">
+                <div class="switch is-off" role="switch" aria-checked="false" tabindex="0">
+                  <div class="switch__side">
+                    <span class="switch__on-half">ON</span>
+                    <span class="switch__off-half">OFF</span>
+                  </div>
+                  <div class="switch__knob"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Save row -->
+            <div class="dirty-section__save-row">
+              <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">Cancel</button>
+              <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">Save</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // Toggle switch click handler
+    document.querySelectorAll('.switch').forEach(sw => {
+      sw.addEventListener('click', () => {
+        const isOn = sw.classList.contains('is-on');
+        sw.classList.toggle('is-on', !isOn);
+        sw.classList.toggle('is-off', isOn);
+        sw.setAttribute('aria-checked', String(!isOn));
+      });
+    });
+
+    // Textarea character counter
+    const textarea = document.querySelector('.dirty-section__textarea');
+    const charCount = document.getElementById('charCount');
+    if (textarea && charCount) {
+      textarea.addEventListener('input', () => { charCount.textContent = textarea.value.length; });
+    }
+  </script>
+
+  <script src="../interactions/design-system.js"></script>
+</body>
+</html>
