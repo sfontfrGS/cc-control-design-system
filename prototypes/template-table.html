@@ -80,28 +80,31 @@
         </div>
       </div>
 
-      <!-- Row 2: utility buttons + pagination -->
-      <div class="action-bar">
-        <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">
-          <div><div><span class="button-control__title-text"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9.76618 2.23335C8.79952 1.26669 7.47285 0.666687 5.99952 0.666687C3.05285 0.666687 0.672852 3.05335 0.672852 6.00002C0.672852 8.94669 3.05285 11.3334 5.99952 11.3334C8.48619 11.3334 10.5595 9.63335 11.1529 7.33335H9.76618C9.21952 8.88669 7.73952 10 5.99952 10C3.79285 10 1.99952 8.20669 1.99952 6.00002C1.99952 3.79335 3.79285 2.00002 5.99952 2.00002C7.10618 2.00002 8.09285 2.46002 8.81285 3.18669L6.66618 5.33335H11.3329V0.666687L9.76618 2.23335Z" fill="currentColor"/></svg>Refresh</span></div></div>
-        </button>
-        <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">
-          <div><div><span class="button-control__title-text"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 2.667H2C1.633 2.667 1.333 2.967 1.333 3.334V12.667C1.333 13.034 1.633 13.334 2 13.334H14C14.367 13.334 14.667 13.034 14.667 12.667V3.334C14.667 2.967 14.367 2.667 14 2.667ZM5.333 12H2.667V4H5.333V12ZM9.333 12H6.667V4H9.333V12ZM13.333 12H10.667V4H13.333V12Z" fill="currentColor"/></svg>Columns</span></div></div>
-        </button>
+      <!-- Table card: action bar + table in one bordered container (Figma-verified) -->
+      <div class="table-card">
 
-        <div class="pagination">
-          <span class="pagination__info" id="pagInfo">1–5 of 5 results</span>
-          <span class="pagination__item disabled">First</span>
-          <span class="pagination__item disabled chevron"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z"/></svg></span>
-          <span class="pagination__item">Page <input class="pagination__page-box" type="text" value="1"> of <strong>1</strong></span>
-          <span class="pagination__item disabled chevron"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41L13.17 12L8.59 16.59L10 18L16 12L10 6Z"/></svg></span>
-          <span class="pagination__item disabled">Last</span>
-          <span class="pagination__rows"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10L12 15L17 10H7Z"/></svg>25 rows</span>
+        <!-- Action bar: utility buttons (left) + pagination (right) -->
+        <div class="action-bar">
+          <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">
+            <div><div><span class="button-control__title-text"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9.76618 2.23335C8.79952 1.26669 7.47285 0.666687 5.99952 0.666687C3.05285 0.666687 0.672852 3.05335 0.672852 6.00002C0.672852 8.94669 3.05285 11.3334 5.99952 11.3334C8.48619 11.3334 10.5595 9.63335 11.1529 7.33335H9.76618C9.21952 8.88669 7.73952 10 5.99952 10C3.79285 10 1.99952 8.20669 1.99952 6.00002C1.99952 3.79335 3.79285 2.00002 5.99952 2.00002C7.10618 2.00002 8.09285 2.46002 8.81285 3.18669L6.66618 5.33335H11.3329V0.666687L9.76618 2.23335Z" fill="currentColor"/></svg>Refresh</span></div></div>
+          </button>
+          <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">
+            <div><div><span class="button-control__title-text"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 2.667H2C1.633 2.667 1.333 2.967 1.333 3.334V12.667C1.333 13.034 1.633 13.334 2 13.334H14C14.367 13.334 14.667 13.034 14.667 12.667V3.334C14.667 2.967 14.367 2.667 14 2.667ZM5.333 12H2.667V4H5.333V12ZM9.333 12H6.667V4H9.333V12ZM13.333 12H10.667V4H13.333V12Z" fill="currentColor"/></svg>Columns</span></div></div>
+          </button>
+
+          <div class="pagination">
+            <span class="pagination__info" id="pagInfo">1–5 of 5 results</span>
+            <span class="pagination__item disabled">First</span>
+            <span class="pagination__item chevron disabled"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z"/></svg></span>
+            <span class="pagination__item">Page <input class="pagination__page-box" type="text" value="1"> of <strong>1</strong></span>
+            <span class="pagination__item chevron disabled"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41L13.17 12L8.59 16.59L10 18L16 12L10 6Z"/></svg></span>
+            <span class="pagination__item disabled">Last</span>
+            <span class="pagination__rows"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10L12 15L17 10H7Z"/></svg>25 rows</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Table -->
-      <div class="table-scroll">
+        <!-- Scrollable table -->
+        <div class="table-scroll">
         <table class="dt" id="itemsTable">
           <thead>
             <tr>
@@ -198,7 +201,8 @@
             </tr>
           </tbody>
         </table>
-      </div>
+        </div><!-- /.table-scroll -->
+      </div><!-- /.table-card -->
 
     </main>
   </div>

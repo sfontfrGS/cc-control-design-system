@@ -287,10 +287,11 @@ input[type="checkbox"], input[type="radio"] { width: 14px; height: 14px; accent-
 .metric__count { font-size: 32px; font-weight: 600; margin: 4px 0; }
 .metric__delta { font-size: 14px; color: var(--hz-text-color-secondary); }
 
-/* Data table — zero row-divider borders (verified live); column separators via box-shadow on th only */
+/* Data table — Figma-verified 2026-09-09 (node 19624:3598) */
 table.dt { border-collapse: collapse; width: 100%; font-size: 14px; }
-table.dt th { text-align: left; padding: 8px 12px; font-weight: 700; box-shadow: inset 1px 0 0 var(--hz-border-color-base); }
-table.dt td { padding: 8px 12px; vertical-align: middle; }
+table.dt th { text-align: left; padding: 8px 12px; height: 56px; font-weight: 600; border-bottom: 1px solid var(--hz-border-color-base); }
+table.dt td { padding: 8px 12px; height: 56px; vertical-align: middle; border-bottom: 1px solid var(--hz-border-color-base); }
+table.dt tbody tr:last-child td { border-bottom: none; }
 table.dt tr.row--selected td { background: #F5F9FE; }
 .avatar-sm { width: 24px; height: 24px; border-radius: 50%; background: var(--hz-primary-color); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; margin-right: 8px; vertical-align: middle; }
 
@@ -302,14 +303,16 @@ table.dt tr.row--selected td { background: #F5F9FE; }
 .bulk-toolbar__clear   { border: none; background: none; padding: 0; font-size: 14px; color: #828080; text-decoration: underline; cursor: pointer; }
 .bulk-toolbar__actions { display: flex; gap: 12px; }
 
-/* Pagination */
-.pagination { display: flex; align-items: center; gap: 4px; margin-top: 16px; font-size: 14px; color: var(--hz-text-color-primary); }
-.pagination__info      { font-weight: 700; margin-right: 12px; }
-.pagination__item      { display: flex; align-items: center; height: 32px; padding: 0 8px; color: var(--hz-text-color-primary); }
-.pagination__item.disabled { color: #959898; cursor: default; }
+/* Pagination — Figma-verified 2026-09-09 (node 19624:3598) */
+.pagination { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--hz-text-color-primary); margin-left: auto; }
+.pagination__info      { font-weight: 600; }
+.pagination__item      { display: flex; align-items: center; gap: 8px; color: var(--hz-text-color-primary); }
+.pagination__item.disabled { color: var(--hz-border-color-base); cursor: default; }
+.pagination__item.active   { color: var(--hz-primary-color); cursor: pointer; }
 .pagination__item.chevron  { cursor: pointer; }
-.pagination__page-box  { width: 40px; height: 32px; border: 1px solid rgba(0,0,0,.2); border-radius: 2px; text-align: center; margin: 0 6px; font-size: 14px; }
-.pagination__rows-dropdown { margin-left: auto; }
+.pagination__item.chevron.disabled { cursor: default; }
+.pagination__item svg  { width: 16px; height: 16px; }
+.pagination__page-box  { width: 40px; height: 32px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; text-align: center; font-size: 14px; font-family: var(--hz-font-family); }
 
 /* Search box */
 .search-box { display: flex; align-items: center; border: 1px solid var(--hz-border-color-base); border-radius: var(--hz-border-radius-xsmall); padding: 8px 12px; max-width: 360px; color: var(--hz-text-color-placeholder); font-size: 14px; gap: 8px; }
@@ -530,16 +533,18 @@ code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-famil
 
 /* Bulk toolbar show/hide — see definition above; .is-visible added by JS */
 
-/* Action bar (row 2: utility buttons + pagination) */
-.action-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+/* Table card — wraps action-bar + table-scroll as one bordered card */
+.table-card { background: #fff; border: 1px solid var(--hz-border-color-base); border-radius: 4px; overflow: hidden; }
 
-/* Pagination — inline variant (sits inside action-bar, not below table) */
-.pagination--inline { display: flex; align-items: center; margin-left: auto; font-size: 14px; }
-.pagination__rows { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; font-size: 12px; font-weight: 600; background: #fff; cursor: pointer; margin-left: 8px; }
-.pagination__rows svg { width: 24px; height: 24px; margin: -4px; }
+/* Action bar — top toolbar row inside the table card */
+.action-bar { display: flex; align-items: center; gap: 8px; height: 56px; padding: 8px; border-bottom: 1px solid var(--hz-border-color-base); background: #fff; }
+
+/* Rows-per-page select — Figma-verified */
+.pagination__rows { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; font-size: 14px; font-weight: 400; background: #fff; cursor: pointer; }
+.pagination__rows svg { width: 16px; height: 16px; flex: none; }
 
 /* Table column widths (live-extracted from dchdesign-en.insided.com/users/overview) */
-.col-checkbox    { width: 40px; }
+.col-checkbox    { width: 48px; }
 .col-m-big       { width: 240px; min-width: 240px; }
 .col-s           { width: 160px; min-width: 160px; }
 .col-m-flexible  { width: 220px; min-width: 220px; }
@@ -563,8 +568,8 @@ td.col-xs-right, td.col-s-right { text-align: right; }
 .ext-link svg { width: 16px; height: 16px; }
 .muted { color: var(--hz-text-color-secondary); }
 
-/* Scrollable table wrapper */
-.table-scroll { background: #fff; border: 1px solid var(--hz-border-color-light); border-radius: var(--hz-border-radius-base); overflow-x: auto; }
+/* Scrollable table wrapper — border/radius on .table-card, not here */
+.table-scroll { overflow-x: auto; }
 
 /* ===== TOPIC / MODERATION PAGE LAYOUT ===== */
 /* Source: dchdesign-en.insided.com/…/how-to-contact-support… */
