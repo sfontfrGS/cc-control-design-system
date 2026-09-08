@@ -287,9 +287,58 @@
   .spinner--lg { width: 48px; height: 48px; border-width: 3px; }
   .spinner--xl { width: 80px; height: 80px; border-width: 4px; }
 
-  /* empty state */
-  .empty-state { text-align: center; padding: 48px 24px; color: var(--hz-text-color-secondary); }
-  .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+  /* empty state — real class .control_empty, verified live */
+  .empty-state { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 48px 24px; }
+  .empty-state__img { max-width: 400px; margin-bottom: 16px; }
+  .empty-state__title { font-size: 21px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0 0 8px; }
+  .empty-state__desc { font-size: 14px; line-height: 20px; color: var(--hz-text-color-secondary); margin: 0 0 20px; }
+
+  /* Card wrapper — generic white card used throughout (settings cards, content cards) */
+  .card-wrapper { background: #fff; border-radius: 8px; border: 1px solid var(--hz-border-color-light); padding: 24px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  .card-wrapper__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .card-wrapper__title { font-size: 16px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0; }
+
+  /* Tooltip — CSS-only, wraps any trigger element */
+  .has-tooltip { position: relative; display: inline-flex; }
+  .has-tooltip .tooltip-tip {
+    position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #25313B; color: #fff; border-radius: 4px; padding: 4px 8px;
+    font-size: 12px; line-height: 1.4; white-space: nowrap; pointer-events: none;
+    opacity: 0; transition: opacity .15s; z-index: 200;
+  }
+  .has-tooltip:hover .tooltip-tip { opacity: 1; }
+  .has-tooltip .tooltip-tip::after {
+    content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    border: 4px solid transparent; border-top-color: #25313B;
+  }
+  .has-tooltip .tooltip-tip--bottom { top: calc(100% + 6px); bottom: auto; }
+  .has-tooltip .tooltip-tip--bottom::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: #25313B; }
+
+  /* Skeleton loader */
+  @keyframes skeleton-wave {
+    0%   { background-position: -600px 0; }
+    100% { background-position: 600px 0; }
+  }
+  .skeleton {
+    background: linear-gradient(90deg, #e6e9ec 25%, #f0f2f4 50%, #e6e9ec 75%);
+    background-size: 1200px 100%;
+    animation: skeleton-wave 1.5s ease-in-out infinite;
+    border-radius: 4px; display: inline-block;
+  }
+  .skeleton--text   { height: 14px; }
+  .skeleton--title  { height: 20px; }
+  .skeleton--avatar { border-radius: 50%; }
+  .skeleton--pill   { height: 16px; border-radius: 8px; }
+
+  /* Page notification banner (full-width, sits below topbar or at top of content) */
+  .page-banner { display: flex; align-items: center; gap: 12px; padding: 12px 24px; font-size: 14px; border-bottom: 1px solid; }
+  .page-banner__icon  { width: 20px; height: 20px; flex: none; }
+  .page-banner__msg   { flex: 1; }
+  .page-banner__close { border: none; background: none; cursor: pointer; color: currentColor; padding: 0; font-size: 18px; line-height: 1; }
+  .page-banner--info    { background: #e6f0fd; border-color: #a2c7f7; color: #034aa3; }
+  .page-banner--success { background: #ebfbee; border-color: #98e7b1; color: #0f7d4e; }
+  .page-banner--warning { background: #fffaeb; border-color: #ffd45c; color: #a04406; }
+  .page-banner--danger  { background: #fff5f5; border-color: #fcbeb9; color: #9a1c0b; }
 
   code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-family: var(--hz-code-family); font-size: 12px; }
 </style>
@@ -1215,6 +1264,87 @@
     Use medium as the default for inline/button loading; xlarge for full-page blocking states only.
     The spinner is not yet documented in the live codebase — Figma node: ❖ Spinner (page 14202:31280).
   </p>
+</section>
+
+
+<section>
+  <h2>Card wrapper <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— generic white card, used as settings card / content card</span></h2>
+  <p class="label" style="text-transform:none; font-weight:400;">White bg, 8px radius, 1px <code class="tag">var(--hz-border-color-light)</code> border, 24px padding, subtle shadow. Use this for any content block that needs a visual card boundary. Verified on settings screens, AI Settings, and moderation screens.</p>
+  <div class="card-wrapper" style="max-width:480px;">
+    <div class="card-wrapper__header">
+      <h3 class="card-wrapper__title">Card title</h3>
+      <button class="btn-new btn-new--small btn-new--secondary">Action</button>
+    </div>
+    <p style="font-size:14px; color:var(--hz-text-color-secondary); margin:0;">Card body content goes here. Any component can live inside a card wrapper.</p>
+  </div>
+  <p class="label" style="margin-top:8px; text-transform:none; font-weight:400;">Markup: <code class="tag">&lt;div class="card-wrapper"&gt;</code></p>
+</section>
+
+<section>
+  <h2>Tooltip <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— CSS-only, dark bg, shows on hover</span></h2>
+  <p class="label" style="text-transform:none; font-weight:400;">Wrap any element in <code class="tag">.has-tooltip</code> and add a <code class="tag">.tooltip-tip</code> sibling. Live platform uses native <code class="tag">title</code> attribute in many places — use this CSS tooltip when you need custom-styled, multiline, or clickable tooltips in a prototype.</p>
+  <div class="row" style="gap:32px; padding:32px 0 16px;">
+    <span class="has-tooltip">
+      <button class="btn-new btn-new--medium btn-new--secondary">Hover me (above)
+        <span class="tooltip-tip">This is a tooltip with helpful info</span>
+      </button>
+    </span>
+    <span class="has-tooltip">
+      <button class="btn-new btn-new--medium btn-new--secondary">Hover me (below)
+        <span class="tooltip-tip tooltip-tip--bottom">Tooltip shown below the trigger</span>
+      </button>
+    </span>
+    <span class="has-tooltip">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--hz-text-color-secondary)" stroke-width="2" style="cursor:help;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span class="tooltip-tip" style="white-space:normal; width:180px;">Info icon tooltips — common on table column headers to explain the metric</span>
+    </span>
+  </div>
+  <p class="label" style="text-transform:none; font-weight:400;">Markup: <code class="tag">&lt;span class="has-tooltip"&gt; trigger &lt;span class="tooltip-tip"&gt;text&lt;/span&gt; &lt;/span&gt;</code></p>
+</section>
+
+<section>
+  <h2>Skeleton loader <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— animated wave, use while content loads</span></h2>
+  <p class="label" style="text-transform:none; font-weight:400;">Animated shimmer placeholder. Use for any content that loads asynchronously. Sizes are set via inline <code class="tag">width/height</code> to match the real content dimensions.</p>
+  <div style="display:flex; flex-direction:column; gap:12px; max-width:360px; padding:16px; background:#fff; border:1px solid var(--hz-border-color-light); border-radius:8px;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span class="skeleton skeleton--avatar" style="width:32px; height:32px;"></span>
+      <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+        <span class="skeleton skeleton--text" style="width:120px;"></span>
+        <span class="skeleton skeleton--text" style="width:80px;"></span>
+      </div>
+    </div>
+    <span class="skeleton skeleton--title" style="width:100%;"></span>
+    <span class="skeleton skeleton--text" style="width:100%;"></span>
+    <span class="skeleton skeleton--text" style="width:75%;"></span>
+    <div style="display:flex; gap:8px;">
+      <span class="skeleton skeleton--pill" style="width:60px;"></span>
+      <span class="skeleton skeleton--pill" style="width:80px;"></span>
+    </div>
+  </div>
+  <p class="label" style="margin-top:8px; text-transform:none; font-weight:400;">Markup: <code class="tag">&lt;span class="skeleton skeleton--text" style="width:200px;"&gt;&lt;/span&gt;</code></p>
+</section>
+
+<section>
+  <h2>Page notification banner <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— full-width, sits below topbar</span></h2>
+  <p class="label" style="text-transform:none; font-weight:400;">Appears at the top of the main column (between topbar and page-header) for system-level messages: seat limits, maintenance warnings, account alerts. Uses the same color palette as Section Message but full-width and dismissible. Verified on live: <code class="tag">.seat-limit-banner</code> — adapts to a generic pattern here.</p>
+  <div style="display:flex; flex-direction:column; gap:8px; overflow:hidden; border-radius:4px;">
+    <div class="page-banner page-banner--info">
+      <svg class="page-banner__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span class="page-banner__msg"><strong>Heads up:</strong> Your trial ends in 3 days. <a href="#" style="color:currentColor;">Upgrade your plan</a></span>
+      <button class="page-banner__close">×</button>
+    </div>
+    <div class="page-banner page-banner--warning">
+      <svg class="page-banner__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span class="page-banner__msg"><strong>Seat limit reached.</strong> You've used all 5 Community Manager seats. <a href="#" style="color:currentColor;">Manage seats</a></span>
+      <button class="page-banner__close">×</button>
+    </div>
+    <div class="page-banner page-banner--danger">
+      <svg class="page-banner__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <span class="page-banner__msg"><strong>Integration error:</strong> Salesforce sync failed. <a href="#" style="color:currentColor;">View details</a></span>
+      <button class="page-banner__close">×</button>
+    </div>
+  </div>
+  <p class="label" style="margin-top:8px; text-transform:none; font-weight:400;">Markup: <code class="tag">&lt;div class="page-banner page-banner--warning"&gt;</code>. To use in a prototype, place directly inside <code class="tag">.main</code>, after the topbar include and before <code class="tag">.page-header</code>.</p>
 </section>
 
 </body>
