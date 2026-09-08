@@ -6,67 +6,13 @@
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../components/components.css">
 <style>
+  /* Table layout, col-*, filters-row, action-bar, pagination, item-cell styles now in components.css */
+  /* .user-cell is an alias for .item-cell */
+  .user-cell { display: flex; align-items: center; gap: 8px; }
 
-  /* ============ Buttons ============ */
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--hz-font-family); font-weight: 600; border-radius: 4px; cursor: pointer; border: 1px solid var(--hz-border-color-base); background: #fff; color: var(--hz-text-color-primary); height: 40px; padding: 8px 16px; font-size: 14px; white-space: nowrap; }
   .btn:hover { background: var(--hz-bg-color-base-hover); }
   .btn svg { width: 12px; height: 12px; }
-
-  /* ============ Row 1: Filters + Search ============ */
-  .filters-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
-  .search-box { display: flex; align-items: center; gap: 8px; border: 1px solid rgba(0,0,0,.2); border-radius: 4px; padding: 10px 16px; flex: 1; max-width: 532px; background: #fff; }
-  .search-box svg { width: 16px; height: 16px; color: var(--hz-text-color-placeholder); flex: none; }
-  .search-box input { border: none; outline: none; font-size: 14px; width: 100%; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); }
-  .search-box input::placeholder { color: var(--hz-text-color-placeholder); }
-
-  /* ============ Bulk toolbar (replaces row 1) ============ */
-  .bulk-toolbar { display: none; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  .bulk-toolbar.is-visible { display: flex; }
-  .filters-row.is-hidden { display: none; }
-  .bulk-toolbar__left { display: flex; flex-direction: column; gap: 2px; }
-  .bulk-toolbar__count { font-size: 14px; font-weight: 500; }
-  .bulk-toolbar__clear { border: none; background: none; padding: 0; font-size: 14px; color: #828080; text-decoration: underline; cursor: pointer; }
-  .bulk-toolbar__actions { display: flex; gap: 12px; }
-
-  /* ============ Row 2: action bar (Refresh/Columns + pagination) ============ */
-  .action-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-  .pagination { display: flex; align-items: center; margin-left: auto; font-size: 14px; color: var(--hz-text-color-primary); }
-  .pagination__info { font-weight: 700; margin-right: 12px; }
-  .pagination__item { display: flex; align-items: center; height: 32px; padding: 0 8px; }
-  .pagination__item.disabled { color: #959898; cursor: default; }
-  .pagination__item.chevron svg { width: 16px; height: 16px; }
-  .pagination__page-box { width: 40px; height: 32px; border: 1px solid rgba(0,0,0,.2); border-radius: 2px; text-align: center; margin: 0 6px; font-size: 14px; }
-  .pagination__rows { margin-left: 8px; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; font-size: 12px; font-weight: 600; background: #fff; cursor: pointer; }
-  .pagination__rows svg { width: 24px; height: 24px; margin: -4px; }
-
-  /* ============ Table ============ */
-  .table-scroll { background: #fff; border: 1px solid var(--hz-border-color-light); border-radius: var(--hz-border-radius-base); overflow-x: auto; }
-  table.dt { border-collapse: collapse; font-size: 14px; width: 100%; }
-  /* corrected: no row-divider borders anywhere in the real table, verified live */
-  table.dt th { text-align: left; padding: 8px 12px 8px 0; padding-left: 12px; font-weight: 700; white-space: nowrap; box-shadow: inset -1px 0 0 var(--hz-border-color-base); }
-  table.dt th:last-child { box-shadow: none; }
-  table.dt td { padding: 8px 12px; vertical-align: middle; }
-  table.dt tr.is-selected td { background: #F5F9FE; }
-  .th-cell { display: flex; align-items: center; gap: 4px; cursor: pointer; }
-  .th-cell:not(.sortable) { cursor: default; }
-  .th-cell svg { width: 16px; height: 16px; flex: none; }
-  .th-cell .sort-icon { color: #181F26; }
-  .th-cell .sort-icon.inactive { opacity: .25; }
-  .th-cell .help-icon { color: var(--hz-text-color-secondary); cursor: help; }
-  .col-checkbox { width: 40px; }
-  .col-m-big { width: 240px; min-width: 240px; }
-  .col-s { width: 160px; min-width: 160px; }
-  .col-m-flexible { width: 220px; min-width: 220px; }
-  .col-xs-right { width: 90px; min-width: 90px; text-align: right; }
-  .col-s-right { width: 130px; min-width: 130px; text-align: right; }
-  td.col-xs-right, td.col-s-right { text-align: right; }
-
-  .user-cell { display: flex; align-items: center; gap: 8px; }
-  .avatar-initial { width: 24px; height: 24px; border-radius: 50%; color: #fff; display: inline-flex; align-items:center; justify-content:center; font-size: 12px; font-weight: 400; flex: none; }
-  .avatar-photo { width: 24px; height: 24px; border-radius: 50%; flex: none; object-fit: cover; }
-  .ext-link { color: var(--hz-icon-color-normal); margin-left: auto; display: flex; flex: none; }
-  .ext-link svg { width: 16px; height: 16px; }
-  .muted { color: var(--hz-text-color-secondary); }
 </style>
 </head>
 <body data-active-item="Users">
@@ -93,7 +39,7 @@
       <!-- Row 1: Filters + Search -->
       <div class="filters-row" id="filtersRow">
         <button class="btn"><svg viewBox="0 0 18 12" fill="currentColor"><path d="M7 12H11V10H7V12ZM0 0V2H18V0H0ZM3 7H15V5H3V7Z"/></svg>Filters</button>
-        <div class="search-box">
+        <div class="search-box--table">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"/></svg>
           <input type="text" placeholder="Search for username or email" maxlength="500">
         </div>

@@ -6,41 +6,9 @@
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../components/components.css">
 <style>
-
+  /* dirty-section, switch, badge, select-trigger styles now in components.css */
   .avatar-initial { width: 28px; height: 28px; border-radius: 50%; color: #fff; display: inline-flex; align-items:center; justify-content:center; font-size: 12px; font-weight: 400; flex: none; }
-
-  /* ============ dirty-section card (real classes/structure) ============ */
-  .dirty-section { width: 720px; max-width: 720px; margin-bottom: 32px; }
-  .dirty-section__title { font-size: 18px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0 0 12px; }
-  .dirty-section__card { background: #fff; border: 1px solid var(--hz-border-color-base); border-radius: 8px; padding: 24px; box-shadow: rgba(0,0,0,.16) 0 1px 2px 0; }
-  .dirty-section__card-body { display: flex; flex-direction: column; gap: 24px; }
-  .dirty-section__field-row { display: flex; align-items: flex-start; gap: 24px; }
-  .dirty-section__field-row + .dirty-section__field-row { padding-top: 24px; border-top: 1px solid var(--hz-border-color-light); }
-  .dirty-section__field-info { flex: 1; }
-  .dirty-section__field-label { font-size: 14px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0 0 4px; display: flex; align-items: center; gap: 8px; }
-  .dirty-section__field-description { font-size: 14px; font-weight: 400; color: #3C4A57; margin: 0; }
-  .dirty-section__control { flex: none; }
-  .dirty-section__input, .dirty-section__textarea {
-    width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; font-size: 14px;
-    font-family: var(--hz-font-family); color: var(--hz-text-color-primary);
-  }
-  .dirty-section__input { padding: 6px 10px; }
-  .dirty-section__textarea { padding: 12px; min-height: 96px; resize: vertical; }
-  .char-count { text-align: right; font-size: 11px; color: var(--hz-text-color-placeholder); margin-top: 4px; }
-
   .beta-label { display: inline-block; color: var(--hz-primary-color); border: 1px solid var(--hz-primary-color); border-radius: 4px; padding: 0 4px; font-size: 11px; font-weight: 600; }
-
-  .select-trigger { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; background: #fff; font-size: 12px; font-weight: 600; cursor: pointer; }
-
-  /* toggle switch — verified real pattern */
-  .switch { position: relative; width: 51px; height: 24px; display: inline-block; flex: none; }
-  .switch__side { position: absolute; inset: 0; display: flex; border-radius: 3px; overflow: hidden; }
-  .switch__on-half, .switch__off-half { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; }
-  .switch__on-half { background: var(--hz-primary-color); }
-  .switch__off-half { background: var(--hz-border-color-base); color: #aeacac; }
-  .switch__knob { position: absolute; top: 0; width: 26px; height: 24px; background: #fff; border: 1px solid #aeacac; border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
-  .switch.is-on .switch__knob { left: 25px; }
-  .switch.is-off .switch__knob { left: 0; }
 </style>
 </head>
 <body data-active-item="AI">
