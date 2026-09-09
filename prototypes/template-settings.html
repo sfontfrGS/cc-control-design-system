@@ -113,63 +113,36 @@
               </div>
             </div>
 
-            <!-- Type B example 2: feat-toggle ON, plain label -->
+            <!-- Type B example 2: ds-toggle ON -->
             <div class="dirty-section__field-row">
               <div class="dirty-section__field-info">
                 <p class="dirty-section__field-label">Feature toggle</p>
                 <p class="dirty-section__field-description">Enable or disable this feature across the community. Changes take effect immediately.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="feat-toggle" role="group" aria-label="Feature toggle">
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="true" title="Enable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="false" title="Disable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                </div>
+                <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span></label>
               </div>
             </div>
 
-            <!-- Type B example 3: feat-toggle OFF, BETA badge -->
+            <!-- Type B example 3: ds-toggle OFF, BETA badge -->
             <div class="dirty-section__field-row">
               <div class="dirty-section__field-info">
                 <p class="dirty-section__field-label">Beta feature <span class="badge-beta">BETA</span></p>
                 <p class="dirty-section__field-description">This feature is in beta. Enable it to try it out and share feedback with the team.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="feat-toggle" role="group" aria-label="Beta feature">
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="false" title="Enable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="true" title="Disable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                </div>
+                <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span></label>
               </div>
             </div>
 
-            <!-- Type B example 4: feat-toggle OFF, NEW badge -->
+            <!-- Type B example 4: ds-toggle OFF, NEW badge -->
             <div class="dirty-section__field-row">
               <div class="dirty-section__field-info">
                 <p class="dirty-section__field-label">New capability <span class="badge-new">NEW</span></p>
                 <p class="dirty-section__field-description">Newly released option. Turn it on to activate this capability for your community.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="feat-toggle" role="group" aria-label="New capability">
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="false" title="Enable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="true" title="Disable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                </div>
+                <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span></label>
               </div>
             </div>
 
@@ -187,31 +160,20 @@
   </div>
 
   <script>
-    // Feat-toggle click handler
-    document.querySelectorAll('.feat-toggle').forEach(function(group) {
-      var btns = group.querySelectorAll('.feat-toggle__btn');
-      btns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          btns.forEach(function(b) { b.setAttribute('aria-pressed', String(b === btn)); });
-        });
-      });
-    });
-
     // Textarea character counter
     const textarea = document.querySelector('.dirty-section__textarea');
     const charCount = document.getElementById('charCount');
     if (textarea && charCount) {
       textarea.addEventListener('input', () => { charCount.textContent = textarea.value.length; });
     }
-  </script>
 
-  <script>
-document.querySelectorAll('.dirty-section').forEach(function(section) {
-  section.querySelectorAll('input, textarea, select').forEach(function(el) {
-    el.addEventListener('change', function() { section.classList.add('is-dirty'); });
-    el.addEventListener('input', function() { section.classList.add('is-dirty'); });
-  });
-});
+    // Mark section dirty on any input/change (includes ds-toggle checkboxes)
+    document.querySelectorAll('.dirty-section').forEach(function(section) {
+      section.querySelectorAll('input, textarea, select').forEach(function(el) {
+        el.addEventListener('change', function() { section.classList.add('is-dirty'); });
+        el.addEventListener('input', function() { section.classList.add('is-dirty'); });
+      });
+    });
   </script>
   <script src="../interactions/design-system.js"></script>
 </body>

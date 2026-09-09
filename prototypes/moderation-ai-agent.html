@@ -44,16 +44,7 @@
                 <p class="dirty-section__field-description">Automatically review new posts and replies using AI before they are published. Posts that violate your community rules will be flagged or hidden pending human review.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="feat-toggle" id="mainToggle" role="group" aria-label="Enable AI Moderation">
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="true" title="Enable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="false" title="Disable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                </div>
+                <label class="ds-toggle"><input type="checkbox" checked id="mainToggle"><span class="ds-toggle__track"></span></label>
               </div>
             </div>
           </div>
@@ -103,16 +94,7 @@
                 <p class="dirty-section__field-description">Apply AI moderation to replies in addition to top-level posts.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="feat-toggle" role="group" aria-label="Moderate replies">
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="true" title="Enable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="false" title="Disable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                </div>
+                <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span></label>
               </div>
             </div>
 
@@ -191,16 +173,7 @@
                 <p class="dirty-section__field-description">Send an in-platform notification to moderators when the AI flags a post for review.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="feat-toggle" role="group" aria-label="Notify moderators on flag">
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="true" title="Enable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="false" title="Disable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                </div>
+                <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span></label>
               </div>
             </div>
 
@@ -211,16 +184,7 @@
                 <p class="dirty-section__field-description">Send a daily email digest to moderators summarising AI-flagged content from the previous 24 hours.</p>
               </div>
               <div class="dirty-section__control">
-                <div class="feat-toggle" role="group" aria-label="Daily moderation summary email">
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="false" title="Enable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                  <button type="button" class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="true" title="Disable">
-                    <svg class="feat-icon--real" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <svg class="feat-icon--neutral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="16" y1="6" x2="16" y2="18"/></svg>
-                  </button>
-                </div>
+                <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span></label>
               </div>
             </div>
 
@@ -237,27 +201,18 @@
   </div>
 
   <script>
-    document.querySelectorAll('.feat-toggle').forEach(function(group) {
-      var btns = group.querySelectorAll('.feat-toggle__btn');
-      btns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          btns.forEach(function(b) { b.setAttribute('aria-pressed', String(b === btn)); });
-        });
-      });
     });
 
     // Main toggle also updates the ON/OFF section badge
-    const mainToggleGroup = document.getElementById('mainToggle');
-    if (mainToggleGroup) {
-      mainToggleGroup.querySelectorAll('.feat-toggle__btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const isOn = btn.classList.contains('feat-toggle__btn--on');
-          const badge = document.getElementById('sectionBadge');
-          if (badge) {
-            badge.textContent = isOn ? 'ON' : 'OFF';
-            badge.className = 'moderation-agent__badge ' + (isOn ? 'moderation-agent__badge--on' : 'moderation-agent__badge--off');
-          }
-        });
+    const mainToggleInput = document.getElementById('mainToggle');
+    if (mainToggleInput) {
+      mainToggleInput.addEventListener('change', () => {
+        const isOn = mainToggleInput.checked;
+        const badge = document.getElementById('sectionBadge');
+        if (badge) {
+          badge.textContent = isOn ? 'ON' : 'OFF';
+          badge.className = 'moderation-agent__badge ' + (isOn ? 'moderation-agent__badge--on' : 'moderation-agent__badge--off');
+        }
       });
     }
 
