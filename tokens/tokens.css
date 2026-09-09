@@ -146,6 +146,25 @@
   --hz-border-radius-7xlarge: 72px;
   --hz-border-radius-ellipsis: 100px;
 
+  /* ---- Spacing scale (8px grid) ---- */
+  /*
+   * Rule: always use multiples of 8px.
+   * Use 4px (--hz-space-1) only when 8px is too large — e.g. icon-to-label gaps,
+   * tight inline padding, small chip/badge padding.
+   * Never use arbitrary values like 5px, 6px, 10px, 12px, 15px, 20px, etc.
+   */
+  --hz-space-1:  4px;   /* exception only — tight gaps */
+  --hz-space-2:  8px;   /* base unit */
+  --hz-space-3:  16px;
+  --hz-space-4:  24px;
+  --hz-space-5:  32px;
+  --hz-space-6:  40px;
+  --hz-space-7:  48px;
+  --hz-space-8:  56px;
+  --hz-space-9:  64px;
+  --hz-space-10: 72px;
+  --hz-space-11: 80px;
+
   /* ---- Focus / outline ---- */
   --hz-outline-color: #0369E9;
   --hz-outline-width: 0px;
