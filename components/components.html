@@ -218,10 +218,7 @@
      ZERO border-bottom anywhere (not on th, not on td, not between header and body). The only
      real divider is a 1px VERTICAL box-shadow on th (column separator for sticky columns).
      Rows are visually separated purely by height/padding + hover state, not lines. */
-  table.dt { border-collapse: collapse; width: 100%; font-size: 14px; }
-  table.dt th { text-align: left; padding: 8px 12px; font-weight: 700; box-shadow: inset 1px 0 0 var(--hz-border-color-base); }
-  table.dt td { padding: 8px 12px; vertical-align: middle; }
-  table.dt tr.row--selected td { background: #F5F9FE; }
+  /* Data table styles → components.css */
   .avatar-sm { width: 24px; height: 24px; border-radius: 50%; background: var(--hz-primary-color); color: #fff; display: inline-flex; align-items:center; justify-content:center; font-size: 11px; font-weight: 600; margin-right: 8px; vertical-align: middle; }
 
   /* bulk action toolbar — replaces search/filter row once >=1 row selected */
@@ -330,9 +327,94 @@
   .page-banner--danger  { background: #fff5f5; border-color: #fcbeb9; color: #9a1c0b; }
 
   code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-family: var(--hz-code-family); font-size: 12px; }
+
+  /* Component nav sidebar */
+  .comp-nav { position: fixed; top: 0; left: 0; width: 220px; height: 100vh; overflow-y: auto; background: #F6F6F6; border-right: 1px solid #e0e0e0; padding: 16px 0; font-size: 12px; z-index: 100; }
+  .comp-nav__title { font-size: 13px; font-weight: 700; color: #181F26; padding: 0 16px 12px; border-bottom: 1px solid #e0e0e0; margin-bottom: 8px; }
+  .comp-nav__group { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #888; padding: 10px 16px 4px; }
+  .comp-nav__link { display: block; padding: 4px 16px; color: #3C4A57; text-decoration: none; border-left: 2px solid transparent; line-height: 1.4; }
+  .comp-nav__link:hover { background: #e8e8e8; color: #0369E9; }
+  .comp-nav__link.active { color: #0369E9; border-left-color: #0369E9; background: #EBF3FE; }
+  .comp-nav-spacer { margin-left: 220px; }
 </style>
 </head>
 <body>
+<nav class="comp-nav" id="compNav">
+  <div class="comp-nav__title">⚡ Components</div>
+
+  <div class="comp-nav__group">Foundations</div>
+  <a class="comp-nav__link" href="#color-tokens">Color tokens</a>
+  <a class="comp-nav__link" href="#typography">Typography</a>
+
+  <div class="comp-nav__group">Buttons &amp; Controls</div>
+  <a class="comp-nav__link" href="#buttons-current">Buttons — Horizon</a>
+  <a class="comp-nav__link" href="#buttons-mid">Buttons — Mid</a>
+  <a class="comp-nav__link" href="#buttons-legacy">Buttons — Legacy</a>
+  <a class="comp-nav__link" href="#form-controls">Form controls</a>
+  <a class="comp-nav__link" href="#filter-pill">Applied filter pill</a>
+
+  <div class="comp-nav__group">Navigation</div>
+  <a class="comp-nav__link" href="#breadcrumb">Breadcrumb</a>
+  <a class="comp-nav__link" href="#tabs">Tabs</a>
+  <a class="comp-nav__link" href="#nav-shell">Nav shell</a>
+
+  <div class="comp-nav__group">Feedback</div>
+  <a class="comp-nav__link" href="#modal">Modal / dialog</a>
+  <a class="comp-nav__link" href="#toast">Toast</a>
+  <a class="comp-nav__link" href="#spinner">Spinner</a>
+  <a class="comp-nav__link" href="#tooltip">Tooltip</a>
+  <a class="comp-nav__link" href="#skeleton">Skeleton loader</a>
+  <a class="comp-nav__link" href="#section-message">Section message</a>
+  <a class="comp-nav__link" href="#page-banner">Page banner</a>
+
+  <div class="comp-nav__group">Content</div>
+  <a class="comp-nav__link" href="#data-table">Data table</a>
+  <a class="comp-nav__link" href="#filter-flyout">Filter flyout</a>
+  <a class="comp-nav__link" href="#status-indicator">Status indicator</a>
+  <a class="comp-nav__link" href="#pill">Pill (Lozenge)</a>
+  <a class="comp-nav__link" href="#summary-card">Summary card</a>
+  <a class="comp-nav__link" href="#list-row-card">List-row card</a>
+  <a class="comp-nav__link" href="#empty-state">Empty state</a>
+  <a class="comp-nav__link" href="#card-wrapper">Card wrapper</a>
+  <a class="comp-nav__link" href="#integration-cards">Integration cards</a>
+  <a class="comp-nav__link" href="#info-banner">Info banner</a>
+  <a class="comp-nav__link" href="#table-empty-state">Table empty state</a>
+  <a class="comp-nav__link" href="#kebab-menu">Kebab menu</a>
+
+  <div class="comp-nav__group">Topic / Post</div>
+  <a class="comp-nav__link" href="#post-header">Post header</a>
+  <a class="comp-nav__link" href="#reply-composer">Reply composer</a>
+  <a class="comp-nav__link" href="#write-with-ai">Write with AI</a>
+  <a class="comp-nav__link" href="#topic-action-bar">Topic action bar</a>
+  <a class="comp-nav__link" href="#collapsible-panel">Collapsible panel</a>
+  <a class="comp-nav__link" href="#content-helpfulness">Content helpfulness</a>
+  <a class="comp-nav__link" href="#content-type-pill">Content-type pill</a>
+  <a class="comp-nav__link" href="#moderator-note">Moderator note</a>
+
+  <div class="comp-nav__group">Settings</div>
+  <a class="comp-nav__link" href="#settings-card">Settings card</a>
+  <a class="comp-nav__link" href="#key-value-list">Key-value list</a>
+  <a class="comp-nav__link" href="#radio-option-card">Radio option card</a>
+  <a class="comp-nav__link" href="#dynamic-list">Dynamic editable list</a>
+  <a class="comp-nav__link" href="#beta-badge">BETA badge</a>
+  <a class="comp-nav__link" href="#toggle-subform">Toggle + sub-form</a>
+
+  <div class="comp-nav__group">Media / Inputs</div>
+  <a class="comp-nav__link" href="#rich-text-editor">Rich text editor</a>
+  <a class="comp-nav__link" href="#code-editor">Code editor</a>
+  <a class="comp-nav__link" href="#code-snippet">Code snippet</a>
+  <a class="comp-nav__link" href="#tags-input">Tags input</a>
+  <a class="comp-nav__link" href="#file-upload">File upload</a>
+  <a class="comp-nav__link" href="#image-upload-preview">Image upload</a>
+  <a class="comp-nav__link" href="#image-upload-empty">Image upload empty</a>
+  <a class="comp-nav__link" href="#color-picker">Color picker</a>
+  <a class="comp-nav__link" href="#date-picker">Date / time picker</a>
+  <a class="comp-nav__link" href="#combobox">Combobox</a>
+  <a class="comp-nav__link" href="#nested-tree">Nested tree</a>
+  <a class="comp-nav__link" href="#rule-builder">Rule builder</a>
+  <a class="comp-nav__link" href="#config-preview">Config + preview</a>
+</nav>
+<div class="comp-nav-spacer">
 
 <h1>Control Admin — Component Library</h1>
 <p class="subtitle">Reverse-engineered from the live control panel (dchdesign-en.insided.com), 2026-09-08. v0.1 — inventory in progress.</p>
@@ -343,7 +425,7 @@
   The Mid and Legacy generations are documented below only for reference / recognition when auditing existing screens.
 </div>
 
-<section>
+<section id="color-tokens">
   <h2>Color tokens</h2>
   <div class="label">Semantic</div>
   <div class="swatch-row">
@@ -368,7 +450,7 @@
   </div>
 </section>
 
-<section>
+<section id="typography">
   <h2>Typography</h2>
   <p style="font-size:28px; font-weight:600; margin:4px 0;">Heading 1 — 28px / semibold</p>
   <p style="font-size:21px; font-weight:600; margin:4px 0;">Heading 3 — 21px / semibold</p>
@@ -380,7 +462,7 @@
   <p class="label" style="margin-top:16px;">font-family: Noto Sans, -apple-system, Segoe UI, Helvetica Neue…</p>
 </section>
 
-<section>
+<section id="buttons-current">
   <h2>Buttons — Current (Horizon) <span style="font-size:12px; color:var(--hz-text-color-secondary); font-weight:400;">use for all new prototypes</span></h2>
   <div class="row">
     <button class="btn-new btn-new--medium btn-new--primary">Primary action</button>
@@ -416,7 +498,7 @@
   <code class="tag">--ghost</code> Figma "ghost" — lowest emphasis (no background, no border) — NOT in live codebase yet, added from Figma 2026-09-08
 </section>
 
-<section>
+<section id="filter-pill">
   <h2>Applied filter pill</h2>
   <div class="filter-pill">
     <span><span class="filter-type">Content type</span><span class="filter-value">Article</span></span>
@@ -424,13 +506,13 @@
   </div>
 </section>
 
-<section>
+<section id="breadcrumb">
   <h2>Breadcrumb <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— live-verified: single back-link, not a multi-level trail</span></h2>
   <a class="control-header__breadcrumb-link" href="#">Back to System Emails</a>
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class: <code class="tag">a.control-header__breadcrumb-link</code> inside <code class="tag">div.control-header__breadcrumb</code>. Pattern is always "Back to [Section]" — a single anchor, not a multi-crumb trail. Color: <code class="tag">#3C4A57</code>, 14px/400. The <code class="tag">control-header</code> switches to column layout when a breadcrumb is present via <code class="tag">:has(.control-header__breadcrumb)</code>.</p>
 </section>
 
-<section>
+<section id="modal">
   <h2>Modal / dialog <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— width corrected: small=528px, medium=728px, large=880px (was 420px)</span></h2>
   <p class="label">10% black scrim, white card. Three Figma sizes: small 528px (default), medium 728px, large 880px. 20px/700 title, close × button top-right. Optional: back arrow + subtitle in header. Primary button bottom-right.</p>
   <div class="modal-demo-wrap">
@@ -447,7 +529,7 @@
   </div>
 </section>
 
-<section>
+<section id="toast">
   <h2>Toast notification <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— live-verified: toastr.js library, top-right fixed</span></h2>
   <p class="label" style="text-transform:none; font-weight:400; margin-bottom:8px;">In prototypes, render inline to demonstrate style. In production the container is <code class="tag">.toast-top-right</code> (position:fixed; top:55px; right:12px; z-index:999999; width:300px).</p>
   <div style="position:relative; height:80px;">
@@ -459,7 +541,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Library: <strong>toastr.js</strong>. Real class <code class="tag">.toast.toast-success</code> / <code class="tag">.toast.toast-error</code>. Background success: <code class="tag">#51A351</code> (rgb 81,163,81) — not the brighter #3CB54A. Padding: 15px 15px 15px 50px (extra left for the icon that toastr injects). Border-radius: 3px. Font: 12px/400. Box-shadow: rgba(0,0,0,.3) 0 1px 1px.</p>
 </section>
 
-<section>
+<section id="kebab-menu">
   <h2>Kebab context menu</h2>
   <div class="kebab-menu">
     <button class="kebab-menu__trigger">⋯</button>
@@ -470,7 +552,7 @@
   </div>
 </section>
 
-<section>
+<section id="rich-text-editor">
   <h2>Rich text editor (CKEditor4)</h2>
   <p class="label">Content editor pages (Articles/Ideas/Events) use CKEditor4 — don't rebuild the icon set from scratch, just reproduce the toolbar bar + bordered body.</p>
   <div class="rte">
@@ -491,7 +573,7 @@
   </div>
 </section>
 
-<section>
+<section id="write-with-ai">
   <h2>"Write with AI" panel <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— corrected: real pattern is a gradient border + gradient text, verified via computed style, not a flat purple label</span></h2>
   <div class="ai-panel">
     <div class="ai-panel__label"><svg class="grad-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M6.23 3.07a1 1 0 011.6 0l1.24 3.35c.1.28.32.5.6.6l3.35 1.24a1 1 0 010 1.6l-3.35 1.24a1 1 0 00-.6.6l-1.24 3.35a1 1 0 01-1.6 0L4.99 11.7a1 1 0 00-.6-.6L1.04 9.86a1 1 0 010-1.6L4.4 7.02a1 1 0 00.6-.6z"/></svg>Write with AI</div>
@@ -501,7 +583,7 @@
   <p class="label" style="text-transform:none; font-weight:400;">Real CSS: <code class="tag">background: linear-gradient(#fff,#fff) padding-box, linear-gradient(to right top,#FF8F6B,#B972FF,#55ADFF) border-box; border:1px solid transparent;</code> — this exact double-background trick is how the gradient border is achieved. Label text uses <code class="tag">background-clip:text</code> with the same gradient.</p>
 </section>
 
-<section>
+<section id="file-upload">
   <h2>File / image upload <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— corrected: real button is legacy-styled, not Horizon</span></h2>
   <div class="upload-field" style="max-width:320px;">
     <strong style="font-size:13px;">Featured Image</strong>
@@ -511,7 +593,7 @@
   <p class="label" style="text-transform:none; font-weight:400;">Verified on Create Article → Featured Image: <code class="tag">.btn.btn-default.btn-upload</code> — legacy generation (2px radius, #C7C7C7 border, 12px font), not Horizon. A second "Upload image" button exists on Platform → Community → Create Section using the current Horizon secondary button instead — the admin is inconsistent here, so match whichever generation the surrounding page uses.</p>
 </section>
 
-<section>
+<section id="tags-input">
   <h2>Tags input</h2>
   <div class="field">
     <label>Public Tags</label>
@@ -523,7 +605,7 @@
   </div>
 </section>
 
-<section>
+<section id="nested-tree">
   <h2>Nested draggable tree (categories/sections)</h2>
   <div class="tree">
     <div class="tree__header">
@@ -539,7 +621,7 @@
   </div>
 </section>
 
-<section>
+<section id="rule-builder">
   <h2>Rule builder card (sentence-style config)</h2>
   <div class="rule-card">
     <div class="rule-card__header">
@@ -556,7 +638,7 @@
   </div>
 </section>
 
-<section>
+<section id="buttons-mid">
   <h2>Buttons — Mid generation <em style="font-weight:400; color:var(--hz-text-color-secondary);">(seen on role/rank edit screens — .button-control)</em></h2>
   <div class="row">
     <button class="btn-mid btn-mid--success">Save changes</button>
@@ -565,7 +647,7 @@
   </div>
 </section>
 
-<section>
+<section id="buttons-legacy">
   <h2>Buttons — Legacy <em style="font-weight:400; color:var(--hz-text-color-secondary);">(bootstrap-era .btn — oldest screens only)</em></h2>
   <div class="row">
     <button class="btn-legacy btn-legacy--primary">Add role</button>
@@ -573,7 +655,7 @@
   </div>
 </section>
 
-<section>
+<section id="form-controls">
   <h2>Form controls</h2>
   <div class="field">
     <label>Company name</label>
@@ -654,7 +736,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Used on AI agent settings pages (Moderation AI Agent, etc.). Two-button segmented control, 30×30px buttons. Active ON button: <code class="tag">background:#0369E9; color:#fff</code>. Active OFF button: <code class="tag">background:#5b6472; color:#fff</code>. Inactive: white bg, gray icon. Container: <code class="tag">border:1px solid var(--hz-border-color-base); border-radius:6px</code>.</p>
 </section>
 
-<section>
+<section id="tabs">
   <h2>Tabs</h2>
   <div class="tabs">
     <div class="tab active">Unread by team</div>
@@ -663,7 +745,7 @@
   </div>
 </section>
 
-<section>
+<section id="summary-card">
   <h2>Summary card <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— corrected: this is ONE card with a 3-column metric grid inside, not 3 separate stat cards</span></h2>
   <div class="summary-card">
     <div class="summary-card__title">Summary</div>
@@ -689,7 +771,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real classes: <code class="tag">.home-overview-card.home-overview-card-summary</code> → <code class="tag">.home-overview-card__header</code> (title 18px/600 + subtitle 14px/#5F6C7A) → <code class="tag">.home-overview-card__content</code> (CSS grid, 3 cols, gap 16px) → each metric is a <code class="tag">&lt;button&gt;</code> (clickable, links to the relevant report). Count is 32px/600, title is 18px/600 — bigger than typical "label" text, easy to underestimate from a screenshot.</p>
 </section>
 
-<section>
+<section id="data-table">
   <h2>Data table</h2>
   <div class="note" style="margin-bottom:16px;">
     <strong>Verified structure (corrected 2026-09-08 against live Users Overview at desktop width):</strong>
@@ -757,7 +839,7 @@
   </p>
 </section>
 
-<section>
+<section id="filter-flyout">
   <h2>Filter flyout / dropdown menu</h2>
   <div class="flyout">
     <div class="flyout__group-label">System properties</div>
@@ -768,7 +850,7 @@
   </div>
 </section>
 
-<section>
+<section id="status-indicator">
   <h2>Status indicator <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— corrected twice: first fabricated a pill, then over-corrected to "no pill exists at all"</span></h2>
   <div class="note" style="margin-bottom:16px;">
     Content Overview's "Topic status" column (Published/Draft/Trashed) really is a
@@ -806,7 +888,7 @@
   </div>
 </section>
 
-<section>
+<section id="list-row-card">
   <h2>List-row card (icon + title/description + action) <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Integrations ▸ SSO ▸ End Users</span></h2>
   <div style="max-width:500px; display:flex; align-items:center; gap:16px; border:1px solid #C7C7C7; border-radius:4px; padding:24px; margin-bottom:12px;">
     <div style="width:48px; height:48px; border-radius:50%; background:#0369E9; flex:none;"></div>
@@ -816,7 +898,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class <code class="tag">.method-box</code> — full-width row (not a grid card like Integrations▸Apps), 48px round icon, 1px <code class="tag">#C7C7C7</code> border, 4px radius, 24px padding. Trailing action is contextual: a toggle switch for the currently-active method, an "Install" button for others. Different from the 2-column app-card grid — use this row style when there's a small, short list (SSO methods) rather than a large catalog (integrations).</p>
 </section>
 
-<section>
+<section id="empty-state">
   <h2>Empty state <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— corrected: real illustration, not an emoji</span></h2>
   <div class="empty-state" style="text-align:center; padding:24px;">
     <img src="https://cdn-euw1.insided.com/2026-09-08-11-58-55-c02da78716/dist/control/images/moderation-home/empty_content.png" style="max-width:160px; margin-bottom:8px;">
@@ -826,7 +908,7 @@
   <p class="label" style="text-transform:none; font-weight:400;">Real class: <code class="tag">.control_empty</code> / <code class="tag">.control_empty_image</code> (real PNG illustration, served from Control's CDN) / <code class="tag">.control_empty_message_header.bold</code> / <code class="tag">.control_empty_message_description</code>.</p>
 </section>
 
-<section>
+<section id="settings-card">
   <h2>Settings card ("dirty-section") <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on AI Settings</span></h2>
   <p class="label" style="text-transform:none; font-weight:400;">The standard settings-page pattern: section title, then a white card containing stacked field-rows (label+description on the left, control on the right via <code class="tag">flex:1</code> on the info column). Rows within a card are separated by a top border, not individual card borders. Card: 720px max-width, 8px radius, 1px border <code class="tag">#D5D9DE</code>, 24px padding, subtle shadow <code class="tag">0 1px 2px rgba(0,0,0,.16)</code>.</p>
   <div style="width:480px; border:1px solid var(--hz-border-color-light); border-radius:6px;">
@@ -849,13 +931,13 @@
   </div>
 </section>
 
-<section>
+<section id="beta-badge">
   <h2>"BETA" outline badge <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on AI Settings (Community MCP)</span></h2>
   <span style="display:inline-block; color:var(--hz-primary-color); border:1px solid var(--hz-primary-color); border-radius:4px; padding:0 4px; font-size:11px; font-weight:600;">BETA</span>
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class: <code class="tag">.beta-label-secondary</code> — outline pill, no fill, next to a feature label to flag it as beta.</p>
 </section>
 
-<section>
+<section id="key-value-list">
   <h2>Key-value list <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Moderate Topic ("Overview" panel)</span></h2>
   <div class="kv-list">
     <div class="kv-list__row"><span class="kv-list__label">Type:</span><span class="kv-list__value">Articles</span></div>
@@ -865,7 +947,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Plain flex row, label in secondary gray on the left, value right-aligned on the right. No real class name captured (generic layout, not a named component) — safe to reuse freely for read-only metadata lists.</p>
 </section>
 
-<section>
+<section id="collapsible-panel">
   <h2>Collapsible sidebar panel <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— corrected: header/body need explicit backgrounds, they don't inherit one</span></h2>
   <div class="note" style="margin-bottom:12px;">
     <strong>Correction:</strong> real class <code class="tag">.m-section</code> is itself
@@ -884,7 +966,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Used to group sidebar sections (Overview / Details / Featured image / Team notes / Content helpfulness) on detail pages. Chevron flips ⌃/⌄ on toggle — simple show/hide, no animation observed.</p>
 </section>
 
-<section>
+<section id="post-header">
   <h2>Topic/post header <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— verified on Moderate Topic; card wrapper corrected below</span></h2>
   <div style="max-width:500px; background:#fff; border:1px solid var(--hz-border-color-base); border-radius:8px; padding:16px;">
     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -909,7 +991,7 @@
   </div>
 </section>
 
-<section>
+<section id="image-upload-preview">
   <h2>Image upload with preview <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Moderate Topic ("Featured image")</span></h2>
   <div style="max-width:280px; border:1px solid var(--hz-border-color-light); border-radius:6px; padding:16px;">
     <p style="font-size:12px; color:var(--hz-text-color-secondary); margin:0 0 8px;">Max 5MB (jpg, jpeg, png, gif). Recommended resolution 1440×640px.</p>
@@ -923,7 +1005,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Once an image exists: helper text → preview (with dimensions + open-in-new-tab link) → Replace/Remove buttons. Pairs with a plain text "Alt Text" input below it. Missing from this pass: the empty/no-image-yet state — not seen.</p>
 </section>
 
-<section>
+<section id="moderator-note">
   <h2>Moderator-only note <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Moderate Topic ("Team notes")</span></h2>
   <div style="max-width:280px;">
     <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--hz-text-color-secondary); margin-bottom:8px;">🔒 Only visible in control</div>
@@ -932,7 +1014,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Lock icon + "Only visible in control" is the real pattern for flagging any field as internal-only/not-visible-to-end-users — reuse this whenever a prototype needs that distinction, don't invent a different lock treatment.</p>
 </section>
 
-<section>
+<section id="content-helpfulness">
   <h2>Content helpfulness / performance widget <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Moderate Topic</span></h2>
   <div style="max-width:280px;">
     <div class="field">
@@ -961,7 +1043,7 @@
   </p>
 </section>
 
-<section>
+<section id="content-type-pill">
   <h2>Content-type / "New" flag pill <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Guide to Ideation topic</span></h2>
   <div class="row">
     <span style="display:inline-block; background:var(--hz-primary-color); color:#fff; border-radius:4px; padding:0 4px; font-size:11px; font-weight:700; text-transform:uppercase;">Guide</span>
@@ -970,7 +1052,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class <code class="tag">.label-component.label--brand.label--emphasis-high</code> — the SAME component renders the content-type flag above a topic title ("Guide", "Idea", "Question"...) and the unread indicator next to a reply author's name. One component, two uses.</p>
 </section>
 
-<section>
+<section id="topic-action-bar">
   <h2>Topic action bar (Like / Reply / Follow / Share) <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on topic + reply</span></h2>
   <div style="display:flex; gap:4px; border-bottom:1px solid var(--hz-border-color-light); padding-bottom:16px; max-width:400px;">
     <button style="display:inline-flex; align-items:center; gap:6px; background:none; border:none; border-radius:8px; padding:0 8px; height:32px; font-size:14px; font-weight:500; color:#5F6C7A; cursor:pointer;">👍 Like</button>
@@ -990,7 +1072,7 @@
   </div>
 </section>
 
-<section>
+<section id="reply-composer">
   <h2>Reply composer + threaded reply <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— corrected: composer and each reply are full cards, not a border-indent</span></h2>
   <div style="max-width:500px;">
     <div style="background:#fff; border:1px solid var(--hz-border-color-base); border-radius:8px; padding:16px; margin-bottom:16px;">
@@ -1045,7 +1127,7 @@
   </p>
 </section>
 
-<section>
+<section id="color-picker">
   <h2>Color picker <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— live-verified: react-color SketchPicker, Customization ▸ Header</span></h2>
   <div style="display:flex; gap:24px; align-items:flex-start;">
     <div>
@@ -1083,13 +1165,13 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Library: <strong>react-color</strong> <code class="tag">SketchPicker</code>. Trigger: <code class="tag">span.default-header_colors-visual</code> → 24×24 swatch (<code class="tag">.default-header_colors-preview</code>, 1px #C7C7C7 border, no radius) + hex label (<code class="tag">.color-selector_selected-color</code>, 12px) + chevron. Popover container: <code class="tag">span.default-header_colors-picker-container</code> (220×290px, position:absolute). Picker: <code class="tag">div.sketch-picker</code> (200px wide, white bg, 4px radius, double box-shadow, 10px padding). Contains: saturation area (200×150px), hue bar (10px tall), alpha bar (10px), preview swatch, 15 preset swatches (each 16×16px, 3px radius). Don't hand-build — use the react-color library in real code.</p>
 </section>
 
-<section>
+<section id="image-upload-empty">
   <h2>Image upload — empty state <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Customization ▸ Header (Logo)</span></h2>
   <div style="width:160px; height:100px; border:1px dashed var(--hz-border-color-base); border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--hz-text-color-secondary); font-size:12px; cursor:pointer;">📷 Click to add</div>
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class <code class="tag">.component-uploader__no-image</code> inside a <code class="tag">&lt;label&gt;</code> wrapping a hidden <code class="tag">&lt;input type="file"&gt;</code> — camera icon + "Click to add" text, centered. This is the state BEFORE an image exists; once uploaded it switches to the image-upload-with-preview pattern documented earlier (preview + Replace/Remove, or here Edit/Remove). Exact border style (dashed vs solid) wasn't confirmed via computed style — verify before pixel-matching a border style.</p>
 </section>
 
-<section>
+<section id="toggle-subform">
   <h2>Toggle that reveals a sub-form <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new pattern, verified on Gamification ▸ Add Badge</span></h2>
   <div style="max-width:360px;">
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
@@ -1104,7 +1186,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Not a new toggle component — the same <code class="tag">.control-switcher</code> switch, wired via <code class="tag">data-toggle-inputs</code> to show/hide a sibling block of fields. Reuse this pattern anywhere a setting is "off by default, configure more when turned on" (e.g. notification settings) instead of always showing the sub-fields disabled.</p>
 </section>
 
-<section>
+<section id="date-picker">
   <h2>Date / time picker <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Platform ▸ Events (Create Event)</span></h2>
   <div class="row">
     <div class="field" style="margin-bottom:0;">
@@ -1122,7 +1204,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real: date field is <strong>flatpickr</strong> (open-source date picker library) — class <code class="tag">.control-date-picker-input-wrapper</code>, 40px height, 1px <code class="tag">#C7C7C7</code> border, 4px radius, calendar icon on the left, opens flatpickr's standard calendar popover on click. Don't hand-build the calendar grid — treat it like CKEditor: reproduce the trigger/input exactly, use flatpickr's own default styling for the popover if a real calendar view is needed. Time field is NOT a native time input — it's the same secondary-button dropdown trigger as every other select in this library, opening a list of time slots.</p>
 </section>
 
-<section>
+<section id="radio-option-card">
   <h2>Radio option card <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, recurring pattern across Header/Footer type, Badge type, Event registration/visibility</span></h2>
   <div class="radio-opt-card" style="max-width:400px;">
     <label class="radio-opt-card__option">
@@ -1137,7 +1219,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Seen repeatedly: Header/Footer type selection, Badge type, Event registration type (Community/External), Event visibility (Public/Group). Bordered card, each option full-width with radio + bold title + gray description, divider between options, selecting one may reveal additional fields below the group (e.g. Header's SSI URL field, Event's "Choose group" field) — same reveal mechanism as the toggle-reveals-subform pattern above, just triggered by radio instead of switch.</p>
 </section>
 
-<section>
+<section id="dynamic-list">
   <h2>Dynamic editable list <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Settings ▸ Moderation Labels</span></h2>
   <div style="max-width:400px;">
     <div style="display:flex; gap:8px; margin-bottom:8px;">
@@ -1153,19 +1235,19 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Legacy-generation pattern (Bootstrap row/col, <code class="tag">.form-control</code> + <code class="tag">.btn.btn-danger</code>) for building an open-ended list of short text values — moderation labels, keyword lists, etc. Each row: text input + red square "x" delete button. "Add [item]" button (legacy primary blue) appends a new empty row. Different from the Tags input component (which is for applying existing tags to a record) — this is for MANAGING the list of possible values itself.</p>
 </section>
 
-<section>
+<section id="table-empty-state">
   <h2>Table empty state (inline) <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new variant, verified on Settings ▸ Post Fields</span></h2>
   <table class="dt"><tbody><tr><td colspan="4" style="text-align:center; color:#828080; font-size:14px; padding:8px;">No items found...</td></tr></tbody></table>
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">A second, simpler empty state exists alongside the illustrated one (image + "All done!" heading documented earlier): a single centered gray <code class="tag">&lt;td&gt;</code> reading "No items found..." spanning all columns. Use the illustrated version for moderation-queue-style "you're caught up" pages; use this plain text row for a genuinely empty config list (Post Fields, etc.) — don't force an illustration where the real product just shows text.</p>
 </section>
 
-<section>
+<section id="info-banner">
   <h2>Info banner (light blue) <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new variant, verified on Settings ▸ Open Betas</span></h2>
   <div style="background:#F2F8FF; border:1px solid #CCE1FF; border-radius:4px; padding:16px; font-size:14px; max-width:500px;">Please be aware that the features on this page are in open beta. The features are under active development and may contain unresolved issues.</div>
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class <code class="tag">.warning-box</code> (name is misleading — it's used for neutral/informational notices like beta disclaimers, not errors). No icon, just text. Different from the info-callout documented earlier (gray <code class="tag">#F6F6F6</code>, used inline under a rule/setting with a link) — use this blue variant for a standalone page-level notice instead.</p>
 </section>
 
-<section>
+<section id="integration-cards">
   <h2>Integration app card grid <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Integrations ▸ Apps</span></h2>
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:600px;">
     <a style="display:flex; gap:12px; border:1px solid var(--hz-border-color-base); border-radius:4px; padding:16px; text-decoration:none; color:inherit;">
@@ -1180,7 +1262,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class <code class="tag">.integration-app-card-container</code> — the WHOLE card is a clickable <code class="tag">&lt;a&gt;</code> (1px border <code class="tag">#D5D9DE</code>, 4px radius, 16px padding), containing a 40×40 icon + bold title + gray description, laid out in a 2-column grid. Use this for any "browse a catalog of options, click to configure" screen — integrations, apps, connectors.</p>
 </section>
 
-<section>
+<section id="code-editor">
   <h2>Code editor <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on System Emails (Custom HTML) and Customization ▸ Third-party Scripts</span></h2>
   <div style="border:1px solid var(--hz-border-color-base); border-radius:4px; overflow:hidden; max-width:500px; font-family:monospace; font-size:14px;">
     <div style="display:flex;"><div style="background:#f7f7f7; color:#999; padding:4px 8px; text-align:right; user-select:none;">1<br>2<br>3</div><div style="padding:4px 8px; flex:1;">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>...</div></div>
@@ -1188,7 +1270,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real: <strong>CodeMirror</strong> (open-source code editor library), default theme, 1px <code class="tag">#D5D9DE</code> border, 4px radius, monospace 14px. Used anywhere raw HTML/CSS is edited (system email templates, header/footer custom code, third-party scripts). Same treatment as CKEditor/flatpickr — reproduce the bordered container and line-number gutter, don't hand-build CodeMirror's internal syntax highlighting.</p>
 </section>
 
-<section>
+<section id="combobox">
   <h2>Searchable multi-select combobox <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Gamification ▸ Point system</span></h2>
   <div style="position:relative; display:inline-block;">
     <button class="btn-new btn-new--medium btn-new--secondary">Select user roles to exclude ▾</button>
@@ -1202,7 +1284,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:60px;">Real class <code class="tag">.user-role-selector</code>: a standard secondary-button trigger opens a <code class="tag">.overview__filters-box</code> popover (400px wide, 1px <code class="tag">#C7C7C7</code> border, 4px radius, <code class="tag">0 0 16px rgba(0,0,0,.08)</code> shadow) — the SAME popover shell as the Filter flyout documented earlier, just containing a search box + checkbox list instead of grouped links. Reuse the flyout shell for any "search + pick multiple" control.</p>
 </section>
 
-<section>
+<section id="config-preview">
   <h2>Config + live-preview layout <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Settings ▸ Content & Replies</span></h2>
   <div style="display:flex; gap:24px; max-width:600px;">
     <div style="flex:1;">
@@ -1221,7 +1303,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class <code class="tag">.content-helpfulness_preview-widget-container</code> — settings on the left, a live-rendered preview of the actual community-facing widget on the right (plain 1px <code class="tag">#C7C7C7</code> border, no radius, 32px padding — this one doesn't use the standard 4px-radius card). Use this layout whenever a setting configures something end-users will visually see (widgets, banners, badges) — showing the real rendered result next to the config beats a text description.</p>
 </section>
 
-<section>
+<section id="code-snippet">
   <h2>Code snippet with copy button <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Integrations ▸ Embeddable Widget ▸ Installation</span></h2>
   <div style="max-width:500px;">
     <textarea class="embed-script" style="width:100%; height:120px; background:#fff; border:1px solid #767676; border-radius:0; padding:2px; font-size:12px; font-family:inherit; resize:vertical; display:block;">&lt;script src="https://cdn.insided.com/community/js/community.js"&gt;&lt;/script&gt;
@@ -1231,7 +1313,7 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Live-verified on Integrations ▸ Embeddable Widget. Real element: <code class="tag">textarea.embed-script</code> (not a styled div). Background: white. Border: <code class="tag">1px solid #767676</code> (native textarea border, not design token). Border-radius: 0. Font: 12px, inherits page font (Noto Sans — NOT monospace). Copy button is legacy-generation primary: <code class="tag">.btn.btn-primary</code>, positioned below — not overlaid. Alias class in design system: <code class="tag">.btn-legacy.btn-legacy--primary</code>.</p>
 </section>
 
-<section>
+<section id="nav-shell">
   <h2>Side navigation shell <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— canonical version lives in <code style="text-transform:none;">shell/shell.html</code>, cross-checked against the team's Figma file</span></h2>
   <div class="note" style="margin-bottom:12px;">
     <strong>Figma vs. live discrepancy, resolved:</strong> the team's Figma file ("CC Design
@@ -1251,7 +1333,7 @@
   <p class="label" style="text-transform:none; font-weight:400;">Always copy the shell from <code class="tag">shell/shell.html</code> for new prototypes rather than hand-rolling the rail/flyout inline — that file is the single source of truth for this component, including a full real multi-group flyout example (Settings: Platform/User/Topic/Moderation/SEO). Don't truncate the flyout to one group when a page's real menu has several — verify the specific section's full menu before building.</p>
 </section>
 
-<section>
+<section id="pill">
   <h2>Pill (Lozenge) <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— Horizon design system, verified in Figma 2026-09-08</span></h2>
   <div class="note" style="margin-bottom:16px;">
     This is the Horizon <strong>Pill</strong> component — a static, non-interactive label for status or category. Not clickable.
@@ -1276,7 +1358,7 @@
   </p>
 </section>
 
-<section>
+<section id="section-message">
   <h2>Section Message <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— Horizon design system, verified in Figma 2026-09-08</span></h2>
   <div class="note" style="margin-bottom:16px;">
     Distinct from <strong>Info banner (.warning-box)</strong> — that is the live codebase pattern (bg <code class="tag">#F2F8FF</code>, no icon, just text).
@@ -1310,7 +1392,7 @@
   </p>
 </section>
 
-<section>
+<section id="spinner">
   <h2>Spinner <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— Horizon design system, verified in Figma 2026-09-08</span></h2>
   <div class="row" style="align-items:center; gap:16px;">
     <span class="spinner spinner--xs"></span>
@@ -1328,7 +1410,7 @@
 </section>
 
 
-<section>
+<section id="card-wrapper">
   <h2>Card wrapper <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— generic white card, used as settings card / content card</span></h2>
   <p class="label" style="text-transform:none; font-weight:400;">White bg, 8px radius, 1px <code class="tag">var(--hz-border-color-light)</code> border, 24px padding, subtle shadow. Use this for any content block that needs a visual card boundary. Verified on settings screens, AI Settings, and moderation screens.</p>
   <div class="card-wrapper" style="max-width:480px;">
@@ -1341,7 +1423,7 @@
   <p class="label" style="margin-top:8px; text-transform:none; font-weight:400;">Markup: <code class="tag">&lt;div class="card-wrapper"&gt;</code></p>
 </section>
 
-<section>
+<section id="tooltip">
   <h2>Tooltip <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— CSS-only, dark bg, shows on hover</span></h2>
   <p class="label" style="text-transform:none; font-weight:400;">Wrap any element in <code class="tag">.has-tooltip</code> and add a <code class="tag">.tooltip-tip</code> sibling. Live platform uses native <code class="tag">title</code> attribute in many places — use this CSS tooltip when you need custom-styled, multiline, or clickable tooltips in a prototype.</p>
   <div class="row" style="gap:32px; padding:32px 0 16px;">
@@ -1363,7 +1445,7 @@
   <p class="label" style="text-transform:none; font-weight:400;">Markup: <code class="tag">&lt;span class="has-tooltip"&gt; trigger &lt;span class="tooltip-tip"&gt;text&lt;/span&gt; &lt;/span&gt;</code></p>
 </section>
 
-<section>
+<section id="skeleton">
   <h2>Skeleton loader <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— animated wave, use while content loads</span></h2>
   <p class="label" style="text-transform:none; font-weight:400;">Animated shimmer placeholder. Use for any content that loads asynchronously. Sizes are set via inline <code class="tag">width/height</code> to match the real content dimensions.</p>
   <div style="display:flex; flex-direction:column; gap:12px; max-width:360px; padding:16px; background:#fff; border:1px solid var(--hz-border-color-light); border-radius:8px;">
@@ -1385,7 +1467,7 @@
   <p class="label" style="margin-top:8px; text-transform:none; font-weight:400;">Markup: <code class="tag">&lt;span class="skeleton skeleton--text" style="width:200px;"&gt;&lt;/span&gt;</code></p>
 </section>
 
-<section>
+<section id="page-banner">
   <h2>Page notification banner <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— full-width, sits below topbar</span></h2>
   <p class="label" style="text-transform:none; font-weight:400;">Appears at the top of the main column (between topbar and page-header) for system-level messages: seat limits, maintenance warnings, account alerts. Uses the same color palette as Section Message but full-width and dismissible. Verified on live: <code class="tag">.seat-limit-banner</code> — adapts to a generic pattern here.</p>
   <div style="display:flex; flex-direction:column; gap:8px; overflow:hidden; border-radius:4px;">
@@ -1408,5 +1490,22 @@
   <p class="label" style="margin-top:8px; text-transform:none; font-weight:400;">Markup: <code class="tag">&lt;div class="page-banner page-banner--warning"&gt;</code>. To use in a prototype, place directly inside <code class="tag">.main</code>, after the topbar include and before <code class="tag">.page-header</code>.</p>
 </section>
 
+</div><!-- /.comp-nav-spacer -->
+<script>
+(function() {
+  var sections = document.querySelectorAll('section[id]');
+  var links = document.querySelectorAll('.comp-nav__link');
+  function onScroll() {
+    var scrollY = window.scrollY + 80;
+    var current = '';
+    sections.forEach(function(s) { if (s.offsetTop <= scrollY) current = s.id; });
+    links.forEach(function(a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 </body>
 </html>
