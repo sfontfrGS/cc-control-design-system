@@ -1013,7 +1013,7 @@ h2.control-header__title,
 .ds-pane.active { display: block; }
 
 /* ===== TOGGLE — .ds-toggle (label > input + .ds-toggle__track) ===== */
-/* Spec: Figma node 16412-3227. Two sizes: default (40×20px) and small (32×16px). */
+/* Spec: Figma node 16412-3227. Two sizes: regular (40×20px) and small (32×16px). */
 /* HTML: <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span><span class="ds-toggle__label">Label</span></label> */
 .ds-toggle { display: inline-flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
 .ds-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
@@ -1033,11 +1033,18 @@ h2.control-header__title,
   display: flex; align-items: center; justify-content: center;
   line-height: 14px; text-align: center;
 }
+/* Checked */
 .ds-toggle input:checked + .ds-toggle__track { background: #12995B; }
 .ds-toggle input:checked + .ds-toggle__track::before { content: '✓'; color: #12995B; transform: translateX(20px); }
+/* Hover (unchecked / checked) — rich-gray-80 / fresh-green-90 */
+.ds-toggle:hover input:not(:disabled):not(:checked) + .ds-toggle__track { background: #25313B; }
+.ds-toggle:hover input:not(:disabled):checked + .ds-toggle__track { background: #0F7D4E; }
+/* Focus-visible ring */
+.ds-toggle input:focus-visible + .ds-toggle__track { outline: 2px solid #0369E9; outline-offset: 2px; }
+/* Disabled */
 .ds-toggle input:disabled + .ds-toggle__track { background: #D5D9DE; cursor: not-allowed; }
 .ds-toggle input:disabled + .ds-toggle__track::before { color: #D5D9DE; }
-.ds-toggle input:disabled ~ .ds-toggle__label { color: #D5D9DE; }
+.ds-toggle input:disabled ~ .ds-toggle__label { color: #D5D9DE; cursor: not-allowed; }
 .ds-toggle__label { font-size: 14px; color: #25313B; line-height: 20px; }
 /* Small variant */
 .ds-toggle--small { gap: 8px; }
