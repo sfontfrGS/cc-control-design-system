@@ -31,6 +31,13 @@
 <style>
   /* All dirty-section, switch, badge, and button-control-new styles are in components.css */
   .select-trigger svg { width: 16px; height: 16px; }
+  .dirty-section.is-dirty .dirty-section__title::after {
+    content: '• Unsaved changes';
+    font-size: 12px;
+    font-weight: 400;
+    color: #E2483D;
+    margin-left: 8px;
+  }
 </style>
 </head>
 <!-- Change data-active-item: Add|Home|Content|Email|Users|Analytics|Platform|Gamification|Customization|Integrations|AI|Settings -->
@@ -206,6 +213,14 @@
     }
   </script>
 
+  <script>
+document.querySelectorAll('.dirty-section').forEach(function(section) {
+  section.querySelectorAll('input, textarea, select').forEach(function(el) {
+    el.addEventListener('change', function() { section.classList.add('is-dirty'); });
+    el.addEventListener('input', function() { section.classList.add('is-dirty'); });
+  });
+});
+  </script>
   <script src="../interactions/design-system.js"></script>
 </body>
 </html>

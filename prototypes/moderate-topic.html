@@ -41,6 +41,42 @@
         <!-- ── LEFT SIDEBAR ── -->
         <aside class="topic-moderation-sidebar" aria-label="Topic details">
 
+          <!-- Content moderation panel -->
+          <div class="m-section">
+            <div class="m-section-header">
+              <span class="a-section-title">Content moderation</span>
+              <span class="m-section-header__toggle">
+                <button type="button" aria-label="Collapse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg></button>
+              </span>
+            </div>
+            <div class="m-section-body">
+              <div class="m-tabs">
+                <button type="button" class="m-tab m-tab--active">Topic actions</button>
+                <button type="button" class="m-tab">Notifications</button>
+              </div>
+              <div class="m-tab-panel">
+                <div class="details-field" style="margin-top:12px;">
+                  <label>Status</label>
+                  <select>
+                    <option selected>Published</option>
+                    <option>Pending review</option>
+                    <option>Hidden</option>
+                    <option>Deleted</option>
+                  </select>
+                </div>
+                <div class="details-field">
+                  <label>Moderation action</label>
+                  <select>
+                    <option selected>No action</option>
+                    <option>Flag for review</option>
+                    <option>Hide content</option>
+                    <option>Delete content</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Overview -->
           <div class="m-section">
             <div class="m-section-header">
@@ -331,6 +367,14 @@
                 <div class="author-meta"><span class="author-name">Admin (you)</span></div>
               </div>
               <div class="reply-composer__body">
+                <div class="reply-composer__toolbar">
+                  <button type="button" class="reply-composer__tool-btn" title="Bold"><b>B</b></button>
+                  <button type="button" class="reply-composer__tool-btn" title="Italic"><i>I</i></button>
+                  <button type="button" class="reply-composer__tool-btn" title="Underline"><u>U</u></button>
+                  <button type="button" class="reply-composer__tool-btn" title="Link" style="font-size:15px;">🔗</button>
+                  <button type="button" class="reply-composer__tool-btn" title="Bullet list" style="font-size:15px;">≡</button>
+                  <button type="button" class="reply-composer__tool-btn" title="Image" style="font-size:15px;">🖼</button>
+                </div>
                 <textarea class="reply-composer__textarea" placeholder="Write a reply…" rows="3" style="width:100%;border:1px solid var(--hz-border-color-base);border-radius:4px;padding:10px 12px;font-size:14px;font-family:var(--hz-font-family);resize:vertical;"></textarea>
                 <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px;">
                   <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
@@ -354,6 +398,14 @@
 
           <!-- Original reply composer (kept for structure) -->
           <div class="reply-composer">
+            <div class="reply-composer__toolbar">
+              <button type="button" class="reply-composer__tool-btn" title="Bold"><b>B</b></button>
+              <button type="button" class="reply-composer__tool-btn" title="Italic"><i>I</i></button>
+              <button type="button" class="reply-composer__tool-btn" title="Underline"><u>U</u></button>
+              <button type="button" class="reply-composer__tool-btn" title="Link" style="font-size:15px;">🔗</button>
+              <button type="button" class="reply-composer__tool-btn" title="Bullet list" style="font-size:15px;">≡</button>
+              <button type="button" class="reply-composer__tool-btn" title="Image" style="font-size:15px;">🖼</button>
+            </div>
             <textarea placeholder="Leave a reply..."></textarea>
             <div class="reply-composer__footer">
               <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>

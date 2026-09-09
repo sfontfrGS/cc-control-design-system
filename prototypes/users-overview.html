@@ -57,6 +57,12 @@
 
       <!-- Action bar: utility buttons (left) + pagination (right) -->
       <div class="action-bar">
+          <div class="batch-actions">
+            <span class="batch-count">1 selected</span>
+            <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Export</span></div></div></button>
+            <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Delete</span></div></div></button>
+          </div>
+          <div class="normal-actions">
         <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button"><div><div><span class="button-control__title-text"><svg width="14" height="14" viewBox="0 0 12 12" fill="none"><path d="M9.76618 2.23335C8.79952 1.26669 7.47285 0.666687 5.99952 0.666687C3.05285 0.666687 0.672852 3.05335 0.672852 6.00002C0.672852 8.94669 3.05285 11.3334 5.99952 11.3334C8.48619 11.3334 10.5595 9.63335 11.1529 7.33335H9.76618C9.21952 8.88669 7.73952 10 5.99952 10C3.79285 10 1.99952 8.20669 1.99952 6.00002C1.99952 3.79335 3.79285 2.00002 5.99952 2.00002C7.10618 2.00002 8.09285 2.46002 8.81285 3.18669L6.66618 5.33335H11.3329V0.666687L9.76618 2.23335Z" fill="currentColor"/></svg>Refresh</span></div></div></button>
         <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button"><div><div><span class="button-control__title-text"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14.0002 2.66699H2.00016C1.6335 2.66699 1.3335 2.96699 1.3335 3.33366V12.667C1.3335 13.0337 1.6335 13.3337 2.00016 13.3337H14.0002C14.3668 13.3337 14.6668 13.0337 14.6668 12.667V3.33366C14.6668 2.96699 14.3668 2.66699 14.0002 2.66699ZM5.3335 12.0003H2.66683V4.00033H9.3335V12.0003ZM13.3335 12.0003H10.6668V4.00033H13.3335V12.0003Z" fill="currentColor"/></svg>Columns</span></div></div></button>
 
@@ -69,6 +75,7 @@
           <span class="pagination__item disabled">Last</span>
           <span class="pagination__rows"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10L12 15L17 10H7Z"/></svg>25 rows</span>
         </div>
+          </div><!-- /.normal-actions -->
       </div>
 
       <div class="table-scroll">
@@ -276,6 +283,36 @@
     });
   </script>
 
+  <script>
+(function() {
+  const actionBar = document.querySelector('.action-bar');
+  if (!actionBar) return;
+  const batchCount = actionBar.querySelector('.batch-count');
+  const allCbs = Array.from(document.querySelectorAll('table.dt tbody input[type="checkbox"]'));
+  const headerCb = document.querySelector('table.dt thead input[type="checkbox"]');
+
+  function syncSelection() {
+    const checked = allCbs.filter(c => c.checked);
+    if (checked.length > 0) {
+      actionBar.classList.add('has-selection');
+      if (batchCount) batchCount.textContent = checked.length + ' selected';
+    } else {
+      actionBar.classList.remove('has-selection');
+    }
+    if (headerCb) headerCb.indeterminate = checked.length > 0 && checked.length < allCbs.length;
+    if (headerCb) headerCb.checked = checked.length === allCbs.length;
+  }
+
+  allCbs.forEach(cb => cb.addEventListener('change', syncSelection));
+  if (headerCb) {
+    headerCb.addEventListener('change', function() {
+      allCbs.forEach(cb => { cb.checked = this.checked; });
+      syncSelection();
+    });
+  }
+  syncSelection();
+})();
+  </script>
   <script src="../interactions/design-system.js"></script>
 
 </body>
