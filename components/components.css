@@ -241,10 +241,11 @@ body { display: flex; font-family: var(--hz-font-family); }
 
 /* Content area */
 .content { flex: 1; overflow-y: auto; padding: 24px; background: #fff; }
-/* Settings page variant — matches live product (verified 2026-09-09)
-   White bg, left-aligned, 24px horizontal padding. No centering, no max-width cap.
+/* Settings page variant (verified against live product 2026-09-09)
+   White bg, centered column, max-width 640px, 24px horizontal padding.
    Section spacing: dirty-section__title mb=16px (title→card), dirty-section mb=24px (card→next title). */
-.content--settings { background: #fff; padding: 0 24px 80px; }
+.content--settings { background: #fff; padding: 0 24px 80px; display: flex; flex-direction: column; align-items: center; }
+.content--settings > * { width: 100%; max-width: 640px; }
 
 .placeholder-card {
   background: var(--hz-component-background);
@@ -657,13 +658,14 @@ code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-famil
 /* ===== DIRTY-SECTION — Settings page card pattern ===== */
 /* Source: dchdesign-en.insided.com/ai/settings */
 .dirty-section { margin-bottom: 24px; }
-/* Type scale for settings pages:
-   Page title (control-header h2) → 24px / 700
+/* Type scale — verified against live product (see tokens.css for full reference)
+   Page title (control-header h2) → 20px / 600 / lh 28px
    Section title (dirty-section__title) → 18px / 600
    Field label (dirty-section__field-label) → 14px / 600
-   Field description (dirty-section__field-description) → 14px / 400
+   Field description / body → 14px / 400
+   Meta / hints → 13px / 400 / lh 20px
 */
-.dirty-section__title { font-size: 18px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0 0 16px; }
+.dirty-section__title { font-size: var(--hz-font-size-xl, 18px); font-weight: 600; color: var(--hz-text-color-primary); margin: 0 0 16px; }
 .dirty-section__card { background: #fff; border: 1px solid var(--hz-border-color-base); border-radius: 8px; padding: 24px; box-shadow: rgba(0,0,0,.16) 0 1px 2px 0; }
 .dirty-section__card-body { display: flex; flex-direction: column; gap: 24px; }
 /* Type A: vertical — label/description above full-width control */

@@ -98,14 +98,36 @@
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   --hz-code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
-  --hz-font-size-xs: 11px;
-  --hz-font-size-sm: 12px;
-  --hz-font-size-base: 14px;
-  --hz-font-size-lg: 16px;
+  /* ---- Font size scale ---- */
+  --hz-font-size-xs:   11px;
+  --hz-font-size-sm:   12px;
+  --hz-font-size-meta: 13px;   /* secondary labels, hints, timestamps — line-height: 20px */
+  --hz-font-size-base: 14px;   /* body, inputs, field labels, buttons — DEFAULT */
+  --hz-font-size-lg:   16px;
+  --hz-font-size-xl:   18px;   /* section titles (h3 in settings/content) */
+  --hz-font-size-2xl:  20px;   /* page titles (control-header h2) — line-height: 28px */
 
-  --hz-font-weight-light: 300;
-  --hz-font-weight-regular: 400;
+  /* ---- Font weight ---- */
+  --hz-font-weight-light:    300;
+  --hz-font-weight-regular:  400;
   --hz-font-weight-semibold: 600;
+  --hz-font-weight-bold:     700;
+
+  /*
+   * Control platform type scale — verified against dchdesign-en.insided.com (2026-09-09)
+   * ─────────────────────────────────────────────────────────────
+   * Role                    Size   Weight  Line-height  Token
+   * Page title (h2)         20px   600     28px         --hz-font-size-2xl
+   * Section title (h3)      18px   600     —            --hz-font-size-xl
+   * Body / field label      14px   600     —            --hz-font-size-base
+   * Body / input / default  14px   400     —            --hz-font-size-base
+   * Meta / hints / badges   13px   400     20px         --hz-font-size-meta
+   * Small labels            12px   400/600 —            --hz-font-size-sm
+   * Eyebrows / tags         11px   600     —            --hz-font-size-xs
+   * ─────────────────────────────────────────────────────────────
+   * Font family (primary):  "Noto Sans" → --hz-font-family
+   * Font family (code):     "SFMono-Regular" → --hz-code-family
+   */
 
   --hz-heading-hero-size: 42px;
   --hz-heading-1-size: 28px;
