@@ -296,11 +296,12 @@ input[type="checkbox"], input[type="radio"] { width: 14px; height: 14px; accent-
 .metric__count { font-size: 32px; font-weight: 600; margin: 4px 0; }
 .metric__delta { font-size: 14px; color: var(--hz-text-color-secondary); }
 
-/* Data table — live-verified: NO border-bottom on rows; columns separated by inset box-shadow */
+/* Data table — live-verified: rows separated by border-bottom, no column separators */
 table.dt { border-collapse: collapse; width: 100%; font-size: 14px; }
-table.dt th { text-align: left; padding: 8px 12px; height: 54px; font-weight: 700; box-shadow: inset -1px 0 0 var(--hz-border-color-base); }
-table.dt td { padding: 8px 12px; vertical-align: middle; box-shadow: inset -1px 0 0 var(--hz-border-color-base); }
-table.dt th:last-child, table.dt td:last-child { box-shadow: none; }
+table.dt th { text-align: left; padding: 8px 12px; height: 54px; font-weight: 700; border-bottom: 1px solid var(--hz-border-color-base); }
+table.dt td { padding: 8px 12px; vertical-align: middle; border-bottom: 1px solid var(--hz-border-color-base); }
+table.dt tbody tr { height: 56px; }
+table.dt tbody tr:last-child td { border-bottom: none; }
 table.dt tr.row--selected td { background: #F5F9FE; }
 .avatar-sm { width: 24px; height: 24px; border-radius: 50%; background: var(--hz-primary-color); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; margin-right: 8px; vertical-align: middle; }
 
