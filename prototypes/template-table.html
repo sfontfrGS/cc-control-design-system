@@ -36,16 +36,8 @@
 </style>
 </head>
 <!-- Change data-active-item to match the section icon: Add|Home|Content|Email|Users|Analytics|Platform|Gamification|Customization|Integrations|AI|Settings -->
-<body data-active-item="Users">
-
-  <div data-include="../shell/nav-rail.html"></div>
-
-  <!-- Section nav panel — update title and links for this section -->
-  <aside class="nav-panel" aria-label="Section">
-    <div class="nav-panel__title">Users</div>
-    <a class="nav-panel__link active" href="#">Items Overview</a>
-    <a class="nav-panel__link" href="#">Segments</a>
-  </aside>
+<body data-section="users" data-active-item="Users Overview">
+  <script src="../components/side-nav.js"></script>
 
   <div class="main">
     <div data-include="../shell/topbar.html"></div>

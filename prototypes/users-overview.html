@@ -10,16 +10,8 @@
   .user-cell { display: flex; align-items: center; gap: 8px; }
 </style>
 </head>
-<body data-active-item="Users">
-
-  <div data-include="../shell/nav-rail.html"></div>
-
-  <!-- SECONDARY FLYOUT / SECTION NAV -->
-  <aside class="nav-panel" aria-label="Section">
-    <div class="nav-panel__title">Users</div>
-    <a class="nav-panel__link active" href="#">Users Overview</a>
-    <a class="nav-panel__link" href="#">Segments</a>
-  </aside>
+<body data-section="users" data-active-item="Users Overview">
+  <script src="../components/side-nav.js"></script>
 
   <!-- MAIN COLUMN -->
   <div class="main">

@@ -19,40 +19,11 @@
   .color-swatch-round { width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--hz-border-color-base); flex: none; }
 </style>
 </head>
-<body data-active-item="Settings">
+<body data-section="settings" data-active-item="Ideation Status">
+  <script src="../components/side-nav.js"></script>
 
-  <div data-include="../shell/nav-rail.html"></div>
 
   <!-- SECONDARY FLYOUT / SECTION NAV -->
-  <aside class="nav-panel" aria-label="Section">
-    <div class="nav-panel__title">Settings</div>
-    <div class="nav-panel__group-label">Platform</div>
-    <a class="nav-panel__link" href="#">Event Types</a>
-    <a class="nav-panel__link" href="#">Event Settings</a>
-    <a class="nav-panel__link active" href="#">Ideation Status</a>
-    <a class="nav-panel__link" href="#">Product Areas</a>
-    <a class="nav-panel__link" href="#">Languages</a>
-    <a class="nav-panel__link" href="#">Platform Visibility</a>
-    <a class="nav-panel__link" href="#">Open betas</a>
-    <div class="nav-panel__group-label">User</div>
-    <a class="nav-panel__link" href="#">User Roles</a>
-    <a class="nav-panel__link" href="#">User Profile Fields</a>
-    <a class="nav-panel__link" href="#">Registration Rules</a>
-    <a class="nav-panel__link" href="#">Attachment Permissions</a>
-    <div class="nav-panel__group-label">Topic</div>
-    <a class="nav-panel__link" href="#">Public Tags</a>
-    <a class="nav-panel__link" href="#">Content &amp; Replies</a>
-    <a class="nav-panel__link" href="#">Moderation Labels</a>
-    <a class="nav-panel__link" href="#">Post Fields</a>
-    <div class="nav-panel__group-label">Moderation</div>
-    <a class="nav-panel__link" href="#">Automation Rules</a>
-    <a class="nav-panel__link" href="#">Pre-moderation Rules</a>
-    <a class="nav-panel__link" href="#">Moderation Notifications</a>
-    <a class="nav-panel__link" href="#">Spam Prevention</a>
-    <a class="nav-panel__link" href="#">Webmaster Email</a>
-    <div class="nav-panel__group-label">SEO</div>
-    <a class="nav-panel__link" href="#">Robots.txt</a>
-  </aside>
 
   <!-- MAIN COLUMN -->
   <div class="main">
