@@ -436,9 +436,9 @@
 </section>
 
 <section>
-  <h2>Breadcrumb <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— corrected: no arrow icon, verified no ::before content exists</span></h2>
-  <a class="breadcrumb">Back to Overview</a>
-  <p class="label" style="text-transform:none; font-weight:400;">Real: <code class="tag">&lt;a class="control-header__breadcrumb-link" href="/overview"&gt;Back to Overview&lt;/a&gt;</code> — plain link, color <code class="tag">#3C4A57</code>, 14px/400, no icon.</p>
+  <h2>Breadcrumb <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— live-verified: single back-link, not a multi-level trail</span></h2>
+  <a class="control-header__breadcrumb-link" href="#">Back to System Emails</a>
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class: <code class="tag">a.control-header__breadcrumb-link</code> inside <code class="tag">div.control-header__breadcrumb</code>. Pattern is always "Back to [Section]" — a single anchor, not a multi-crumb trail. Color: <code class="tag">#3C4A57</code>, 14px/400. The <code class="tag">control-header</code> switches to column layout when a breadcrumb is present via <code class="tag">:has(.control-header__breadcrumb)</code>.</p>
 </section>
 
 <section>
@@ -459,11 +459,15 @@
 </section>
 
 <section>
-  <h2>Toast notification</h2>
-  <div class="row">
-    <div class="toast">✓ AI context settings have been updated successfully. <span style="margin-left:8px; cursor:pointer;">✕</span></div>
+  <h2>Toast notification <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— live-verified: toastr.js library, top-right fixed</span></h2>
+  <p class="label" style="text-transform:none; font-weight:400; margin-bottom:8px;">In prototypes, render inline to demonstrate style. In production the container is <code class="tag">.toast-top-right</code> (position:fixed; top:55px; right:12px; z-index:999999; width:300px).</p>
+  <div style="position:relative; height:80px;">
+    <div class="toast-container" style="position:absolute; top:0; right:0;">
+      <div class="toast">✓ Your embed code has been copied to your clipboard.</div>
+      <div class="toast toast--error">✕ Something went wrong. Please try again.</div>
+    </div>
   </div>
-  <p class="label">Fixed to top of viewport, auto-dismisses after a few seconds. Success = #3CB54A. Use --hz-error-color for error toasts.</p>
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Library: <strong>toastr.js</strong>. Real class <code class="tag">.toast.toast-success</code> / <code class="tag">.toast.toast-error</code>. Background success: <code class="tag">#51A351</code> (rgb 81,163,81) — not the brighter #3CB54A. Padding: 15px 15px 15px 50px (extra left for the icon that toastr injects). Border-radius: 3px. Font: 12px/400. Box-shadow: rgba(0,0,0,.3) 0 1px 1px.</p>
 </section>
 
 <section>
@@ -605,17 +609,60 @@
   <label class="opt-row"><input type="radio" name="r1"> 60 minutes</label>
   <label class="opt-row"><input type="radio" name="r1" checked> Unlimited time</label>
 
-  <div class="label">Toggle switch (.control-switcher) — on / off — <strong style="color:#C26400;">DEPRECATED per Figma</strong></div>
-  <div class="row">
-    <span class="switch is-on"><span class="switch__track on"><span class="switch__side on-half">✓</span><span class="switch__side off-half">✕</span></span><span class="switch__knob"></span></span>
-    <span class="switch is-off"><span class="switch__track on"><span class="switch__side on-half">✓</span><span class="switch__side off-half">✕</span></span><span class="switch__knob"></span></span>
+  <div class="label">Toggle switch (.control-switcher) — on / off — live-verified</div>
+  <div class="row" style="gap:16px; align-items:center;">
+    <div class="control-switcher on">
+      <a class="toggle" href="#" onclick="return false;">
+        <svg viewBox="0 0 14 14"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+      </a>
+      <a class="ui-on" href="#" onclick="return false;">
+        <svg viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      </a>
+      <a class="ui-off" href="#" onclick="return false;">
+        <svg viewBox="0 0 10 10"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      </a>
+    </div>
+    <span style="font-size:12px; color:var(--hz-text-color-secondary);">ON</span>
+    <div class="control-switcher off">
+      <a class="toggle" href="#" onclick="return false;">
+        <svg viewBox="0 0 14 14"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+      </a>
+      <a class="ui-on" href="#" onclick="return false;">
+        <svg viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      </a>
+      <a class="ui-off" href="#" onclick="return false;">
+        <svg viewBox="0 0 10 10"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      </a>
+    </div>
+    <span style="font-size:12px; color:var(--hz-text-color-secondary);">OFF</span>
   </div>
-  <p class="label" style="text-transform:none; font-weight:400;">
-    This is the live product's toggle (51×24px, text labels ✓/✕ inside halves, real class <code class="tag">.control-switcher</code>).
-    <strong>The Figma design system marks this as "Legacy Toggle (To Deprecate)"</strong> — the new Horizon toggle is a clean 40×20px (regular) or 32×16px (small) pill with no inner text, green ON <code class="tag">#12995B</code>.
-    Since prototypes must match the live codebase today, keep using the legacy design. When the tech team ships the new toggle, update to: 40×20px pill, round thumb, ON=<code class="tag">#12995B</code>, OFF=gray.
-    <br><br><strong>Correction (re permissions):</strong> there is no separate "permission grant/deny segmented control" — the icon pair on Edit Custom Role is this same <code class="tag">.control-switcher</code> toggle rendered small.
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">
+    Real class <code class="tag">.control-switcher</code> (ON: add <code class="tag">.on</code>, OFF: add <code class="tag">.off</code>). 51×24px. Three-element sliding panel — <code class="tag">.toggle</code> (white thumb, 26×24px, 2px radius, slides left/right), <code class="tag">.ui-on</code> (blue #0369E9, left segment), <code class="tag">.ui-off</code> (gray #D5D9DE, right segment).
+    <strong>Figma marks this as "Legacy Toggle (To Deprecate)"</strong> — future Horizon toggle: 40×20px pill, round thumb, ON=#12995B. For now, use this for all live-matching prototypes.
   </p>
+
+  <div class="label" style="margin-top:16px;">Feat-toggle (.feat-toggle) — settings AI pages, segmented on/off</div>
+  <div class="row" style="gap:16px; align-items:center;">
+    <div class="feat-toggle">
+      <button class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="true">
+        <svg viewBox="0 0 14 14"><path d="M1.5 7l3.5 3.5 7-7" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      </button>
+      <button class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="false">
+        <svg viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      </button>
+    </div>
+    <span style="font-size:12px; color:var(--hz-text-color-secondary);">ON (enabled)</span>
+    <div class="feat-toggle">
+      <button class="feat-toggle__btn feat-toggle__btn--on" aria-pressed="false">
+        <svg viewBox="0 0 14 14"><path d="M1.5 7l3.5 3.5 7-7" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      </button>
+      <button class="feat-toggle__btn feat-toggle__btn--off" aria-pressed="true">
+        <svg viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      </button>
+    </div>
+    <span style="font-size:12px; color:var(--hz-text-color-secondary);">OFF (disabled)</span>
+  </div>
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Used on AI agent settings pages (Moderation AI Agent, etc.). Two-button segmented control, 30×30px buttons. Active ON button: <code class="tag">background:#0369E9; color:#fff</code>. Active OFF button: <code class="tag">background:#5b6472; color:#fff</code>. Inactive: white bg, gray icon. Container: <code class="tag">border:1px solid var(--hz-border-color-base); border-radius:6px</code>.</p>
 </section>
 
 <section>
@@ -1010,13 +1057,41 @@
 </section>
 
 <section>
-  <h2>Color picker <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Customization ▸ Header</span></h2>
-  <button class="color-trigger">
-    <span class="color-trigger__swatch" style="background:#5050D6;"></span>
-    <span class="color-trigger__hex">#5050d6</span>
-    <span>▾</span>
-  </button>
-  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real classes: <code class="tag">.default-header_colors-preview</code> (24×24 swatch, 1px <code class="tag">#C7C7C7</code> border, square — no radius) + <code class="tag">.color-selector_selected-color</code> (hex text, 12px) + a chevron-down icon button that opens the actual picker popup (not captured in detail — treat as a standard color-picker popover, same family as flatpickr below, don't hand-build the hue/saturation grid).</p>
+  <h2>Color picker <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— live-verified: react-color SketchPicker, Customization ▸ Header</span></h2>
+  <div style="display:flex; gap:24px; align-items:flex-start;">
+    <div>
+      <div style="font-size:11px; color:var(--hz-text-color-secondary); margin-bottom:4px;">Trigger (closed)</div>
+      <button class="color-trigger">
+        <span class="color-trigger__swatch" style="background:#5050D6;"></span>
+        <span class="color-trigger__hex">#5050d6</span>
+        <span>▾</span>
+      </button>
+    </div>
+    <div>
+      <div style="font-size:11px; color:var(--hz-text-color-secondary); margin-bottom:4px;">Popover (react-color SketchPicker)</div>
+      <div style="width:220px; background:#fff; border-radius:4px; box-shadow:rgba(0,0,0,.15) 0 0 0 1px, rgba(0,0,0,.15) 0 8px 16px; padding:10px 10px 0; font-size:11px; color:var(--hz-text-color-secondary);">
+        <div style="height:150px; background:linear-gradient(to bottom,transparent,#000), linear-gradient(to right,#fff,#5050D6); border-radius:2px; margin-bottom:8px; position:relative;">
+          <div style="position:absolute; bottom:4px; right:4px; width:10px; height:10px; border:2px solid #fff; border-radius:50%; box-shadow:0 0 0 1px rgba(0,0,0,.3);"></div>
+        </div>
+        <div style="display:flex; gap:8px; margin-bottom:8px;">
+          <div style="flex:1;">
+            <div style="height:10px; background:linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); border-radius:2px; margin-bottom:4px;"></div>
+            <div style="height:10px; background:linear-gradient(to right,rgba(80,80,214,0),#5050D6); border-radius:2px;"></div>
+          </div>
+          <div style="width:32px; height:32px; background:#5050D6; border-radius:3px; box-shadow:rgba(0,0,0,.15) 0 0 0 1px inset;"></div>
+        </div>
+        <div style="display:flex; gap:4px; flex-wrap:wrap; padding-bottom:8px;">
+          <div style="width:16px; height:16px; border-radius:3px; background:#D0021B; box-shadow:rgba(0,0,0,.15) 0 0 0 1px inset;"></div>
+          <div style="width:16px; height:16px; border-radius:3px; background:#F5A623; box-shadow:rgba(0,0,0,.15) 0 0 0 1px inset;"></div>
+          <div style="width:16px; height:16px; border-radius:3px; background:#F8E71C; box-shadow:rgba(0,0,0,.15) 0 0 0 1px inset;"></div>
+          <div style="width:16px; height:16px; border-radius:3px; background:#417505; box-shadow:rgba(0,0,0,.15) 0 0 0 1px inset;"></div>
+          <div style="width:16px; height:16px; border-radius:3px; background:#0369E9; box-shadow:rgba(0,0,0,.15) 0 0 0 1px inset;"></div>
+          <div style="width:16px; height:16px; border-radius:3px; background:#9013FE; box-shadow:rgba(0,0,0,.15) 0 0 0 1px inset;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Library: <strong>react-color</strong> <code class="tag">SketchPicker</code>. Trigger: <code class="tag">span.default-header_colors-visual</code> → 24×24 swatch (<code class="tag">.default-header_colors-preview</code>, 1px #C7C7C7 border, no radius) + hex label (<code class="tag">.color-selector_selected-color</code>, 12px) + chevron. Popover container: <code class="tag">span.default-header_colors-picker-container</code> (220×290px, position:absolute). Picker: <code class="tag">div.sketch-picker</code> (200px wide, white bg, 4px radius, double box-shadow, 10px padding). Contains: saturation area (200×150px), hue bar (10px tall), alpha bar (10px), preview swatch, 15 preset swatches (each 16×16px, 3px radius). Don't hand-build — use the react-color library in real code.</p>
 </section>
 
 <section>
@@ -1159,13 +1234,12 @@
 
 <section>
   <h2>Code snippet with copy button <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Integrations ▸ Embeddable Widget ▸ Installation</span></h2>
-  <div style="max-width:500px; border:1px solid var(--hz-border-color-light); border-radius:6px; padding:16px;">
-    <div style="font-weight:700; font-size:14px; margin-bottom:12px;">Installation</div>
-    <p style="font-size:13px; color:var(--hz-text-color-secondary); margin:0 0 8px;">How to install the embed code</p>
-    <div style="background:#F5F7F9; border:1px solid var(--hz-border-color-light); border-radius:4px; padding:12px; font-family:monospace; font-size:12px; color:var(--hz-text-color-primary); margin-bottom:12px; word-break:break-all;">&lt;script&gt;...&lt;/script&gt;</div>
-    <button class="btn-legacy btn-legacy--primary">Copy code</button>
+  <div style="max-width:500px;">
+    <textarea class="embed-script" style="width:100%; height:120px; background:#fff; border:1px solid #767676; border-radius:0; padding:2px; font-size:12px; font-family:inherit; resize:vertical; display:block;">&lt;script src="https://cdn.insided.com/community/js/community.js"&gt;&lt;/script&gt;
+&lt;div id="insided-community"&gt;&lt;/div&gt;</textarea>
+    <button class="btn-legacy btn-legacy--primary" style="margin-top:8px;">Copy code</button>
   </div>
-  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real class <code class="tag">.embed-code</code> wrapped in a bordered panel card; button is legacy-generation primary (<code class="tag">.btn.btn-primary</code>). Exact code-box background/border wasn't fully verified via computed style (climbed to the wrong ancestor while inspecting) — treat the box styling here as a reasonable approximation, re-verify before pixel-matching.</p>
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Live-verified on Integrations ▸ Embeddable Widget. Real element: <code class="tag">textarea.embed-script</code> (not a styled div). Background: white. Border: <code class="tag">1px solid #767676</code> (native textarea border, not design token). Border-radius: 0. Font: 12px, inherits page font (Noto Sans — NOT monospace). Copy button is legacy-generation primary: <code class="tag">.btn.btn-primary</code>, positioned below — not overlaid. Alias class in design system: <code class="tag">.btn-legacy.btn-legacy--primary</code>.</p>
 </section>
 
 <section>

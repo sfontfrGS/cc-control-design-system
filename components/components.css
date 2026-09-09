@@ -163,8 +163,9 @@ body { display: flex; font-family: var(--hz-font-family); }
 }
 .modal-overlay[hidden] { display: none; }
 
-/* Toast */
-.toast       { display: inline-flex; align-items: center; gap: 8px; background: #3CB54A; color: #fff; padding: 12px; border-radius: 2px; font-size: 14px; }
+/* Toast — live-verified: position fixed top-right, z-index 999999 */
+.toast-container { position: fixed; top: 55px; right: 12px; z-index: 999999; width: 300px; display: flex; flex-direction: column; gap: 8px; }
+.toast { width: 300px; background: #51A351; color: #fff; padding: 15px 15px 15px 50px; border-radius: 3px; box-shadow: rgba(0,0,0,.3) 0 1px 1px; font-size: 12px; font-weight: 400; position: relative; }
 .toast--error { background: var(--hz-error-color); }
 
 /* Kebab dropdown */
@@ -182,14 +183,23 @@ body { display: flex; font-family: var(--hz-font-family); }
 .kebab-menu__item:hover { background: var(--hz-bg-color-base-hover); }
 .kebab-menu__item--danger { color: var(--hz-bg-color-notify); }
 
-/* Rich text editor */
+/* Rich text editor — wrapper alias (design system); real library is CKEditor4 */
 .rte { border: 1px solid var(--hz-border-color-base); border-radius: 4px; overflow: hidden; }
-.rte__toolbar { display: flex; align-items: center; gap: 2px; padding: 4px 4px 0; border-bottom: 1px solid var(--hz-border-color-base); background: rgb(207,209,207); flex-wrap: wrap; border-radius: 4px 4px 0 0; }
-.rte__toolbar button { border: none; background: none; width: 26px; height: 26px; border-radius: 3px; color: var(--hz-text-color-primary); cursor: pointer; font-size: 13px; }
+.rte__toolbar { display: flex; align-items: center; gap: 2px; padding: 4px 4px 0; border-bottom: 1px solid var(--hz-border-color-base); background: rgb(207,209,207); flex-wrap: wrap; border-radius: 4px 4px 0 0; height: 33px; box-shadow: rgba(255,255,255,1) 0 1px 0 inset; }
+.rte__toolbar button { border: none; background: none; width: 20px; height: 20px; border-radius: 3px; color: var(--hz-text-color-primary); cursor: pointer; font-size: 13px; padding: 4px; }
 .rte__toolbar button:hover { background: var(--hz-bg-color-base-hover); }
-.rte__toolbar .sep { width: 1px; height: 18px; background: var(--hz-border-color-light); margin: 0 4px; }
+.rte__toolbar .sep { width: 1px; height: 18px; background: #D5D9DE; box-shadow: rgba(255,255,255,.5) 1px 0 1px; margin: 0 4px; }
 .rte__toolbar select { border: none; background: none; font-size: 12px; color: var(--hz-text-color-primary); }
-.rte__body { min-height: 120px; padding: 12px; font-size: 14px; color: var(--hz-text-color-placeholder); }
+.rte__body { min-height: 120px; padding: 12px; font-size: 14px; color: var(--hz-text-color-placeholder); border-radius: 0 0 4px 4px; }
+/* Real CKEditor4 class names (live-verified) */
+.cke_top { height: 33px; padding: 4px 4px 0; background: rgb(207,209,207); box-shadow: rgba(255,255,255,1) 0 1px 0 inset; border-radius: 4px 4px 0 0; }
+.cke_button { width: 20px; height: 20px; padding: 4px; border-radius: 3px; }
+.cke_toolbar_separator { width: 1px; height: 18px; background: #D5D9DE; box-shadow: rgba(255,255,255,.5) 1px 0 1px; margin: 0 4px; display: inline-block; }
+
+/* CodeMirror — live-verified values (email editor + scripts page) */
+.CodeMirror { font-family: monospace; font-size: 14px; line-height: 20px; background: #fff; color: #000; border: 1px solid #D5D9DE; border-radius: 4px; }
+.CodeMirror-gutters { background: #F7F7F7; border-right: 1px solid #DDD; width: 29px; }
+.CodeMirror-linenumber { color: #999; padding: 0 3px 0 5px; }
 
 /* AI panel */
 .ai-panel {
@@ -608,8 +618,10 @@ h2.control-header__title,
 .control-header__texts-container { flex: 1; display: flex; align-items: center; }
 .control-header__buttons { display: flex; gap: 8px; align-items: center; margin-left: auto; }
 /* Breadcrumb link */
-.control-header__breadcrumb a { font-size: 13px; color: var(--hz-primary-color); text-decoration: none; }
-.control-header__breadcrumb a:hover { text-decoration: underline; }
+.control-header__breadcrumb a,
+.control-header__breadcrumb-link { font-size: 14px; color: #3C4A57; text-decoration: none; font-weight: 400; }
+.control-header__breadcrumb a:hover,
+.control-header__breadcrumb-link:hover { text-decoration: underline; }
 /* Row inside breadcrumb variant (h2 + buttons side by side) */
 .control-header__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
 .control-header__row h2 { font-size: 21px; font-weight: 400; line-height: 32px; margin: 0; color: #181F26; white-space: nowrap; }
