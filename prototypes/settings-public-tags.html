@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Public Tags — Settings</title>
+<!-- Tabler icons kept for dynamic JS-updated sort icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/components.css">
+<style>
+  /* ── Page tabs ─────────────────────────────────────────────── */
+  .ds-tabs { display: flex; border-bottom: 1px solid #D5D9DE; margin-bottom: 24px; }
+  .ds-tab { padding: 10px 16px; font-size: 14px; font-weight: 500; color: #5F6C7A; cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s; }
+  .ds-tab:hover { color: #181F26; }
+  .ds-tab.active { color: #0369E9; border-bottom-color: #0369E9; }
+  .ds-pane { display: none; }
+  .ds-pane.active { display: block; }
+
+  /* ── Simple toggle switch (not feat-toggle) ─────────────────── */
+  .switch { position: relative; width: 36px; height: 20px; cursor: pointer; display: inline-block; flex-shrink: 0; }
+  .switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+  .switch-track { position: absolute; inset: 0; border-radius: 20px; background: #C8C9C9; transition: background .2s; }
+  .switch-track::before { content: ''; position: absolute; width: 14px; height: 14px; border-radius: 50%; background: #fff; top: 3px; left: 3px; transition: transform .2s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+  input:checked + .switch-track { background: #0369E9; }
+  input:checked + .switch-track::before { transform: translateX(16px); }
+
+  /* ── Tag chips ──────────────────────────────────────────────── */
+  .tag-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; background: #F6F6F6; border: 1px solid #D5D9DE; border-radius: 20px; font-size: 13px; color: #3C4A57; }
+  .tag-chip.from-global { background: #EBF3FE; border-color: #A2C4F7; color: #0369E9; }
+  .tag-chip button { background: none; border: none; cursor: pointer; color: #8A9BB0; padding: 0; display: flex; align-items: center; }
+  .tag-chip button:hover { color: #181F26; }
+  .tags-list { display: flex; flex-wrap: wrap; gap: 6px; min-height: 32px; }
+  .empty-state { font-size: 13px; color: #8A9BB0; font-style: italic; }
+
+  /* ── Tag panel (expandable) ─────────────────────────────────── */
+  .tag-panel { margin-top: 16px; border-top: 1px solid #E8EAED; padding-top: 16px; display: none; }
+  .tag-panel.visible { display: block; }
+  .tag-panel-inner { background: #FAFAFA; border: 1px solid #E8EAED; border-radius: 6px; padding: 16px; }
+  .panel-label { font-size: 13px; font-weight: 600; color: #181F26; margin-bottom: 4px; }
+  .panel-desc { font-size: 13px; color: #5F6C7A; margin-bottom: 12px; line-height: 1.5; }
+  .freeform-row { margin-top: 12px; padding-top: 12px; border-top: 1px solid #E8EAED; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+
+  /* ── Autocomplete ───────────────────────────────────────────── */
+  .autocomplete-wrap { position: relative; flex: 1; }
+  .tag-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+  .tag-input-row input { width: 100%; height: 36px; border: 1px solid #D5D9DE; border-radius: 4px; padding: 0 12px; font-size: 14px; background: #fff; color: #181F26; outline: none; }
+  .tag-input-row input:focus { border-color: #0369E9; box-shadow: 0 0 0 3px rgba(3,105,233,.12); }
+  .dropdown { position: absolute; top: 40px; left: 0; right: 0; background: #fff; border: 1px solid #D5D9DE; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,.08); z-index: 100; max-height: 200px; overflow-y: auto; display: none; }
+  .dropdown.open { display: block; }
+  .dropdown-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; cursor: pointer; font-size: 14px; color: #181F26; }
+  .dropdown-item:hover { background: #F6F6F6; }
+  .dropdown-item .usage { font-size: 12px; color: #8A9BB0; }
+  .dropdown-item.create-new { color: #0369E9; font-style: italic; }
+  .dropdown-section-label { padding: 6px 12px 4px; font-size: 11px; font-weight: 600; color: #8A9BB0; text-transform: uppercase; letter-spacing: .05em; border-top: 1px solid #F0F2F4; }
+  .dropdown-section-label:first-child { border-top: none; }
+
+  /* ── Helper / info note ─────────────────────────────────────── */
+  .helper-note { margin-top: 12px; font-size: 13px; display: flex; align-items: flex-start; gap: 6px; line-height: 1.5; padding: 8px 10px; background: #EBF3FE; border-radius: 4px; border: 1px solid #A2C4F7; color: #0369E9; }
+
+  /* ── New badge ──────────────────────────────────────────────── */
+  .new-badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; background: #EBF3FE; color: #0369E9; border-radius: 20px; border: 1px solid #A2C4F7; margin-left: 6px; vertical-align: middle; }
+
+  /* ── Legend ─────────────────────────────────────────────────── */
+  .legend { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; font-size: 12px; color: #5F6C7A; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* ── Category badge in table ────────────────────────────────── */
+  .cat-badge { display: inline-flex; align-items: center; padding: 2px 8px; background: #F6F6F6; border: 1px solid #E8EAED; border-radius: 20px; font-size: 11px; color: #3C4A57; margin-right: 3px; margin-bottom: 2px; white-space: nowrap; }
+  .cat-badge.unassigned { background: #FFF5F5; color: #C0392B; border-color: #F5C6C6; }
+
+  /* ── Bulk action bar ────────────────────────────────────────── */
+  .bulk-bar { display: none; align-items: center; gap: 12px; padding: 8px 16px; background: #181F26; border-radius: 4px; margin-bottom: 12px; }
+  .bulk-bar.visible { display: flex; }
+  .bulk-bar > span { font-size: 14px; color: #fff; flex: 1; }
+  .bulk-action-btn { height: 32px; padding: 0 14px; border-radius: 4px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; border: none; }
+  .bulk-action-btn.delete { background: #E2483D; color: #fff; }
+  .bulk-action-btn.delete:hover { background: #C0392B; }
+  .bulk-action-btn.merge { background: #fff; color: #181F26; }
+  .bulk-action-btn.merge:hover { background: #F6F6F6; }
+  .bulk-action-btn.cancel { background: transparent; color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.2); }
+  .bulk-action-btn.cancel:hover { background: rgba(255,255,255,.1); }
+
+  /* ── Collapsible settings section (details) ─────────────────── */
+  details.dirty-section > summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; }
+  details.dirty-section > summary::-webkit-details-marker { display: none; }
+  details.dirty-section[open] > summary .chevron-icon { transform: rotate(180deg); }
+  .chevron-icon { font-size: 15px; color: #8A9BB0; transition: transform .2s; }
+
+  /* ── Danger action button ───────────────────────────────────── */
+  .button-control-new--danger { color: #E2483D !important; border-color: #F5C6C6 !important; }
+  .button-control-new--danger:hover { background: #FFF5F5 !important; }
+
+  /* ── Modal ──────────────────────────────────────────────────── */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 200; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .modal-tag { display: inline-flex; align-items: center; padding: 3px 10px; background: #F6F6F6; border-radius: 20px; font-size: 13px; color: #3C4A57; border: 1px solid #D5D9DE; }
+  .warning-note { display: flex; gap: 6px; align-items: flex-start; padding: 8px 10px; background: #FFF9EB; border: 1px solid #F5D78C; border-radius: 4px; font-size: 13px; color: #8A6500; margin-bottom: 16px; line-height: 1.5; }
+</style>
+</head>
+<body data-section="settings" data-active-item="Public Tags">
+  <script src="../components/side-nav.js"></script>
+
+  <div class="main">
+    <script src="../components/topbar.js"></script>
+
+    <div class="control-header">
+      <h2 class="control-header__title">Tags</h2>
+    </div>
+
+    <main class="content content--settings">
+
+      <!-- Tabs -->
+      <div class="ds-tabs">
+        <button class="ds-tab active" onclick="switchTab('cat')">Category tags</button>
+        <button class="ds-tab" onclick="switchTab('global')">Manage public tags</button>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           TAB 1 — Category tags
+      ══════════════════════════════════════════ -->
+      <div id="pane-cat" class="ds-pane active">
+
+        <div class="dirty-section">
+          <h3 class="dirty-section__title">Settings</h3>
+          <div class="dirty-section__card">
+            <div class="dirty-section__card-body">
+
+              <div class="dirty-section__field-row">
+                <div class="dirty-section__field-info">
+                  <p class="dirty-section__field-label">Hide categories and topics from search</p>
+                  <p class="dirty-section__field-description">These categories and topics will not be shown in search results</p>
+                </div>
+                <div class="dirty-section__control">
+                  <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+                </div>
+              </div>
+
+              <div class="dirty-section__field-row">
+                <div class="dirty-section__field-info">
+                  <p class="dirty-section__field-label">Activity contributes towards user statistics and ranks</p>
+                  <p class="dirty-section__field-description">User activity in this category is included in statistics and used to unlock ranks</p>
+                </div>
+                <div class="dirty-section__control">
+                  <label class="switch"><input type="checkbox" checked><span class="switch-track"></span></label>
+                </div>
+              </div>
+
+              <!-- Expandable tag limit row -->
+              <div class="dirty-section__field-row" style="flex-direction:column;gap:0;align-items:stretch;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;">
+                  <div class="dirty-section__field-info">
+                    <p class="dirty-section__field-label">Limit tags to this category <span class="new-badge">New</span></p>
+                    <p class="dirty-section__field-description">Define which tags members can use when posting here. Only these tags will appear in this category — global tags are hidden.</p>
+                  </div>
+                  <div class="dirty-section__control">
+                    <label class="switch"><input type="checkbox" id="tagToggle"><span class="switch-track"></span></label>
+                  </div>
+                </div>
+
+                <div class="tag-panel" id="tagPanel">
+                  <div class="tag-panel-inner">
+                    <div class="panel-label">Category tags</div>
+                    <div class="panel-desc">Search existing public tags or create new ones. Tags selected from the global list are shown in blue.</div>
+
+                    <div class="tag-input-row">
+                      <div class="autocomplete-wrap">
+                        <input type="text" id="tagInput" placeholder="Search existing tags or type to create new…" autocomplete="off">
+                        <div class="dropdown" id="tagDropdown"></div>
+                      </div>
+                    </div>
+
+                    <div class="legend">
+                      <div class="legend-item"><span class="legend-dot" style="background:#A2C4F7;border:1px solid #6BA8F0"></span> From global tag list</div>
+                      <div class="legend-item"><span class="legend-dot" style="background:#D5D9DE"></span> New tag</div>
+                    </div>
+
+                    <div class="tags-list" id="tagsList">
+                      <span class="empty-state">No tags added yet — search above or type a new tag and press Enter</span>
+                    </div>
+
+                    <div class="freeform-row">
+                      <div>
+                        <p class="dirty-section__field-label" style="font-size:13px">Also allow members to create their own tags</p>
+                        <p class="dirty-section__field-description" style="font-size:12px">If off, members can only pick from the tags you define above. Recommended off for stricter taxonomy control.</p>
+                      </div>
+                      <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+                    </div>
+
+                    <div class="helper-note">
+                      <i class="ti ti-info-circle" style="font-size:15px;flex-shrink:0;margin-top:1px"></i>
+                      Existing posts in this category keep their current tags. Once saved, members won't be able to add tags outside this list.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /pane-cat -->
+
+      <!-- ═══════════════════════════════════════
+           TAB 2 — Manage public tags
+      ══════════════════════════════════════════ -->
+      <div id="pane-global" class="ds-pane">
+
+        <!-- Sub-header: search + add button -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div><!-- spacer --></div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div class="search-box--table">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3 5.91 3 3 5.91 3 9.5c0 3.59 2.91 6.5 6.5 6.5 1.61 0 3.09-.59 4.23-1.57l.27.27V15.5l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              <input type="text" placeholder="Search tags…" id="globalSearch" oninput="filterTable()">
+            </div>
+            <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">
+              <div><div><span class="button-control__title-text">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>
+                Add public tag
+              </span></div></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Settings collapsible -->
+        <details class="dirty-section" open style="margin-bottom:16px;">
+          <summary class="dirty-section__title">
+            Settings
+            <i class="ti ti-chevron-down chevron-icon"></i>
+          </summary>
+          <div class="dirty-section__card">
+            <div class="dirty-section__card-body">
+              <div class="dirty-section__field-row">
+                <div class="dirty-section__field-info">
+                  <p class="dirty-section__field-label">Allow end users to add new public tags</p>
+                </div>
+                <div class="dirty-section__control">
+                  <label class="switch"><input type="checkbox" checked><span class="switch-track"></span></label>
+                </div>
+              </div>
+              <div class="dirty-section__field-row">
+                <div class="dirty-section__field-info">
+                  <p class="dirty-section__field-label">Mark public tags as mandatory in destination while creating a topic</p>
+                </div>
+                <div class="dirty-section__control">
+                  <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Bulk action bar -->
+        <div class="bulk-bar" id="bulkBar">
+          <span id="bulkLabel">0 tags selected</span>
+          <button class="bulk-action-btn merge" onclick="openMergeModal()"><i class="ti ti-git-merge" style="font-size:14px"></i> Merge tags</button>
+          <button class="bulk-action-btn delete" onclick="bulkDelete()"><i class="ti ti-trash" style="font-size:14px"></i> Delete selected</button>
+          <button class="bulk-action-btn cancel" onclick="clearSelection()"><i class="ti ti-x" style="font-size:14px"></i> Cancel</button>
+        </div>
+
+        <!-- Table card -->
+        <div class="table-card">
+          <div class="action-bar">
+            <div class="batch-actions"></div>
+            <div class="normal-actions">
+              <div class="pagination">
+                <span class="pagination__info"><strong id="tagCount">9543</strong> public tags &nbsp;·&nbsp; <span id="rangeLabel">1–25 of 9543 results</span></span>
+                <span class="pagination__item disabled" id="firstBtn">First</span>
+                <span class="pagination__item chevron disabled" id="prevBtn" onclick="changePage(-1)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6 8 12l6 6 1.41-1.41L10.83 12z"/></svg></span>
+                <span class="pagination__item">Page <input class="pagination__page-box" id="pgInput" type="text" value="1" onchange="goToPage(this.value)"> of <strong id="totalPages">382</strong></span>
+                <span class="pagination__item chevron" id="nextBtn" onclick="changePage(1)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span>
+                <span class="pagination__item disabled" id="lastBtn">Last</span>
+                <span class="pagination__rows"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5H7z"/></svg>25 rows</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-scroll">
+            <table class="dt" id="tagsTable">
+              <thead>
+                <tr>
+                  <th class="col-checkbox"><input type="checkbox" id="selectAll" onchange="toggleAll(this)"></th>
+                  <th class="col-m-big"><span class="th-cell">Public tag</span></th>
+                  <th class="col-s-right" id="th-topics" onclick="sortBy('topics')" style="cursor:pointer">
+                    <span class="th-cell sortable sorted" style="justify-content:flex-end;">Topics tagged <i class="ti ti-arrow-down sort-icon" style="font-size:13px;color:#0369E9"></i></span>
+                  </th>
+                  <th class="col-m-flexible">
+                    <span class="th-cell">Categories assigned <span class="new-badge">New</span></span>
+                  </th>
+                  <th><span class="th-cell">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody id="tagsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /pane-global -->
+
+    </main>
+  </div>
+
+  <!-- Merge modal -->
+  <div class="modal-overlay" id="mergeModal">
+    <div class="modal">
+      <h3 class="modal__title">Merge tags</h3>
+      <p class="modal__body" style="margin-bottom:16px;">These tags and all their associated topics will be merged into a single canonical tag. This cannot be undone.</p>
+      <p class="modal__label" style="font-size:12px;font-weight:500;color:#3C4A57;margin-bottom:6px;">Tags being merged</p>
+      <div class="modal-tags" id="mergingTags"></div>
+      <div class="warning-note"><i class="ti ti-alert-triangle" style="font-size:14px;flex-shrink:0;margin-top:1px"></i> All topics currently tagged with any of these will be retagged with the canonical tag below.</div>
+      <p class="modal__label" style="font-size:12px;font-weight:500;color:#3C4A57;margin-bottom:6px;">Canonical tag (keep this one)</p>
+      <input class="dirty-section__input" id="mergeTarget" placeholder="Type the tag name to keep…" style="margin-bottom:20px;">
+      <div class="modal__footer">
+        <button class="button-control-new button-control-new--medium button-control-new--secondary" onclick="closeMergeModal()"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+        <button class="button-control-new button-control-new--medium button-control-new--primary" onclick="confirmMerge()"><div><div><span class="button-control__title-text">Merge tags</span></div></div></button>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ── Tab switching ── */
+function switchTab(id) {
+  document.querySelectorAll('.ds-tab').forEach((t, i) => t.classList.toggle('active', (id === 'cat' && i === 0) || (id === 'global' && i === 1)));
+  document.querySelectorAll('.ds-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('pane-' + id).classList.add('active');
+}
+
+/* ── Tab 1: Category tags autocomplete ── */
+const GLOBAL_TAGS = [
+  {name:'journey-orchestrator',count:1723},{name:'reports',count:1422},{name:'dashboards',count:1097},
+  {name:'rules',count:1065},{name:'timeline',count:945},{name:'surveys',count:623},
+  {name:'data-management',count:617},{name:'rules-engine',count:533},{name:'office-hours',count:528},
+  {name:'engagements',count:433},{name:'playbook',count:433},{name:'success-plans',count:415},
+  {name:'analytics',count:388},{name:'moderation',count:378},{name:'cs-ops',count:315},
+  {name:'email',count:297},{name:'activation',count:283},{name:'data-designer',count:276},
+  {name:'health-score',count:261},{name:'integrations',count:244},{name:'api',count:231},
+  {name:'nps',count:218},{name:'cta',count:480},{name:'px',count:681},{name:'c360',count:742}
+];
+
+const toggle = document.getElementById('tagToggle');
+const panel = document.getElementById('tagPanel');
+const tagInput = document.getElementById('tagInput');
+const tagsList = document.getElementById('tagsList');
+const dropdown = document.getElementById('tagDropdown');
+let selectedTags = [];
+
+toggle.addEventListener('change', () => panel.classList.toggle('visible', toggle.checked));
+
+tagInput.addEventListener('input', () => {
+  const q = tagInput.value.trim().toLowerCase();
+  if (!q) { dropdown.classList.remove('open'); return; }
+  const matches = GLOBAL_TAGS.filter(t => t.name.includes(q) && !selectedTags.find(s => s.name === t.name));
+  let html = '';
+  if (matches.length) {
+    html += '<div class="dropdown-section-label">Existing public tags</div>';
+    html += matches.slice(0, 6).map(t =>
+      `<div class="dropdown-item" onclick="selectExisting('${t.name}',${t.count})">
+        <span>${highlight(t.name, q)}</span><span class="usage">${t.count.toLocaleString()} topics</span>
+      </div>`
+    ).join('');
+  }
+  const exact = GLOBAL_TAGS.find(t => t.name === q);
+  if (!exact && q.length > 1) {
+    html += `<div class="dropdown-section-label">Create new</div>
+      <div class="dropdown-item create-new" onclick="createNew('${q}')">
+        <span>Create "<strong>${q}</strong>"</span><span class="usage">new</span>
+      </div>`;
+  }
+  dropdown.innerHTML = html || '<div class="dropdown-item" style="color:#8A9BB0;font-style:italic">No matches</div>';
+  dropdown.classList.add('open');
+});
+
+tagInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const q = tagInput.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (q && !selectedTags.find(t => t.name === q)) createNew(q);
+  }
+  if (e.key === 'Escape') dropdown.classList.remove('open');
+});
+
+document.addEventListener('click', e => { if (!e.target.closest('.autocomplete-wrap')) dropdown.classList.remove('open'); });
+
+function highlight(str, q) { return str.replace(new RegExp(`(${q})`, 'gi'), '<strong>$1</strong>'); }
+
+function selectExisting(name, count) {
+  selectedTags.push({name, count, isGlobal: true});
+  tagInput.value = ''; dropdown.classList.remove('open'); renderTags();
+}
+function createNew(name) {
+  selectedTags.push({name, count: null, isGlobal: false});
+  tagInput.value = ''; dropdown.classList.remove('open'); renderTags();
+}
+function removeTag(name) {
+  selectedTags = selectedTags.filter(t => t.name !== name); renderTags();
+}
+function renderTags() {
+  if (!selectedTags.length) {
+    tagsList.innerHTML = '<span class="empty-state">No tags added yet — search above or type a new tag and press Enter</span>';
+    return;
+  }
+  tagsList.innerHTML = selectedTags.map(t =>
+    `<span class="tag-chip ${t.isGlobal ? 'from-global' : ''}">${t.name}${t.count != null ? ` <span style="font-size:11px;opacity:.7">(${t.count.toLocaleString()})</span>` : ''}
+      <button onclick="removeTag('${t.name}')" aria-label="Remove ${t.name}"><i class="ti ti-x" style="font-size:12px"></i></button>
+    </span>`
+  ).join('');
+}
+
+/* ── Tab 2: Public tags table ── */
+let allTags = [], filteredTags = [], sortDir = 'desc', currentPage = 1, PER_PAGE = 25;
+let selectedRows = new Set();
+
+const RAW = [
+  ['journey-orchestrator',1723,['CS Platform','Onboarding']],
+  ['reports',1422,['Analytics','CS Platform']],
+  ['dashboards',1097,['Analytics']],
+  ['rules',1065,['CS Platform','Automation']],
+  ['timeline',945,['CS Platform']],
+  ['New Idea',939,[]],
+  ['Open',914,[]],
+  ['c360',742,['CS Platform','Onboarding']],
+  ['px',681,[]],
+  ['surveys',623,['Feedback']],
+  ['data-management',617,['Admin','CS Platform']],
+  ['360',551,[]],
+  ['rules-engine',533,['Automation']],
+  ['office-hours',528,['Community']],
+  ['cta',480,['CS Platform','Automation']],
+  ['engagements',433,['CS Platform']],
+  ['playbook',433,['CS Platform']],
+  ['success-plans',415,['CS Platform','Onboarding']],
+  ['analytics',388,['Analytics']],
+  ['Moderation',378,['Community']],
+  ['CS Ops',315,[]],
+  ['email',297,['Notifications']],
+  ['activation',283,['Onboarding']],
+  ['officehours',277,[]],
+  ['data-designer',276,['Admin']],
+];
+
+function initTable() {
+  allTags = RAW.map((r, i) => ({id: i, name: r[0], count: r[1], cats: r[2]}));
+  filteredTags = [...allTags]; renderTable();
+}
+
+function filterTable() {
+  const q = document.getElementById('globalSearch').value.toLowerCase();
+  filteredTags = allTags.filter(t => t.name.toLowerCase().includes(q));
+  currentPage = 1; clearSelection(); renderTable();
+}
+
+function sortBy(col) {
+  if (col === 'topics') { sortDir = sortDir === 'desc' ? 'asc' : 'desc'; filteredTags.sort((a, b) => sortDir === 'desc' ? b.count - a.count : a.count - b.count); }
+  currentPage = 1; renderTable();
+}
+
+function renderTable() {
+  const total = filteredTags.length, totalPg = Math.max(1, Math.ceil(total / PER_PAGE));
+  currentPage = Math.min(currentPage, totalPg);
+  const start = (currentPage - 1) * PER_PAGE, slice = filteredTags.slice(start, start + PER_PAGE);
+
+  document.getElementById('tagCount').textContent = total.toLocaleString();
+  document.getElementById('rangeLabel').textContent = `${start + 1}–${Math.min(start + PER_PAGE, total)} of ${total.toLocaleString()} results`;
+  document.getElementById('pgInput').value = currentPage;
+  document.getElementById('totalPages').textContent = totalPg;
+
+  // Pagination disabled states via classList (spans don't have .disabled property)
+  document.getElementById('prevBtn').classList.toggle('disabled', currentPage <= 1);
+  document.getElementById('firstBtn').classList.toggle('disabled', currentPage <= 1);
+  document.getElementById('nextBtn').classList.toggle('disabled', currentPage >= totalPg);
+  document.getElementById('lastBtn').classList.toggle('disabled', currentPage >= totalPg);
+
+  // Sort icon
+  document.getElementById('th-topics').querySelector('.sort-icon').className =
+    `ti ti-arrow-${sortDir === 'desc' ? 'down' : 'up'} sort-icon`;
+
+  const body = document.getElementById('tagsBody');
+  body.innerHTML = slice.map(t => `
+    <tr class="${selectedRows.has(t.id) ? 'is-selected' : ''}" id="row-${t.id}">
+      <td class="col-checkbox"><input type="checkbox" ${selectedRows.has(t.id) ? 'checked' : ''} onchange="toggleRow(${t.id},this)"></td>
+      <td class="col-m-big" style="font-weight:500">${t.name}</td>
+      <td class="col-s-right">${t.count.toLocaleString()}</td>
+      <td class="col-m-flexible">${t.cats.length
+        ? t.cats.map(c => `<span class="cat-badge">${c}</span>`).join('')
+        : '<span class="cat-badge unassigned"><i class="ti ti-alert-circle" style="font-size:11px;margin-right:3px;vertical-align:-1px"></i>Unassigned</span>'
+      }</td>
+      <td style="white-space:nowrap">
+        <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button>
+        <button class="button-control-new button-control-new--small button-control-new--secondary button-control-new--danger" type="button" onclick="deleteSingle(${t.id})" style="margin-left:4px"><div><div><span class="button-control__title-text">Remove</span></div></div></button>
+      </td>
+    </tr>`).join('');
+
+  document.getElementById('selectAll').checked = slice.length > 0 && slice.every(t => selectedRows.has(t.id));
+  updateBulkBar();
+}
+
+function toggleRow(id, cb) {
+  cb.checked ? selectedRows.add(id) : selectedRows.delete(id);
+  document.getElementById('row-' + id)?.classList.toggle('is-selected', cb.checked);
+  updateBulkBar();
+  const slice = filteredTags.slice((currentPage - 1) * PER_PAGE, (currentPage - 1) * PER_PAGE + PER_PAGE);
+  document.getElementById('selectAll').checked = slice.every(t => selectedRows.has(t.id));
+}
+
+function toggleAll(cb) {
+  const slice = filteredTags.slice((currentPage - 1) * PER_PAGE, (currentPage - 1) * PER_PAGE + PER_PAGE);
+  slice.forEach(t => { cb.checked ? selectedRows.add(t.id) : selectedRows.delete(t.id); });
+  renderTable();
+}
+
+function clearSelection() { selectedRows.clear(); renderTable(); }
+
+function updateBulkBar() {
+  const n = selectedRows.size;
+  document.getElementById('bulkBar').classList.toggle('visible', n > 0);
+  document.getElementById('bulkLabel').textContent = `${n} tag${n !== 1 ? 's' : ''} selected`;
+}
+
+function deleteSingle(id) {
+  allTags = allTags.filter(t => t.id !== id);
+  filteredTags = filteredTags.filter(t => t.id !== id);
+  selectedRows.delete(id); renderTable();
+}
+
+function bulkDelete() {
+  allTags = allTags.filter(t => !selectedRows.has(t.id));
+  filteredTags = filteredTags.filter(t => !selectedRows.has(t.id));
+  selectedRows.clear(); renderTable();
+}
+
+function openMergeModal() {
+  if (selectedRows.size < 2) { alert('Select at least 2 tags to merge.'); return; }
+  const names = [...selectedRows].map(id => allTags.find(t => t.id === id)?.name).filter(Boolean);
+  document.getElementById('mergingTags').innerHTML = names.map(n => `<span class="modal-tag">${n}</span>`).join('');
+  document.getElementById('mergeTarget').value = names[0] || '';
+  document.getElementById('mergeModal').classList.add('open');
+}
+
+function closeMergeModal() { document.getElementById('mergeModal').classList.remove('open'); }
+
+function confirmMerge() {
+  const target = document.getElementById('mergeTarget').value.trim();
+  if (!target) { alert('Enter a canonical tag name.'); return; }
+  const ids = [...selectedRows];
+  const totalCount = ids.reduce((s, id) => { const t = allTags.find(x => x.id === id); return s + (t ? t.count : 0); }, 0);
+  allTags = allTags.filter(t => !ids.includes(t.id));
+  filteredTags = filteredTags.filter(t => !ids.includes(t.id));
+  const newId = Date.now();
+  const merged = {id: newId, name: target, count: totalCount, cats: []};
+  allTags.unshift(merged); filteredTags.unshift(merged);
+  selectedRows.clear(); closeMergeModal(); renderTable();
+}
+
+function changePage(d) {
+  const totalPg = Math.max(1, Math.ceil(filteredTags.length / PER_PAGE));
+  if (d < 0 && currentPage <= 1) return;
+  if (d > 0 && currentPage >= totalPg) return;
+  currentPage += d; renderTable();
+}
+function goToPage(v) {
+  currentPage = Math.max(1, Math.min(parseInt(v) || 1, Math.ceil(filteredTags.length / PER_PAGE)));
+  renderTable();
+}
+
+initTable();
+</script>
+</body>
+</html>
