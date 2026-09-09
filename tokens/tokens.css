@@ -157,5 +157,5 @@ body {
   font-family: var(--hz-font-family);
   font-size: var(--hz-font-size-base);
   color: var(--hz-text-color-primary);
-  background-color: var(--hz-control-bg-base);
+  background-color: #fff;
 }
