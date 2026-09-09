@@ -676,7 +676,7 @@ code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-famil
 .dirty-section__textarea { width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 12px; font-size: 14px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); min-height: 96px; resize: vertical; }
 /* Type B: horizontal — info (label+desc) left, control right */
 .dirty-section__field-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
-.dirty-section__field-row + .dirty-section__field-row { padding-top: 24px; border-top: 1px solid var(--hz-border-color-light); }
+.dirty-section__field-row + .dirty-section__field-row { padding-top: 24px; }
 .dirty-section__field-info { flex: 1; }
 .dirty-section__control { flex: none; }
 /* Per-section save row */

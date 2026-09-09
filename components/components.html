@@ -681,36 +681,19 @@
   <label class="opt-row"><input type="radio" name="r1"> 60 minutes</label>
   <label class="opt-row"><input type="radio" name="r1" checked> Unlimited time</label>
 
-  <div class="label">Toggle switch (.control-switcher) — on / off — live-verified</div>
-  <div class="row" style="gap:16px; align-items:center;">
-    <div class="control-switcher on">
-      <a class="toggle" href="#" onclick="return false;">
-        <svg viewBox="0 0 14 14"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-      </a>
-      <a class="ui-on" href="#" onclick="return false;">
-        <svg viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
-      </a>
-      <a class="ui-off" href="#" onclick="return false;">
-        <svg viewBox="0 0 10 10"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
-      </a>
-    </div>
-    <span style="font-size:12px; color:var(--hz-text-color-secondary);">ON</span>
-    <div class="control-switcher off">
-      <a class="toggle" href="#" onclick="return false;">
-        <svg viewBox="0 0 14 14"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-      </a>
-      <a class="ui-on" href="#" onclick="return false;">
-        <svg viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
-      </a>
-      <a class="ui-off" href="#" onclick="return false;">
-        <svg viewBox="0 0 10 10"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
-      </a>
-    </div>
-    <span style="font-size:12px; color:var(--hz-text-color-secondary);">OFF</span>
+  <div class="label">Toggle (.ds-toggle) — Figma node 16412-3227 — regular &amp; small</div>
+  <div class="row" style="gap:24px; align-items:center; flex-wrap:wrap;">
+    <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span><span class="ds-toggle__label">Off</span></label>
+    <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span><span class="ds-toggle__label">On</span></label>
+    <label class="ds-toggle"><input type="checkbox" disabled><span class="ds-toggle__track"></span><span class="ds-toggle__label">Disabled</span></label>
+    <label class="ds-toggle ds-toggle--small"><input type="checkbox"><span class="ds-toggle__track"></span><span class="ds-toggle__label">Small off</span></label>
+    <label class="ds-toggle ds-toggle--small"><input type="checkbox" checked><span class="ds-toggle__track"></span><span class="ds-toggle__label">Small on</span></label>
   </div>
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">
-    Real class <code class="tag">.control-switcher</code> (ON: add <code class="tag">.on</code>, OFF: add <code class="tag">.off</code>). 51×24px. Three-element sliding panel — <code class="tag">.toggle</code> (white thumb, 26×24px, 2px radius, slides left/right), <code class="tag">.ui-on</code> (blue #0369E9, left segment), <code class="tag">.ui-off</code> (gray #D5D9DE, right segment).
-    <strong>Figma marks this as "Legacy Toggle (To Deprecate)"</strong> — future Horizon toggle: 40×20px pill, round thumb, ON=#12995B. For now, use this for all live-matching prototypes.
+    Use <code class="tag">&lt;label class="ds-toggle"&gt;&lt;input type="checkbox"&gt;&lt;span class="ds-toggle__track"&gt;&lt;/span&gt;&lt;span class="ds-toggle__label"&gt;Label&lt;/span&gt;&lt;/label&gt;</code>.
+    Regular: 40×20px, gap 12px. Small (<code class="tag">.ds-toggle--small</code>): 32×16px, gap 8px.
+    Unchecked: dark <code class="tag">#3C4A57</code> track. Checked: green <code class="tag">#12995B</code>. Disabled: <code class="tag">#D5D9DE</code>.
+    Label is optional — omit <code class="tag">.ds-toggle__label</code> when used inline in a <code class="tag">.dirty-section__field-row</code>.
   </p>
 
   <div class="label" style="margin-top:16px;">Feat-toggle (.feat-toggle) — settings AI pages, segmented on/off</div>
