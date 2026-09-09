@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ranks — Gamification</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/components.css">
+<style>
+  .col-drag { width: 32px; padding: 0 8px; color: #C8C9C9; }
+  .col-drag svg { display: block; }
+  .col-id { width: 56px; text-align: right; }
+  th.col-id, td.col-id { padding-right: 16px; }
+</style>
+</head>
+<body data-section="gamification" data-active-item="Ranks">
+  <script src="../components/side-nav.js"></script>
+
+  <div class="main">
+    <script src="../components/topbar.js"></script>
+
+    <!-- Success banner -->
+    <div class="page-banner page-banner--success" id="successBanner">
+      The rebuild has completed successfully.
+      <button class="page-banner__dismiss" onclick="document.getElementById('successBanner').remove()" aria-label="Dismiss">✕</button>
+    </div>
+
+    <div class="control-header">
+      <div class="control-header__row">
+        <h2 class="control-header__title">Ranks</h2>
+        <div class="control-header__buttons">
+          <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">
+            <div><div><span class="button-control__title-text">Rebuild</span></div></div>
+          </button>
+          <button class="button-control-new button-control-new--medium button-control-new--primary" type="button">
+            <div><div><span class="button-control__title-text">Add rank</span></div></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main class="content">
+
+      <div class="table-card">
+
+        <div class="action-bar">
+          <div class="batch-actions"></div>
+          <div class="normal-actions">
+            <button class="button-control-new button-control-new--medium button-control-new--secondary" type="button">
+              <div><div><span class="button-control__title-text">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9.76618 2.23335C8.79952 1.26669 7.47285 0.666687 5.99952 0.666687C3.05285 0.666687 0.672852 3.05335 0.672852 6.00002C0.672852 8.94669 3.05285 11.3334 5.99952 11.3334C8.48619 11.3334 10.5595 9.63335 11.1529 7.33335H9.76618C9.21952 8.88669 7.73952 10 5.99952 10C3.79285 10 1.99952 8.20669 1.99952 6.00002C1.99952 3.79335 3.79285 2.00002 5.99952 2.00002C7.10618 2.00002 8.09285 2.46002 8.81285 3.18669L6.66618 5.33335H11.3329V0.666687L9.76618 2.23335Z" fill="currentColor"/></svg>
+                Refresh
+              </span></div></div>
+            </button>
+            <div class="pagination">
+              <span class="pagination__info">1–10 of 10 results</span>
+              <span class="pagination__item disabled">First</span>
+              <span class="pagination__item chevron disabled"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z"/></svg></span>
+              <span class="pagination__item">Page <input class="pagination__page-box" type="text" value="1"> of <strong>1</strong></span>
+              <span class="pagination__item chevron disabled"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41L13.17 12L8.59 16.59L10 18L16 12L10 6Z"/></svg></span>
+              <span class="pagination__item disabled">Last</span>
+              <span class="pagination__rows"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10L12 15L17 10H7Z"/></svg>25 rows</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="dt">
+            <thead>
+              <tr>
+                <th class="col-drag"></th>
+                <th class="col-m-big"><span class="th-cell">Ranks</span></th>
+                <th class="col-id"><span class="th-cell" style="justify-content:flex-end;">ID#</span></th>
+                <th class="col-xs-right"><span class="th-cell" style="justify-content:flex-end;">Users</span></th>
+                <th class="col-xs-right"><span class="th-cell" style="justify-content:flex-end;">Roles</span></th>
+                <th class="col-xs-right"><span class="th-cell" style="justify-content:flex-end;">Replies</span></th>
+                <th class="col-xs-right"><span class="th-cell" style="justify-content:flex-end;">Topics</span></th>
+                <th class="col-xs-right"><span class="th-cell" style="justify-content:flex-end;">Answers</span></th>
+                <th class="col-s-right"><span class="th-cell" style="justify-content:flex-end;">Likes received</span></th>
+                <th class="col-s-right"><span class="th-cell" style="justify-content:flex-end;">Likes given</span></th>
+                <th class="col-xs-right"><span class="th-cell" style="justify-content:flex-end;">Logins</span></th>
+                <th class="col-xs-right"><span class="th-cell" style="justify-content:flex-end;">Age</span></th>
+                <th class="col-xs-right"><span class="th-cell" style="justify-content:flex-end;">Points</span></th>
+                <th><span class="th-cell">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- drag handle SVG reused per row -->
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">Community Manager</td>
+                <td class="col-id">1</td>
+                <td class="col-xs-right">7</td>
+                <td class="col-xs-right"><a href="#">3</a></td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">Employee</td>
+                <td class="col-id">2</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right"><a href="#">1</a></td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">Genius</td>
+                <td class="col-id">3</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">50</td>
+                <td class="col-xs-right">5</td>
+                <td class="col-xs-right">10</td>
+                <td class="col-s-right">10</td>
+                <td class="col-s-right">5</td>
+                <td class="col-xs-right">100</td>
+                <td class="col-xs-right">100000</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">Brainy</td>
+                <td class="col-id">4</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">10</td>
+                <td class="col-xs-right">2</td>
+                <td class="col-xs-right">5</td>
+                <td class="col-s-right">2</td>
+                <td class="col-s-right">3</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">Inspiring</td>
+                <td class="col-id">5</td>
+                <td class="col-xs-right">1</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">5</td>
+                <td class="col-xs-right">1</td>
+                <td class="col-xs-right">1</td>
+                <td class="col-s-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">Known Participant</td>
+                <td class="col-id">6</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">10</td>
+                <td class="col-xs-right">2</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">Participating Frequently</td>
+                <td class="col-id">7</td>
+                <td class="col-xs-right">1</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">5</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">New Participant</td>
+                <td class="col-id">8</td>
+                <td class="col-xs-right">4</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">1</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">New Participant</td>
+                <td class="col-id">9</td>
+                <td class="col-xs-right">1</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">1</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+              <tr>
+                <td class="col-drag"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="2" width="4" height="2" rx="1"/><rect x="8" y="2" width="4" height="2" rx="1"/><rect x="2" y="6" width="4" height="2" rx="1"/><rect x="8" y="6" width="4" height="2" rx="1"/><rect x="2" y="10" width="4" height="2" rx="1"/><rect x="8" y="10" width="4" height="2" rx="1"/></svg></td>
+                <td class="col-m-big">New Member</td>
+                <td class="col-id">10</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-s-right">0</td>
+                <td class="col-xs-right">1</td>
+                <td class="col-xs-right">0</td>
+                <td class="col-xs-right">0</td>
+                <td><button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.table-scroll -->
+      </div><!-- /.table-card -->
+
+    </main>
+  </div>
+
+  <script src="../interactions/design-system.js"></script>
+</body>
+</html>
