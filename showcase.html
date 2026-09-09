@@ -63,35 +63,35 @@
   </div>
 
   <!-- ══════════════════════════════════════════════════
-       TOGGLE SWITCH
+       TOGGLE
   ═══════════════════════════════════════════════════ -->
   <div class="sc-section">
-    <div class="sc-section-title">Toggle Switch — .control-switcher</div>
+    <div class="sc-section-title">Toggle — .ds-toggle (Figma 16412-3227)</div>
     <div class="sc-block">
-      <div class="sc-row">
+      <div class="sc-row" style="gap:32px; align-items:flex-end; flex-wrap:wrap;">
         <div>
-          <div class="sc-label">ON state</div>
-          <div class="control-switcher on" role="switch" aria-checked="true">
-            <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
-            <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
-            <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
-          </div>
+          <div class="sc-label">Off</div>
+          <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span></label>
         </div>
         <div>
-          <div class="sc-label">OFF state</div>
-          <div class="control-switcher off" role="switch" aria-checked="false">
-            <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
-            <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
-            <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
-          </div>
+          <div class="sc-label">On</div>
+          <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span></label>
         </div>
         <div>
-          <div class="sc-label">Interactive (click to toggle)</div>
-          <div class="control-switcher off js-toggle" role="switch" aria-checked="false">
-            <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
-            <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
-            <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
-          </div>
+          <div class="sc-label">Disabled off</div>
+          <label class="ds-toggle"><input type="checkbox" disabled><span class="ds-toggle__track"></span></label>
+        </div>
+        <div>
+          <div class="sc-label">Disabled on</div>
+          <label class="ds-toggle"><input type="checkbox" checked disabled><span class="ds-toggle__track"></span></label>
+        </div>
+        <div>
+          <div class="sc-label">With label</div>
+          <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span><span class="ds-toggle__label">Enabled</span></label>
+        </div>
+        <div>
+          <div class="sc-label">Small</div>
+          <label class="ds-toggle ds-toggle--small"><input type="checkbox" checked><span class="ds-toggle__track"></span><span class="ds-toggle__label">On</span></label>
         </div>
       </div>
     </div>
@@ -209,11 +209,7 @@
               <p class="dirty-section__field-description">Info on left, control on right. Used for toggles and dropdowns.</p>
             </div>
             <div class="dirty-section__control">
-              <div class="control-switcher on js-toggle" role="switch" aria-checked="true">
-                <a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="4.5" width="10" height="1.5" rx=".5"/><rect x="3" y="7.25" width="10" height="1.5" rx=".5"/><rect x="3" y="10" width="10" height="1.5" rx=".5"/></svg></a>
-                <a class="ui-on"  href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,8.5 6,12 13,4.5"/></svg></a>
-                <a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></a>
-              </div>
+              <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span></label>
             </div>
           </div>
           <div class="dirty-section__save-row">
