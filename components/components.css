@@ -220,13 +220,14 @@ body { display: flex; font-family: var(--hz-font-family); }
 .topbar {
   height: 48px; flex: 0 0 48px;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 20px;
-  background: transparent;
-  font-size: var(--hz-font-size-base);
-  color: var(--hz-text-color-primary);
+  padding: 0 40px;
+  background: #fff;
+  border-bottom: 1px solid #D5D9DE;
+  font-size: 14px;
+  color: #181F26;
 }
-.topbar__greeting { display: flex; align-items: center; gap: 6px; }
-.topbar__actions { display: flex; align-items: center; gap: 16px; color: var(--hz-icon-color-normal); }
+.topbar__greeting { display: flex; align-items: center; gap: 0; }
+.topbar__actions { display: flex; align-items: center; gap: 24px; color: #181F26; }
 .avatar {
   width: 24px; height: 24px; border-radius: 50%;
   background: var(--hz-primary-color); color: #fff;
