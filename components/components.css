@@ -120,7 +120,7 @@ body { display: flex; font-family: var(--hz-font-family); }
   border: 1px solid transparent;
 }
 .btn-new--medium { height: 40px; padding: 8px 16px; font-size: 14px; }
-.btn-new--small  { height: 32px; padding: 0 12px; font-size: 12px; }
+.btn-new--small  { height: 32px; padding: 2px 8px; font-size: 12px; }
 .btn-new--secondary { background: #fff; color: var(--hz-text-color-primary); border-color: var(--hz-border-color-base); }
 .btn-new--secondary:hover { background: var(--hz-bg-color-base-hover); }
 .btn-new--primary { background: var(--hz-primary-color); color: #fff; border-color: var(--hz-primary-color); }
@@ -286,11 +286,11 @@ input[type="checkbox"], input[type="radio"] { width: 14px; height: 14px; accent-
 .metric__count { font-size: 32px; font-weight: 600; margin: 4px 0; }
 .metric__delta { font-size: 14px; color: var(--hz-text-color-secondary); }
 
-/* Data table — Figma-verified 2026-09-09 (node 19624:3598) */
+/* Data table — live-verified: NO border-bottom on rows; columns separated by inset box-shadow */
 table.dt { border-collapse: collapse; width: 100%; font-size: 14px; }
-table.dt th { text-align: left; padding: 8px 12px; height: 54px; font-weight: 700; border-bottom: 1px solid var(--hz-border-color-base); }
-table.dt td { padding: 8px 12px; vertical-align: middle; border-bottom: 1px solid var(--hz-border-color-base); }
-table.dt tbody tr:last-child td { border-bottom: none; }
+table.dt th { text-align: left; padding: 8px 12px; height: 54px; font-weight: 700; box-shadow: inset -1px 0 0 var(--hz-border-color-base); }
+table.dt td { padding: 8px 12px; vertical-align: middle; box-shadow: inset -1px 0 0 var(--hz-border-color-base); }
+table.dt th:last-child, table.dt td:last-child { box-shadow: none; }
 table.dt tr.row--selected td { background: #F5F9FE; }
 .avatar-sm { width: 24px; height: 24px; border-radius: 50%; background: var(--hz-primary-color); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; margin-right: 8px; vertical-align: middle; }
 
@@ -809,3 +809,24 @@ h2.control-header__title,
 .ts-card[data-collapsed="true"] > :not(.ts-head):not(.ts-strip):not(.ts-busy) { display: none; }
 .ts-card[data-collapsed="true"] .ts-strip { display: flex; }
 .ts-card[data-expanded="false"] .ts-body p:nth-of-type(n+2) { display: none; }
+
+/* ===== KEY-VALUE LIST — read-only metadata rows (live-verified on Moderate Topic "Overview" panel) ===== */
+.kv-list { max-width: 280px; font-size: 14px; }
+.kv-list__row { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; }
+.kv-list__label { color: var(--hz-text-color-secondary); flex: none; }
+.kv-list__value { text-align: right; }
+
+/* ===== RADIO OPTION CARD — bordered card group for mutually-exclusive options ===== */
+/* Seen on: Badge type, Header/Footer type, Event registration, Event visibility */
+.radio-opt-card { border: 1px solid var(--hz-border-color-base); border-radius: 4px; overflow: hidden; }
+.radio-opt-card__option { display: flex; gap: 10px; padding: 16px; border-bottom: 1px solid var(--hz-border-color-light); cursor: pointer; }
+.radio-opt-card__option:last-child { border-bottom: none; }
+.radio-opt-card__option input[type="radio"] { margin-top: 2px; flex: none; }
+.radio-opt-card__title { display: block; font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.radio-opt-card__desc  { font-size: 13px; color: var(--hz-text-color-secondary); }
+
+/* ===== COLOR TRIGGER — swatch + hex + chevron row (opens native color picker) ===== */
+/* Real class: .default-header_colors-preview / .color-selector_selected-color */
+.color-trigger { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 8px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; background: #fff; cursor: pointer; font-size: 12px; font-family: var(--hz-font-family); }
+.color-trigger__swatch { width: 24px; height: 24px; border: 1px solid #C7C7C7; flex: none; }
+.color-trigger__hex    { color: var(--hz-text-color-primary); min-width: 52px; }

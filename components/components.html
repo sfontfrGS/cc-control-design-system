@@ -41,7 +41,7 @@
     border: 1px solid transparent;
   }
   .btn-new--medium { height: 40px; padding: 8px 16px; font-size: 14px; }
-  .btn-new--small { height: 32px; padding: 0 12px; font-size: 12px; }
+  .btn-new--small { height: 32px; padding: 2px 8px; font-size: 12px; }
   .btn-new--secondary { background: #fff; color: var(--hz-text-color-primary); border-color: var(--hz-border-color-base); }
   .btn-new--secondary:hover { background: var(--hz-bg-color-base-hover); }
   .btn-new--primary { background: var(--hz-primary-color); color: #fff; border-color: var(--hz-primary-color); }
@@ -243,8 +243,8 @@
   .bulk-toolbar__actions { display: flex; gap: 12px; }
 
   /* pagination */
-  .pagination { display: flex; align-items: center; gap: 4px; margin-top: 16px; font-size: 14px; color: var(--hz-text-color-primary); }
-  .pagination__info { font-weight: 700; margin-right: 12px; }
+  .pagination { display: flex; align-items: center; gap: 16px; margin-top: 16px; font-size: 14px; color: var(--hz-text-color-primary); }
+  .pagination__info { font-weight: 600; }
   .pagination__item { display: flex; align-items: center; height: 32px; padding: 0 8px; color: var(--hz-text-color-primary); }
   .pagination__item.disabled { color: #959898; cursor: default; }
   .pagination__item.chevron { cursor: pointer; }
@@ -821,10 +821,10 @@
 
 <section>
   <h2>Key-value list <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Moderate Topic ("Overview" panel)</span></h2>
-  <div style="max-width:280px; font-size:14px;">
-    <div style="display:flex; justify-content:space-between; gap:12px; padding:6px 0;"><span style="color:var(--hz-text-color-secondary); flex:none;">Type:</span><span style="text-align:right;">Articles</span></div>
-    <div style="display:flex; justify-content:space-between; gap:12px; padding:6px 0;"><span style="color:var(--hz-text-color-secondary); flex:none;">Category:</span><span style="text-align:right;">Company announcements</span></div>
-    <div style="display:flex; justify-content:space-between; gap:12px; padding:6px 0;"><span style="color:var(--hz-text-color-secondary); flex:none;">Views:</span><span style="text-align:right;">0</span></div>
+  <div class="kv-list">
+    <div class="kv-list__row"><span class="kv-list__label">Type:</span><span class="kv-list__value">Articles</span></div>
+    <div class="kv-list__row"><span class="kv-list__label">Category:</span><span class="kv-list__value">Company announcements</span></div>
+    <div class="kv-list__row"><span class="kv-list__label">Views:</span><span class="kv-list__value">0</span></div>
   </div>
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Plain flex row, label in secondary gray on the left, value right-aligned on the right. No real class name captured (generic layout, not a named component) — safe to reuse freely for read-only metadata lists.</p>
 </section>
@@ -1011,13 +1011,11 @@
 
 <section>
   <h2>Color picker <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, verified on Customization ▸ Header</span></h2>
-  <div style="display:inline-flex; align-items:center; gap:0; border:0;">
-    <span style="display:inline-flex; align-items:center; height:24px;">
-      <span style="width:24px; height:24px; border:1px solid #C7C7C7; background:#5050D6; display:inline-block;"></span>
-      <span style="font-size:12px; color:#34383A; margin-left:8px;">#5050d6</span>
-    </span>
-    <button class="btn-new btn-new--small" style="margin-left:8px; padding:0 6px;">▾</button>
-  </div>
+  <button class="color-trigger">
+    <span class="color-trigger__swatch" style="background:#5050D6;"></span>
+    <span class="color-trigger__hex">#5050d6</span>
+    <span>▾</span>
+  </button>
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Real classes: <code class="tag">.default-header_colors-preview</code> (24×24 swatch, 1px <code class="tag">#C7C7C7</code> border, square — no radius) + <code class="tag">.color-selector_selected-color</code> (hex text, 12px) + a chevron-down icon button that opens the actual picker popup (not captured in detail — treat as a standard color-picker popover, same family as flatpickr below, don't hand-build the hue/saturation grid).</p>
 </section>
 
@@ -1062,14 +1060,14 @@
 
 <section>
   <h2>Radio option card <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new, recurring pattern across Header/Footer type, Badge type, Event registration/visibility</span></h2>
-  <div style="max-width:400px; border:1px solid var(--hz-border-color-base); border-radius:4px; overflow:hidden;">
-    <label style="display:flex; gap:10px; padding:16px; border-bottom:1px solid var(--hz-border-color-light); cursor:pointer;">
-      <input type="radio" name="rc" checked style="margin-top:2px;">
-      <span><strong style="display:block; font-size:14px;">Manual badge</strong><span style="font-size:13px; color:var(--hz-text-color-secondary);">Manual badges can only be awarded manually in control or via API</span></span>
+  <div class="radio-opt-card" style="max-width:400px;">
+    <label class="radio-opt-card__option">
+      <input type="radio" name="rc" checked>
+      <span><strong class="radio-opt-card__title">Manual badge</strong><span class="radio-opt-card__desc">Manual badges can only be awarded manually in control or via API</span></span>
     </label>
-    <label style="display:flex; gap:10px; padding:16px; cursor:pointer;">
-      <input type="radio" name="rc" style="margin-top:2px;">
-      <span><strong style="display:block; font-size:14px;">Automatic badge</strong><span style="font-size:13px; color:var(--hz-text-color-secondary);">Automatic badges are awarded based on rules you configure about user activity</span></span>
+    <label class="radio-opt-card__option">
+      <input type="radio" name="rc">
+      <span><strong class="radio-opt-card__title">Automatic badge</strong><span class="radio-opt-card__desc">Automatic badges are awarded based on rules you configure about user activity</span></span>
     </label>
   </div>
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Seen repeatedly: Header/Footer type selection, Badge type, Event registration type (Community/External), Event visibility (Public/Group). Bordered card, each option full-width with radio + bold title + gray description, divider between options, selecting one may reveal additional fields below the group (e.g. Header's SSI URL field, Event's "Choose group" field) — same reveal mechanism as the toggle-reveals-subform pattern above, just triggered by radio instead of switch.</p>
