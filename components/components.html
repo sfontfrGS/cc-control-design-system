@@ -80,8 +80,9 @@
   .modal__body { font-size: 14px; color: var(--hz-text-color-primary); margin-bottom: 20px; }
   .modal__footer { display: flex; justify-content: flex-end; gap: 12px; }
 
-  /* toast */
-  .toast { display: inline-flex; align-items: center; gap: 8px; background: #3CB54A; color: #fff; padding: 12px; border-radius: 2px; font-size: 14px; }
+  /* toast — live-verified: toastr.js, top-right fixed */
+  .toast-container { position: fixed; top: 55px; right: 12px; z-index: 999999; width: 300px; display: flex; flex-direction: column; gap: 8px; }
+  .toast { width: 300px; background: #51A351; color: #fff; padding: 15px 15px 15px 50px; border-radius: 3px; box-shadow: rgba(0,0,0,.3) 0 1px 1px; font-size: 12px; font-weight: 400; }
   .toast--error { background: var(--hz-error-color); }
 
   /* kebab dropdown menu */
@@ -185,19 +186,7 @@
   .opt-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 14px; }
   input[type="checkbox"], input[type="radio"] { width: 14px; height: 14px; accent-color: var(--hz-primary-color); }
 
-  /* toggle switch (.control-switcher) */
-  .switch { position: relative; width: 51px; height: 24px; display: inline-block; }
-  .switch__track { position: absolute; inset: 0; border-radius: 3px; display: flex; }
-  .switch__track.on { background: transparent; }
-  .switch__side { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; }
-  .switch__side.on-half { background: var(--hz-primary-color); border-radius: 3px 0 0 3px; }
-  .switch__side.off-half { background: var(--hz-border-color-base); color: #aeacac; border-radius: 0 3px 3px 0; }
-  .switch__knob {
-    position: absolute; top: 0; width: 26px; height: 24px; background: #fff;
-    border: 1px solid #aeacac; border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  }
-  .switch.is-on .switch__knob { left: 25px; }
-  .switch.is-off .switch__knob { left: 0; }
+  /* toggle switch — real class .control-switcher (defined in components.css) */
 
   /* segmented grant/deny icon-toggle (permission matrix) */
   .perm-toggle { display: inline-flex; border: 1px solid var(--hz-border-color-base); border-radius: 4px; overflow: hidden; }
@@ -855,7 +844,7 @@
         <p style="font-size:14px; font-weight:600; margin:0 0 4px;">Another field</p>
         <p style="font-size:14px; color:#3C4A57; margin:0;">Another description.</p>
       </div>
-      <span class="switch is-on"><span class="switch__track on"><span class="switch__side on-half">✓</span><span class="switch__side off-half">✕</span></span><span class="switch__knob"></span></span>
+      <div class="control-switcher on"><a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></a><a class="ui-on" href="#" onclick="return false;"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a><a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a></div>
     </div>
   </div>
 </section>
@@ -1105,7 +1094,7 @@
   <div style="max-width:360px;">
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
       <label style="font-size:14px; font-weight:600;">Send private message</label>
-      <span class="switch is-on"><span class="switch__track on"><span class="switch__side on-half">✓</span><span class="switch__side off-half">✕</span></span><span class="switch__knob"></span></span>
+      <div class="control-switcher on"><a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></a><a class="ui-on" href="#" onclick="return false;"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a><a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a></div>
     </div>
     <div style="padding-left:8px; border-left:2px solid var(--hz-border-color-light);">
       <div class="field"><label>From</label><div class="select-trigger">Choose a user ▾</div></div>
