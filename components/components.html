@@ -186,7 +186,7 @@
   .opt-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 14px; }
   input[type="checkbox"], input[type="radio"] { width: 14px; height: 14px; accent-color: var(--hz-primary-color); }
 
-  /* toggle switch — real class .control-switcher (defined in components.css) */
+  /* toggle — use .ds-toggle (defined in components.css) */
 
   /* segmented grant/deny icon-toggle (permission matrix) */
   .perm-toggle { display: inline-flex; border: 1px solid var(--hz-border-color-base); border-radius: 4px; overflow: hidden; }
@@ -696,6 +696,30 @@
     Label is optional — omit <code class="tag">.ds-toggle__label</code> when used inline in a <code class="tag">.dirty-section__field-row</code>.
   </p>
 
+  <div class="label" style="margin-top:24px;">Tooltip — <code class="tag">[data-tooltip]</code> attribute &amp; <code class="tag">.ds-tooltip-wrap</code> (Figma 17494-24506)</div>
+  <div class="row" style="gap:32px; align-items:flex-end; flex-wrap:wrap; margin-top:48px;">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <span data-tooltip="This is a tooltip" style="cursor:default; font-size:14px; border-bottom:1px dashed var(--hz-border-color-base);">Hover me (top)</span>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <span data-tooltip="Appears below the trigger" data-tooltip-pos="bottom" style="cursor:default; font-size:14px; border-bottom:1px dashed var(--hz-border-color-base);">Hover me (bottom)</span>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <span class="ds-tooltip-wrap" style="cursor:default; font-size:14px;">
+        <span style="border-bottom:1px dashed var(--hz-border-color-base);">Rich tooltip</span>
+        <span class="ds-tooltip" style="width:180px; text-align:left;">Use <strong style="color:#fff;">.ds-tooltip-wrap</strong> when you need multi-line or formatted content.</span>
+      </span>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <button class="button-control-new button-control-new--small button-control-new--secondary" data-tooltip="Save your changes before leaving">Save</button>
+    </div>
+  </div>
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:40px;">
+    Simple: add <code class="tag">data-tooltip="…"</code> to any element — tooltip appears above on hover. Use <code class="tag">data-tooltip-pos="bottom"</code> to flip below.<br>
+    Rich: wrap trigger + <code class="tag">&lt;span class="ds-tooltip"&gt;…&lt;/span&gt;</code> in <code class="tag">&lt;span class="ds-tooltip-wrap"&gt;</code> for multi-line content.<br>
+    Both: <code class="tag">#25313B</code> bg · white 12px · 4px 8px padding · 4px radius · max-width 240px.
+  </p>
+
   <div class="label" style="margin-top:16px;">Feat-toggle (.feat-toggle) — settings AI pages, segmented on/off</div>
   <div class="row" style="gap:16px; align-items:center;">
     <div class="feat-toggle">
@@ -1156,18 +1180,18 @@
 </section>
 
 <section id="toggle-subform">
-  <h2>Toggle that reveals a sub-form <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— new pattern, verified on Gamification ▸ Add Badge</span></h2>
+  <h2>Toggle that reveals a sub-form <span style="font-size:12px; font-weight:400; color:var(--hz-text-color-secondary);">— verified on Gamification ▸ Add Badge</span></h2>
   <div style="max-width:360px;">
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-      <label style="font-size:14px; font-weight:600;">Send private message</label>
-      <div class="control-switcher on"><a class="toggle" href="#" onclick="return false;"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M2 7l4 4 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></a><a class="ui-on" href="#" onclick="return false;"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a><a class="ui-off" href="#" onclick="return false;"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a></div>
+      <label style="font-size:14px; font-weight:600;" for="tog-subform">Send private message</label>
+      <label class="ds-toggle"><input type="checkbox" id="tog-subform" checked onchange="document.getElementById('subform-body').style.display=this.checked?'block':'none'"><span class="ds-toggle__track"></span></label>
     </div>
-    <div style="padding-left:8px; border-left:2px solid var(--hz-border-color-light);">
+    <div id="subform-body" style="padding-left:8px; border-left:2px solid var(--hz-border-color-light);">
       <div class="field"><label>From</label><div class="select-trigger">Choose a user ▾</div></div>
       <div class="field" style="margin-bottom:0;"><label>Message</label><textarea class="textarea"></textarea></div>
     </div>
   </div>
-  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Not a new toggle component — the same <code class="tag">.control-switcher</code> switch, wired via <code class="tag">data-toggle-inputs</code> to show/hide a sibling block of fields. Reuse this pattern anywhere a setting is "off by default, configure more when turned on" (e.g. notification settings) instead of always showing the sub-fields disabled.</p>
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">Use a <code class="tag">ds-toggle</code> whose <code class="tag">onchange</code> shows/hides a sibling block of fields. Reuse this pattern anywhere a setting is "off by default, configure more when turned on" (e.g. notification settings) instead of always showing the sub-fields disabled.</p>
 </section>
 
 <section id="date-picker">

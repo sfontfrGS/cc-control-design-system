@@ -422,7 +422,7 @@ body { display: flex; font-family: var(--hz-font-family); }
 .opt-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 14px; }
 input[type="checkbox"], input[type="radio"] { width: 14px; height: 14px; accent-color: var(--hz-primary-color); }
 
-/* Toggle switch — removed, see .control-switcher below */
+/* Toggle switch — replaced by .ds-toggle (see above) */
 
 /* Permission toggle */
 .perm-toggle { display: inline-flex; border: 1px solid var(--hz-border-color-base); border-radius: 4px; overflow: hidden; }
@@ -596,45 +596,7 @@ code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-famil
 .btn-sm:hover { background: var(--hz-bg-color-base-hover); }
 .btn-sm svg { width: 16px; height: 16px; }
 
-/* ===== TOGGLE SWITCH — .control-switcher (live class names, live computed styles) ===== */
-/* Real HTML (from dchdesign-en.insided.com):
-   <div class="control-switcher on">
-     <a class="toggle" href="#">[handle icon]</a>
-     <a class="ui-on"  href="#">[checkmark icon]</a>
-     <a class="ui-off" href="#">[cross icon]</a>
-   </div>
-   Real product uses the insided icon font for icons.
-   Design system uses inline SVGs for portability (see template-settings.html).
-*/
-.control-switcher {
-  position: relative; display: inline-flex; align-items: center;
-  width: 51px; height: 24px; cursor: pointer; flex: none;
-}
-.control-switcher .ui-on {
-  position: relative; z-index: 1; flex: none;
-  width: 25px; height: 20px;
-  background: #0369E9; border-radius: 2px 0 0 2px;
-  display: flex; align-items: center; justify-content: center;
-}
-.control-switcher .ui-off {
-  position: absolute; left: 25px; top: 50%; transform: translateY(-50%);
-  width: 25px; height: 20px;
-  background: #D5D9DE; border-radius: 0 2px 2px 0;
-  display: flex; align-items: center; justify-content: center;
-}
-.control-switcher .toggle {
-  position: absolute; top: 0; z-index: 3;
-  width: 26px; height: 24px;
-  background: #fff; border: 1px solid #aeacac; border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.15); transition: left .1s;
-  display: flex; align-items: center; justify-content: center;
-  text-decoration: none;
-}
-.control-switcher.on  .toggle { left: 25px; }
-.control-switcher.off .toggle { left: 0; }
-.control-switcher .ui-on svg  { width: 10px; height: 10px; color: #fff; }
-.control-switcher .ui-off svg { width: 10px; height: 10px; color: #fff; }
-.control-switcher .toggle svg { width: 14px; height: 14px; color: #888; }
+/* .control-switcher removed — superseded by .ds-toggle (Figma 16412-3227) */
 
 /* ===== FEAT-TOGGLE — two-button segmented on/off control (settings pages) ===== */
 .feat-toggle { display: inline-flex; border: 1px solid var(--hz-border-color-base); border-radius: 6px; overflow: hidden; }
@@ -1052,3 +1014,65 @@ h2.control-header__title,
 .ds-toggle--small .ds-toggle__track::before { width: 10px; height: 10px; top: 3px; left: 3px; font-size: 6px; line-height: 10px; }
 .ds-toggle--small input:checked + .ds-toggle__track::before { transform: translateX(16px); }
 .ds-toggle--small .ds-toggle__label { font-size: 12px; line-height: 16px; }
+
+/* ===== TOOLTIP — [data-tooltip] attribute or .ds-tooltip (Figma 17494-24506) ===== */
+/* Usage A (simple): <span data-tooltip="Your text">trigger</span>                    */
+/* Usage B (rich):   <span class="ds-tooltip-wrap"><button>…</button>                 */
+/*                     <span class="ds-tooltip">Rich content</span></span>            */
+/* Placement modifiers: data-tooltip-pos="bottom|left|right" (default: top)          */
+
+/* Shared bubble styles */
+[data-tooltip]::after,
+.ds-tooltip {
+  background: #25313B;
+  color: #fff;
+  font-family: var(--hz-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  padding: 4px 8px;
+  border-radius: var(--hz-border-radius-xsmall);
+  max-width: 240px;
+  white-space: normal;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ── Attribute-based (zero markup) ── */
+[data-tooltip] { position: relative; }
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%; transform: translateX(-50%);
+  opacity: 0; transition: opacity .15s;
+  white-space: nowrap;
+}
+[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%; transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #25313B;
+  opacity: 0; transition: opacity .15s;
+  z-index: 1000; pointer-events: none;
+}
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before { opacity: 1; }
+
+/* Bottom placement */
+[data-tooltip][data-tooltip-pos="bottom"]::after { bottom: auto; top: calc(100% + 8px); }
+[data-tooltip][data-tooltip-pos="bottom"]::before { bottom: auto; top: calc(100% + 4px); border-top-color: transparent; border-bottom-color: #25313B; }
+
+/* ── Class-based wrapper (for multi-line / rich content) ── */
+.ds-tooltip-wrap { position: relative; display: inline-flex; }
+.ds-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%; transform: translateX(-50%);
+  text-align: left; white-space: normal;
+}
+.ds-tooltip-wrap:hover .ds-tooltip { display: block; }
