@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Side Navigation — CC Design System</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--hz-font-family);
+      font-size: 14px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .demo-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .demo-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #5F6C7A;
+    }
+
+    /* ==============================
+       SIDE NAV COMPONENT
+       ============================== */
+    .side-nav {
+      display: flex;
+      height: 720px;
+      position: relative;
+      box-shadow: 0 0 1px 0 rgba(24,31,38,.12), 1px 1px 3px 0 rgba(24,31,38,.2);
+    }
+
+    /* Icon rail */
+    .side-nav__rail {
+      width: 48px;
+      height: 100%;
+      background: #34383A;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .side-nav__logo {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .side-nav__logo svg {
+      width: 24px;
+      height: 14px;
+    }
+
+    .side-nav__icon-btn {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #34383A;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.1s;
+      border-left: 3px solid transparent;
+    }
+
+    .side-nav__icon-btn:hover {
+      background: #3d4245;
+    }
+
+    .side-nav__icon-btn.active {
+      background: #43474A;
+      border-left-color: #0369E9;
+    }
+
+    .side-nav__icon-btn svg {
+      width: 24px;
+      height: 24px;
+      color: #fff;
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+
+    .side-nav__icon-btn.active svg {
+      opacity: 1;
+    }
+
+    /* Drawer */
+    .side-nav__drawer {
+      width: 240px;
+      height: 100%;
+      background: #F6F6F6;
+      border-right: 1px solid #C8C9C9;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .side-nav__drawer-inner {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .side-nav__drawer-inner::-webkit-scrollbar {
+      width: 15px;
+    }
+    .side-nav__drawer-inner::-webkit-scrollbar-track {
+      background: #F9F9F9;
+      border-left: 1px solid #E8E8E8;
+    }
+    .side-nav__drawer-inner::-webkit-scrollbar-thumb {
+      background: #C2C2C2;
+      border-radius: 4px;
+      border: 3px solid #F9F9F9;
+    }
+
+    .side-nav__section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #181F26;
+      line-height: 28px;
+      padding: 0 24px;
+    }
+
+    .side-nav__group { }
+
+    .side-nav__group-heading {
+      font-size: 12px;
+      font-weight: 400;
+      color: #3C4A57;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 16px;
+      padding: 0 24px 8px;
+    }
+
+    .side-nav__group-items { }
+
+    .side-nav__item {
+      display: block;
+      width: 100%;
+      padding: 8px 24px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #181F26;
+      line-height: 20px;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: background 0.1s, color 0.1s;
+    }
+
+    .side-nav__item:hover {
+      background: rgba(3,105,233,.06);
+      color: #0369E9;
+    }
+
+    .side-nav__item.active {
+      background: #EBF3FE;
+      color: #0369E9;
+      font-weight: 600;
+    }
+
+    /* Panel showing content area for demo */
+    .side-nav__content-area {
+      flex: 1;
+      background: #fff;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 32px;
+    }
+
+    .side-nav__content-placeholder {
+      color: #ACB4BD;
+      font-size: 14px;
+    }
+
+    /* Panels visibility */
+    .side-nav__panel {
+      display: none;
+    }
+    .side-nav__panel.active {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+    }
+
+    /* No drawer for Home */
+    .side-nav--no-drawer .side-nav__drawer {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="demo-stage">
+  <div class="demo-label">Side Navigation — Interactive Component</div>
+
+  <div class="side-nav" id="sideNav">
+
+    <!-- Icon Rail -->
+    <nav class="side-nav__rail" aria-label="Main navigation">
+      <!-- Logo -->
+      <div class="side-nav__logo" title="Customer Communities">
+        <svg viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="12" font-family="sans-serif" font-size="13" font-weight="700" fill="#E91E8C">CC</text>
+        </svg>
+      </div>
+
+      <!-- Create -->
+      <button class="side-nav__icon-btn active" data-section="create" title="Create">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+      </button>
+
+      <!-- Home -->
+      <button class="side-nav__icon-btn" data-section="home" title="Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </button>
+
+      <!-- Content -->
+      <button class="side-nav__icon-btn" data-section="content" title="Content">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </button>
+
+      <!-- Email -->
+      <button class="side-nav__icon-btn" data-section="email" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </button>
+
+      <!-- Users -->
+      <button class="side-nav__icon-btn" data-section="users" title="Users">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+      </button>
+
+      <!-- Analytics -->
+      <button class="side-nav__icon-btn" data-section="analytics" title="Analytics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
+        </svg>
+      </button>
+
+      <!-- Platform -->
+      <button class="side-nav__icon-btn" data-section="platform" title="Platform">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+      </button>
+
+      <!-- Gamification -->
+      <button class="side-nav__icon-btn" data-section="gamification" title="Gamification">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/>
+        </svg>
+      </button>
+
+      <!-- Customization -->
+      <button class="side-nav__icon-btn" data-section="customization" title="Customization">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+        </svg>
+      </button>
+
+      <!-- Integrations -->
+      <button class="side-nav__icon-btn" data-section="integrations" title="Integrations">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 012 2v7"/><line x1="6" y1="9" x2="6" y2="21"/>
+        </svg>
+      </button>
+
+      <!-- AI -->
+      <button class="side-nav__icon-btn" data-section="ai" title="AI">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </button>
+
+      <!-- Settings -->
+      <button class="side-nav__icon-btn" data-section="settings" title="Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Drawer -->
+    <div class="side-nav__drawer">
+      <div class="side-nav__drawer-inner" id="drawerInner">
+
+        <!-- Create -->
+        <div class="side-nav__panel active" data-panel="create">
+          <h2 class="side-nav__section-title">Create</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">New Article</button>
+              <button class="side-nav__item">New Events</button>
+              <button class="side-nav__item">New Product Updates</button>
+              <button class="side-nav__item">New Conversation</button>
+              <button class="side-nav__item">New Question</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="side-nav__panel" data-panel="content">
+          <h2 class="side-nav__section-title">Content</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Moderation</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Overview</button>
+              <button class="side-nav__item">Pending</button>
+              <button class="side-nav__item">Reported</button>
+              <button class="side-nav__item">Spam (0)</button>
+              <button class="side-nav__item">Trash Can</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Content Types</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Articles</button>
+              <button class="side-nav__item">Drafts</button>
+              <button class="side-nav__item">Ideas</button>
+              <button class="side-nav__item">Events</button>
+              <button class="side-nav__item">Product Updates</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="side-nav__panel" data-panel="email">
+          <h2 class="side-nav__section-title">Email</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Email Campaigns</button>
+              <button class="side-nav__item">System Emails</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users -->
+        <div class="side-nav__panel" data-panel="users">
+          <h2 class="side-nav__section-title">Users</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Users Overview</button>
+              <button class="side-nav__item">Segments</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytics -->
+        <div class="side-nav__panel" data-panel="analytics">
+          <h2 class="side-nav__section-title">Analytics</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Dashboards</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Content</button>
+              <button class="side-nav__item">User</button>
+              <button class="side-nav__item">Q&amp;A</button>
+              <button class="side-nav__item">Audience</button>
+              <button class="side-nav__item">Engagement</button>
+              <button class="side-nav__item">Self-service</button>
+              <button class="side-nav__item">Product Feedback</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Export</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Content</button>
+              <button class="side-nav__item">User</button>
+              <button class="side-nav__item">Q&amp;A</button>
+              <button class="side-nav__item">Audience</button>
+              <button class="side-nav__item">Engagement</button>
+              <button class="side-nav__item">Self-service</button>
+              <button class="side-nav__item">Product Feedback</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Platform -->
+        <div class="side-nav__panel" data-panel="platform">
+          <h2 class="side-nav__section-title">Platform</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Knowledge Base</button>
+              <button class="side-nav__item">Community</button>
+              <button class="side-nav__item">Ideation</button>
+              <button class="side-nav__item">Groups</button>
+              <button class="side-nav__item">Events</button>
+              <button class="side-nav__item">Product Updates</button>
+              <button class="side-nav__item">Custom Pages</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gamification -->
+        <div class="side-nav__panel" data-panel="gamification">
+          <h2 class="side-nav__section-title">Gamification</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Ranks</button>
+              <button class="side-nav__item">Badges</button>
+              <button class="side-nav__item">Point System</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customization -->
+        <div class="side-nav__panel" data-panel="customization">
+          <h2 class="side-nav__section-title">Customization</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Header</button>
+              <button class="side-nav__item">Footer</button>
+              <button class="side-nav__item">Sidebar</button>
+              <button class="side-nav__item">Phrases</button>
+              <button class="side-nav__item">Third-party Scripts</button>
+              <button class="side-nav__item">Self-service</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integrations -->
+        <div class="side-nav__panel" data-panel="integrations">
+          <h2 class="side-nav__section-title">Integrations</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Integrations</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Apps</button>
+              <button class="side-nav__item">API</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">SSO</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">End Users</button>
+              <button class="side-nav__item">Control Users</button>
+              <button class="side-nav__item">Content Configuration</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Embeddable Widget</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Setup</button>
+              <button class="side-nav__item">Customization</button>
+              <button class="side-nav__item">Content Configuration</button>
+              <button class="side-nav__item">Installation</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Developer Studio</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Sources</button>
+              <button class="side-nav__item">Connectors</button>
+              <button class="side-nav__item">Secrets and Variables</button>
+              <button class="side-nav__item">CLI Access</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI -->
+        <div class="side-nav__panel" data-panel="ai">
+          <h2 class="side-nav__section-title">AI</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">AI Settings</button>
+              <button class="side-nav__item">Moderation AI Agent</button>
+              <button class="side-nav__item">AI Answers for Search</button>
+              <button class="side-nav__item">AI Translations</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="side-nav__panel" data-panel="settings">
+          <h2 class="side-nav__section-title">Settings</h2>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Super Admin</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Modules</button>
+              <button class="side-nav__item">Community Information</button>
+              <button class="side-nav__item">Destination URL</button>
+              <button class="side-nav__item">Advanced Configurations</button>
+              <button class="side-nav__item">AI Playground</button>
+              <button class="side-nav__item">Unified Login</button>
+              <button class="side-nav__item">Platform Sources</button>
+              <button class="side-nav__item">Hub Connection</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Super Admin</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Event Types</button>
+              <button class="side-nav__item">Event Settings</button>
+              <button class="side-nav__item">Ideation Status</button>
+              <button class="side-nav__item">Bug Status</button>
+              <button class="side-nav__item">Product Areas</button>
+              <button class="side-nav__item">Languages</button>
+              <button class="side-nav__item">Platform Visibility</button>
+              <button class="side-nav__item">Open Betas</button>
+              <button class="side-nav__item">AI</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">User</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">User Roles</button>
+              <button class="side-nav__item">User Profile Fields</button>
+              <button class="side-nav__item">Registration Rules</button>
+              <button class="side-nav__item">Attachment Permissions</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Topic</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Public Tags</button>
+              <button class="side-nav__item">Content Helpfulness</button>
+              <button class="side-nav__item">Moderation Labels</button>
+              <button class="side-nav__item">Post Fields</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">Moderation</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Automation Rules</button>
+              <button class="side-nav__item">Pre-moderation Rules</button>
+              <button class="side-nav__item">Moderation Notifications</button>
+              <button class="side-nav__item">Spam Prevention</button>
+              <button class="side-nav__item">Webmaster Email</button>
+            </div>
+          </div>
+          <div class="side-nav__group">
+            <div class="side-nav__group-heading">SEO</div>
+            <div class="side-nav__group-items">
+              <button class="side-nav__item">Robots.txt</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Home (empty panel) -->
+        <div class="side-nav__panel" data-panel="home">
+          <h2 class="side-nav__section-title" style="color:#ACB4BD; font-size:14px; font-weight:400;">Home has no sub-navigation</h2>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Content Area (demo placeholder) -->
+    <div class="side-nav__content-area">
+      <span class="side-nav__content-placeholder">← Select a section to navigate</span>
+    </div>
+
+  </div><!-- /.side-nav -->
+</div><!-- /.demo-stage -->
+
+<script>
+  (function() {
+    const rail = document.querySelector('.side-nav__rail');
+    const drawerInner = document.getElementById('drawerInner');
+    const drawer = document.querySelector('.side-nav__drawer');
+
+    function activateSection(sectionKey) {
+      // Update icon buttons
+      rail.querySelectorAll('.side-nav__icon-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.section === sectionKey);
+      });
+
+      // Update panels
+      drawerInner.querySelectorAll('.side-nav__panel').forEach(panel => {
+        panel.classList.toggle('active', panel.dataset.panel === sectionKey);
+      });
+
+      // Hide drawer for Home
+      drawer.style.display = sectionKey === 'home' ? 'none' : '';
+    }
+
+    // Icon rail clicks
+    rail.addEventListener('click', function(e) {
+      const btn = e.target.closest('.side-nav__icon-btn');
+      if (!btn) return;
+      activateSection(btn.dataset.section);
+    });
+
+    // Nav item clicks — set active on the clicked item within its group
+    drawerInner.addEventListener('click', function(e) {
+      const item = e.target.closest('.side-nav__item');
+      if (!item) return;
+      // Only deactivate items in the same panel
+      const panel = item.closest('.side-nav__panel');
+      if (panel) {
+        panel.querySelectorAll('.side-nav__item').forEach(i => i.classList.remove('active'));
+      }
+      item.classList.add('active');
+    });
+  })();
+</script>
+</body>
+</html>
