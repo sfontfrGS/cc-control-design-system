@@ -50,14 +50,15 @@ body { display: flex; font-family: var(--hz-font-family); }
   border-right: 1px solid var(--hz-border-color-base);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 2px;
   padding: 16px 0;
   overflow-y: auto;
   z-index: 1;
   transition: width .15s ease, flex-basis .15s ease;
 }
+
 .nav-panel.is-hidden { width: 0; flex: 0 0 0; overflow: hidden; padding: 0; }
-.nav-panel__title { font-size: 18px; font-weight: 600; color: #181F26; padding: 0 24px; }
+.nav-panel__title { font-size: 18px; font-weight: 600; color: #181F26; padding: 0 24px 10px; }
 .nav-panel__section { display: flex; flex-direction: column; }
 .nav-panel__group-label {
   font-size: 12px; font-weight: 400; letter-spacing: 1px;
@@ -96,7 +97,7 @@ body { display: flex; font-family: var(--hz-font-family); }
 .page-header h1 { font-size: 26px; font-weight: 700; color: #181F26; margin: 0; line-height: 1.3; }
 
 /* Content area */
-.content { flex: 1; overflow-y: auto; padding: 24px; background: var(--hz-control-bg-base); }
+.content { flex: 1; overflow-y: auto; padding: 24px; background: #fff; }
 /* Settings page variant: white bg, centered 720px column */
 .content--settings { background: #fff; padding: 24px 40px 60px; }
 .content--settings .dirty-section { margin: 0 auto; }
