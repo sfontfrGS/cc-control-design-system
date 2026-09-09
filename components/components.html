@@ -413,6 +413,7 @@
   <a class="comp-nav__link" href="#nested-tree">Nested tree</a>
   <a class="comp-nav__link" href="#rule-builder">Rule builder</a>
   <a class="comp-nav__link" href="#config-preview">Config + preview</a>
+  <a class="comp-nav__link" href="#side-nav">Side navigation</a>
 </nav>
 <div class="comp-nav-spacer">
 
@@ -1488,6 +1489,15 @@
     </div>
   </div>
   <p class="label" style="margin-top:8px; text-transform:none; font-weight:400;">Markup: <code class="tag">&lt;div class="page-banner page-banner--warning"&gt;</code>. To use in a prototype, place directly inside <code class="tag">.main</code>, after the topbar include and before <code class="tag">.page-header</code>.</p>
+</section>
+
+<section id="side-nav">
+  <h2>Side navigation</h2>
+  <p class="label" style="text-transform:none; font-weight:400;">Full 12-section nav: icon rail (48px) + drawer (240px). Inject with <code class="tag">&lt;script src="../components/side-nav.js"&gt;&lt;/script&gt;</code> after <code class="tag">&lt;body data-section="ai" data-active-item="AI Settings"&gt;</code>. Also add <code class="tag">&lt;script src="../components/topbar.js"&gt;&lt;/script&gt;</code> inside <code class="tag">.main</code> for the topbar. See <a href="side-nav.html">side-nav.html</a> for a standalone demo.</p>
+  <div style="border:1px solid #C8C9C9; border-radius:6px; overflow:hidden; height:420px; display:flex;">
+    <iframe src="side-nav.html" style="width:100%; height:100%; border:none;" title="Side nav demo"></iframe>
+  </div>
+  <p class="label" style="margin-top:8px; text-transform:none; font-weight:400;">Usage in any prototype: set <code class="tag">data-section</code> to the section key (e.g. <code class="tag">users</code>, <code class="tag">ai</code>, <code class="tag">settings</code>) and <code class="tag">data-active-item</code> to the exact nav item label. The script auto-removes any legacy <code class="tag">.icon-rail</code> / <code class="tag">.nav-panel</code> elements.</p>
 </section>
 
 </div><!-- /.comp-nav-spacer -->
