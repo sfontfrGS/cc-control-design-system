@@ -109,7 +109,7 @@
       <h2 class="control-header__title">Tags</h2>
     </div>
 
-    <main class="content content--settings">
+    <main class="content" style="padding:24px 32px 60px;">
 
       <!-- Tabs -->
       <div class="ds-tabs">
@@ -260,18 +260,18 @@
           <button class="bulk-action-btn cancel" onclick="clearSelection()"><i class="ti ti-x" style="font-size:14px"></i> Cancel</button>
         </div>
 
+        <p style="font-size:13px;color:#5F6C7A;margin-bottom:8px"><strong id="tagCount">9543</strong> public tags</p>
+
         <!-- Table card -->
         <div class="table-card">
           <div class="action-bar">
             <div class="batch-actions"></div>
             <div class="normal-actions">
               <div class="pagination">
-                <span class="pagination__info"><strong id="tagCount">9543</strong> public tags &nbsp;·&nbsp; <span id="rangeLabel">1–25 of 9543 results</span></span>
-                <span class="pagination__item disabled" id="firstBtn">First</span>
+                <span class="pagination__info" id="rangeLabel">1–25 of 9543</span>
                 <span class="pagination__item chevron disabled" id="prevBtn" onclick="changePage(-1)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6 8 12l6 6 1.41-1.41L10.83 12z"/></svg></span>
                 <span class="pagination__item">Page <input class="pagination__page-box" id="pgInput" type="text" value="1" onchange="goToPage(this.value)"> of <strong id="totalPages">382</strong></span>
                 <span class="pagination__item chevron" id="nextBtn" onclick="changePage(1)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></span>
-                <span class="pagination__item disabled" id="lastBtn">Last</span>
                 <span class="pagination__rows"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5H7z"/></svg>25 rows</span>
               </div>
             </div>
@@ -461,15 +461,12 @@ function renderTable() {
   const start = (currentPage - 1) * PER_PAGE, slice = filteredTags.slice(start, start + PER_PAGE);
 
   document.getElementById('tagCount').textContent = total.toLocaleString();
-  document.getElementById('rangeLabel').textContent = `${start + 1}–${Math.min(start + PER_PAGE, total)} of ${total.toLocaleString()} results`;
+  document.getElementById('rangeLabel').textContent = `${start + 1}–${Math.min(start + PER_PAGE, total)} of ${total.toLocaleString()}`;
   document.getElementById('pgInput').value = currentPage;
   document.getElementById('totalPages').textContent = totalPg;
 
-  // Pagination disabled states via classList (spans don't have .disabled property)
   document.getElementById('prevBtn').classList.toggle('disabled', currentPage <= 1);
-  document.getElementById('firstBtn').classList.toggle('disabled', currentPage <= 1);
   document.getElementById('nextBtn').classList.toggle('disabled', currentPage >= totalPg);
-  document.getElementById('lastBtn').classList.toggle('disabled', currentPage >= totalPg);
 
   // Sort icon
   document.getElementById('th-topics').querySelector('.sort-icon').className =
@@ -487,7 +484,7 @@ function renderTable() {
       }</td>
       <td style="white-space:nowrap">
         <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button>
-        <button class="button-control-new button-control-new--small button-control-new--secondary button-control-new--danger" type="button" onclick="deleteSingle(${t.id})" style="margin-left:4px"><div><div><span class="button-control__title-text">Remove</span></div></div></button>
+        <button class="btn-new btn-new--small btn-new--danger-subtle" type="button" onclick="deleteSingle(${t.id})" style="margin-left:4px">Remove</button>
       </td>
     </tr>`).join('');
 
