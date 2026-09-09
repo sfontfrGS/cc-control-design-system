@@ -987,3 +987,47 @@ h2.control-header__title,
 .color-trigger { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 8px; border: 1px solid var(--hz-border-color-base); border-radius: 4px; background: #fff; cursor: pointer; font-size: 12px; font-family: var(--hz-font-family); }
 .color-trigger__swatch { width: 24px; height: 24px; border: 1px solid #C7C7C7; flex: none; }
 .color-trigger__hex    { color: var(--hz-text-color-primary); min-width: 52px; }
+
+/* ===== PAGE TABS — .ds-tabs / .ds-tab / .ds-pane ===== */
+/* Use for top-level tab switching within a page (e.g. Integration / Installation). */
+/* JS: tab buttons get class "active"; panes use "active" to show/hide. */
+.ds-tabs { display: flex; border-bottom: 1px solid var(--hz-border-color-base); margin-bottom: 24px; gap: 0; }
+.ds-tab { padding: 8px 16px; font-size: 14px; font-weight: 500; color: var(--hz-text-color-secondary); cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s; font-family: var(--hz-font-family); }
+.ds-tab:hover { color: var(--hz-text-color-primary); }
+.ds-tab.active { color: var(--hz-primary-color); border-bottom-color: var(--hz-primary-color); }
+.ds-pane { display: none; }
+.ds-pane.active { display: block; }
+
+/* ===== TOGGLE — .ds-toggle (label > input + .ds-toggle__track) ===== */
+/* Spec: Figma node 16412-3227. Two sizes: default (40×20px) and small (32×16px). */
+/* HTML: <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span><span class="ds-toggle__label">Label</span></label> */
+.ds-toggle { display: inline-flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+.ds-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.ds-toggle__track {
+  position: relative; flex-shrink: 0;
+  width: 40px; height: 20px; border-radius: 10px;
+  background: #3C4A57;
+  transition: background .15s;
+}
+.ds-toggle__track::before {
+  content: '✕';
+  position: absolute;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: #fff; top: 3px; left: 3px;
+  transition: transform .15s;
+  font-size: 7px; color: #3C4A57;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 14px; text-align: center;
+}
+.ds-toggle input:checked + .ds-toggle__track { background: #12995B; }
+.ds-toggle input:checked + .ds-toggle__track::before { content: '✓'; color: #12995B; transform: translateX(20px); }
+.ds-toggle input:disabled + .ds-toggle__track { background: #D5D9DE; cursor: not-allowed; }
+.ds-toggle input:disabled + .ds-toggle__track::before { color: #D5D9DE; }
+.ds-toggle input:disabled ~ .ds-toggle__label { color: #D5D9DE; }
+.ds-toggle__label { font-size: 14px; color: #25313B; line-height: 20px; }
+/* Small variant */
+.ds-toggle--small { gap: 8px; }
+.ds-toggle--small .ds-toggle__track { width: 32px; height: 16px; border-radius: 8px; }
+.ds-toggle--small .ds-toggle__track::before { width: 10px; height: 10px; top: 3px; left: 3px; font-size: 6px; line-height: 10px; }
+.ds-toggle--small input:checked + .ds-toggle__track::before { transform: translateX(16px); }
+.ds-toggle--small .ds-toggle__label { font-size: 12px; line-height: 16px; }

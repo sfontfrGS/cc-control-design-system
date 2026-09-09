@@ -8,21 +8,7 @@
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../components/components.css">
 <style>
-  /* ── Page tabs ─────────────────────────────────────────────── */
-  .ds-tabs { display: flex; border-bottom: 1px solid #D5D9DE; margin-bottom: 24px; }
-  .ds-tab { padding: 10px 16px; font-size: 14px; font-weight: 500; color: #5F6C7A; cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s; }
-  .ds-tab:hover { color: #181F26; }
-  .ds-tab.active { color: #0369E9; border-bottom-color: #0369E9; }
-  .ds-pane { display: none; }
-  .ds-pane.active { display: block; }
-
-  /* ── Simple toggle switch (not feat-toggle) ─────────────────── */
-  .switch { position: relative; width: 36px; height: 20px; cursor: pointer; display: inline-block; flex-shrink: 0; }
-  .switch input { opacity: 0; width: 0; height: 0; position: absolute; }
-  .switch-track { position: absolute; inset: 0; border-radius: 20px; background: #C8C9C9; transition: background .2s; }
-  .switch-track::before { content: ''; position: absolute; width: 14px; height: 14px; border-radius: 50%; background: #fff; top: 3px; left: 3px; transition: transform .2s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
-  input:checked + .switch-track { background: #0369E9; }
-  input:checked + .switch-track::before { transform: translateX(16px); }
+  /* ds-tabs, ds-toggle — now in components.css */
 
   /* ── Tag chips ──────────────────────────────────────────────── */
   .tag-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; background: #F6F6F6; border: 1px solid #D5D9DE; border-radius: 20px; font-size: 13px; color: #3C4A57; }
@@ -87,10 +73,6 @@
   details.dirty-section[open] > summary .chevron-icon { transform: rotate(180deg); }
   .chevron-icon { font-size: 15px; color: #8A9BB0; transition: transform .2s; }
 
-  /* ── Danger action button ───────────────────────────────────── */
-  .button-control-new--danger { color: #E2483D !important; border-color: #F5C6C6 !important; }
-  .button-control-new--danger:hover { background: #FFF5F5 !important; }
-
   /* ── Modal ──────────────────────────────────────────────────── */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 200; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
@@ -133,7 +115,7 @@
                   <p class="dirty-section__field-description">These categories and topics will not be shown in search results</p>
                 </div>
                 <div class="dirty-section__control">
-                  <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+                  <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span></label>
                 </div>
               </div>
 
@@ -143,7 +125,7 @@
                   <p class="dirty-section__field-description">User activity in this category is included in statistics and used to unlock ranks</p>
                 </div>
                 <div class="dirty-section__control">
-                  <label class="switch"><input type="checkbox" checked><span class="switch-track"></span></label>
+                  <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span></label>
                 </div>
               </div>
 
@@ -155,7 +137,7 @@
                     <p class="dirty-section__field-description">Define which tags members can use when posting here. Only these tags will appear in this category — global tags are hidden.</p>
                   </div>
                   <div class="dirty-section__control">
-                    <label class="switch"><input type="checkbox" id="tagToggle"><span class="switch-track"></span></label>
+                    <label class="ds-toggle"><input type="checkbox" id="tagToggle"><span class="ds-toggle__track"></span></label>
                   </div>
                 </div>
 
@@ -185,7 +167,7 @@
                         <p class="dirty-section__field-label" style="font-size:13px">Also allow members to create their own tags</p>
                         <p class="dirty-section__field-description" style="font-size:12px">If off, members can only pick from the tags you define above. Recommended off for stricter taxonomy control.</p>
                       </div>
-                      <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+                      <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span></label>
                     </div>
 
                     <div class="helper-note">
@@ -237,7 +219,7 @@
                   <p class="dirty-section__field-label">Allow end users to add new public tags</p>
                 </div>
                 <div class="dirty-section__control">
-                  <label class="switch"><input type="checkbox" checked><span class="switch-track"></span></label>
+                  <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span></label>
                 </div>
               </div>
               <div class="dirty-section__field-row">
@@ -245,7 +227,7 @@
                   <p class="dirty-section__field-label">Mark public tags as mandatory in destination while creating a topic</p>
                 </div>
                 <div class="dirty-section__control">
-                  <label class="switch"><input type="checkbox"><span class="switch-track"></span></label>
+                  <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span></label>
                 </div>
               </div>
             </div>
