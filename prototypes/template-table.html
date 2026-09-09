@@ -108,7 +108,7 @@
         <table class="dt" id="itemsTable">
           <thead>
             <tr>
-              <th class="col-checkbox"><input type="checkbox" id="selectAll"></th>
+              <th class="col-checkbox"><input type="checkbox" id="selectAll" data-indeterminate="true"></th>
               <!-- Primary identifier column -->
               <th class="col-m-big"><span class="th-cell sortable">Name <svg class="sort-icon inactive" viewBox="0 0 24 24" fill="black"><path d="M12 4L17 9L7 9L12 4ZM12 20L7 15H17L12 20Z"/></svg></span></th>
               <!-- Secondary identifier -->
@@ -121,11 +121,12 @@
               <th class="col-s"><span class="th-cell sortable">Created <svg class="sort-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10L12 15L17 10H7Z"/></svg></span></th>
               <!-- Right-aligned count -->
               <th class="col-xs-right"><span class="th-cell" style="justify-content:flex-end;">Count</span></th>
+              <th><span class="th-cell">Actions</span></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="col-checkbox"><input type="checkbox" class="row-check"></td>
+            <tr class="is-selected">
+              <td class="col-checkbox"><input type="checkbox" class="row-check" checked></td>
               <td class="col-m-big">
                 <div class="item-cell">
                   <span class="avatar-initial" style="background:#9ADBD5;">A</span>
@@ -138,6 +139,10 @@
               <td class="col-m-flexible">Tag 1, Tag 2</td>
               <td class="col-s">8 Sep 2026, 10:00</td>
               <td class="col-xs-right">12</td>
+              <td style="white-space:nowrap;">
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button" style="margin-left:4px;"><div><div><span class="button-control__title-text">Delete</span></div></div></button>
+              </td>
             </tr>
             <tr>
               <td class="col-checkbox"><input type="checkbox" class="row-check"></td>
@@ -153,6 +158,10 @@
               <td class="col-m-flexible muted">—</td>
               <td class="col-s">7 Sep 2026, 14:30</td>
               <td class="col-xs-right">5</td>
+              <td style="white-space:nowrap;">
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button" style="margin-left:4px;"><div><div><span class="button-control__title-text">Delete</span></div></div></button>
+              </td>
             </tr>
             <tr>
               <td class="col-checkbox"><input type="checkbox" class="row-check"></td>
@@ -168,6 +177,10 @@
               <td class="col-m-flexible">Tag 3</td>
               <td class="col-s">1 Sep 2026, 09:15</td>
               <td class="col-xs-right">0</td>
+              <td style="white-space:nowrap;">
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button" style="margin-left:4px;"><div><div><span class="button-control__title-text">Delete</span></div></div></button>
+              </td>
             </tr>
             <tr>
               <td class="col-checkbox"><input type="checkbox" class="row-check"></td>
@@ -183,6 +196,10 @@
               <td class="col-m-flexible">Tag 1, Tag 4, Tag 5</td>
               <td class="col-s">15 Aug 2026, 17:00</td>
               <td class="col-xs-right">28</td>
+              <td style="white-space:nowrap;">
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button" style="margin-left:4px;"><div><div><span class="button-control__title-text">Delete</span></div></div></button>
+              </td>
             </tr>
             <tr>
               <td class="col-checkbox"><input type="checkbox" class="row-check"></td>
@@ -198,6 +215,10 @@
               <td class="col-m-flexible muted">—</td>
               <td class="col-s">3 Jul 2026, 11:45</td>
               <td class="col-xs-right">7</td>
+              <td style="white-space:nowrap;">
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Edit</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--secondary" type="button" style="margin-left:4px;"><div><div><span class="button-control__title-text">Delete</span></div></div></button>
+              </td>
             </tr>
           </tbody>
         </table>

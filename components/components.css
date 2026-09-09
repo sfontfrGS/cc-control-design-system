@@ -92,7 +92,7 @@ body { display: flex; font-family: var(--hz-font-family); }
 }
 
 /* Page header — large standalone heading used on settings/detail pages */
-.page-header { padding: 28px 40px 4px; background: #fff; flex: none; }
+.page-header { padding: 16px 40px; background: #fff; border-bottom: 1px solid #c7c7c7; flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .page-header h1 { font-size: 26px; font-weight: 700; color: #181F26; margin: 0; line-height: 1.3; }
 
 /* Content area */

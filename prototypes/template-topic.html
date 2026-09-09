@@ -272,6 +272,81 @@
             </article>
           </div>
 
+          <!-- Reply 1 -->
+          <div class="box">
+            <div class="topic-wrapper">
+              <div class="qa-post-author-info">
+                <div class="author-avatar"><div style="width:32px;height:32px;border-radius:50%;background:#9ADBD5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;">A</div></div>
+                <div class="author-meta">
+                  <span class="author-name">Anna</span>
+                  <span class="post-date">2 hours ago</span>
+                </div>
+                <button class="post-menu-trigger" type="button" aria-label="More options">⋮</button>
+              </div>
+              <article class="topic-body">
+                <p>Great article! This was exactly what I needed. The step-by-step guide made it very easy to follow along.</p>
+              </article>
+              <div class="post-actions">
+                <button class="post-action-btn" type="button">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                  <span>0</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reply 2 -->
+          <div class="box">
+            <div class="topic-wrapper">
+              <div class="qa-post-author-info">
+                <div class="author-avatar"><div style="width:32px;height:32px;border-radius:50%;background:#F4A261;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;">F</div></div>
+                <div class="author-meta">
+                  <span class="author-name">Frank</span>
+                  <span class="post-date">45 minutes ago</span>
+                </div>
+                <button class="post-menu-trigger" type="button" aria-label="More options">⋮</button>
+              </div>
+              <article class="topic-body">
+                <p>Thanks for sharing this. I had a similar issue last week and wish I had found this article sooner. The account ID tip saved me a lot of time!</p>
+              </article>
+              <div class="post-actions">
+                <button class="post-action-btn" type="button">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                  <span>1</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reply composer -->
+          <div class="box reply-composer">
+            <div class="topic-wrapper">
+              <div class="qa-post-author-info">
+                <div class="author-avatar"><div style="width:32px;height:32px;border-radius:50%;background:#0C66E4;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;">A</div></div>
+                <div class="author-meta"><span class="author-name">Admin (you)</span></div>
+              </div>
+              <div class="reply-composer__body">
+                <textarea class="reply-composer__textarea" placeholder="Write a reply…" rows="3" style="width:100%;border:1px solid var(--hz-border-color-base);border-radius:4px;padding:10px 12px;font-size:14px;font-family:var(--hz-font-family);resize:vertical;"></textarea>
+                <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px;">
+                  <button class="button-control-new button-control-new--small button-control-new--secondary" type="button"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+                  <button class="button-control-new button-control-new--small button-control-new--primary" type="button"><div><div><span class="button-control__title-text">Post reply</span></div></div></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="thread-pagination" style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;font-size:13px;color:var(--hz-text-color-secondary);">
+            <span>1–3 of 3 results</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span>First</span>
+              <span style="opacity:.4;">‹</span>
+              <span>Page <input type="text" value="1" style="width:32px;text-align:center;border:1px solid var(--hz-border-color-base);border-radius:3px;padding:2px 4px;font-size:13px;"> of 1</span>
+              <span style="opacity:.4;">›</span>
+              <span>Last</span>
+            </div>
+          </div>
+
           <!-- Reply card (repeat this block for each reply) -->
           <div class="box reply">
             <article class="topic-wrapper">
