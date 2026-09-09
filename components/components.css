@@ -241,9 +241,10 @@ body { display: flex; font-family: var(--hz-font-family); }
 
 /* Content area */
 .content { flex: 1; overflow-y: auto; padding: 24px; background: #fff; }
-/* Settings page variant: white bg, centered column */
-.content--settings { background: #fff; padding: 40px 40px 80px; display: flex; flex-direction: column; align-items: center; }
-.content--settings > * { width: 100%; max-width: 720px; }
+/* Settings page variant — matches live product (verified 2026-09-09)
+   White bg, left-aligned, 24px horizontal padding. No centering, no max-width cap.
+   Section spacing: dirty-section__title mb=16px (title→card), dirty-section mb=24px (card→next title). */
+.content--settings { background: #fff; padding: 0 24px 80px; }
 
 .placeholder-card {
   background: var(--hz-component-background);
@@ -655,7 +656,7 @@ code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-famil
 
 /* ===== DIRTY-SECTION — Settings page card pattern ===== */
 /* Source: dchdesign-en.insided.com/ai/settings */
-.dirty-section { max-width: 720px; margin-bottom: 32px; }
+.dirty-section { margin-bottom: 24px; }
 /* Type scale for settings pages:
    Page title (control-header h2) → 24px / 700
    Section title (dirty-section__title) → 18px / 600
