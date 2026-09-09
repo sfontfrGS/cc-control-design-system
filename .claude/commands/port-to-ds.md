@@ -81,7 +81,8 @@ Reference `components/components.html` for full component catalogue.
 3. Compare against the source — call out any components that have no design system equivalent (so the user knows what's still a gap)
 4. Commit the file with a descriptive message
 5. Push to GitHub Pages
-6. Report the local preview URL and the GitHub Pages URL
+6. **Send the file to the user** using the SendUserFile tool so they can download it immediately without hunting for it
+7. Report the local preview URL and the GitHub Pages URL
 
 ---
 
