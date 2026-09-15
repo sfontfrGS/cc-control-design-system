@@ -244,6 +244,7 @@
       <a class="docs-nav__link" href="#settings-card">Settings card</a>
       <a class="docs-nav__link" href="#modal">Modal</a>
       <a class="docs-nav__link" href="#tabs">Tabs</a>
+      <a class="docs-nav__link" href="#data-table">Data table</a>
     </nav>
   </aside>
 
@@ -1005,15 +1006,15 @@ section.querySelectorAll('input, textarea').forEach(el =&gt;
     <!-- ===== MODAL ===== -->
     <section class="docs-section" id="modal">
       <h2>Modal <span class="docs-badge docs-badge--stable">Stable</span></h2>
-      <p class="docs-section__desc">Dialog overlay. Toggle <code>[hidden]</code> on the <code>.modal-overlay</code> to show/hide.</p>
+      <p class="docs-section__desc">Dialog overlay. Toggle <code>[hidden]</code> on <code>.modal-overlay</code> to show/hide. Use <code>.modal--medium</code> or <code>.modal--large</code> for wider variants.</p>
 
-      <!-- Default code -->
+      <!-- Standard modal -->
       <div class="docs-variant">
         <div>
-          <div class="docs-variant__label">HTML structure</div>
+          <div class="docs-variant__label">Standard modal</div>
           <div class="docs-preview" style="flex-direction: column; align-items: flex-start; gap: 8px;">
-            <p style="font-size:13px; color:#3C4A57; margin:0;">See the interactive demo below. Click the button to open a live modal.</p>
-            <button class="btn-new btn-new--primary btn-new--medium" id="open-modal-btn">Open modal</button>
+            <p style="font-size:13px; color:#3C4A57; margin:0;">Click to open a live demo.</p>
+            <button class="btn-new btn-new--primary btn-new--medium" id="open-modal-standard-btn">Open modal</button>
           </div>
         </div>
         <div class="docs-code">
@@ -1022,15 +1023,56 @@ section.querySelectorAll('input, textarea').forEach(el =&gt;
   &lt;div class="modal"&gt;
     &lt;div class="modal__header"&gt;
       &lt;div class="modal__title-group"&gt;
-        &lt;span class="modal__label"&gt;CONFIRM ACTION&lt;/span&gt;
-        &lt;h2 class="modal__title"&gt;Delete record&lt;/h2&gt;
+        &lt;h2 class="modal__title"&gt;Creating segments&lt;/h2&gt;
       &lt;/div&gt;
-      &lt;button class="modal__close" onclick="document.getElementById('my-modal').hidden=true"&gt;
+      &lt;button class="modal__close"
+        onclick="document.getElementById('my-modal').hidden=true"&gt;
         &amp;times;
       &lt;/button&gt;
     &lt;/div&gt;
     &lt;div class="modal__body"&gt;
-      Are you sure you want to delete this record? This action cannot be undone.
+      You can create a new segment by applying filters to the
+      User Overview and saving that as a segment.
+    &lt;/div&gt;
+    &lt;div class="modal__footer"&gt;
+      &lt;button class="btn-new btn-new--secondary btn-new--medium"
+        onclick="document.getElementById('my-modal').hidden=true"&gt;
+        Cancel
+      &lt;/button&gt;
+      &lt;button class="btn-new btn-new--primary btn-new--medium"&gt;
+        Take me there
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Destructive confirmation modal -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Destructive confirmation</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+            <p style="font-size:13px; color:#3C4A57; margin:0;">For delete / irreversible actions — use <code>.btn-new--danger</code> as the confirm button.</p>
+            <button class="btn-new btn-new--danger-subtle btn-new--medium" id="open-modal-danger-btn">Open destructive modal</button>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="modal-overlay" id="my-modal" hidden&gt;
+  &lt;div class="modal"&gt;
+    &lt;div class="modal__header"&gt;
+      &lt;div class="modal__title-group"&gt;
+        &lt;h2 class="modal__title"&gt;Delete record&lt;/h2&gt;
+      &lt;/div&gt;
+      &lt;button class="modal__close"
+        onclick="document.getElementById('my-modal').hidden=true"&gt;
+        &amp;times;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="modal__body"&gt;
+      Are you sure you want to delete this record?
+      This action cannot be undone.
     &lt;/div&gt;
     &lt;div class="modal__footer"&gt;
       &lt;button class="btn-new btn-new--secondary btn-new--medium"
@@ -1045,6 +1087,18 @@ section.querySelectorAll('input, textarea').forEach(el =&gt;
 &lt;/div&gt;</code></pre>
         </div>
       </div>
+
+      <table class="docs-props">
+        <thead><tr><th>Class / modifier</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>.modal</code></td><td>Default width (~480px)</td></tr>
+          <tr><td><code>.modal--medium</code></td><td>~640px wide</td></tr>
+          <tr><td><code>.modal--large</code></td><td>~800px wide</td></tr>
+          <tr><td><code>.modal__label</code></td><td>Optional eyebrow text above the title (use sparingly)</td></tr>
+          <tr><td><code>.btn-new--primary</code></td><td>Primary action (blue)</td></tr>
+          <tr><td><code>.btn-new--danger</code></td><td>Destructive action (red)</td></tr>
+        </tbody>
+      </table>
     </section>
 
     <!-- ===== TABS ===== -->
@@ -1098,24 +1152,224 @@ document.getElementById('demo-tabs').addEventListener('click', e =&gt; {
       </div>
     </section>
 
+    <!-- ===== DATA TABLE ===== -->
+    <section class="docs-section" id="data-table">
+      <h2>Data table <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Full-featured list view: <code>.table-card</code> wrapper, <code>.action-bar</code> toolbar (normal + bulk selection), <code>table.dt</code> rows, and <code>.pagination</code>.</p>
+
+      <!-- Full table -->
+      <div class="docs-variant" style="grid-template-columns: 1fr;">
+        <div>
+          <div class="docs-variant__label">Interactive demo</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; padding: 0; overflow: visible;">
+            <div class="table-card" id="table-demo">
+              <!-- Action bar -->
+              <div class="action-bar" id="table-action-bar">
+                <div class="normal-actions">
+                  <div class="search-box--table">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 16.5l3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <input type="search" placeholder="Search…">
+                  </div>
+                  <button class="button-control-new button-control-new--small button-control-new--primary" style="margin-left:auto;">
+                    <div><div><span class="button-control__title-text">New item</span></div></div>
+                  </button>
+                </div>
+                <div class="batch-actions">
+                  <span style="font-size:14px; color:#3C4A57;" id="selection-count"></span>
+                  <button class="btn-new btn-new--danger-subtle btn-new--small" style="margin-left:auto;">Delete selected</button>
+                  <button class="btn-new btn-new--secondary btn-new--small" id="clear-selection-btn">Clear</button>
+                </div>
+              </div>
+              <!-- Table -->
+              <div class="table-scroll">
+                <table class="dt" id="demo-table">
+                  <colgroup>
+                    <col class="col-checkbox">
+                    <col class="col-m-big">
+                    <col class="col-s">
+                    <col class="col-m-flexible">
+                    <col class="col-xs-right">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th><input type="checkbox" id="select-all-chk"></th>
+                      <th>Name</th>
+                      <th>Status</th>
+                      <th>Category</th>
+                      <th style="text-align:right;">Posts</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="checkbox" class="row-chk"></td>
+                      <td>Getting started guide</td>
+                      <td><span class="status-pill status-pill--published">Published</span></td>
+                      <td>Announcements</td>
+                      <td>142</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" class="row-chk"></td>
+                      <td>Feature request: dark mode</td>
+                      <td><span class="status-pill status-pill--pending">Pending</span></td>
+                      <td>Product feedback</td>
+                      <td>38</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" class="row-chk"></td>
+                      <td>How to set up SSO</td>
+                      <td><span class="status-pill status-pill--published">Published</span></td>
+                      <td>Knowledge base</td>
+                      <td>87</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" class="row-chk"></td>
+                      <td>API rate limit discussion</td>
+                      <td><span class="status-pill status-pill--hidden">Hidden</span></td>
+                      <td>Technical</td>
+                      <td>5</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" class="row-chk"></td>
+                      <td>Community guidelines</td>
+                      <td><span class="status-pill status-pill--published">Published</span></td>
+                      <td>Announcements</td>
+                      <td>211</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Pagination -->
+              <div style="display:flex; align-items:center; padding: 8px 16px; border-top: 1px solid var(--hz-border-color-base);">
+                <span style="font-size:13px; color:#3C4A57;">Showing 1–5 of 24</span>
+                <div class="pagination">
+                  <div class="pagination__item chevron disabled">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                  </div>
+                  <span class="pagination__info">Page 1</span>
+                  <div class="pagination__item chevron active">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code snippet -->
+      <div class="docs-variant" style="grid-template-columns: 1fr;">
+        <div class="docs-code" style="position:relative;">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="table-card"&gt;
+
+  &lt;!-- Toolbar: normal-actions shown by default; batch-actions shown when rows selected --&gt;
+  &lt;div class="action-bar"&gt;
+    &lt;div class="normal-actions"&gt;
+      &lt;div class="search-box--table"&gt;
+        &lt;svg …&gt;&lt;/svg&gt;
+        &lt;input type="search" placeholder="Search…"&gt;
+      &lt;/div&gt;
+      &lt;button class="button-control-new button-control-new--small button-control-new--primary"&gt;
+        &lt;div&gt;&lt;div&gt;&lt;span class="button-control__title-text"&gt;New item&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="batch-actions"&gt;
+      &lt;span&gt;3 selected&lt;/span&gt;
+      &lt;button class="btn-new btn-new--danger-subtle btn-new--small"&gt;Delete selected&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Table --&gt;
+  &lt;div class="table-scroll"&gt;
+    &lt;table class="dt"&gt;
+      &lt;colgroup&gt;
+        &lt;col class="col-checkbox"&gt;   &lt;!-- 32px  --&gt;
+        &lt;col class="col-m-big"&gt;      &lt;!-- 240px --&gt;
+        &lt;col class="col-s"&gt;          &lt;!-- 160px --&gt;
+        &lt;col class="col-m-flexible"&gt; &lt;!-- 220px --&gt;
+        &lt;col class="col-xs-right"&gt;   &lt;!-- 90px, right-aligned --&gt;
+      &lt;/colgroup&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;&lt;input type="checkbox" id="select-all"&gt;&lt;/th&gt;
+          &lt;th&gt;Name&lt;/th&gt;
+          &lt;th&gt;Status&lt;/th&gt;
+          &lt;th&gt;Category&lt;/th&gt;
+          &lt;th&gt;Posts&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;input type="checkbox"&gt;&lt;/td&gt;
+          &lt;td&gt;Getting started guide&lt;/td&gt;
+          &lt;td&gt;&lt;span class="status-pill status-pill--published"&gt;Published&lt;/span&gt;&lt;/td&gt;
+          &lt;td&gt;Announcements&lt;/td&gt;
+          &lt;td&gt;142&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Pagination --&gt;
+  &lt;div class="pagination"&gt;…&lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <table class="docs-props">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>.table-card</code></td><td>White card with border and 4px radius — wraps action bar + table + pagination</td></tr>
+          <tr><td><code>.action-bar</code></td><td>Toolbar row. Add <code>.has-selection</code> to swap normal-actions for batch-actions</td></tr>
+          <tr><td><code>table.dt</code></td><td>Table — 56px rows, 54px header, 14px, bottom borders</td></tr>
+          <tr><td><code>tr.row--selected</code></td><td>Light blue row highlight when checkbox is checked</td></tr>
+          <tr><td><code>.col-checkbox</code></td><td>32px — checkbox column</td></tr>
+          <tr><td><code>.col-m-big</code></td><td>240px — primary name / title column</td></tr>
+          <tr><td><code>.col-s</code></td><td>160px — short label column</td></tr>
+          <tr><td><code>.col-m-flexible</code></td><td>220px — medium flexible column</td></tr>
+          <tr><td><code>.col-xs-right</code></td><td>90px, right-aligned — number / count column</td></tr>
+          <tr><td><code>.col-s-right</code></td><td>130px, right-aligned — date / action column</td></tr>
+        </tbody>
+      </table>
+    </section>
+
   </main>
 </div>
 
-<!-- Live demo modal -->
-<div class="modal-overlay" id="demo-modal" hidden>
+<!-- Standard modal -->
+<div class="modal-overlay" id="demo-modal-standard" hidden>
   <div class="modal">
     <div class="modal__header">
       <div class="modal__title-group">
-        <span class="modal__label">CONFIRM ACTION</span>
+        <h2 class="modal__title">Creating segments</h2>
+      </div>
+      <button class="modal__close" id="close-modal-standard-btn">&times;</button>
+    </div>
+    <div class="modal__body">
+      You can create a new segment by applying filters to the User Overview and saving that as a segment.
+    </div>
+    <div class="modal__footer">
+      <button class="btn-new btn-new--secondary btn-new--medium" id="cancel-modal-standard-btn">Cancel</button>
+      <button class="btn-new btn-new--primary btn-new--medium">Take me there</button>
+    </div>
+  </div>
+</div>
+
+<!-- Destructive confirmation modal -->
+<div class="modal-overlay" id="demo-modal-danger" hidden>
+  <div class="modal">
+    <div class="modal__header">
+      <div class="modal__title-group">
         <h2 class="modal__title">Delete record</h2>
       </div>
-      <button class="modal__close" id="close-modal-btn">&times;</button>
+      <button class="modal__close" id="close-modal-danger-btn">&times;</button>
     </div>
     <div class="modal__body">
       Are you sure you want to delete this record? This action cannot be undone.
     </div>
     <div class="modal__footer">
-      <button class="btn-new btn-new--secondary btn-new--medium" id="cancel-modal-btn">Cancel</button>
+      <button class="btn-new btn-new--secondary btn-new--medium" id="cancel-modal-danger-btn">Cancel</button>
       <button class="btn-new btn-new--danger btn-new--medium">Delete</button>
     </div>
   </div>
@@ -1237,16 +1491,47 @@ document.querySelectorAll('.js-tags-field').forEach(field => {
 });
 
 // ===== Modal =====
-const openBtn = document.getElementById('open-modal-btn');
-const modal = document.getElementById('demo-modal');
-const overlay = modal;
+function wireModal(openId, modalId, closeIds) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+  document.getElementById(openId)?.addEventListener('click', () => { modal.hidden = false; });
+  closeIds.forEach(id => document.getElementById(id)?.addEventListener('click', () => { modal.hidden = true; }));
+  modal.addEventListener('click', e => { if (e.target === modal) modal.hidden = true; });
+}
+wireModal('open-modal-standard-btn', 'demo-modal-standard', ['close-modal-standard-btn', 'cancel-modal-standard-btn']);
+wireModal('open-modal-danger-btn', 'demo-modal-danger', ['close-modal-danger-btn', 'cancel-modal-danger-btn']);
 
-openBtn?.addEventListener('click', () => { modal.hidden = false; });
-document.getElementById('close-modal-btn')?.addEventListener('click', () => { modal.hidden = true; });
-document.getElementById('cancel-modal-btn')?.addEventListener('click', () => { modal.hidden = true; });
+// ===== Table selection =====
+const actionBar = document.getElementById('table-action-bar');
+const selectAll = document.getElementById('select-all-chk');
+const rowChks = () => document.querySelectorAll('#demo-table .row-chk');
 
-overlay?.addEventListener('click', e => {
-  if (e.target === overlay) modal.hidden = true;
+function updateSelectionState() {
+  const checked = [...rowChks()].filter(c => c.checked);
+  const count = checked.length;
+  if (actionBar) actionBar.classList.toggle('has-selection', count > 0);
+  const countEl = document.getElementById('selection-count');
+  if (countEl) countEl.textContent = count + ' selected';
+  document.querySelectorAll('#demo-table tbody tr').forEach((tr, i) => {
+    tr.classList.toggle('row--selected', rowChks()[i]?.checked);
+  });
+  if (selectAll) selectAll.indeterminate = count > 0 && count < rowChks().length;
+  if (selectAll) selectAll.checked = count === rowChks().length;
+}
+
+selectAll?.addEventListener('change', () => {
+  rowChks().forEach(c => c.checked = selectAll.checked);
+  updateSelectionState();
+});
+
+document.getElementById('demo-table')?.addEventListener('change', e => {
+  if (e.target.classList.contains('row-chk')) updateSelectionState();
+});
+
+document.getElementById('clear-selection-btn')?.addEventListener('click', () => {
+  rowChks().forEach(c => c.checked = false);
+  if (selectAll) selectAll.checked = false;
+  updateSelectionState();
 });
 
 // ===== Tabs =====
