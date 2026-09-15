@@ -249,6 +249,14 @@
       <a class="docs-nav__link" href="#filter-flyout">Filter flyout</a>
       <a class="docs-nav__link" href="#kebab-menu">Kebab menu</a>
 
+      <div class="docs-nav__group">Display</div>
+      <a class="docs-nav__link" href="#pill">Pill (lozenge)</a>
+      <a class="docs-nav__link" href="#status-indicator">Status indicator</a>
+      <a class="docs-nav__link" href="#content-type-pill">Content-type pill</a>
+      <a class="docs-nav__link" href="#skeleton">Skeleton loader</a>
+      <a class="docs-nav__link" href="#info-banner">Info banner</a>
+      <a class="docs-nav__link" href="#key-value-list">Key-value list</a>
+
       <div class="docs-nav__group">Patterns</div>
       <a class="docs-nav__link" href="#settings-card">Settings card</a>
       <a class="docs-nav__link" href="#modal">Modal</a>
@@ -258,6 +266,12 @@
       <a class="docs-nav__link" href="#summary-card">Summary card</a>
       <a class="docs-nav__link" href="#radio-option-card">Radio option card</a>
       <a class="docs-nav__link" href="#rule-card">Rule card</a>
+      <a class="docs-nav__link" href="#collapsible-panel">Collapsible panel</a>
+      <a class="docs-nav__link" href="#card-wrapper">Card wrapper</a>
+      <a class="docs-nav__link" href="#list-row-card">List-row card</a>
+      <a class="docs-nav__link" href="#integration-cards">Integration cards</a>
+      <a class="docs-nav__link" href="#dynamic-list">Dynamic list</a>
+      <a class="docs-nav__link" href="#file-upload">File upload</a>
     </nav>
   </aside>
 
@@ -1653,6 +1667,433 @@ section.querySelectorAll('input, textarea').forEach(el =&gt;
           <tr><td><code>.a-day--selected</code></td><td>Selected date — primary blue bg, white text</td></tr>
         </tbody>
       </table>
+    </section>
+
+    <!-- ===== PILL ===== -->
+    <section class="docs-section" id="pill">
+      <h2>Pill (lozenge) <span class="docs-badge docs-badge--new">Figma</span></h2>
+      <p class="docs-section__desc">Static, non-interactive label for status or category. 7 semantic variants. Not yet in the live codebase — use for new Horizon pages. Not clickable.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">All variants</div>
+          <div class="docs-preview" style="flex-wrap: wrap; gap: 8px; align-items: center;">
+            <span class="pill pill--default">Default</span>
+            <span class="pill pill--info">Beta</span>
+            <span class="pill pill--info-bold">New</span>
+            <span class="pill pill--success">On</span>
+            <span class="pill pill--success-bold">Installed</span>
+            <span class="pill pill--warning">Warning</span>
+            <span class="pill pill--danger">Flagged</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;span class="pill pill--default"&gt;Default&lt;/span&gt;
+&lt;span class="pill pill--info"&gt;Beta&lt;/span&gt;
+&lt;span class="pill pill--info-bold"&gt;New&lt;/span&gt;
+&lt;span class="pill pill--success"&gt;On&lt;/span&gt;
+&lt;span class="pill pill--success-bold"&gt;Installed&lt;/span&gt;
+&lt;span class="pill pill--warning"&gt;Warning&lt;/span&gt;
+&lt;span class="pill pill--danger"&gt;Flagged&lt;/span&gt;</code></pre>
+        </div>
+      </div>
+      <table class="docs-props">
+        <thead><tr><th>Modifier</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td colspan="2" style="font-size:12px; color:#3C4A57;">All: height 16px, padding 0 4px, border-radius 4px, 11px/700/uppercase</td></tr>
+          <tr><td><code>.pill--default</code></td><td>Neutral gray</td></tr>
+          <tr><td><code>.pill--info</code> / <code>--info-bold</code></td><td>Blue — bold for use on coloured backgrounds</td></tr>
+          <tr><td><code>.pill--success</code> / <code>--success-bold</code></td><td>Green — bold for use on coloured backgrounds</td></tr>
+          <tr><td><code>.pill--warning</code></td><td>Amber</td></tr>
+          <tr><td><code>.pill--danger</code></td><td>Red</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== STATUS INDICATOR ===== -->
+    <section class="docs-section" id="status-indicator">
+      <h2>Status indicator <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Colored dot + plain text for moderation/content status in table columns. Distinct from the solid pill — use the dot only for Published/Draft/Trashed states.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Dot variants</div>
+          <div class="docs-preview" style="gap: 16px; flex-wrap: wrap;">
+            <span style="display:inline-flex; align-items:center; gap:6px; font-size:14px;"><span style="width:8px; height:8px; border-radius:50%; background:#13AD68; display:inline-block;"></span>Published</span>
+            <span style="display:inline-flex; align-items:center; gap:6px; font-size:14px;"><span style="width:8px; height:8px; border-radius:50%; background:#ACB4BD; display:inline-block;"></span>Draft</span>
+            <span style="display:inline-flex; align-items:center; gap:6px; font-size:14px;"><span style="width:8px; height:8px; border-radius:50%; background:#E2483D; display:inline-block;"></span>Trashed</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;span style="display:inline-flex; align-items:center; gap:6px; font-size:14px;"&gt;
+  &lt;span class="status-circle status-circle--published"&gt;&lt;/span&gt;
+  Published
+&lt;/span&gt;
+
+&lt;!-- status-circle colors --&gt;
+&lt;!-- --published : #13AD68 --&gt;
+&lt;!-- --draft     : #ACB4BD --&gt;
+&lt;!-- --trashed   : #E2483D --&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTENT-TYPE PILL ===== -->
+    <section class="docs-section" id="content-type-pill">
+      <h2>Content-type pill <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Solid blue pill used as a content-type flag above topic titles (Guide, Idea, Question) and as a "NEW" unread indicator. Same component, two uses.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Examples</div>
+          <div class="docs-preview" style="gap: 8px; flex-wrap: wrap; align-items: center;">
+            <span style="display:inline-block; background:#0369E9; color:#fff; border-radius:4px; padding:0 4px; font-size:11px; font-weight:700; text-transform:uppercase; line-height:18px;">Guide</span>
+            <span style="display:inline-block; background:#0369E9; color:#fff; border-radius:4px; padding:0 4px; font-size:11px; font-weight:700; text-transform:uppercase; line-height:18px;">Idea</span>
+            <span style="display:inline-block; background:#0369E9; color:#fff; border-radius:4px; padding:0 4px; font-size:11px; font-weight:700; text-transform:uppercase; line-height:18px;">New</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;span class="label-component label--brand label--emphasis-high"&gt;Guide&lt;/span&gt;
+&lt;span class="label-component label--brand label--emphasis-high"&gt;New&lt;/span&gt;
+
+&lt;!-- bg: #0369E9, color: #fff, 11px/700/uppercase, 4px radius, padding: 0 4px --&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKELETON ===== -->
+    <section class="docs-section" id="skeleton">
+      <h2>Skeleton loader <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Animated shimmer placeholder for async content. Set width/height inline to match real content dimensions.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Card loading state</div>
+          <div class="docs-preview">
+            <div style="display:flex; flex-direction:column; gap:12px; width:320px; padding:16px; background:#fff; border:1px solid var(--hz-border-color-base); border-radius:8px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span class="skeleton skeleton--avatar" style="width:32px; height:32px;"></span>
+                <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+                  <span class="skeleton skeleton--text" style="width:120px;"></span>
+                  <span class="skeleton skeleton--text" style="width:80px;"></span>
+                </div>
+              </div>
+              <span class="skeleton skeleton--title" style="width:100%;"></span>
+              <span class="skeleton skeleton--text" style="width:100%;"></span>
+              <span class="skeleton skeleton--text" style="width:75%;"></span>
+              <div style="display:flex; gap:8px;">
+                <span class="skeleton skeleton--pill" style="width:60px;"></span>
+                <span class="skeleton skeleton--pill" style="width:80px;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;!-- Avatar --&gt;
+&lt;span class="skeleton skeleton--avatar" style="width:32px; height:32px;"&gt;&lt;/span&gt;
+
+&lt;!-- Text line --&gt;
+&lt;span class="skeleton skeleton--text" style="width:200px;"&gt;&lt;/span&gt;
+
+&lt;!-- Title (taller) --&gt;
+&lt;span class="skeleton skeleton--title" style="width:100%;"&gt;&lt;/span&gt;
+
+&lt;!-- Pill / tag --&gt;
+&lt;span class="skeleton skeleton--pill" style="width:60px;"&gt;&lt;/span&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== INFO BANNER ===== -->
+    <section class="docs-section" id="info-banner">
+      <h2>Info banner <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Light blue page-level notice for beta disclaimers and neutral informational messages. Real class <code>.warning-box</code> (misleading name — not an error). No icon, just text.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Default</div>
+          <div class="docs-preview" style="flex-direction:column; align-items:stretch;">
+            <div class="warning-box">Please be aware that the features on this page are in open beta. The features are under active development and may contain unresolved issues.</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="warning-box"&gt;
+  Please be aware that the features on this page are in open beta.
+&lt;/div&gt;
+
+&lt;!-- bg: #F2F8FF, border: 1px solid #CCE1FF, border-radius: 4px, padding: 16px, font-size: 14px --&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KEY-VALUE LIST ===== -->
+    <section class="docs-section" id="key-value-list">
+      <h2>Key-value list <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Read-only metadata rows — label in secondary gray on the left, value right-aligned. Used in sidebar detail panels (Moderate Topic › Overview).</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Default</div>
+          <div class="docs-preview" style="flex-direction:column; align-items:stretch;">
+            <div class="kv-list" style="max-width:280px;">
+              <div class="kv-list__row"><span class="kv-list__label">Type:</span><span class="kv-list__value">Article</span></div>
+              <div class="kv-list__row"><span class="kv-list__label">Category:</span><span class="kv-list__value">Announcements</span></div>
+              <div class="kv-list__row"><span class="kv-list__label">Views:</span><span class="kv-list__value">142</span></div>
+              <div class="kv-list__row"><span class="kv-list__label">Replies:</span><span class="kv-list__value">8</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="kv-list"&gt;
+  &lt;div class="kv-list__row"&gt;
+    &lt;span class="kv-list__label"&gt;Type:&lt;/span&gt;
+    &lt;span class="kv-list__value"&gt;Article&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="kv-list__row"&gt;
+    &lt;span class="kv-list__label"&gt;Category:&lt;/span&gt;
+    &lt;span class="kv-list__value"&gt;Announcements&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COLLAPSIBLE PANEL ===== -->
+    <section class="docs-section" id="collapsible-panel">
+      <h2>Collapsible panel <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Expandable sidebar section. Header has a gray background (<code>#F5F7F9</code>), body is white — they share a border to look like one card. Chevron flips on toggle. Real class <code>.m-section</code>.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Collapsed / expanded</div>
+          <div class="docs-preview" style="flex-direction:column; gap:8px; align-items:stretch;">
+            <!-- Collapsed -->
+            <div style="max-width:280px; border-radius:4px; overflow:hidden; border:1px solid var(--hz-border-color-base);">
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 16px; font-weight:600; font-size:14px; cursor:pointer; background:#F5F7F9;">
+                Details
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+              </div>
+            </div>
+            <!-- Expanded -->
+            <div style="max-width:280px; border-radius:4px; overflow:hidden; border:1px solid var(--hz-border-color-base);">
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 16px; font-weight:600; font-size:14px; cursor:pointer; background:#F5F7F9;">
+                Overview
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+              </div>
+              <div style="padding:12px 16px; font-size:14px; color:var(--hz-text-color-secondary); background:#fff;">
+                Panel content goes here.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="m-section"&gt;
+  &lt;div class="m-section-header" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden"&gt;
+    Details
+    &lt;svg …chevron…&gt;&lt;/svg&gt;
+  &lt;/div&gt;
+  &lt;div class="m-section-body"&gt;
+    Panel content goes here.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- header: bg #F5F7F9, padding 12px 16px, 14px/600 --&gt;
+&lt;!-- body:   bg #fff,    padding 12px 16px, 14px/400 --&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CARD WRAPPER ===== -->
+    <section class="docs-section" id="card-wrapper">
+      <h2>Card wrapper <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Generic white card with border, shadow, and optional header row. Use for any content block that needs a visual card boundary.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">With header + action</div>
+          <div class="docs-preview" style="flex-direction:column; align-items:stretch;">
+            <div class="card-wrapper" style="max-width:400px;">
+              <div class="card-wrapper__header">
+                <h3 class="card-wrapper__title">Integrations</h3>
+                <button class="btn-new btn-new--small btn-new--secondary">Manage</button>
+              </div>
+              <p style="font-size:14px; color:var(--hz-text-color-secondary); margin:0;">Connect your community to third-party tools and workflows.</p>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="card-wrapper"&gt;
+  &lt;div class="card-wrapper__header"&gt;
+    &lt;h3 class="card-wrapper__title"&gt;Title&lt;/h3&gt;
+    &lt;button class="btn-new btn-new--small btn-new--secondary"&gt;Action&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p&gt;Body content&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- bg: #fff, border-radius: 8px, border: 1px var(--hz-border-color-light),
+     padding: 24px, box-shadow: 0 1px 2px rgba(0,0,0,.16) --&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LIST ROW CARD ===== -->
+    <section class="docs-section" id="list-row-card">
+      <h2>List-row card <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Full-width row card: round icon + title/description + trailing action. Used for short lists like SSO methods. Different from the integration card grid — use this when there are ≤5 options.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Default</div>
+          <div class="docs-preview" style="flex-direction:column; align-items:stretch; gap:8px;">
+            <div style="display:flex; align-items:center; gap:16px; border:1px solid #C7C7C7; border-radius:4px; padding:16px;">
+              <div style="width:48px; height:48px; border-radius:50%; background:#0369E9; flex:none;"></div>
+              <div style="flex:1;">
+                <strong style="display:block; font-size:15px;">SAML 2</strong>
+                <span style="font-size:13px; color:var(--hz-text-color-secondary);">Enable single sign-on via SAML 2.0</span>
+              </div>
+              <button class="btn-new btn-new--medium btn-new--primary">Install</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:16px; border:1px solid #C7C7C7; border-radius:4px; padding:16px;">
+              <div style="width:48px; height:48px; border-radius:50%; background:#ACB4BD; flex:none;"></div>
+              <div style="flex:1;">
+                <strong style="display:block; font-size:15px;">OpenID Connect</strong>
+                <span style="font-size:13px; color:var(--hz-text-color-secondary);">Sign in with an OpenID Connect provider</span>
+              </div>
+              <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="method-box"&gt;
+  &lt;div class="method-box__icon"&gt;&lt;!-- 48px round --&gt;&lt;/div&gt;
+  &lt;div class="method-box__info"&gt;
+    &lt;strong&gt;SAML 2&lt;/strong&gt;
+    &lt;span&gt;Enable single sign-on via SAML 2.0&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;!-- trailing: Install button OR ds-toggle --&gt;
+  &lt;button class="btn-new btn-new--medium btn-new--primary"&gt;Install&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- border: 1px solid #C7C7C7, radius: 4px, padding: 24px, gap: 16px --&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== INTEGRATION CARDS ===== -->
+    <section class="docs-section" id="integration-cards">
+      <h2>Integration card grid <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">2-column clickable card grid for browsing a catalog of apps or connectors. The whole card is an <code>&lt;a&gt;</code> tag.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">2-column grid</div>
+          <div class="docs-preview" style="flex-direction:column; align-items:stretch;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <a style="display:flex; gap:12px; border:1px solid var(--hz-border-color-base); border-radius:4px; padding:16px; text-decoration:none; color:inherit; cursor:pointer;">
+                <div style="width:40px; height:40px; border-radius:8px; background:#00A1E0; flex:none;"></div>
+                <div>
+                  <div style="font-weight:700; font-size:15px; margin-bottom:4px;">Salesforce</div>
+                  <div style="font-size:13px; color:var(--hz-text-color-secondary);">Combine community and CRM data to enable workflows.</div>
+                </div>
+              </a>
+              <a style="display:flex; gap:12px; border:1px solid var(--hz-border-color-base); border-radius:4px; padding:16px; text-decoration:none; color:inherit; cursor:pointer;">
+                <div style="width:40px; height:40px; border-radius:8px; background:#03363D; flex:none;"></div>
+                <div>
+                  <div style="font-weight:700; font-size:15px; margin-bottom:4px;">Zendesk</div>
+                  <div style="font-size:13px; color:var(--hz-text-color-secondary);">Create tickets from community posts.</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;"&gt;
+  &lt;a class="integration-app-card-container" href="/integrations/salesforce"&gt;
+    &lt;img src="…logo.png" style="width:40px; height:40px;"&gt;
+    &lt;div&gt;
+      &lt;div style="font-weight:700;"&gt;Salesforce&lt;/div&gt;
+      &lt;div style="font-size:13px; color:var(--hz-text-color-secondary);"&gt;
+        Combine community and CRM data.
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;!-- card: border 1px #D5D9DE, radius 4px, padding 16px, gap 12px --&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DYNAMIC LIST ===== -->
+    <section class="docs-section" id="dynamic-list">
+      <h2>Dynamic list <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Editable list of short text values — for managing a set of options (moderation labels, keyword lists). Each row has an input + red delete button; an "Add" button appends a new row. Different from Tags field, which applies existing values to a record.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Interactive</div>
+          <div class="docs-preview" style="flex-direction:column; align-items:flex-start;" id="dynamic-list-demo">
+            <div style="display:flex; flex-direction:column; gap:8px; width:320px;" id="dyn-list-rows">
+              <div style="display:flex; gap:8px;">
+                <input class="ds-input" value="Escalation" style="flex:1;">
+                <button class="btn-new btn-new--small btn-new--danger" onclick="this.closest('div').remove()">×</button>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <input class="ds-input" value="Waiting for customer" style="flex:1;">
+                <button class="btn-new btn-new--small btn-new--danger" onclick="this.closest('div').remove()">×</button>
+              </div>
+            </div>
+            <button class="btn-new btn-new--small btn-new--secondary" style="margin-top:8px;" onclick="(function(){var r=document.getElementById('dyn-list-rows');var d=document.createElement('div');d.style.cssText='display:flex;gap:8px;';d.innerHTML='<input class=\"ds-input\" style=\"flex:1;\" placeholder=\"Label…\"><button class=\"btn-new btn-new--small btn-new--danger\" onclick=\"this.closest(\'div\').remove()\">×</button>';r.appendChild(d);d.querySelector('input').focus();})()">+ Add label</button>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div id="list-rows"&gt;
+  &lt;div style="display:flex; gap:8px;"&gt;
+    &lt;input class="ds-input" value="Escalation" style="flex:1;"&gt;
+    &lt;button class="btn-new btn-new--small btn-new--danger"
+      onclick="this.closest('div').remove()"&gt;×&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;button onclick="
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex; gap:8px; margin-top:8px;';
+  row.innerHTML = '&lt;input class=&quot;ds-input&quot; style=&quot;flex:1;&quot;&gt;'
+    + '&lt;button class=&quot;btn-new btn-new--small btn-new--danger&quot;'
+    + ' onclick=&quot;this.closest(&amp;quot;div&amp;quot;).remove()&quot;&gt;×&lt;/button&gt;';
+  document.getElementById('list-rows').appendChild(row);
+"&gt;+ Add label&lt;/button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FILE UPLOAD ===== -->
+    <section class="docs-section" id="file-upload">
+      <h2>File upload <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Image/file upload field with a label, hint text, and upload button. The button style varies by page generation — use <code>btn-new--secondary</code> for Horizon pages.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Default</div>
+          <div class="docs-preview" style="flex-direction:column; align-items:flex-start; gap:8px;">
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <strong style="font-size:14px;">Featured image</strong>
+              <p style="font-size:12px; color:var(--hz-text-color-secondary); margin:0;">Max 5 MB. Allowed: .jpg, .jpeg, .png, .gif. Min recommended size: 1440×640px.</p>
+              <button class="btn-new btn-new--small btn-new--secondary">Upload image</button>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="ds-field"&gt;
+  &lt;label class="ds-field__label"&gt;Featured image&lt;/label&gt;
+  &lt;p class="ds-field__hint"&gt;
+    Max 5 MB. Allowed: .jpg, .jpeg, .png, .gif.
+  &lt;/p&gt;
+  &lt;button class="btn-new btn-new--small btn-new--secondary"&gt;
+    Upload image
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
     </section>
 
     <!-- ===== RULE CARD ===== -->
