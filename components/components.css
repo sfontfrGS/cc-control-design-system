@@ -410,6 +410,7 @@ body { display: flex; font-family: var(--hz-font-family); }
 .field { margin-bottom: 20px; max-width: 420px; }
 .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
 .field .hint  { font-size: 12px; color: var(--hz-text-color-secondary); margin-bottom: 6px; }
+/* ── Legacy generic input (used in template-topic, moderate etc.) ── */
 .input, .textarea {
   width: 100%; border: 1px solid var(--hz-border-color-base);
   border-radius: var(--hz-border-radius-xsmall);
@@ -418,7 +419,117 @@ body { display: flex; font-family: var(--hz-font-family); }
 .textarea { padding: 12px; min-height: 90px; resize: vertical; }
 .char-count { text-align: right; font-size: 11px; color: var(--hz-text-color-placeholder); margin-top: 4px; }
 .input:focus, .textarea:focus { outline: 2px solid var(--hz-bg-color-active); border-color: var(--hz-primary-color); }
+
+/* ── .select-trigger — inline compact dropdown button (32px, used in action-bars/settings) ── */
 .select-trigger { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid var(--hz-border-color-base); border-radius: var(--hz-border-radius-xsmall); background: #fff; font-size: 12px; font-weight: 600; cursor: pointer; }
+
+/* ===== FORM FIELD COMPONENTS (verified on live edit panels) ===== */
+/* ds-field: label wrapper                                           */
+/* ds-input: text input — 40px, 14px, all states                    */
+/* ds-select: full-width dropdown trigger — same height as ds-input  */
+/* ds-select--searchable: opens a search panel (JS required)         */
+/* ds-tags-field: tag chip container with inline text input          */
+
+.ds-field { display: flex; flex-direction: column; gap: 8px; }
+.ds-field__label { font-size: 14px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0; }
+.ds-field__hint  { font-size: 12px; color: var(--hz-text-color-secondary); margin: -4px 0 0; }
+
+/* Text input — 40px tall */
+.ds-input {
+  width: 100%;
+  border: 1px solid var(--hz-border-color-base); border-radius: var(--hz-border-radius-xsmall);
+  padding: 8px 12px; font-size: 14px; font-family: var(--hz-font-family);
+  color: var(--hz-text-color-primary); background: #fff;
+  transition: border-color .15s;
+}
+.ds-input::placeholder { color: var(--hz-text-color-placeholder); }
+.ds-input:focus { outline: 2px solid var(--hz-bg-color-active); border-color: var(--hz-primary-color); }
+.ds-input:disabled { background: var(--hz-input-disabled-bg); color: var(--hz-text-color-disabled); cursor: not-allowed; }
+.ds-input--error { border-color: var(--hz-error-color) !important; }
+.ds-input--error:focus { outline-color: #FCBEB9; }
+
+/* Textarea */
+.ds-textarea {
+  width: 100%;
+  border: 1px solid var(--hz-border-color-base); border-radius: var(--hz-border-radius-xsmall);
+  padding: 10px 12px; font-size: 14px; font-family: var(--hz-font-family);
+  color: var(--hz-text-color-primary); background: #fff;
+  min-height: 96px; resize: vertical; transition: border-color .15s;
+}
+.ds-textarea::placeholder { color: var(--hz-text-color-placeholder); }
+.ds-textarea:focus { outline: 2px solid var(--hz-bg-color-active); border-color: var(--hz-primary-color); }
+.ds-textarea:disabled { background: var(--hz-input-disabled-bg); color: var(--hz-text-color-disabled); cursor: not-allowed; }
+
+/* Full-width select / dropdown trigger — 40px, matches ds-input height */
+.ds-select {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; height: 40px;
+  border: 1px solid var(--hz-border-color-base); border-radius: var(--hz-border-radius-xsmall);
+  padding: 0 12px; font-size: 14px; font-family: var(--hz-font-family);
+  color: var(--hz-text-color-primary); background: #fff; cursor: pointer;
+  transition: border-color .15s;
+}
+.ds-select:hover { border-color: var(--hz-text-color-secondary); }
+.ds-select:focus { outline: 2px solid var(--hz-bg-color-active); border-color: var(--hz-primary-color); }
+.ds-select--placeholder { color: var(--hz-text-color-placeholder); }
+.ds-select__chevron { flex-shrink: 0; color: var(--hz-text-color-secondary); transition: transform .15s; }
+.ds-select.is-open .ds-select__chevron { transform: rotate(180deg); }
+
+/* Dropdown panel (shared by ds-select and ds-select--searchable) */
+.ds-dropdown {
+  position: absolute; z-index: 200; margin-top: 4px;
+  background: #fff; border: 1px solid var(--hz-border-color-base);
+  border-radius: var(--hz-border-radius-xsmall);
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  min-width: 100%; max-height: 280px; overflow-y: auto;
+}
+.ds-dropdown__search {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-bottom: 1px solid var(--hz-border-color-light);
+}
+.ds-dropdown__search-input {
+  flex: 1; border: none; outline: none; font-size: 14px; font-family: var(--hz-font-family);
+  color: var(--hz-text-color-primary);
+}
+.ds-dropdown__search-input::placeholder { color: var(--hz-text-color-placeholder); }
+.ds-dropdown__option {
+  padding: 8px 12px; font-size: 14px; cursor: pointer;
+  color: var(--hz-text-color-primary);
+}
+.ds-dropdown__option:hover { background: var(--hz-bg-color-base-hover); }
+.ds-dropdown__option.is-selected { color: var(--hz-primary-color); font-weight: 600; }
+.ds-dropdown__option.is-selected::after { content: '✓'; float: right; font-size: 12px; }
+.ds-dropdown__empty { padding: 16px 12px; font-size: 14px; color: var(--hz-text-color-secondary); text-align: center; }
+
+/* Select wrapper (position:relative container for trigger + panel) */
+.ds-select-wrap { position: relative; }
+
+/* Tag chip input — chips + inline text input */
+.ds-tags-field {
+  display: flex; flex-wrap: wrap; gap: 4px; align-items: flex-start;
+  min-height: 40px; padding: 6px;
+  border: 1px solid var(--hz-border-color-base); border-radius: var(--hz-border-radius-xsmall);
+  background: #fff; cursor: text; transition: border-color .15s;
+}
+.ds-tags-field:focus-within { outline: 2px solid var(--hz-bg-color-active); border-color: var(--hz-primary-color); }
+.ds-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #E8E8E8; border-radius: 2px;
+  padding: 4px 8px; font-size: 14px; color: var(--hz-text-color-primary);
+  white-space: nowrap;
+}
+.ds-tag__remove {
+  border: none; background: none; padding: 0; cursor: pointer;
+  color: var(--hz-text-color-secondary); font-size: 14px; line-height: 1;
+  display: flex; align-items: center;
+}
+.ds-tag__remove:hover { color: var(--hz-text-color-primary); }
+.ds-tags-field__input {
+  flex: 1; min-width: 120px; border: none; outline: none;
+  font-size: 12px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary);
+  background: transparent; padding: 0;
+}
+.ds-tags-field__input::placeholder { color: var(--hz-text-color-placeholder); }
 .opt-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 14px; }
 input[type="checkbox"], input[type="radio"] { width: 14px; height: 14px; accent-color: var(--hz-primary-color); }
 

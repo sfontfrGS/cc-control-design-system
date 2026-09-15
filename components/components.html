@@ -394,6 +394,7 @@
   <div class="comp-nav__group">Settings</div>
   <a class="comp-nav__link" href="#settings-card">Settings card</a>
   <a class="comp-nav__link" href="#input-states">Input states</a>
+  <a class="comp-nav__link" href="#form-fields">Form fields (ds-input)</a>
   <a class="comp-nav__link" href="#key-value-list">Key-value list</a>
   <a class="comp-nav__link" href="#radio-option-card">Radio option card</a>
   <a class="comp-nav__link" href="#dynamic-list">Dynamic editable list</a>
@@ -975,6 +976,109 @@
   <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">
     Error: add <code class="tag">.dirty-section__field--error</code> to the parent <code class="tag">.dirty-section__field</code> wrapper — turns the border red. Add <code class="tag">&lt;p class="dirty-section__field-error"&gt;</code> below the input for the message (12px, error red).<br>
     Disabled: native <code class="tag">disabled</code> attr — gray bg <code class="tag">#F5F7F9</code>, muted text, <code class="tag">not-allowed</code> cursor.
+  </p>
+</section>
+
+<section id="form-fields">
+  <h2>Form fields — <code style="font-size:13px; font-weight:400;">ds-input · ds-select · ds-tags-field</code></h2>
+  <p class="label" style="text-transform:none; font-weight:400; margin-bottom:16px;">
+    Live-verified on <code>dchdesign-en.insided.com</code> post edit panel (2026-09-15). All fields 40px tall, 14px/400, <code>1px solid #D5D9DE</code> border, 4px radius.
+  </p>
+
+  <!-- ds-input -->
+  <div class="label" style="margin-bottom:8px;">Text input — <code class="tag">.ds-input</code></div>
+  <div class="row" style="gap:16px; align-items:flex-start; flex-wrap:wrap; margin-bottom:24px;">
+    <div style="width:280px;">
+      <div class="label" style="font-size:11px; margin-bottom:4px;">Default</div>
+      <input class="ds-input" type="text" placeholder="Placeholder text…">
+    </div>
+    <div style="width:280px;">
+      <div class="label" style="font-size:11px; margin-bottom:4px;">With value</div>
+      <input class="ds-input" type="text" value="How to calculate lead score">
+    </div>
+    <div style="width:280px;">
+      <div class="label" style="font-size:11px; margin-bottom:4px;">Disabled</div>
+      <input class="ds-input" type="text" value="Read-only content" disabled>
+    </div>
+    <div style="width:280px;">
+      <div class="label" style="font-size:11px; margin-bottom:4px;">Error</div>
+      <input class="ds-input ds-input--error" type="text" value="bad value">
+      <p class="dirty-section__field-error" style="margin-top:4px;">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><line x1="6" y1="3.5" x2="6" y2="6.5" stroke="currentColor" stroke-linecap="round"/><circle cx="6" cy="8.5" r=".5" fill="currentColor"/></svg>
+        This field is required.
+      </p>
+    </div>
+  </div>
+
+  <!-- ds-select -->
+  <div class="label" style="margin-bottom:8px;">Dropdown — <code class="tag">.ds-select</code> + <code class="tag">.ds-dropdown</code></div>
+  <div class="row" style="gap:16px; align-items:flex-start; flex-wrap:wrap; margin-bottom:24px;">
+    <div style="width:280px; position:relative;">
+      <div class="label" style="font-size:11px; margin-bottom:4px;">Closed (placeholder)</div>
+      <button class="ds-select ds-select--placeholder" type="button" onclick="this.closest('.ds-select-wrap').classList.toggle('is-open'); this.classList.toggle('is-open');">
+        Select a category
+        <svg class="ds-select__chevron" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+      </button>
+    </div>
+    <div class="ds-select-wrap" style="width:280px;">
+      <div class="label" style="font-size:11px; margin-bottom:4px;">Open with options</div>
+      <button class="ds-select is-open" type="button">
+        Company announcements
+        <svg class="ds-select__chevron" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+      </button>
+      <div class="ds-dropdown" style="display:block;">
+        <div class="ds-dropdown__option is-selected">Company announcements</div>
+        <div class="ds-dropdown__option">Product updates</div>
+        <div class="ds-dropdown__option">Best practices</div>
+        <div class="ds-dropdown__option">Community news</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ds-select--searchable -->
+  <div class="label" style="margin-bottom:8px;">Searchable dropdown — <code class="tag">.ds-select</code> + search panel</div>
+  <div class="row" style="gap:16px; align-items:flex-start; flex-wrap:wrap; margin-bottom:24px;">
+    <div class="ds-select-wrap" style="width:280px;">
+      <div class="label" style="font-size:11px; margin-bottom:4px;">Open with search</div>
+      <button class="ds-select is-open" type="button">
+        Select tags…
+        <svg class="ds-select__chevron" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+      </button>
+      <div class="ds-dropdown" style="display:block;">
+        <div class="ds-dropdown__search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="ds-dropdown__search-input" type="text" placeholder="Search…">
+        </div>
+        <div class="ds-dropdown__option">Public</div>
+        <div class="ds-dropdown__option">Private</div>
+        <div class="ds-dropdown__option">Unlisted</div>
+        <div class="ds-dropdown__empty" style="display:none;">No results</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ds-tags-field -->
+  <div class="label" style="margin-bottom:8px;">Tags/chips field — <code class="tag">.ds-tags-field</code> + <code class="tag">.ds-tag</code></div>
+  <div class="row" style="gap:16px; align-items:flex-start; flex-wrap:wrap; margin-bottom:16px;">
+    <div style="width:360px;">
+      <div class="label" style="font-size:11px; margin-bottom:4px;">With chips + inline input</div>
+      <div class="ds-tags-field" onclick="this.querySelector('.ds-tags-field__input').focus()">
+        <span class="ds-tag">Public <button class="ds-tag__remove" type="button" aria-label="Remove Public" onclick="this.closest('.ds-tag').remove()">×</button></span>
+        <span class="ds-tag">Lead score <button class="ds-tag__remove" type="button" aria-label="Remove Lead score" onclick="this.closest('.ds-tag').remove()">×</button></span>
+        <input class="ds-tags-field__input" type="text" placeholder="Add tag…">
+      </div>
+    </div>
+    <div style="width:360px;">
+      <div class="label" style="font-size:11px; margin-bottom:4px;">Empty state</div>
+      <div class="ds-tags-field">
+        <input class="ds-tags-field__input" type="text" placeholder="Add tag…">
+      </div>
+    </div>
+  </div>
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">
+    <strong>ds-input</strong>: <code class="tag">padding: 8px 12px</code> (no explicit height — padding drives 40px). Error: add <code class="tag">.ds-input--error</code>.<br>
+    <strong>ds-select</strong>: button-based trigger + absolute <code class="tag">.ds-dropdown</code> panel. Wrap both in <code class="tag">.ds-select-wrap</code> (position:relative). Add search row with <code class="tag">.ds-dropdown__search</code> for searchable variant.<br>
+    <strong>ds-tags-field</strong>: <code class="tag">padding: 6px</code> · chip bg <code class="tag">#E8E8E8</code> · chip radius <code class="tag">2px</code> · inner input 12px font.
   </p>
 </section>
 
