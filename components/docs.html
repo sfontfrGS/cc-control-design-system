@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Docs — CC Design System</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--hz-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif); }
+
+    .docs-layout { display: flex; flex-direction: row; height: 100vh; }
+
+    .docs-sidebar {
+      width: 220px;
+      min-width: 220px;
+      height: 100vh;
+      overflow-y: auto;
+      background: #F6F6F6;
+      border-right: 1px solid #E0E0E0;
+      flex-shrink: 0;
+    }
+
+    .docs-sidebar__logo {
+      padding: 16px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #181F26;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    .docs-search {
+      width: calc(100% - 32px);
+      margin: 12px 16px 8px;
+      padding: 6px 10px;
+      border: 1px solid #D5D9DE;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: inherit;
+      display: block;
+    }
+
+    .docs-nav__group {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #3C4A57;
+      padding: 12px 20px 4px;
+      font-weight: 600;
+    }
+
+    .docs-nav__link {
+      display: block;
+      padding: 5px 20px;
+      font-size: 13px;
+      color: #3C4A57;
+      text-decoration: none;
+      border-left: 2px solid transparent;
+    }
+
+    .docs-nav__link:hover {
+      color: #0369E9;
+      background: rgba(3, 105, 233, .04);
+    }
+
+    .docs-nav__link.active {
+      color: #0369E9;
+      border-left-color: #0369E9;
+      background: #EBF3FE;
+    }
+
+    .docs-main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 40px 48px;
+      background: #fff;
+    }
+
+    .docs-section {
+      margin-bottom: 64px;
+    }
+
+    .docs-section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #181F26;
+      margin: 0 0 4px;
+    }
+
+    .docs-section__desc {
+      font-size: 14px;
+      color: #3C4A57;
+      margin: 0 0 24px;
+      line-height: 1.6;
+    }
+
+    .docs-variant {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+      align-items: start;
+    }
+
+    .docs-variant__label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #3C4A57;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+    }
+
+    .docs-preview {
+      border: 1px solid #E8E8E8;
+      border-radius: 6px;
+      padding: 24px;
+      background: #FAFAFA;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .docs-code {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #E8E8E8;
+    }
+
+    .docs-code pre {
+      margin: 0;
+      max-height: 320px;
+      overflow-y: auto;
+      font-size: 12px;
+    }
+
+    .docs-copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #fff;
+      border: 1px solid #D5D9DE;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #3C4A57;
+      z-index: 1;
+    }
+
+    .docs-copy-btn:hover { background: #EBF3FE; color: #0369E9; }
+    .docs-copy-btn.copied { background: #EBFBEE; color: #12995B; border-color: #12995B; }
+
+    .docs-props {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 16px;
+    }
+
+    .docs-props th {
+      text-align: left;
+      padding: 8px 12px;
+      background: #F5F7F9;
+      border-bottom: 2px solid #E0E0E0;
+      font-size: 12px;
+      font-weight: 600;
+      color: #3C4A57;
+      text-transform: uppercase;
+    }
+
+    .docs-props td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #F0F0F0;
+      vertical-align: top;
+    }
+
+    .docs-props code {
+      background: #F5F7F9;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 11px;
+      color: #E2483D;
+    }
+
+    .docs-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-left: 8px;
+    }
+
+    .docs-badge--stable { background: #EBFBEE; color: #12995B; }
+    .docs-badge--new    { background: #EBF3FE; color: #0369E9; }
+    .docs-badge--pattern { background: #FFF3E0; color: #E2483D; }
+
+    @media (max-width: 900px) {
+      .docs-variant { grid-template-columns: 1fr; }
+    }
+
+    /* Prism token offset — keep copy button above code */
+    .docs-code .token.tag { color: #0369E9; }
+  </style>
+</head>
+<body>
+<div class="docs-layout">
+
+  <!-- Sidebar -->
+  <aside class="docs-sidebar">
+    <div class="docs-sidebar__logo">CC Design System</div>
+    <input class="docs-search" placeholder="Search components…" type="search">
+    <nav class="docs-nav">
+      <div class="docs-nav__group">Foundations</div>
+      <a class="docs-nav__link" href="#color">Color tokens</a>
+      <a class="docs-nav__link" href="#typography">Typography</a>
+
+      <div class="docs-nav__group">Forms</div>
+      <a class="docs-nav__link" href="#toggle">Toggle</a>
+      <a class="docs-nav__link" href="#text-input">Text input</a>
+      <a class="docs-nav__link" href="#textarea">Textarea</a>
+      <a class="docs-nav__link" href="#dropdown">Dropdown</a>
+      <a class="docs-nav__link" href="#tags-field">Tags field</a>
+
+      <div class="docs-nav__group">Actions</div>
+      <a class="docs-nav__link" href="#buttons">Buttons</a>
+
+      <div class="docs-nav__group">Feedback</div>
+      <a class="docs-nav__link" href="#tooltip">Tooltip</a>
+      <a class="docs-nav__link" href="#page-banner">Page banner</a>
+      <a class="docs-nav__link" href="#status-pill">Status pill</a>
+
+      <div class="docs-nav__group">Patterns</div>
+      <a class="docs-nav__link" href="#settings-card">Settings card</a>
+      <a class="docs-nav__link" href="#modal">Modal</a>
+      <a class="docs-nav__link" href="#tabs">Tabs</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="docs-main">
+
+    <!-- ===== COLOR TOKENS stub ===== -->
+    <section class="docs-section" id="color">
+      <h2>Color tokens <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">See <code>tokens/tokens.css</code> for the full token list. Reference them in components as <code>var(--hz-primary-color)</code>, <code>var(--hz-text-color-primary)</code>, etc.</p>
+    </section>
+
+    <!-- ===== TYPOGRAPHY stub ===== -->
+    <section class="docs-section" id="typography">
+      <h2>Typography <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">The design system uses <code>var(--hz-font-family)</code> throughout. Font sizes follow a scale defined in <code>tokens.css</code>.</p>
+    </section>
+
+    <!-- ===== TOGGLE ===== -->
+    <section class="docs-section" id="toggle">
+      <h2>Toggle <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Binary on/off control. Wraps a hidden checkbox inside a <code>&lt;label&gt;</code> with a styled track.</p>
+
+      <!-- Off / On / Disabled -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Off / On / Disabled</div>
+          <div class="docs-preview">
+            <label class="ds-toggle">
+              <input type="checkbox">
+              <span class="ds-toggle__track"></span>
+            </label>
+            <label class="ds-toggle">
+              <input type="checkbox" checked>
+              <span class="ds-toggle__track"></span>
+            </label>
+            <label class="ds-toggle">
+              <input type="checkbox" disabled>
+              <span class="ds-toggle__track"></span>
+            </label>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;!-- Off --&gt;
+&lt;label class="ds-toggle"&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span class="ds-toggle__track"&gt;&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;!-- On --&gt;
+&lt;label class="ds-toggle"&gt;
+  &lt;input type="checkbox" checked&gt;
+  &lt;span class="ds-toggle__track"&gt;&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;label class="ds-toggle"&gt;
+  &lt;input type="checkbox" disabled&gt;
+  &lt;span class="ds-toggle__track"&gt;&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- With label -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">With label</div>
+          <div class="docs-preview">
+            <label class="ds-toggle">
+              <input type="checkbox" checked>
+              <span class="ds-toggle__track"></span>
+              <span class="ds-toggle__label">Enable notifications</span>
+            </label>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;label class="ds-toggle"&gt;
+  &lt;input type="checkbox" checked&gt;
+  &lt;span class="ds-toggle__track"&gt;&lt;/span&gt;
+  &lt;span class="ds-toggle__label"&gt;Enable notifications&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Small -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Small</div>
+          <div class="docs-preview">
+            <label class="ds-toggle ds-toggle--small">
+              <input type="checkbox">
+              <span class="ds-toggle__track"></span>
+              <span class="ds-toggle__label">Small toggle</span>
+            </label>
+            <label class="ds-toggle ds-toggle--small">
+              <input type="checkbox" checked>
+              <span class="ds-toggle__track"></span>
+              <span class="ds-toggle__label">Small on</span>
+            </label>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;label class="ds-toggle ds-toggle--small"&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span class="ds-toggle__track"&gt;&lt;/span&gt;
+  &lt;span class="ds-toggle__label"&gt;Small toggle&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Reveals sub-form -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Toggle reveals sub-form</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: flex-start;">
+            <label class="ds-toggle">
+              <input type="checkbox" onchange="document.getElementById('sub-1').style.display=this.checked?'block':'none'">
+              <span class="ds-toggle__track"></span>
+              <span class="ds-toggle__label">Enable feature</span>
+            </label>
+            <div id="sub-1" style="display:none; margin-top:16px; padding:16px; border:1px solid #E0E0E0; border-radius:4px;">
+              <input class="ds-input" type="text" placeholder="Configuration value…" style="max-width:280px;">
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;label class="ds-toggle"&gt;
+  &lt;input type="checkbox"
+    onchange="document.getElementById('sub-1').style.display=this.checked?'block':'none'"&gt;
+  &lt;span class="ds-toggle__track"&gt;&lt;/span&gt;
+  &lt;span class="ds-toggle__label"&gt;Enable feature&lt;/span&gt;
+&lt;/label&gt;
+&lt;div id="sub-1" style="display:none; margin-top:16px; padding:16px;
+  border:1px solid #E0E0E0; border-radius:4px;"&gt;
+  &lt;input class="ds-input" type="text"
+    placeholder="Configuration value…" style="max-width:280px;"&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Props table -->
+      <table class="docs-props">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>.ds-toggle</code></td><td>Wrapper label</td></tr>
+          <tr><td><code>.ds-toggle__track</code></td><td>The pill track</td></tr>
+          <tr><td><code>.ds-toggle__label</code></td><td>Optional text label</td></tr>
+          <tr><td><code>.ds-toggle--small</code></td><td>32×16px variant</td></tr>
+          <tr><td><code>input[checked]</code></td><td>Checked/on state</td></tr>
+          <tr><td><code>input[disabled]</code></td><td>Disabled state</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== TEXT INPUT ===== -->
+    <section class="docs-section" id="text-input">
+      <h2>Text input <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Standard 40px text input. Supports default, focus, disabled, and error states.</p>
+
+      <!-- States -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">States</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 8px;">
+            <input class="ds-input" type="text" placeholder="Default">
+            <input class="ds-input" type="text" value="Focused" autofocus>
+            <input class="ds-input" type="text" placeholder="Disabled" disabled>
+            <input class="ds-input ds-input--error" type="text" value="Error state">
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;!-- Default --&gt;
+&lt;input class="ds-input" type="text" placeholder="Default"&gt;
+
+&lt;!-- Focus --&gt;
+&lt;input class="ds-input" type="text" value="Focused" autofocus&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;input class="ds-input" type="text" placeholder="Disabled" disabled&gt;
+
+&lt;!-- Error --&gt;
+&lt;input class="ds-input ds-input--error" type="text" value="Error state"&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- With error message -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">With error message</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 4px;">
+            <input class="ds-input ds-input--error" type="text" value="bad@value">
+            <p class="dirty-section__field-error" style="margin:0;">This field is required.</p>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;input class="ds-input ds-input--error" type="text" value="bad@value"&gt;
+&lt;p class="dirty-section__field-error"&gt;This field is required.&lt;/p&gt;</code></pre>
+        </div>
+      </div>
+
+      <table class="docs-props">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>.ds-input</code></td><td>Base input — 40px, 14px, padding 8px 12px</td></tr>
+          <tr><td><code>.ds-input--error</code></td><td>Red border</td></tr>
+          <tr><td><code>[disabled]</code></td><td>Gray bg, not-allowed cursor</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== TEXTAREA ===== -->
+    <section class="docs-section" id="textarea">
+      <h2>Textarea <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Multi-line text area. Available as <code>.ds-textarea</code> or within dirty-section as <code>.dirty-section__textarea</code>.</p>
+
+      <!-- Default -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Default</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 8px;">
+            <textarea class="ds-textarea" rows="3" placeholder="ds-textarea — type here…"></textarea>
+            <textarea class="dirty-section__textarea" rows="3" placeholder="dirty-section__textarea — type here…"></textarea>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;!-- ds-textarea --&gt;
+&lt;textarea class="ds-textarea" rows="3" placeholder="Type here…"&gt;&lt;/textarea&gt;
+
+&lt;!-- dirty-section variant --&gt;
+&lt;textarea class="dirty-section__textarea" rows="3" placeholder="Type here…"&gt;&lt;/textarea&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- With char count -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">With char count</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 4px;">
+            <textarea class="ds-textarea" rows="3" id="ta-charcount" maxlength="200" placeholder="Type here…" oninput="document.getElementById('ta-count').textContent=this.value.length"></textarea>
+            <div style="font-size:12px; color:#3C4A57; text-align:right;"><span id="ta-count">0</span> / 200</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;textarea class="ds-textarea" rows="3" id="ta-charcount"
+  maxlength="200" placeholder="Type here…"
+  oninput="document.getElementById('ta-count').textContent=this.value.length"&gt;&lt;/textarea&gt;
+&lt;div style="font-size:12px; color:#3C4A57; text-align:right;"&gt;
+  &lt;span id="ta-count"&gt;0&lt;/span&gt; / 200
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DROPDOWN ===== -->
+    <section class="docs-section" id="dropdown">
+      <h2>Dropdown / Select <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Custom dropdown built from <code>.ds-select</code> trigger and a <code>.ds-dropdown</code> panel. Requires JS for interactivity.</p>
+
+      <!-- Closed -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Closed (placeholder state)</div>
+          <div class="docs-preview">
+            <div class="ds-select-wrap" style="width:200px;">
+              <button class="ds-select ds-select--placeholder" type="button">
+                Select an option
+                <svg class="ds-select__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="ds-select-wrap"&gt;
+  &lt;button class="ds-select ds-select--placeholder" type="button"&gt;
+    Select an option
+    &lt;svg class="ds-select__chevron" width="16" height="16"
+      viewBox="0 0 16 16" fill="none"&gt;
+      &lt;path d="M4 6l4 4 4-4" stroke="currentColor"
+        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Open / Interactive -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Interactive (open/close)</div>
+          <div class="docs-preview" style="min-height: 160px; align-items: flex-start;">
+            <div class="ds-select-wrap js-dropdown" style="width:220px;">
+              <button class="ds-select" type="button">
+                <span class="js-select-label">Choose option</span>
+                <svg class="ds-select__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="ds-dropdown" style="display:none; position:absolute; top:100%; left:0; right:0; z-index:100;">
+                <div class="ds-dropdown__option" data-value="alpha">Alpha</div>
+                <div class="ds-dropdown__option" data-value="beta">Beta</div>
+                <div class="ds-dropdown__option" data-value="gamma">Gamma</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="ds-select-wrap js-dropdown"&gt;
+  &lt;button class="ds-select" type="button"&gt;
+    &lt;span class="js-select-label"&gt;Choose option&lt;/span&gt;
+    &lt;svg class="ds-select__chevron" width="16" height="16"
+      viewBox="0 0 16 16" fill="none"&gt;
+      &lt;path d="M4 6l4 4 4-4" stroke="currentColor"
+        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;div class="ds-dropdown"&gt;
+    &lt;div class="ds-dropdown__option" data-value="alpha"&gt;Alpha&lt;/div&gt;
+    &lt;div class="ds-dropdown__option" data-value="beta"&gt;Beta&lt;/div&gt;
+    &lt;div class="ds-dropdown__option" data-value="gamma"&gt;Gamma&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Searchable -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Searchable</div>
+          <div class="docs-preview" style="min-height: 200px; align-items: flex-start;">
+            <div class="ds-select-wrap js-dropdown js-dropdown--searchable" style="width:240px;">
+              <button class="ds-select" type="button">
+                <span class="js-select-label">Search &amp; select…</span>
+                <svg class="ds-select__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="ds-dropdown" style="display:none; position:absolute; top:100%; left:0; right:0; z-index:100;">
+                <div class="ds-dropdown__search">
+                  <input class="ds-dropdown__search-input js-dropdown-search" type="text" placeholder="Search…">
+                </div>
+                <div class="ds-dropdown__option" data-value="apricot">Apricot</div>
+                <div class="ds-dropdown__option" data-value="blueberry">Blueberry</div>
+                <div class="ds-dropdown__option" data-value="cherry">Cherry</div>
+                <div class="ds-dropdown__option" data-value="dragonfruit">Dragonfruit</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="ds-select-wrap js-dropdown js-dropdown--searchable"&gt;
+  &lt;button class="ds-select" type="button"&gt;
+    &lt;span class="js-select-label"&gt;Search &amp;amp; select…&lt;/span&gt;
+    &lt;svg class="ds-select__chevron" width="16" height="16"
+      viewBox="0 0 16 16" fill="none"&gt;
+      &lt;path d="M4 6l4 4 4-4" stroke="currentColor"
+        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;div class="ds-dropdown"&gt;
+    &lt;div class="ds-dropdown__search"&gt;
+      &lt;input class="ds-dropdown__search-input js-dropdown-search"
+        type="text" placeholder="Search…"&gt;
+    &lt;/div&gt;
+    &lt;div class="ds-dropdown__option" data-value="apricot"&gt;Apricot&lt;/div&gt;
+    &lt;div class="ds-dropdown__option" data-value="blueberry"&gt;Blueberry&lt;/div&gt;
+    &lt;div class="ds-dropdown__option" data-value="cherry"&gt;Cherry&lt;/div&gt;
+    &lt;div class="ds-dropdown__option" data-value="dragonfruit"&gt;Dragonfruit&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAGS FIELD ===== -->
+    <section class="docs-section" id="tags-field">
+      <h2>Tags field <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Chip-based multi-value input. Press Enter or comma to add a chip; click × to remove.</p>
+
+      <!-- Static -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">With chips (static)</div>
+          <div class="docs-preview">
+            <div class="ds-tags-field" style="width:100%;">
+              <span class="ds-tag">Design<button class="ds-tag__remove" type="button">×</button></span>
+              <span class="ds-tag">System<button class="ds-tag__remove" type="button">×</button></span>
+              <input class="ds-tags-field__input" type="text" placeholder="Add tag…">
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="ds-tags-field"&gt;
+  &lt;span class="ds-tag"&gt;
+    Design
+    &lt;button class="ds-tag__remove" type="button"&gt;×&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;span class="ds-tag"&gt;
+    System
+    &lt;button class="ds-tag__remove" type="button"&gt;×&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;input class="ds-tags-field__input" type="text" placeholder="Add tag…"&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Interactive -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Interactive (type + Enter to add)</div>
+          <div class="docs-preview">
+            <div class="ds-tags-field js-tags-field" style="width:100%;" id="tags-demo">
+              <input class="ds-tags-field__input js-tags-input" type="text" placeholder="Type a tag, press Enter…">
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="ds-tags-field js-tags-field" id="tags-demo"&gt;
+  &lt;input class="ds-tags-field__input js-tags-input"
+    type="text" placeholder="Type a tag, press Enter…"&gt;
+&lt;/div&gt;
+
+&lt;!-- JS: see bottom of page --&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BUTTONS ===== -->
+    <section class="docs-section" id="buttons">
+      <h2>Buttons <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">All button variants built on the <code>.btn-new</code> base class.</p>
+
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">All variants</div>
+          <div class="docs-preview" style="flex-wrap: wrap; gap: 8px;">
+            <button class="btn-new btn-new--primary btn-new--small">Primary small</button>
+            <button class="btn-new btn-new--primary btn-new--medium">Primary medium</button>
+            <button class="btn-new btn-new--secondary btn-new--small">Secondary small</button>
+            <button class="btn-new btn-new--secondary btn-new--medium">Secondary medium</button>
+            <button class="btn-new btn-new--danger-subtle btn-new--small">Danger subtle sm</button>
+            <button class="btn-new btn-new--danger-subtle btn-new--medium">Danger subtle md</button>
+            <button class="btn-new btn-new--danger btn-new--medium">Danger</button>
+            <button class="btn-new btn-new--success btn-new--medium">Success</button>
+            <button class="btn-new btn-new--ghost btn-new--medium">Ghost</button>
+            <button class="btn-new btn-new--primary btn-new--medium" disabled>Disabled</button>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;button class="btn-new btn-new--primary btn-new--small"&gt;Primary small&lt;/button&gt;
+&lt;button class="btn-new btn-new--primary btn-new--medium"&gt;Primary medium&lt;/button&gt;
+&lt;button class="btn-new btn-new--secondary btn-new--small"&gt;Secondary small&lt;/button&gt;
+&lt;button class="btn-new btn-new--secondary btn-new--medium"&gt;Secondary medium&lt;/button&gt;
+&lt;button class="btn-new btn-new--danger-subtle btn-new--small"&gt;Danger subtle sm&lt;/button&gt;
+&lt;button class="btn-new btn-new--danger-subtle btn-new--medium"&gt;Danger subtle md&lt;/button&gt;
+&lt;button class="btn-new btn-new--danger btn-new--medium"&gt;Danger&lt;/button&gt;
+&lt;button class="btn-new btn-new--success btn-new--medium"&gt;Success&lt;/button&gt;
+&lt;button class="btn-new btn-new--ghost btn-new--medium"&gt;Ghost&lt;/button&gt;
+&lt;button class="btn-new btn-new--primary btn-new--medium" disabled&gt;Disabled&lt;/button&gt;</code></pre>
+        </div>
+      </div>
+
+      <table class="docs-props">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>.btn-new</code></td><td>Base button</td></tr>
+          <tr><td><code>.btn-new--small</code></td><td>32px height, 12px font</td></tr>
+          <tr><td><code>.btn-new--medium</code></td><td>40px height, 14px font</td></tr>
+          <tr><td><code>.btn-new--primary</code></td><td>Filled blue</td></tr>
+          <tr><td><code>.btn-new--secondary</code></td><td>White with border</td></tr>
+          <tr><td><code>.btn-new--danger</code></td><td>Filled red</td></tr>
+          <tr><td><code>.btn-new--danger-subtle</code></td><td>White with red text</td></tr>
+          <tr><td><code>.btn-new--success</code></td><td>Filled green</td></tr>
+          <tr><td><code>.btn-new--ghost</code></td><td>Transparent, no border</td></tr>
+          <tr><td><code>[disabled]</code></td><td>Gray, not-allowed</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== TOOLTIP ===== -->
+    <section class="docs-section" id="tooltip">
+      <h2>Tooltip <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">CSS-only tooltips. Use the <code>data-tooltip</code> attribute for simple text, or <code>.ds-tooltip-wrap</code> for rich content.</p>
+
+      <!-- Attribute tooltip -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Attribute tooltip</div>
+          <div class="docs-preview" style="gap: 24px; padding: 40px 24px;">
+            <span data-tooltip="This appears on hover" style="cursor:default; border-bottom: 1px dashed #3C4A57;">Hover me (top)</span>
+            <span data-tooltip="Tooltip below" data-tooltip-pos="bottom" style="cursor:default; border-bottom: 1px dashed #3C4A57;">Hover me (bottom)</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;!-- Default (top) --&gt;
+&lt;span data-tooltip="This appears on hover"&gt;Hover me&lt;/span&gt;
+
+&lt;!-- Bottom --&gt;
+&lt;span data-tooltip="Tooltip below" data-tooltip-pos="bottom"&gt;
+  Hover me (bottom)
+&lt;/span&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Rich tooltip -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Rich tooltip</div>
+          <div class="docs-preview" style="padding: 40px 24px;">
+            <span class="ds-tooltip-wrap">
+              <button class="btn-new btn-new--secondary btn-new--small">Hover for details</button>
+              <span class="ds-tooltip">Multi-line<br>tooltip content<br>here</span>
+            </span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;span class="ds-tooltip-wrap"&gt;
+  &lt;button class="btn-new btn-new--secondary btn-new--small"&gt;
+    Hover for details
+  &lt;/button&gt;
+  &lt;span class="ds-tooltip"&gt;
+    Multi-line&lt;br&gt;tooltip content&lt;br&gt;here
+  &lt;/span&gt;
+&lt;/span&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PAGE BANNER ===== -->
+    <section class="docs-section" id="page-banner">
+      <h2>Page banner <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Full-width alert banners for page-level feedback. Four semantic variants.</p>
+
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">All variants</div>
+          <div class="docs-preview" style="flex-direction: column; gap: 8px; padding: 16px;">
+            <div class="page-banner page-banner--success">Changes saved successfully.</div>
+            <div class="page-banner page-banner--warning">Review required before publishing.</div>
+            <div class="page-banner page-banner--danger">An error occurred. Please try again.</div>
+            <div class="page-banner page-banner--info">New version available.</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="page-banner page-banner--success"&gt;
+  Changes saved successfully.
+&lt;/div&gt;
+
+&lt;div class="page-banner page-banner--warning"&gt;
+  Review required before publishing.
+&lt;/div&gt;
+
+&lt;div class="page-banner page-banner--danger"&gt;
+  An error occurred. Please try again.
+&lt;/div&gt;
+
+&lt;div class="page-banner page-banner--info"&gt;
+  New version available.
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATUS PILL ===== -->
+    <section class="docs-section" id="status-pill">
+      <h2>Status pill <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Small inline badge for content status.</p>
+
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Variants</div>
+          <div class="docs-preview">
+            <span class="status-pill status-pill--published">Published</span>
+            <span class="status-pill status-pill--pending">Pending</span>
+            <span class="status-pill status-pill--draft">Draft</span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;span class="status-pill status-pill--published"&gt;Published&lt;/span&gt;
+&lt;span class="status-pill status-pill--pending"&gt;Pending&lt;/span&gt;
+&lt;span class="status-pill status-pill--draft"&gt;Draft&lt;/span&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SETTINGS CARD ===== -->
+    <section class="docs-section" id="settings-card">
+      <h2>Settings card <span class="docs-badge docs-badge--pattern">Pattern</span></h2>
+      <p class="docs-section__desc">The <code>.dirty-section</code> pattern wraps a card with a title, fields, and a save row. Add <code>.is-dirty</code> to the section when any input changes to signal unsaved state.</p>
+
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Default</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch;">
+            <div class="dirty-section" id="demo-dirty-section">
+              <h3 class="dirty-section__title">Notification preferences</h3>
+              <div class="dirty-section__card">
+                <div class="dirty-section__card-body">
+                  <div class="dirty-section__field-row">
+                    <div class="dirty-section__field-info">
+                      <p class="dirty-section__field-label">Email alerts</p>
+                      <p class="dirty-section__field-description">Send me an email for important updates.</p>
+                    </div>
+                    <div class="dirty-section__control">
+                      <label class="ds-toggle">
+                        <input type="checkbox" checked onchange="document.getElementById('demo-dirty-section').classList.add('is-dirty')">
+                        <span class="ds-toggle__track"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="dirty-section__field">
+                    <label class="dirty-section__field-label">Display name</label>
+                    <input class="dirty-section__input" type="text" value="Jane Smith" oninput="document.getElementById('demo-dirty-section').classList.add('is-dirty')">
+                  </div>
+                </div>
+                <div class="dirty-section__save-row">
+                  <button class="btn-new btn-new--secondary btn-new--small" onclick="document.getElementById('demo-dirty-section').classList.remove('is-dirty')">Cancel</button>
+                  <button class="btn-new btn-new--primary btn-new--small" onclick="document.getElementById('demo-dirty-section').classList.remove('is-dirty')">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="dirty-section" id="my-section"&gt;
+  &lt;h3 class="dirty-section__title"&gt;Notification preferences&lt;/h3&gt;
+  &lt;div class="dirty-section__card"&gt;
+    &lt;div class="dirty-section__card-body"&gt;
+      &lt;div class="dirty-section__field-row"&gt;
+        &lt;div class="dirty-section__field-info"&gt;
+          &lt;p class="dirty-section__field-label"&gt;Email alerts&lt;/p&gt;
+          &lt;p class="dirty-section__field-description"&gt;
+            Send me an email for important updates.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="dirty-section__control"&gt;
+          &lt;label class="ds-toggle"&gt;
+            &lt;input type="checkbox" checked&gt;
+            &lt;span class="ds-toggle__track"&gt;&lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="dirty-section__field"&gt;
+        &lt;label class="dirty-section__field-label"&gt;Display name&lt;/label&gt;
+        &lt;input class="dirty-section__input" type="text" value="Jane Smith"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="dirty-section__save-row"&gt;
+      &lt;button class="btn-new btn-new--secondary btn-new--small"&gt;Cancel&lt;/button&gt;
+      &lt;button class="btn-new btn-new--primary btn-new--small"&gt;Save changes&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+// Mark dirty on any change
+const section = document.getElementById('my-section');
+section.querySelectorAll('input, textarea').forEach(el =&gt;
+  el.addEventListener('change', () =&gt; section.classList.add('is-dirty'))
+);
+&lt;/script&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Error state -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Error state</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch;">
+            <div class="dirty-section">
+              <div class="dirty-section__card">
+                <div class="dirty-section__card-body">
+                  <div class="dirty-section__field dirty-section__field--error">
+                    <label class="dirty-section__field-label">API endpoint</label>
+                    <input class="dirty-section__input" type="text" value="not a url">
+                    <p class="dirty-section__field-error">Must be a valid URL.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="dirty-section__field dirty-section__field--error"&gt;
+  &lt;label class="dirty-section__field-label"&gt;API endpoint&lt;/label&gt;
+  &lt;input class="dirty-section__input" type="text" value="not a url"&gt;
+  &lt;p class="dirty-section__field-error"&gt;Must be a valid URL.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MODAL ===== -->
+    <section class="docs-section" id="modal">
+      <h2>Modal <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Dialog overlay. Toggle <code>[hidden]</code> on the <code>.modal-overlay</code> to show/hide.</p>
+
+      <!-- Default code -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">HTML structure</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+            <p style="font-size:13px; color:#3C4A57; margin:0;">See the interactive demo below. Click the button to open a live modal.</p>
+            <button class="btn-new btn-new--primary btn-new--medium" id="open-modal-btn">Open modal</button>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="modal-overlay" id="my-modal" hidden&gt;
+  &lt;div class="modal"&gt;
+    &lt;div class="modal__header"&gt;
+      &lt;div class="modal__title-group"&gt;
+        &lt;span class="modal__label"&gt;CONFIRM ACTION&lt;/span&gt;
+        &lt;h2 class="modal__title"&gt;Delete record&lt;/h2&gt;
+      &lt;/div&gt;
+      &lt;button class="modal__close" onclick="document.getElementById('my-modal').hidden=true"&gt;
+        &amp;times;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="modal__body"&gt;
+      Are you sure you want to delete this record? This action cannot be undone.
+    &lt;/div&gt;
+    &lt;div class="modal__footer"&gt;
+      &lt;button class="btn-new btn-new--secondary btn-new--medium"
+        onclick="document.getElementById('my-modal').hidden=true"&gt;
+        Cancel
+      &lt;/button&gt;
+      &lt;button class="btn-new btn-new--danger btn-new--medium"&gt;
+        Delete
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TABS ===== -->
+    <section class="docs-section" id="tabs">
+      <h2>Tabs <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Horizontal tab navigation with <code>.ds-tabs</code> / <code>.ds-tab</code> and content panes via <code>.ds-pane</code>.</p>
+
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Interactive tabs</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; padding: 16px;">
+            <div class="ds-tabs" id="demo-tabs">
+              <button class="ds-tab active" data-tab="overview">Overview</button>
+              <button class="ds-tab" data-tab="settings">Settings</button>
+              <button class="ds-tab" data-tab="history">History</button>
+            </div>
+            <div class="ds-pane active" id="tab-overview" style="font-size:14px; color:#3C4A57;">
+              <p>Overview pane: high-level summary of the item.</p>
+            </div>
+            <div class="ds-pane" id="tab-settings" style="font-size:14px; color:#3C4A57;">
+              <p>Settings pane: configuration options.</p>
+            </div>
+            <div class="ds-pane" id="tab-history" style="font-size:14px; color:#3C4A57;">
+              <p>History pane: audit log of changes.</p>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="ds-tabs" id="demo-tabs"&gt;
+  &lt;button class="ds-tab active" data-tab="overview"&gt;Overview&lt;/button&gt;
+  &lt;button class="ds-tab" data-tab="settings"&gt;Settings&lt;/button&gt;
+  &lt;button class="ds-tab" data-tab="history"&gt;History&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class="ds-pane active" id="tab-overview"&gt;Overview content&lt;/div&gt;
+&lt;div class="ds-pane" id="tab-settings"&gt;Settings content&lt;/div&gt;
+&lt;div class="ds-pane" id="tab-history"&gt;History content&lt;/div&gt;
+
+&lt;script&gt;
+document.getElementById('demo-tabs').addEventListener('click', e =&gt; {
+  const tab = e.target.closest('.ds-tab');
+  if (!tab) return;
+  document.querySelectorAll('.ds-tab').forEach(t =&gt; t.classList.remove('active'));
+  document.querySelectorAll('.ds-pane').forEach(p =&gt; p.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+});
+&lt;/script&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Live demo modal -->
+<div class="modal-overlay" id="demo-modal" hidden>
+  <div class="modal">
+    <div class="modal__header">
+      <div class="modal__title-group">
+        <span class="modal__label">CONFIRM ACTION</span>
+        <h2 class="modal__title">Delete record</h2>
+      </div>
+      <button class="modal__close" id="close-modal-btn">&times;</button>
+    </div>
+    <div class="modal__body">
+      Are you sure you want to delete this record? This action cannot be undone.
+    </div>
+    <div class="modal__footer">
+      <button class="btn-new btn-new--secondary btn-new--medium" id="cancel-modal-btn">Cancel</button>
+      <button class="btn-new btn-new--danger btn-new--medium">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== Copy buttons =====
+document.querySelectorAll('.docs-copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const code = btn.closest('.docs-code').querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  });
+});
+
+// ===== Nav search =====
+const searchInput = document.querySelector('.docs-search');
+searchInput?.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase();
+  document.querySelectorAll('.docs-nav__link').forEach(link => {
+    const show = !q || link.textContent.toLowerCase().includes(q);
+    link.style.display = show ? '' : 'none';
+  });
+});
+
+// ===== Active nav highlight on scroll =====
+const sections = document.querySelectorAll('.docs-section');
+const navLinks = document.querySelectorAll('.docs-nav__link');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ===== Dropdown =====
+document.querySelectorAll('.js-dropdown').forEach(wrap => {
+  const btn = wrap.querySelector('.ds-select');
+  const panel = wrap.querySelector('.ds-dropdown');
+  const label = wrap.querySelector('.js-select-label');
+
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = panel.style.display === 'block';
+    // Close all first
+    document.querySelectorAll('.js-dropdown .ds-dropdown').forEach(p => p.style.display = 'none');
+    document.querySelectorAll('.js-dropdown').forEach(w => w.classList.remove('is-open'));
+    if (!isOpen) {
+      panel.style.display = 'block';
+      wrap.classList.add('is-open');
+      // Focus search if searchable
+      const searchEl = wrap.querySelector('.js-dropdown-search');
+      if (searchEl) { searchEl.value = ''; searchEl.focus(); filterDropdown(searchEl); }
+    }
+  });
+
+  panel.querySelectorAll('.ds-dropdown__option').forEach(opt => {
+    opt.addEventListener('click', e => {
+      e.stopPropagation();
+      if (label) label.textContent = opt.textContent;
+      btn.classList.remove('ds-select--placeholder');
+      panel.querySelectorAll('.ds-dropdown__option').forEach(o => o.classList.remove('is-selected'));
+      opt.classList.add('is-selected');
+      panel.style.display = 'none';
+      wrap.classList.remove('is-open');
+    });
+  });
+});
+
+// Search filter inside searchable dropdown
+function filterDropdown(searchEl) {
+  const wrap = searchEl.closest('.js-dropdown');
+  const q = searchEl.value.toLowerCase();
+  wrap.querySelectorAll('.ds-dropdown__option').forEach(opt => {
+    opt.style.display = !q || opt.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+document.querySelectorAll('.js-dropdown-search').forEach(input => {
+  input.addEventListener('input', () => filterDropdown(input));
+  input.addEventListener('click', e => e.stopPropagation());
+});
+
+// Close dropdowns on outside click
+document.addEventListener('click', () => {
+  document.querySelectorAll('.js-dropdown .ds-dropdown').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.js-dropdown').forEach(w => w.classList.remove('is-open'));
+});
+
+// ===== Tags field =====
+document.querySelectorAll('.js-tags-field').forEach(field => {
+  const input = field.querySelector('.js-tags-input');
+
+  function addTag(value) {
+    const v = value.trim().replace(/,$/, '');
+    if (!v) return;
+    const tag = document.createElement('span');
+    tag.className = 'ds-tag';
+    tag.innerHTML = `${v}<button class="ds-tag__remove" type="button">×</button>`;
+    tag.querySelector('.ds-tag__remove').addEventListener('click', () => tag.remove());
+    field.insertBefore(tag, input);
+  }
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      addTag(input.value);
+      input.value = '';
+    } else if (e.key === 'Backspace' && !input.value) {
+      const tags = field.querySelectorAll('.ds-tag');
+      if (tags.length) tags[tags.length - 1].remove();
+    }
+  });
+});
+
+// ===== Modal =====
+const openBtn = document.getElementById('open-modal-btn');
+const modal = document.getElementById('demo-modal');
+const overlay = modal;
+
+openBtn?.addEventListener('click', () => { modal.hidden = false; });
+document.getElementById('close-modal-btn')?.addEventListener('click', () => { modal.hidden = true; });
+document.getElementById('cancel-modal-btn')?.addEventListener('click', () => { modal.hidden = true; });
+
+overlay?.addEventListener('click', e => {
+  if (e.target === overlay) modal.hidden = true;
+});
+
+// ===== Tabs =====
+document.getElementById('demo-tabs')?.addEventListener('click', e => {
+  const tab = e.target.closest('.ds-tab');
+  if (!tab) return;
+  document.querySelectorAll('#demo-tabs .ds-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#tab-overview, #tab-settings, #tab-history').forEach(p => p.classList.remove('active'));
+  tab.classList.add('active');
+  const pane = document.getElementById('tab-' + tab.dataset.tab);
+  if (pane) pane.classList.add('active');
+});
+</script>
+
+</body>
+</html>
