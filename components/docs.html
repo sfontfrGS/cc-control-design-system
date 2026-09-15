@@ -405,55 +405,91 @@
     <!-- ===== TEXT INPUT ===== -->
     <section class="docs-section" id="text-input">
       <h2>Text input <span class="docs-badge docs-badge--stable">Stable</span></h2>
-      <p class="docs-section__desc">Standard 40px text input. Supports default, focus, disabled, and error states.</p>
+      <p class="docs-section__desc">Standard 40px text input. Always wrap in <code>.ds-field</code> to get the label, hint, and error message laid out correctly.</p>
 
-      <!-- States -->
+      <!-- With label (the default pattern) -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">With label — standard pattern</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 16px;">
+            <div class="ds-field">
+              <label class="ds-field__label">Title</label>
+              <input class="ds-input" type="text" placeholder="Enter a title…">
+            </div>
+            <div class="ds-field">
+              <label class="ds-field__label">Description</label>
+              <p class="ds-field__hint">Optional — shown below the title in search results.</p>
+              <input class="ds-input" type="text" placeholder="Short description…">
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;!-- Label only --&gt;
+&lt;div class="ds-field"&gt;
+  &lt;label class="ds-field__label"&gt;Title&lt;/label&gt;
+  &lt;input class="ds-input" type="text" placeholder="Enter a title…"&gt;
+&lt;/div&gt;
+
+&lt;!-- Label + hint --&gt;
+&lt;div class="ds-field"&gt;
+  &lt;label class="ds-field__label"&gt;Description&lt;/label&gt;
+  &lt;p class="ds-field__hint"&gt;Optional — shown in search results.&lt;/p&gt;
+  &lt;input class="ds-input" type="text" placeholder="Short description…"&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Input states -->
       <div class="docs-variant">
         <div>
           <div class="docs-variant__label">States</div>
-          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 8px;">
-            <input class="ds-input" type="text" placeholder="Default">
-            <input class="ds-input" type="text" value="Focused" autofocus>
-            <input class="ds-input" type="text" placeholder="Disabled" disabled>
-            <input class="ds-input ds-input--error" type="text" value="Error state">
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 12px;">
+            <div class="ds-field">
+              <label class="ds-field__label">Default</label>
+              <input class="ds-input" type="text" placeholder="Placeholder text…">
+            </div>
+            <div class="ds-field">
+              <label class="ds-field__label">Disabled</label>
+              <input class="ds-input" type="text" value="Read-only value" disabled>
+            </div>
+            <div class="ds-field">
+              <label class="ds-field__label">Error</label>
+              <input class="ds-input ds-input--error" type="text" value="bad@value">
+              <p class="dirty-section__field-error" style="margin:0;">This field is required.</p>
+            </div>
           </div>
         </div>
         <div class="docs-code">
           <button class="docs-copy-btn">Copy</button>
           <pre><code class="language-html">&lt;!-- Default --&gt;
-&lt;input class="ds-input" type="text" placeholder="Default"&gt;
-
-&lt;!-- Focus --&gt;
-&lt;input class="ds-input" type="text" value="Focused" autofocus&gt;
+&lt;div class="ds-field"&gt;
+  &lt;label class="ds-field__label"&gt;Label&lt;/label&gt;
+  &lt;input class="ds-input" type="text" placeholder="Placeholder…"&gt;
+&lt;/div&gt;
 
 &lt;!-- Disabled --&gt;
-&lt;input class="ds-input" type="text" placeholder="Disabled" disabled&gt;
+&lt;div class="ds-field"&gt;
+  &lt;label class="ds-field__label"&gt;Label&lt;/label&gt;
+  &lt;input class="ds-input" type="text" value="Read-only value" disabled&gt;
+&lt;/div&gt;
 
 &lt;!-- Error --&gt;
-&lt;input class="ds-input ds-input--error" type="text" value="Error state"&gt;</code></pre>
-        </div>
-      </div>
-
-      <!-- With error message -->
-      <div class="docs-variant">
-        <div>
-          <div class="docs-variant__label">With error message</div>
-          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 4px;">
-            <input class="ds-input ds-input--error" type="text" value="bad@value">
-            <p class="dirty-section__field-error" style="margin:0;">This field is required.</p>
-          </div>
-        </div>
-        <div class="docs-code">
-          <button class="docs-copy-btn">Copy</button>
-          <pre><code class="language-html">&lt;input class="ds-input ds-input--error" type="text" value="bad@value"&gt;
-&lt;p class="dirty-section__field-error"&gt;This field is required.&lt;/p&gt;</code></pre>
+&lt;div class="ds-field"&gt;
+  &lt;label class="ds-field__label"&gt;Label&lt;/label&gt;
+  &lt;input class="ds-input ds-input--error" type="text" value="bad@value"&gt;
+  &lt;p class="dirty-section__field-error"&gt;This field is required.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
         </div>
       </div>
 
       <table class="docs-props">
         <thead><tr><th>Class</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>.ds-input</code></td><td>Base input — 40px, 14px, padding 8px 12px</td></tr>
+          <tr><td><code>.ds-field</code></td><td>Wrapper — flex column, 8px gap between children</td></tr>
+          <tr><td><code>.ds-field__label</code></td><td>Label — 14px/600, primary color</td></tr>
+          <tr><td><code>.ds-field__hint</code></td><td>Helper text — 12px, secondary color, sits between label and input</td></tr>
+          <tr><td><code>.ds-input</code></td><td>Input — 40px tall, 14px, padding 8px 12px</td></tr>
           <tr><td><code>.ds-input--error</code></td><td>Red border</td></tr>
           <tr><td><code>[disabled]</code></td><td>Gray bg, not-allowed cursor</td></tr>
         </tbody>
@@ -468,19 +504,22 @@
       <!-- Default -->
       <div class="docs-variant">
         <div>
-          <div class="docs-variant__label">Default</div>
-          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 8px;">
-            <textarea class="ds-textarea" rows="3" placeholder="ds-textarea — type here…"></textarea>
-            <textarea class="dirty-section__textarea" rows="3" placeholder="dirty-section__textarea — type here…"></textarea>
+          <div class="docs-variant__label">With label</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 16px;">
+            <div class="ds-field">
+              <label class="ds-field__label">Community rules</label>
+              <p class="ds-field__hint">Describe what is and is not allowed in your community.</p>
+              <textarea class="ds-textarea" rows="3" placeholder="Type here…"></textarea>
+            </div>
           </div>
         </div>
         <div class="docs-code">
           <button class="docs-copy-btn">Copy</button>
-          <pre><code class="language-html">&lt;!-- ds-textarea --&gt;
-&lt;textarea class="ds-textarea" rows="3" placeholder="Type here…"&gt;&lt;/textarea&gt;
-
-&lt;!-- dirty-section variant --&gt;
-&lt;textarea class="dirty-section__textarea" rows="3" placeholder="Type here…"&gt;&lt;/textarea&gt;</code></pre>
+          <pre><code class="language-html">&lt;div class="ds-field"&gt;
+  &lt;label class="ds-field__label"&gt;Community rules&lt;/label&gt;
+  &lt;p class="ds-field__hint"&gt;Describe what is and is not allowed.&lt;/p&gt;
+  &lt;textarea class="ds-textarea" rows="3" placeholder="Type here…"&gt;&lt;/textarea&gt;
+&lt;/div&gt;</code></pre>
         </div>
       </div>
 
@@ -510,30 +549,36 @@
       <h2>Dropdown / Select <span class="docs-badge docs-badge--stable">Stable</span></h2>
       <p class="docs-section__desc">Custom dropdown built from <code>.ds-select</code> trigger and a <code>.ds-dropdown</code> panel. Requires JS for interactivity.</p>
 
-      <!-- Closed -->
+      <!-- With label -->
       <div class="docs-variant">
         <div>
-          <div class="docs-variant__label">Closed (placeholder state)</div>
-          <div class="docs-preview">
-            <div class="ds-select-wrap" style="width:200px;">
-              <button class="ds-select ds-select--placeholder" type="button">
-                Select an option
-                <svg class="ds-select__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
+          <div class="docs-variant__label">With label</div>
+          <div class="docs-preview" style="align-items: flex-start;">
+            <div class="ds-field" style="width:220px;">
+              <label class="ds-field__label">Content type</label>
+              <div class="ds-select-wrap" style="width:100%;">
+                <button class="ds-select ds-select--placeholder" type="button">
+                  Select an option
+                  <svg class="ds-select__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
         <div class="docs-code">
           <button class="docs-copy-btn">Copy</button>
-          <pre><code class="language-html">&lt;div class="ds-select-wrap"&gt;
-  &lt;button class="ds-select ds-select--placeholder" type="button"&gt;
-    Select an option
-    &lt;svg class="ds-select__chevron" width="16" height="16"
-      viewBox="0 0 16 16" fill="none"&gt;
-      &lt;path d="M4 6l4 4 4-4" stroke="currentColor"
-        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/&gt;
-    &lt;/svg&gt;
-  &lt;/button&gt;
+          <pre><code class="language-html">&lt;div class="ds-field"&gt;
+  &lt;label class="ds-field__label"&gt;Content type&lt;/label&gt;
+  &lt;div class="ds-select-wrap"&gt;
+    &lt;button class="ds-select ds-select--placeholder" type="button"&gt;
+      Select an option
+      &lt;svg class="ds-select__chevron" width="16" height="16"
+        viewBox="0 0 16 16" fill="none"&gt;
+        &lt;path d="M4 6l4 4 4-4" stroke="currentColor"
+          stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </div>
       </div>
@@ -629,30 +674,36 @@
       <h2>Tags field <span class="docs-badge docs-badge--stable">Stable</span></h2>
       <p class="docs-section__desc">Chip-based multi-value input. Press Enter or comma to add a chip; click × to remove.</p>
 
-      <!-- Static -->
+      <!-- With label -->
       <div class="docs-variant">
         <div>
-          <div class="docs-variant__label">With chips (static)</div>
-          <div class="docs-preview">
-            <div class="ds-tags-field" style="width:100%;">
-              <span class="ds-tag">Design<button class="ds-tag__remove" type="button">×</button></span>
-              <span class="ds-tag">System<button class="ds-tag__remove" type="button">×</button></span>
-              <input class="ds-tags-field__input" type="text" placeholder="Add tag…">
+          <div class="docs-variant__label">With label</div>
+          <div class="docs-preview" style="align-items: flex-start; width:100%;">
+            <div class="ds-field" style="width:100%;">
+              <label class="ds-field__label">Topics</label>
+              <div class="ds-tags-field" style="width:100%;">
+                <span class="ds-tag">Design<button class="ds-tag__remove" type="button">×</button></span>
+                <span class="ds-tag">System<button class="ds-tag__remove" type="button">×</button></span>
+                <input class="ds-tags-field__input" type="text" placeholder="Add tag…">
+              </div>
             </div>
           </div>
         </div>
         <div class="docs-code">
           <button class="docs-copy-btn">Copy</button>
-          <pre><code class="language-html">&lt;div class="ds-tags-field"&gt;
-  &lt;span class="ds-tag"&gt;
-    Design
-    &lt;button class="ds-tag__remove" type="button"&gt;×&lt;/button&gt;
-  &lt;/span&gt;
-  &lt;span class="ds-tag"&gt;
-    System
-    &lt;button class="ds-tag__remove" type="button"&gt;×&lt;/button&gt;
-  &lt;/span&gt;
-  &lt;input class="ds-tags-field__input" type="text" placeholder="Add tag…"&gt;
+          <pre><code class="language-html">&lt;div class="ds-field"&gt;
+  &lt;label class="ds-field__label"&gt;Topics&lt;/label&gt;
+  &lt;div class="ds-tags-field"&gt;
+    &lt;span class="ds-tag"&gt;
+      Design
+      &lt;button class="ds-tag__remove" type="button"&gt;×&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class="ds-tag"&gt;
+      System
+      &lt;button class="ds-tag__remove" type="button"&gt;×&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;input class="ds-tags-field__input" type="text" placeholder="Add tag…"&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </div>
       </div>
