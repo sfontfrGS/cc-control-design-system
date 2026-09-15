@@ -239,12 +239,23 @@
       <a class="docs-nav__link" href="#tooltip">Tooltip</a>
       <a class="docs-nav__link" href="#page-banner">Page banner</a>
       <a class="docs-nav__link" href="#status-pill">Status pill</a>
+      <a class="docs-nav__link" href="#section-message">Section message</a>
+      <a class="docs-nav__link" href="#toast">Toast</a>
+      <a class="docs-nav__link" href="#spinner">Spinner</a>
+
+      <div class="docs-nav__group">Navigation</div>
+      <a class="docs-nav__link" href="#breadcrumb">Breadcrumb</a>
+      <a class="docs-nav__link" href="#filter-pill">Filter pill</a>
+      <a class="docs-nav__link" href="#kebab-menu">Kebab menu</a>
 
       <div class="docs-nav__group">Patterns</div>
       <a class="docs-nav__link" href="#settings-card">Settings card</a>
       <a class="docs-nav__link" href="#modal">Modal</a>
       <a class="docs-nav__link" href="#tabs">Tabs</a>
       <a class="docs-nav__link" href="#data-table">Data table</a>
+      <a class="docs-nav__link" href="#empty-state">Empty state</a>
+      <a class="docs-nav__link" href="#summary-card">Summary card</a>
+      <a class="docs-nav__link" href="#radio-option-card">Radio option card</a>
     </nav>
   </aside>
 
@@ -1099,6 +1110,346 @@ section.querySelectorAll('input, textarea').forEach(el =&gt;
           <tr><td><code>.btn-new--danger</code></td><td>Destructive action (red)</td></tr>
         </tbody>
       </table>
+    </section>
+
+    <!-- ===== SECTION MESSAGE ===== -->
+    <section class="docs-section" id="section-message">
+      <h2>Section message <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Inline semantic message with 4 variants — info, success, warning, danger. Use for contextual feedback within a page, not for transient notifications (use Toast for those).</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Variants</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 8px;">
+            <div class="section-msg section-msg--info">
+              <svg class="section-msg__icon" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="9" fill="currentColor" opacity=".15"/><path d="M10 9v5M10 7h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+              <span>This feature is in open beta and may contain unresolved issues.</span>
+            </div>
+            <div class="section-msg section-msg--success">
+              <svg class="section-msg__icon" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="9" fill="currentColor" opacity=".15"/><path d="M6.5 10.5l2.5 2.5 4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+              <span>Your Salesforce integration is active and working properly.</span>
+            </div>
+            <div class="section-msg section-msg--warning">
+              <svg class="section-msg__icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2L2 17h16L10 2z" fill="currentColor" opacity=".15"/><path d="M10 8v4M10 14h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+              <span>There are 4 ideation statuses without an assigned type. Please assign types.</span>
+            </div>
+            <div class="section-msg section-msg--danger">
+              <svg class="section-msg__icon" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="9" fill="currentColor" opacity=".15"/><path d="M10 6v5M10 14h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+              <span>Your team has exceeded the seat limit. Please manage your seats.</span>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="section-msg section-msg--info"&gt;
+  &lt;svg class="section-msg__icon" …&gt;&lt;/svg&gt;
+  &lt;span&gt;Message text here.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Variants: section-msg--info / --success / --warning / --danger --&gt;</code></pre>
+        </div>
+      </div>
+      <table class="docs-props">
+        <thead><tr><th>Modifier</th><th>Use for</th></tr></thead>
+        <tbody>
+          <tr><td><code>.section-msg--info</code></td><td>Neutral info — beta notices, guidance</td></tr>
+          <tr><td><code>.section-msg--success</code></td><td>Active / connected state confirmation</td></tr>
+          <tr><td><code>.section-msg--warning</code></td><td>Non-blocking issue requiring attention</td></tr>
+          <tr><td><code>.section-msg--danger</code></td><td>Blocking error or limit exceeded</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== TOAST ===== -->
+    <section class="docs-section" id="toast">
+      <h2>Toast <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Transient notification that appears top-right. In prototypes render inline; in production the container is <code>.toast-top-right</code> (position: fixed; top: 55px; right: 12px).</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Variants</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: flex-end; gap: 8px;">
+            <div class="toast">✓ Your embed code has been copied to your clipboard.</div>
+            <div class="toast toast--error">✕ Something went wrong. Please try again.</div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;!-- Success --&gt;
+&lt;div class="toast"&gt;✓ Changes saved successfully.&lt;/div&gt;
+
+&lt;!-- Error --&gt;
+&lt;div class="toast toast--error"&gt;✕ Something went wrong. Please try again.&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SPINNER ===== -->
+    <section class="docs-section" id="spinner">
+      <h2>Spinner <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Five sizes. Use <code>--md</code> (24px) as the default for inline/button loading; <code>--xl</code> (80px) for full-page blocking states only.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Sizes</div>
+          <div class="docs-preview" style="gap: 24px; align-items: center;">
+            <span class="spinner spinner--xs"></span>
+            <span class="spinner spinner--sm"></span>
+            <span class="spinner spinner--md"></span>
+            <span class="spinner spinner--lg"></span>
+            <span class="spinner spinner--xl"></span>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;span class="spinner spinner--xs"&gt;&lt;/span&gt;  &lt;!-- 12px --&gt;
+&lt;span class="spinner spinner--sm"&gt;&lt;/span&gt;  &lt;!-- 16px --&gt;
+&lt;span class="spinner spinner--md"&gt;&lt;/span&gt;  &lt;!-- 24px default --&gt;
+&lt;span class="spinner spinner--lg"&gt;&lt;/span&gt;  &lt;!-- 48px --&gt;
+&lt;span class="spinner spinner--xl"&gt;&lt;/span&gt;  &lt;!-- 80px --&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <section class="docs-section" id="breadcrumb">
+      <h2>Breadcrumb <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Always a single "Back to [Section]" link — not a multi-level trail. Sits inside <code>.control-header__breadcrumb</code> above the page title.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Back link</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+            <div class="control-header__breadcrumb">
+              <a class="control-header__breadcrumb-link" href="#">Back to System Emails</a>
+            </div>
+            <h2 style="font-size: 20px; font-weight: 700; margin: 0; color: var(--hz-text-color-primary);">Welcome email</h2>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="control-header"&gt;
+  &lt;div class="control-header__breadcrumb"&gt;
+    &lt;a class="control-header__breadcrumb-link" href="/system-emails"&gt;
+      Back to System Emails
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;h2 class="control-header__title"&gt;Welcome email&lt;/h2&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FILTER PILL ===== -->
+    <section class="docs-section" id="filter-pill">
+      <h2>Filter pill <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Applied filter chip shown in the action bar after a filter is selected. Clicking × removes the filter.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Applied filters</div>
+          <div class="docs-preview" style="gap: 8px; flex-wrap: wrap;">
+            <div class="filter-pill">
+              <span><span class="filter-type">Content type</span><span class="filter-value">Article</span></span>
+              <span class="dismiss"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/></svg></span>
+            </div>
+            <div class="filter-pill">
+              <span><span class="filter-type">Status</span><span class="filter-value">Published</span></span>
+              <span class="dismiss"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/></svg></span>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="filter-pill"&gt;
+  &lt;span&gt;
+    &lt;span class="filter-type"&gt;Content type&lt;/span&gt;
+    &lt;span class="filter-value"&gt;Article&lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span class="dismiss"&gt;
+    &lt;svg …&gt;&lt;/svg&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KEBAB MENU ===== -->
+    <section class="docs-section" id="kebab-menu">
+      <h2>Kebab menu <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Row-level context menu triggered by a ⋯ button. Typically in the last column of a table row.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Open state</div>
+          <div class="docs-preview" style="min-height: 120px; align-items: flex-start;">
+            <div class="kebab-menu" style="position: relative;">
+              <button class="kebab-menu__trigger">⋯</button>
+              <div class="kebab-menu__list" style="position: absolute; top: 100%; right: 0; display: block;">
+                <a class="kebab-menu__item">Edit section</a>
+                <a class="kebab-menu__item kebab-menu__item--danger">Delete section</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="kebab-menu"&gt;
+  &lt;button class="kebab-menu__trigger"&gt;⋯&lt;/button&gt;
+  &lt;div class="kebab-menu__list"&gt;
+    &lt;a class="kebab-menu__item"&gt;Edit section&lt;/a&gt;
+    &lt;a class="kebab-menu__item kebab-menu__item--danger"&gt;Delete section&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EMPTY STATE ===== -->
+    <section class="docs-section" id="empty-state">
+      <h2>Empty state <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Two variants: illustrated (moderation queue, "you're caught up") and inline table row (config lists with no items).</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Illustrated</div>
+          <div class="docs-preview">
+            <div style="text-align: center; padding: 24px;">
+              <img src="https://cdn-euw1.insided.com/2026-09-08-11-58-55-c02da78716/dist/control/images/moderation-home/empty_content.png" style="max-width: 120px; margin-bottom: 8px;">
+              <h3 style="font-size: 16px; font-weight: 600; color: var(--hz-text-color-primary); margin: 0;">All done!</h3>
+              <p style="color: var(--hz-text-color-secondary); margin: 4px 0 0; font-size: 14px;">You're all caught up!</p>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div style="text-align:center; padding:24px;"&gt;
+  &lt;img src="…empty_content.png" style="max-width:120px;"&gt;
+  &lt;h3 style="font-size:16px; font-weight:600;"&gt;All done!&lt;/h3&gt;
+  &lt;p style="color:var(--hz-text-color-secondary);"&gt;You're all caught up!&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Inline table row</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch;">
+            <div class="table-card">
+              <table class="dt">
+                <thead><tr><th>Name</th><th>Status</th><th>Posts</th></tr></thead>
+                <tbody>
+                  <tr><td colspan="3" style="text-align: center; color: #828080; font-size: 14px; padding: 16px;">No items found...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td colspan="5"
+      style="text-align:center; color:#828080; font-size:14px; padding:16px;"&gt;
+      No items found...
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SUMMARY CARD ===== -->
+    <section class="docs-section" id="summary-card">
+      <h2>Summary card <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">One card with a 3-column metric grid. Each metric is clickable and links to the relevant report.</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Default</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch;">
+            <div class="summary-card">
+              <div class="summary-card__title">Summary</div>
+              <div class="summary-card__subtitle">Last 7 days</div>
+              <div class="summary-card__metrics">
+                <button class="metric">
+                  <div class="metric__title">New registrations</div>
+                  <div class="metric__count">0</div>
+                  <div class="metric__delta">— vs previous period</div>
+                </button>
+                <button class="metric">
+                  <div class="metric__title">Unique visitors</div>
+                  <div class="metric__count">2</div>
+                  <div class="metric__delta">— vs previous period</div>
+                </button>
+                <button class="metric">
+                  <div class="metric__title">Posts created</div>
+                  <div class="metric__count">29</div>
+                  <div class="metric__delta">— vs previous period</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="summary-card"&gt;
+  &lt;div class="summary-card__title"&gt;Summary&lt;/div&gt;
+  &lt;div class="summary-card__subtitle"&gt;Last 7 days&lt;/div&gt;
+  &lt;div class="summary-card__metrics"&gt;
+    &lt;button class="metric"&gt;
+      &lt;div class="metric__title"&gt;New registrations&lt;/div&gt;
+      &lt;div class="metric__count"&gt;0&lt;/div&gt;
+      &lt;div class="metric__delta"&gt;— vs previous period&lt;/div&gt;
+    &lt;/button&gt;
+    &lt;!-- repeat for each metric --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RADIO OPTION CARD ===== -->
+    <section class="docs-section" id="radio-option-card">
+      <h2>Radio option card <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Bordered card group where each option has a radio button, bold title, and description. Used for type selection (badge type, event registration, header type).</p>
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Default</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch;">
+            <div class="radio-opt-card" style="max-width: 400px;">
+              <label class="radio-opt-card__option">
+                <input type="radio" name="rc-demo" checked>
+                <span>
+                  <strong class="radio-opt-card__title">Manual badge</strong>
+                  <span class="radio-opt-card__desc">Manual badges can only be awarded manually in Control or via API.</span>
+                </span>
+              </label>
+              <label class="radio-opt-card__option">
+                <input type="radio" name="rc-demo">
+                <span>
+                  <strong class="radio-opt-card__title">Automatic badge</strong>
+                  <span class="radio-opt-card__desc">Automatic badges are awarded based on rules you configure about user activity.</span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="radio-opt-card"&gt;
+  &lt;label class="radio-opt-card__option"&gt;
+    &lt;input type="radio" name="type" checked&gt;
+    &lt;span&gt;
+      &lt;strong class="radio-opt-card__title"&gt;Manual badge&lt;/strong&gt;
+      &lt;span class="radio-opt-card__desc"&gt;
+        Manual badges can only be awarded manually.
+      &lt;/span&gt;
+    &lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label class="radio-opt-card__option"&gt;
+    &lt;input type="radio" name="type"&gt;
+    &lt;span&gt;
+      &lt;strong class="radio-opt-card__title"&gt;Automatic badge&lt;/strong&gt;
+      &lt;span class="radio-opt-card__desc"&gt;
+        Based on rules you configure about user activity.
+      &lt;/span&gt;
+    &lt;/span&gt;
+  &lt;/label&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
     </section>
 
     <!-- ===== TABS ===== -->
