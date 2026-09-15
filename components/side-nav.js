@@ -1,70 +1,100 @@
 /**
  * Side Navigation — CC Design System
- * Usage: add <script src="../components/side-nav.js"></script> to any page.
- * Set active section via:  <body data-section="users">
- * Set active item via:     <body data-section="users" data-active-item="Users Overview">
+ * Usage: add <script src="../components/side-nav.js"></script> as first child of <body>.
+ * Set active section: <body data-section="ai">
+ * Set active item:    <body data-section="ai" data-active-item="AI Settings">
  *
- * The script removes any existing .icon-rail + .nav-panel and injects the
- * unified .side-nav component at the start of <body>.
+ * Features:
+ *  - Icon rail (48px) + drawer panel (240px)
+ *  - L2 groups collapsible via chevron icon
+ *  - Full nav collapse (icon-only mode) via ‹ button at bottom of rail
  */
 (function () {
   'use strict';
 
-  /* ── Section data ───────────────────────────────────────────── */
+  /* ─── Section + item data (live-verified 2026-09-15) ─────────── */
   var SECTIONS = [
-    { key: 'create',        label: 'Create',        icon: 'plus-circle',    groups: [{ items: ['New Article','New Events','New Product Updates','New Conversation','New Question'] }] },
-    { key: 'home',          label: 'Home',          icon: 'home',           groups: [] },
-    { key: 'content',       label: 'Content',       icon: 'file-text',      groups: [
-        { heading: 'Moderation',    items: ['Overview','Pending','Reported','Spam (0)','Trash Can'] },
-        { heading: 'Content Types', items: ['Articles','Drafts','Ideas','Events','Product Updates'] }
-    ]},
-    { key: 'email',         label: 'Email',         icon: 'mail',           groups: [{ items: ['Email Campaigns','System Emails'] }] },
-    { key: 'users',         label: 'Users',         icon: 'users',          groups: [{ items: ['Users Overview','Segments'] }] },
-    { key: 'analytics',     label: 'Analytics',     icon: 'bar-chart',      groups: [
-        { heading: 'Dashboards', items: ['Content','User','Q&A','Audience','Engagement','Self-service','Product Feedback'] },
-        { heading: 'Export',     items: ['Content','User','Q&A','Audience','Engagement','Self-service','Product Feedback'] }
-    ]},
-    { key: 'platform',      label: 'Platform',      icon: 'grid',           groups: [{ items: ['Knowledge Base','Community','Ideation','Groups','Events','Product Updates','Custom Pages'] }] },
-    { key: 'gamification',  label: 'Gamification',  icon: 'gamepad',        groups: [{ items: ['Ranks','Badges','Point System'] }] },
-    { key: 'customization', label: 'Customization', icon: 'pen-tool',       groups: [{ items: ['Header','Footer','Sidebar','Phrases','Third-party Scripts','Self-service'] }] },
-    { key: 'integrations',  label: 'Integrations',  icon: 'git-merge',      groups: [
-        { heading: 'Integrations',      items: ['Apps','API'] },
-        { heading: 'SSO',               items: ['End Users','Control Users','Content Configuration'] },
-        { heading: 'Embeddable Widget', items: ['Setup','Customization','Content Configuration','Installation'] },
-        { heading: 'Developer Studio',  items: ['Sources','Connectors','Secrets and Variables','CLI Access'] }
-    ]},
-    { key: 'ai',            label: 'AI',            icon: 'sparkles',       groups: [{ items: ['AI Settings','Moderation AI Agent','AI Answers for Search','AI Translations'] }] },
-    { key: 'settings',      label: 'Settings',      icon: 'settings',       groups: [
-        { heading: 'Super Admin', items: ['Modules','Community Information','Destination URL','Advanced Configurations','AI Playground','Unified Login','Platform Sources','Hub Connection'] },
-        { heading: 'Super Admin', items: ['Event Types','Event Settings','Ideation Status','Bug Status','Product Areas','Languages','Platform Visibility','Open Betas','AI'] },
-        { heading: 'User',        items: ['User Roles','User Profile Fields','Registration Rules','Attachment Permissions'] },
-        { heading: 'Topic',       items: ['Public Tags','Content Helpfulness','Moderation Labels','Post Fields'] },
-        { heading: 'Moderation',  items: ['Automation Rules','Pre-moderation Rules','Moderation Notifications','Spam Prevention','Webmaster Email'] },
-        { heading: 'SEO',         items: ['Robots.txt'] }
-    ]}
+    {
+      key: 'create', label: 'Create',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8V16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12H16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      groups: [{ heading: null, items: ['New Article','New Event','New Product Update','New Conversation','New Question'] }]
+    },
+    {
+      key: 'home', label: 'Home',
+      svg: '<svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L10.4265 1.40142C10.7709 1.1604 11.2291 1.1604 11.5735 1.40142L21 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M4 6V16C4 16.5523 4.44772 17 5 17H17C17.5523 17 18 16.5523 18 16V6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8 17V12C8 11.4477 8.44772 11 9 11H13C13.5523 11 14 11.4477 14 12V17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>',
+      groups: []
+    },
+    {
+      key: 'content', label: 'Content',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2V8H20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 13H8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17H8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 9H8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      groups: [{ heading: null, items: ['Overview','Pending','Reported','Spam (0)','Trash Can','Articles','Drafts','Ideas','Events','Product updates'] }]
+    },
+    {
+      key: 'email', label: 'Email',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      groups: [{ heading: null, items: ['Email Campaigns'] }]
+    },
+    {
+      key: 'users', label: 'Users',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      groups: [{ heading: null, items: ['Users Overview','Segments'] }]
+    },
+    {
+      key: 'analytics', label: 'Analytics',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.2099 15.89C20.5737 17.3945 19.5787 18.7202 18.3118 19.7513C17.0449 20.7824 15.5447 21.4874 13.9424 21.8048C12.34 22.1221 10.6843 22.0421 9.12006 21.5718C7.55578 21.1014 6.13054 20.2551 4.96893 19.1066C3.80733 17.9582 2.94473 16.5427 2.45655 14.9839C1.96837 13.4251 1.86948 11.7705 2.16851 10.1646C2.46755 8.55877 3.15541 7.05061 4.17196 5.77202C5.18851 4.49342 6.5028 3.4833 7.99992 2.82999" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2V12H22Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      groups: [{ heading: null, items: ['New Dashboards','Content','Moderation','User','Q&A','Audience','Engagement','Self-service','Product Feedback','Search Analytics','Post Fields Analysis','Export'] }]
+    },
+    {
+      key: 'platform', label: 'Platform',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 3H3V10H10V3Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 3H14V10H21V3Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 14H14V21H21V14Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14H3V21H10V14Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      groups: [{ heading: null, items: ['Knowledge Base','Community','Ideation','Groups','Events','Product Updates','Custom Pages'] }]
+    },
+    {
+      key: 'gamification', label: 'Gamification',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.299805 12C0.299805 8.2997 3.2995 5.3 6.9998 5.3H16.9998C20.7001 5.3 23.6998 8.2997 23.6998 12C23.6998 15.7003 20.7001 18.7 16.9998 18.7H6.9998C3.2995 18.7 0.299805 15.7003 0.299805 12ZM22.2998 12C22.2998 9.07289 19.9269 6.7 16.9998 6.7H6.9998C4.0727 6.7 1.6998 9.07289 1.6998 12C1.6998 14.9271 4.0727 17.3 6.9998 17.3H16.9998C19.9269 17.3 22.2998 14.9271 22.2998 12ZM6.9998 9.3C7.3864 9.3 7.6998 9.6134 7.6998 10V11.3H8.9998C9.3864 11.3 9.6998 11.6134 9.6998 12C9.6998 12.3866 9.3864 12.7 8.9998 12.7H7.6998V14C7.6998 14.3866 7.3864 14.7 6.9998 14.7C6.6132 14.7 6.2998 14.3866 6.2998 14V12.7H4.9998C4.6132 12.7 4.2998 12.3866 4.2998 12C4.2998 11.6134 4.6132 11.3 4.9998 11.3H6.2998V10C6.2998 9.6134 6.6132 9.3 6.9998 9.3ZM17.9998 10C17.9998 10.5523 17.5521 11 16.9998 11C16.4475 11 15.9998 10.5523 15.9998 10C15.9998 9.44772 16.4475 9 16.9998 9C17.5521 9 17.9998 9.44772 17.9998 10ZM16.9998 15C17.5521 15 17.9998 14.5523 17.9998 14C17.9998 13.4477 17.5521 13 16.9998 13C16.4475 13 15.9998 13.4477 15.9998 14C15.9998 14.5523 16.4475 15 16.9998 15ZM15.9998 12C15.9998 12.5523 15.5521 13 14.9998 13C14.4475 13 13.9998 12.5523 13.9998 12C13.9998 11.4477 14.4475 11 14.9998 11C15.5521 11 15.9998 11.4477 15.9998 12ZM18.9998 13C19.5521 13 19.9998 12.5523 19.9998 12C19.9998 11.4477 19.5521 11 18.9998 11C18.4475 11 17.9998 11.4477 17.9998 12C17.9998 12.5523 18.4475 13 18.9998 13Z" fill="currentColor"/></svg>',
+      groups: [{ heading: null, items: ['Ranks','Badges','Point system'] }]
+    },
+    {
+      key: 'customization', label: 'Customization',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 19L19 12L22 15L15 22L12 19Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 13L16.5 5.5L2 2L5.5 16.5L13 18L18 13Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 2L9.586 9.586" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 13C12.1046 13 13 12.1046 13 11C13 9.89543 12.1046 9 11 9C9.89543 9 9 9.89543 9 11C9 12.1046 9.89543 13 11 13Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      groups: [{ heading: null, items: ['Header','Footer','Sidebar','Third-party Scripts'] }]
+    },
+    {
+      key: 'integrations', label: 'Integrations',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.8293 6L16.1693 5.76673C16.0936 5.98097 16.1266 6.21864 16.2578 6.40417C16.389 6.5897 16.6021 6.7 16.8293 6.7V6ZM11.1707 6V6.7C11.3979 6.7 11.611 6.5897 11.7422 6.40417C11.8734 6.21864 11.9064 5.98097 11.8307 5.76673L11.1707 6ZM6 11.1707L5.76673 11.8307C5.98097 11.9064 6.21864 11.8734 6.40417 11.7422C6.5897 11.611 6.7 11.3979 6.7 11.1707H6ZM6 16.8293H6.7C6.7 16.6021 6.5897 16.389 6.40417 16.2578C6.21864 16.1266 5.98097 16.0936 5.76673 16.1693L6 16.8293ZM11.1707 22V22.7C11.3979 22.7 11.611 22.5897 11.7422 22.4042C11.8734 22.2186 11.9064 21.981 11.8307 21.7667L11.1707 22ZM16.8293 22L16.1693 21.7667C16.0936 21.981 16.1266 22.2186 16.2578 22.4042C16.389 22.5897 16.6021 22.7 16.8293 22.7V22ZM22 16.8293H22.7C22.7 16.6021 22.5897 16.389 22.4042 16.2578C22.2186 16.1266 21.981 16.0936 21.7667 16.1693L22 16.8293ZM22 11.1707L21.7667 11.8307C21.981 11.9064 22.2186 11.8734 22.4042 11.7422C22.5897 11.611 22.7 11.3979 22.7 11.1707H22ZM16.3 5C16.3 5.27007 16.2537 5.52783 16.1693 5.76673L17.4893 6.23327C17.6259 5.84661 17.7 5.4312 17.7 5H16.3ZM14 2.7C15.2703 2.7 16.3 3.72974 16.3 5H17.7C17.7 2.95655 16.0435 1.3 14 1.3V2.7ZM11.7 5C11.7 3.72974 12.7297 2.7 14 2.7V1.3C11.9565 1.3 10.3 2.95655 10.3 5H11.7ZM11.8307 5.76673C11.7463 5.52783 11.7 5.27007 11.7 5H10.3C10.3 5.4312 10.3741 5.84661 10.5107 6.23327L11.8307 5.76673ZM8 6.7H11.1707V5.3H8V6.7ZM6.7 8C6.7 7.28203 7.28203 6.7 8 6.7V5.3C6.50883 5.3 5.3 6.50883 5.3 8H6.7ZM6.7 11.1707V8H5.3V11.1707H6.7ZM5 11.7C5.27007 11.7 5.52783 11.7463 5.76673 11.8307L6.23327 10.5107C5.84661 10.3741 5.4312 10.3 5 10.3V11.7ZM2.7 14C2.7 12.7297 3.72974 11.7 5 11.7V10.3C2.95655 10.3 1.3 11.9565 1.3 14H2.7ZM5 16.3C3.72974 16.3 2.7 15.2703 2.7 14H1.3C1.3 16.0435 2.95655 17.7 5 17.7V16.3ZM5.76673 16.1693C5.52783 16.2537 5.27007 16.3 5 16.3V17.7C5.4312 17.7 5.84661 17.6259 6.23327 17.4893L5.76673 16.1693ZM6.7 20V16.8293H5.3V20H6.7ZM8 21.3C7.28203 21.3 6.7 20.718 6.7 20H5.3C5.3 21.4912 6.50883 22.7 8 22.7V21.3ZM11.1707 21.3H8V22.7H11.1707V21.3ZM10.3 21C10.3 21.4312 10.3741 21.8466 10.5107 22.2333L11.8307 21.7667C11.7463 21.5278 11.7 21.2701 11.7 21H10.3ZM14 17.3C11.9565 17.3 10.3 18.9565 10.3 21H11.7C11.7 19.7297 12.7297 18.7 14 18.7V17.3ZM17.7 21C17.7 18.9565 16.0435 17.3 14 17.3V18.7C15.2703 18.7 16.3 19.7297 16.3 21H17.7ZM17.4893 22.2333C17.6259 21.8466 17.7 21.4312 17.7 21H16.3C16.3 21.2701 16.2537 21.5278 16.1693 21.7667L17.4893 22.2333ZM20 21.3H16.8293V22.7H20V21.3ZM21.3 20C21.3 20.718 20.718 21.3 20 21.3V22.7C21.4912 22.7 22.7 21.4912 22.7 20H21.3ZM21.3 16.8293V20H22.7V16.8293H21.3ZM21 17.7C21.4312 17.7 21.8466 17.6259 22.2333 17.4893L21.7667 16.1693C21.5278 16.2537 21.2701 16.3 21 16.3V17.7ZM17.3 14C17.3 16.0435 18.9565 17.7 21 17.7V16.3C19.7297 16.3 18.7 15.2703 18.7 14H17.3ZM21 10.3C18.9565 10.3 17.3 11.9565 17.3 14H18.7C18.7 12.7297 19.7297 11.7 21 11.7V10.3ZM22.2333 10.5107C21.8466 10.3741 21.4312 10.3 21 10.3V11.7C21.2701 11.7 21.5278 11.7463 21.7667 11.8307L22.2333 10.5107ZM21.3 8V11.1707H22.7V8H21.3ZM20 6.7C20.718 6.7 21.3 7.28203 21.3 8H22.7C22.7 6.50883 21.4912 5.3 20 5.3V6.7ZM16.8293 6.7H20V5.3H16.8293V6.7Z" fill="currentColor"/></svg>',
+      groups: [
+        { heading: 'Integrations',     items: ['Apps','API'] },
+        { heading: 'SSO',              items: ['End Users','Control Users'] },
+        { heading: 'Embeddable Widget',items: ['Setup','Customization','Content Configuration','Installation'] },
+        { heading: 'Developer Studio', items: ['Sources','Connectors','Secrets and Variables'] }
+      ]
+    },
+    {
+      key: 'ai', label: 'AI',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.1015 6.18943C11.2535 6.60001 11.5777 6.92422 11.9883 7.07615L17.4277 9.08884L11.9883 11.1015C11.5777 11.2535 11.2535 11.5777 11.1015 11.9883L9.08884 17.4277L7.07615 11.9883C6.92422 11.5777 6.60001 11.2535 6.18943 11.1015L0.749977 9.08884L6.18943 7.07615C6.60001 6.92422 6.92422 6.60001 7.07615 6.18943L9.08884 0.749977L11.1015 6.18943Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" transform="translate(2.91 2.96)"/><path d="M3.72408 2.4399C3.83246 2.73266 4.06316 2.96335 4.35591 3.07173L5.23677 3.39791L4.35591 3.72408C4.09962 3.81896 3.89074 4.0075 3.76998 4.24947L3.72408 4.35591L3.39791 5.23677L3.07173 4.35591C2.96335 4.06316 2.73266 3.83246 2.4399 3.72408L1.55806 3.39791L2.4399 3.07173C2.73266 2.96335 2.96335 2.73266 3.07173 2.4399L3.39791 1.55806L3.72408 2.4399Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" transform="translate(15.6 1.56)"/></svg>',
+      groups: [{ heading: null, items: ['AI Settings','Moderation AI Agent','AI Answers for Search','AI Translations','AI Answers Agent'] }]
+    },
+    {
+      key: 'settings', label: 'Settings',
+      svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15C19.2669 15.3016 19.2272 15.6362 19.286 15.9606C19.3448 16.285 19.4995 16.5843 19.73 16.82L19.79 16.88C19.976 17.0657 20.1235 17.2863 20.2241 17.5291C20.3248 17.7719 20.3766 18.0322 20.3766 18.295C20.3766 18.5578 20.3248 18.8181 20.2241 19.0609C20.1235 19.3037 19.976 19.5243 19.79 19.71C19.6043 19.896 19.3837 20.0435 19.1409 20.1441C18.8981 20.2448 18.6378 20.2966 18.375 20.2966C18.1122 20.2966 17.8519 20.2448 17.6091 20.1441C17.3663 20.0435 17.1457 19.896 16.96 19.71L16.9 19.65C16.6643 19.4195 16.365 19.2648 16.0406 19.206C15.7162 19.1472 15.3816 19.1869 15.08 19.32C14.7842 19.4468 14.532 19.6572 14.3543 19.9255C14.1766 20.1938 14.0813 20.5082 14.08 20.83V21C14.08 21.5304 13.8693 22.0391 13.4942 22.4142C13.1191 22.7893 12.6104 23 12.08 23C11.5496 23 11.0409 22.7893 10.6658 22.4142C10.2907 22.0391 10.08 21.5304 10.08 21V20.91C10.0723 20.579 9.96512 20.258 9.77251 19.9887C9.5799 19.7194 9.31074 19.5143 9 19.4C8.69838 19.2669 8.36381 19.2272 8.03941 19.286C7.71502 19.3448 7.41568 19.4995 7.18 19.73L7.12 19.79C6.93425 19.976 6.71368 20.1235 6.47088 20.2241C6.22808 20.3248 5.96783 20.3766 5.705 20.3766C5.44217 20.3766 5.18192 20.3248 4.93912 20.2241C4.69632 20.1235 4.47575 19.976 4.29 19.79C4.10405 19.6043 3.95653 19.3837 3.85588 19.1409C3.75523 18.8981 3.70343 18.6378 3.70343 18.375C3.70343 18.1122 3.75523 17.8519 3.85588 17.6091C3.95653 17.3663 4.10405 17.1457 4.29 16.96L4.35 16.9C4.58054 16.6643 4.73519 16.365 4.794 16.0406C4.85282 15.7162 4.81312 15.3816 4.68 15.08C4.55324 14.7842 4.34276 14.532 4.07447 14.3543C3.80618 14.1766 3.49179 14.0813 3.17 14.08H3C2.46957 14.08 1.96086 13.8693 1.58579 13.4942C1.21071 13.1191 1 12.6104 1 12.08C1 11.5496 1.21071 11.0409 1.58579 10.6658C1.96086 10.2907 2.46957 10.08 3 10.08H3.09C3.42099 10.0723 3.742 9.96512 4.0113 9.77251C4.28059 9.5799 4.48572 9.31074 4.6 9C4.73312 8.69838 4.77282 8.36381 4.714 8.03941C4.65519 7.71502 4.50054 7.41568 4.27 7.18L4.21 7.12C4.02405 6.93425 3.87653 6.71368 3.77588 6.47088C3.67523 6.22808 3.62343 5.96783 3.62343 5.705C3.62343 5.44217 3.67523 5.18192 3.77588 4.93912C3.87653 4.69632 4.02405 4.47575 4.21 4.29C4.39575 4.10405 4.61632 3.95653 4.85912 3.85588C5.10192 3.75523 5.36217 3.70343 5.625 3.70343C5.88783 3.70343 6.14808 3.75523 6.39088 3.85588C6.63368 3.95653 6.85425 4.10405 7.04 4.29L7.1 4.35C7.33568 4.58054 7.63502 4.73519 7.95941 4.794C8.28381 4.85282 8.61838 4.81312 8.92 4.68H9C9.29577 4.55324 9.54802 4.34276 9.72569 4.07447C9.90337 3.80618 9.99872 3.49179 10 3.17V3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V3.09C14.0013 3.41179 14.0966 3.72618 14.2743 3.99447C14.452 4.26276 14.7042 4.47324 15 4.6C15.3016 4.73312 15.6362 4.77282 15.9606 4.714C16.285 4.65519 16.5843 4.50054 16.82 4.27L16.88 4.21C17.0657 4.02405 17.2863 3.87653 17.5291 3.77588C17.7719 3.67523 18.0322 3.62343 18.295 3.62343C18.5578 3.62343 18.8181 3.67523 19.0609 3.77588C19.3037 3.87653 19.5243 4.02405 19.71 4.21C19.896 4.39575 20.0435 4.61632 20.1441 4.85912C20.2448 5.10192 20.2966 5.36217 20.2966 5.625C20.2966 5.88783 20.2448 6.14808 20.1441 6.39088C20.0435 6.63368 19.896 6.85425 19.71 7.04L19.65 7.1C19.4195 7.33568 19.2648 7.63502 19.206 7.95941C19.1472 8.28381 19.1869 8.61838 19.32 8.92V9C19.4468 9.29577 19.6572 9.54802 19.9255 9.72569C20.1938 9.90337 20.5082 9.99872 20.83 10H21C21.5304 10 22.0391 10.2107 22.4142 10.5858C22.7893 10.9609 23 11.4696 23 12C23 12.5304 22.7893 13.0391 22.4142 13.4142C22.0391 13.7893 21.5304 14 21 14H20.91C20.5882 14.0013 20.2738 14.0966 20.0055 14.2743C19.7372 14.452 19.5268 14.7042 19.4 15V15Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      groups: [
+        { heading: 'Platform',   items: ['Event Types','Event Settings','Ideation Status','Product Areas','Languages','Platform Visibility','Open betas'] },
+        { heading: 'User',       items: ['User Roles','User Profile Fields','Registration Rules','Attachment Permissions'] },
+        { heading: 'Topic',      items: ['Public Tags','Content & Replies','Moderation Labels','Post Fields'] },
+        { heading: 'Moderation', items: ['Automation Rules','Moderation Notifications','Spam Prevention'] }
+      ]
+    }
   ];
 
-  /* ── SVG icons ──────────────────────────────────────────────── */
-  function icon(name) {
-    var icons = {
-      'plus-circle': '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>',
-      'home':        '<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
-      'file-text':   '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
-      'mail':        '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
-      'users':       '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',
-      'bar-chart':   '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>',
-      'grid':        '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
-      'gamepad':     '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/>',
-      'pen-tool':    '<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>',
-      'git-merge':   '<circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 012 2v7"/><line x1="6" y1="9" x2="6" y2="21"/>',
-      'sparkles':    '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
-      'settings':    '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>'
-    };
-    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (icons[name] || '') + '</svg>';
-  }
+  /* ─── Collapse chevron SVG ───────────────────────────────────── */
+  var CHEVRON_LEFT  = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var CHEVRON_RIGHT = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var CHEVRON_DOWN  = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var CHEVRON_UP    = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 10L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-  /* ── Build HTML ─────────────────────────────────────────────── */
+  /* ─── Build HTML ─────────────────────────────────────────────── */
   function buildHTML(activeSection, activeItem) {
+    // Icon rail
     var rail = '<nav class="side-nav__rail" aria-label="Main navigation">'
       + '<div class="side-nav__logo" title="Customer Communities">'
       + '<svg viewBox="0 0 28 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
@@ -74,39 +104,52 @@
     SECTIONS.forEach(function (s) {
       var isActive = s.key === activeSection;
       rail += '<button class="side-nav__icon-btn' + (isActive ? ' active' : '') + '" data-section="' + s.key + '" title="' + s.label + '" aria-label="' + s.label + '">'
-            + icon(s.icon)
+            + s.svg
             + '</button>';
     });
+
+    // Collapse toggle at the bottom of the rail
+    rail += '<button class="side-nav__collapse-btn" id="sideNavCollapseBtn" title="Collapse navigation" aria-label="Collapse navigation">'
+          + CHEVRON_LEFT
+          + '</button>';
     rail += '</nav>';
 
-    var drawer = '<div class="side-nav__drawer"><div class="side-nav__drawer-inner">';
+    // Drawer
+    var drawer = '<div class="side-nav__drawer" id="sideNavDrawer">';
     SECTIONS.forEach(function (s) {
       var isActive = s.key === activeSection;
-      if (s.groups.length === 0) {
-        drawer += '<div class="side-nav__panel' + (isActive ? ' active' : '') + '" data-panel="' + s.key + '">'
-                + '<h2 class="side-nav__section-title">' + s.label + '</h2></div>';
-        return;
-      }
-      drawer += '<div class="side-nav__panel' + (isActive ? ' active' : '') + '" data-panel="' + s.key + '">'
-              + '<h2 class="side-nav__section-title">' + s.label + '</h2>';
-      s.groups.forEach(function (g) {
-        drawer += '<div class="side-nav__group">';
-        if (g.heading) drawer += '<div class="side-nav__group-heading">' + g.heading + '</div>';
-        drawer += '<div class="side-nav__group-items">';
-        g.items.forEach(function (item) {
-          var ia = item === activeItem;
-          drawer += '<button class="side-nav__item' + (ia ? ' active' : '') + '" data-item="' + item + '">' + item + '</button>';
-        });
-        drawer += '</div></div>';
-      });
-      drawer += '</div>';
+      if (!isActive) return; // only render active panel (swap on click)
+      drawer += buildPanel(s, activeItem);
     });
-    drawer += '</div></div>';
+    drawer += '</div>';
 
     return '<div class="side-nav">' + rail + drawer + '</div>';
   }
 
-  /* ── Inject CSS if not already linked ──────────────────────── */
+  function buildPanel(s, activeItem) {
+    var html = '<div class="side-nav__panel active" data-panel="' + s.key + '">';
+    html += '<h2 class="side-nav__section-title">' + s.label + '</h2>';
+    s.groups.forEach(function (g, gi) {
+      var hasHeading = !!g.heading;
+      html += '<div class="side-nav__group" data-group="' + gi + '">';
+      if (hasHeading) {
+        html += '<button class="side-nav__group-heading" data-group-toggle="' + gi + '">'
+              + '<span>' + g.heading + '</span>'
+              + '<span class="side-nav__group-chevron">' + CHEVRON_DOWN + '</span>'
+              + '</button>';
+      }
+      html += '<div class="side-nav__group-items">';
+      g.items.forEach(function (item) {
+        var ia = item === activeItem;
+        html += '<button class="side-nav__item' + (ia ? ' active' : '') + '" data-item="' + item + '">' + item + '</button>';
+      });
+      html += '</div></div>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  /* ─── Inject CSS check ───────────────────────────────────────── */
   function ensureCSS() {
     var links = document.querySelectorAll('link[rel="stylesheet"]');
     for (var i = 0; i < links.length; i++) {
@@ -119,7 +162,7 @@
     document.head.appendChild(link);
   }
 
-  /* ── Init ───────────────────────────────────────────────────── */
+  /* ─── Init ───────────────────────────────────────────────────── */
   function init() {
     ensureCSS();
 
@@ -128,17 +171,18 @@
     var activeItem    = body.getAttribute('data-active-item') || '';
 
     // Remove legacy nav elements if present
-    var old = body.querySelectorAll('.icon-rail, .nav-panel');
-    old.forEach(function (el) { el.parentNode.removeChild(el); });
+    body.querySelectorAll('.icon-rail, .nav-panel').forEach(function (el) { el.parentNode.removeChild(el); });
 
-    // Inject side nav as first child of body
     var wrapper = document.createElement('div');
     wrapper.innerHTML = buildHTML(activeSection, activeItem);
     body.insertBefore(wrapper.firstChild, body.firstChild);
 
-    // Wire up interactions
-    var sideNav = body.querySelector('.side-nav');
+    var sideNav  = body.querySelector('.side-nav');
+    var drawer   = body.querySelector('#sideNavDrawer');
+    var collapseBtn = body.querySelector('#sideNavCollapseBtn');
+    var isCollapsed = false;
 
+    // ── Rail icon click → switch panel ──────────────────────────
     sideNav.querySelector('.side-nav__rail').addEventListener('click', function (e) {
       var btn = e.target.closest('.side-nav__icon-btn');
       if (!btn) return;
@@ -147,26 +191,70 @@
       sideNav.querySelectorAll('.side-nav__icon-btn').forEach(function (b) {
         b.classList.toggle('active', b.dataset.section === key);
       });
-      sideNav.querySelectorAll('.side-nav__panel').forEach(function (p) {
-        p.classList.toggle('active', p.dataset.panel === key);
-      });
-      var drawerEl = sideNav.querySelector('.side-nav__drawer');
-      drawerEl.style.display = key === 'home' ? 'none' : '';
+
+      // Find the section definition
+      var section = null;
+      SECTIONS.forEach(function (s) { if (s.key === key) section = s; });
+      if (!section) return;
+
+      // Rebuild drawer content for clicked section
+      drawer.innerHTML = buildPanel(section, activeItem);
+      wireGroupToggles(drawer);
+
+      // Show drawer if collapsed (nav auto-expands on section click)
+      if (isCollapsed) {
+        sideNav.classList.remove('side-nav--collapsed');
+        collapseBtn.setAttribute('title', 'Collapse navigation');
+        collapseBtn.setAttribute('aria-label', 'Collapse navigation');
+        collapseBtn.innerHTML = CHEVRON_LEFT;
+        isCollapsed = false;
+      }
+
+      // Hide drawer for Home (no sub-items)
+      drawer.style.display = (key === 'home') ? 'none' : '';
+      activeSection = key;
     });
 
-    sideNav.querySelector('.side-nav__drawer-inner').addEventListener('click', function (e) {
+    // ── Collapse / expand the whole nav ─────────────────────────
+    collapseBtn.addEventListener('click', function () {
+      isCollapsed = !isCollapsed;
+      sideNav.classList.toggle('side-nav--collapsed', isCollapsed);
+      if (isCollapsed) {
+        collapseBtn.setAttribute('title', 'Expand navigation');
+        collapseBtn.setAttribute('aria-label', 'Expand navigation');
+        collapseBtn.innerHTML = CHEVRON_RIGHT;
+      } else {
+        collapseBtn.setAttribute('title', 'Collapse navigation');
+        collapseBtn.setAttribute('aria-label', 'Collapse navigation');
+        collapseBtn.innerHTML = CHEVRON_LEFT;
+      }
+    });
+
+    // ── L2 group collapse / expand ───────────────────────────────
+    wireGroupToggles(drawer);
+
+    // ── Item click → mark active ─────────────────────────────────
+    drawer.addEventListener('click', function (e) {
       var item = e.target.closest('.side-nav__item');
       if (!item) return;
-      var panel = item.closest('.side-nav__panel');
-      if (panel) panel.querySelectorAll('.side-nav__item').forEach(function (i) { i.classList.remove('active'); });
+      drawer.querySelectorAll('.side-nav__item').forEach(function (i) { i.classList.remove('active'); });
       item.classList.add('active');
+      activeItem = item.dataset.item;
     });
 
-    // Hide drawer if starting on home
-    if (activeSection === 'home') {
-      var drawerEl = sideNav.querySelector('.side-nav__drawer');
-      if (drawerEl) drawerEl.style.display = 'none';
-    }
+    // Hide drawer for Home on load
+    if (activeSection === 'home') drawer.style.display = 'none';
+  }
+
+  function wireGroupToggles(drawer) {
+    drawer.querySelectorAll('.side-nav__group-heading').forEach(function (heading) {
+      heading.addEventListener('click', function () {
+        var group = heading.closest('.side-nav__group');
+        var collapsed = group.classList.toggle('is-collapsed');
+        var chevron = heading.querySelector('.side-nav__group-chevron');
+        if (chevron) chevron.innerHTML = collapsed ? CHEVRON_UP : CHEVRON_DOWN;
+      });
+    });
   }
 
   if (document.readyState === 'loading') {
