@@ -393,6 +393,7 @@
 
   <div class="comp-nav__group">Settings</div>
   <a class="comp-nav__link" href="#settings-card">Settings card</a>
+  <a class="comp-nav__link" href="#input-states">Input states</a>
   <a class="comp-nav__link" href="#key-value-list">Key-value list</a>
   <a class="comp-nav__link" href="#radio-option-card">Radio option card</a>
   <a class="comp-nav__link" href="#dynamic-list">Dynamic editable list</a>
@@ -937,6 +938,44 @@
       <label class="ds-toggle"><input type="checkbox" checked><span class="ds-toggle__track"></span></label>
     </div>
   </div>
+</section>
+
+<section id="input-states">
+  <h2>Input &amp; textarea states — <code style="font-size:13px; font-weight:400;">.dirty-section__input</code></h2>
+  <div class="row" style="gap:32px; align-items:flex-start; flex-wrap:wrap;">
+    <div>
+      <div class="label" style="margin-bottom:8px;">Default</div>
+      <input class="dirty-section__input" style="width:200px;" type="text" placeholder="Placeholder…">
+    </div>
+    <div>
+      <div class="label" style="margin-bottom:8px;">Disabled</div>
+      <input class="dirty-section__input" style="width:200px;" type="text" value="Locked value" disabled>
+    </div>
+    <div>
+      <div class="label" style="margin-bottom:8px;">Error</div>
+      <div class="dirty-section__field dirty-section__field--error" style="width:200px; gap:4px;">
+        <input class="dirty-section__input" type="text" value="bad@value">
+        <p class="dirty-section__field-error">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><line x1="6" y1="3.5" x2="6" y2="6.5" stroke="currentColor" stroke-linecap="round"/><circle cx="6" cy="8.5" r=".5" fill="currentColor"/></svg>
+          This field is required.
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="label" style="margin-bottom:8px;">Error textarea</div>
+      <div class="dirty-section__field dirty-section__field--error" style="width:200px; gap:4px;">
+        <textarea class="dirty-section__textarea" style="min-height:64px;">Too long…</textarea>
+        <p class="dirty-section__field-error">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><line x1="6" y1="3.5" x2="6" y2="6.5" stroke="currentColor" stroke-linecap="round"/><circle cx="6" cy="8.5" r=".5" fill="currentColor"/></svg>
+          Exceeds 500 character limit.
+        </p>
+      </div>
+    </div>
+  </div>
+  <p class="label" style="text-transform:none; font-weight:400; margin-top:8px;">
+    Error: add <code class="tag">.dirty-section__field--error</code> to the parent <code class="tag">.dirty-section__field</code> wrapper — turns the border red. Add <code class="tag">&lt;p class="dirty-section__field-error"&gt;</code> below the input for the message (12px, error red).<br>
+    Disabled: native <code class="tag">disabled</code> attr — gray bg <code class="tag">#F5F7F9</code>, muted text, <code class="tag">not-allowed</code> cursor.
+  </p>
 </section>
 
 <section id="beta-badge">

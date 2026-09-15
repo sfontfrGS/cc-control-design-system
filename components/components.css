@@ -636,6 +636,18 @@ code.tag { background: #F5F7F9; padding: 1px 6px; border-radius: 4px; font-famil
 .dirty-section__field-description { font-size: 14px; color: #3C4A57; margin: 0; }
 .dirty-section__input    { width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 6px 10px; font-size: 14px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); }
 .dirty-section__textarea { width: 100%; border: 1px solid var(--hz-border-color-base); border-radius: 4px; padding: 12px; font-size: 14px; font-family: var(--hz-font-family); color: var(--hz-text-color-primary); min-height: 96px; resize: vertical; }
+/* Focus */
+.dirty-section__input:focus,
+.dirty-section__textarea:focus { outline: 2px solid var(--hz-bg-color-active); border-color: var(--hz-primary-color); }
+/* Disabled */
+.dirty-section__input:disabled,
+.dirty-section__textarea:disabled { background: var(--hz-input-disabled-bg); color: var(--hz-text-color-disabled); cursor: not-allowed; border-color: var(--hz-border-color-base); }
+/* Error state — add .dirty-section__field--error on the parent .dirty-section__field */
+.dirty-section__field--error .dirty-section__input,
+.dirty-section__field--error .dirty-section__textarea { border-color: var(--hz-error-color); }
+.dirty-section__field--error .dirty-section__input:focus,
+.dirty-section__field--error .dirty-section__textarea:focus { outline-color: #FCBEB9; border-color: var(--hz-error-color); }
+.dirty-section__field-error { font-size: 12px; color: var(--hz-error-color); margin: 0; display: flex; align-items: center; gap: 4px; }
 /* Type B: horizontal — info (label+desc) left, control right */
 .dirty-section__field-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
 .dirty-section__field-row + .dirty-section__field-row { padding-top: 24px; }

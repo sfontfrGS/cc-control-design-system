@@ -93,6 +93,7 @@
       <!-- ─────────────────────────────────────────────────────────────────
            SECTION B — Horizontal field-rows (toggle switches, dropdowns)
            Use when the control is compact and sits to the right of the label
+           B.3 pattern: toggle that shows / hides a sub-form
       ───────────────────────────────────────────────────────────────────── -->
       <div class="dirty-section">
         <h3 class="dirty-section__title">Another Section</h3>
@@ -144,6 +145,58 @@
               <div class="dirty-section__control">
                 <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle__track"></span></label>
               </div>
+            </div>
+
+            <!-- Save row -->
+            <div class="dirty-section__save-row">
+              <button class="button-control-new button-control-new--small button-control-new--secondary" type="button">Cancel</button>
+              <button class="button-control-new button-control-new--small button-control-new--primary" type="button">Save</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────────────────
+           SECTION C — Toggle that reveals a sub-form
+           Use when a setting is "off by default, configure more when on"
+      ───────────────────────────────────────────────────────────────────── -->
+      <div class="dirty-section">
+        <h3 class="dirty-section__title">Conditional Settings</h3>
+        <div class="dirty-section__card">
+          <div class="dirty-section__card-body">
+
+            <!-- Toggle-subform pattern -->
+            <div class="dirty-section__field-row">
+              <div class="dirty-section__field-info">
+                <p class="dirty-section__field-label">Enable feature</p>
+                <p class="dirty-section__field-description">When enabled, additional configuration options appear below.</p>
+              </div>
+              <div class="dirty-section__control">
+                <label class="ds-toggle">
+                  <input type="checkbox" id="tog-subform-tpl" onchange="document.getElementById('subform-tpl').style.display=this.checked?'block':'none'">
+                  <span class="ds-toggle__track"></span>
+                </label>
+              </div>
+            </div>
+
+            <div id="subform-tpl" style="display:none; padding-top:16px; padding-left:16px; border-left:2px solid var(--hz-border-color-light); margin-top:8px;">
+              <div class="dirty-section__field">
+                <p class="dirty-section__field-label">Sub-option</p>
+                <p class="dirty-section__field-description">This field is only relevant when the feature is enabled.</p>
+                <input class="dirty-section__input" type="text" placeholder="Enter value…">
+              </div>
+            </div>
+
+            <!-- Error state example -->
+            <div class="dirty-section__field dirty-section__field--error" style="margin-top:24px;">
+              <p class="dirty-section__field-label">Required field</p>
+              <p class="dirty-section__field-description">This field must be filled in before saving.</p>
+              <input class="dirty-section__input" type="text" placeholder="Required…">
+              <p class="dirty-section__field-error">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><line x1="6" y1="3.5" x2="6" y2="6.5" stroke="currentColor" stroke-linecap="round"/><circle cx="6" cy="8.5" r=".5" fill="currentColor"/></svg>
+                This field is required.
+              </p>
             </div>
 
             <!-- Save row -->
