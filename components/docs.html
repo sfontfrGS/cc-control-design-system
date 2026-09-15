@@ -246,6 +246,7 @@
       <div class="docs-nav__group">Navigation</div>
       <a class="docs-nav__link" href="#breadcrumb">Breadcrumb</a>
       <a class="docs-nav__link" href="#filter-pill">Filter pill</a>
+      <a class="docs-nav__link" href="#filter-flyout">Filter flyout</a>
       <a class="docs-nav__link" href="#kebab-menu">Kebab menu</a>
 
       <div class="docs-nav__group">Patterns</div>
@@ -256,6 +257,7 @@
       <a class="docs-nav__link" href="#empty-state">Empty state</a>
       <a class="docs-nav__link" href="#summary-card">Summary card</a>
       <a class="docs-nav__link" href="#radio-option-card">Radio option card</a>
+      <a class="docs-nav__link" href="#rule-card">Rule card</a>
     </nav>
   </aside>
 
@@ -1447,6 +1449,265 @@ section.querySelectorAll('input, textarea').forEach(el =&gt;
       &lt;/span&gt;
     &lt;/span&gt;
   &lt;/label&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FILTER FLYOUT ===== -->
+    <section class="docs-section" id="filter-flyout">
+      <h2>Filter flyout <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Two-step panel attached to the Filters button. Step 1: property list with group headings. Step 2: operator + value picker (date calendar or multiselect checkboxes). Live-verified on Users Overview.</p>
+
+      <!-- Property list (step 1) -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Step 1 — property list</div>
+          <div class="docs-preview" style="align-items: flex-start; min-height: 300px;">
+            <div class="overview__filters-box" style="position: relative;">
+              <div style="padding: 12px 16px; font-size: 11px; font-weight: 600; color: #828080; text-transform: uppercase; letter-spacing: 1px;">System properties</div>
+              <div class="overview__filters-box-filter qa-filter-item" style="background: #F5F7F9;">
+                <span>Email</span>
+              </div>
+              <div class="overview__filters-box-filter qa-filter-item">
+                <span>Primary Role</span>
+              </div>
+              <div class="overview__filters-box-filter qa-filter-item">
+                <span>Last activity</span>
+              </div>
+              <div class="overview__filters-box-filter qa-filter-item">
+                <span>Registration date</span>
+              </div>
+              <div style="padding: 12px 16px; font-size: 11px; font-weight: 600; color: #828080; text-transform: uppercase; letter-spacing: 1px;">User profile fields</div>
+              <div class="overview__filters-box-filter qa-filter-item">
+                <span>Company</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="overview__filters-box"&gt;
+  &lt;div class="overview__filters-box-group-heading"&gt;
+    System properties
+  &lt;/div&gt;
+  &lt;div class="overview__filters-box-filter"&gt;
+    &lt;span&gt;Email&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="overview__filters-box-filter"&gt;
+    &lt;span&gt;Primary Role&lt;/span&gt;
+  &lt;/div&gt;
+  …
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Step 2 — date picker -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Step 2 — date operator + calendar</div>
+          <div class="docs-preview" style="align-items: flex-start; min-height: 360px;">
+            <div class="overview__filters-box" style="position: relative;">
+              <div class="overview__filters-box-header-back" style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; font-size: 14px; font-weight: 700; border-bottom: 1px solid #E8E8E8;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z"/></svg>
+                Last activity
+              </div>
+              <div style="padding: 8px 16px;">
+                <div class="overview__filters-box-filter form-group" style="display:flex; align-items:center; gap:8px; background: #F5F7F9;">
+                  <input type="radio" name="date-op-demo" checked> <label>After</label>
+                </div>
+                <!-- Inline calendar -->
+                <div class="m-calendar" style="padding: 8px 0; width: 280px;">
+                  <div class="a-calendar-month" style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:14px; padding: 4px 0 8px;">
+                    <span style="cursor:pointer; color:#0369E9;">‹</span>
+                    September 2026
+                    <span style="cursor:pointer; color:#0369E9;">›</span>
+                  </div>
+                  <div class="m-weekdays" style="display:grid; grid-template-columns: repeat(7,40px); font-size:12px; color:#3C4A57; text-align:center; margin-bottom:4px;">
+                    <div>sun</div><div>mon</div><div>tue</div><div>wed</div><div>thu</div><div>fri</div><div>sat</div>
+                  </div>
+                  <div class="m-month-days" style="display:grid; grid-template-columns: repeat(7,40px);">
+                    <div class="a-day a-day--disabled"></div><div class="a-day a-day--disabled"></div>
+                    <div class="a-day">1</div><div class="a-day">2</div><div class="a-day">3</div><div class="a-day">4</div><div class="a-day">5</div>
+                    <div class="a-day">6</div><div class="a-day">7</div><div class="a-day">8</div><div class="a-day">9</div><div class="a-day">10</div><div class="a-day">11</div><div class="a-day">12</div>
+                    <div class="a-day">13</div><div class="a-day">14</div><div class="a-day a-day--today">15</div><div class="a-day">16</div><div class="a-day">17</div><div class="a-day">18</div><div class="a-day">19</div>
+                    <div class="a-day">20</div><div class="a-day">21</div><div class="a-day">22</div><div class="a-day">23</div><div class="a-day">24</div><div class="a-day">25</div><div class="a-day">26</div>
+                  </div>
+                </div>
+              </div>
+              <div class="overview__filters-box-buttons" style="display:flex; gap:8px; padding: 8px 16px;">
+                <button class="button-control-new button-control-new--small button-control-new--primary"><div><div><span class="button-control__title-text">Apply</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--secondary"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;!-- Step 2 with date picker --&gt;
+&lt;div class="overview__filters-box"&gt;
+  &lt;div class="overview__filters-box-header-back"&gt;
+    &lt;svg …back arrow…&gt;&lt;/svg&gt; Last activity
+  &lt;/div&gt;
+  &lt;!-- Radio operators --&gt;
+  &lt;div class="overview__filters-box-filter form-group"&gt;
+    &lt;input type="radio" name="op" value="from"&gt;
+    &lt;label&gt;After&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;!-- Calendar (shown when a date operator is selected) --&gt;
+  &lt;div class="m-calendar"&gt;
+    &lt;div class="a-calendar-month"&gt;‹ September 2026 ›&lt;/div&gt;
+    &lt;div class="m-weekdays"&gt;
+      &lt;div class="a-week"&gt;sun&lt;/div&gt; … &lt;div class="a-week"&gt;sat&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="m-month-days"&gt;
+      &lt;div class="a-day a-day--disabled"&gt;&lt;/div&gt;
+      &lt;div class="a-day"&gt;1&lt;/div&gt;
+      &lt;div class="a-day a-day--today"&gt;15&lt;/div&gt;
+      &lt;div class="a-day a-day--selected"&gt;20&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="overview__filters-box-buttons"&gt;
+    &lt;button …primary…&gt;Apply&lt;/button&gt;
+    &lt;button …secondary…&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Step 2 — multiselect -->
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Step 2 — multiselect checkboxes</div>
+          <div class="docs-preview" style="align-items: flex-start; min-height: 340px;">
+            <div class="overview__filters-box" style="position: relative;">
+              <div class="overview__filters-box-header-back" style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; font-size: 14px; font-weight: 700; border-bottom: 1px solid #E8E8E8;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z"/></svg>
+                Primary Role
+              </div>
+              <div style="padding: 8px 16px;">
+                <div class="overview__filters-box-filter form-group" style="display:flex; align-items:center; gap:8px; background: #F5F7F9;">
+                  <input type="radio" name="role-op-demo" checked> <label>Is one of</label>
+                </div>
+                <div style="padding: 8px 0;">
+                  <div class="search-box--table" style="margin-bottom:8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 16.5l3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <input type="text" placeholder="Search for Primary Role">
+                  </div>
+                  <div class="overview__filters-box-filter" style="display:flex; align-items:center; gap:8px;"><input type="checkbox"> <label>Administrators</label></div>
+                  <div class="overview__filters-box-filter" style="display:flex; align-items:center; gap:8px;"><input type="checkbox"> <label>Community Managers</label></div>
+                  <div class="overview__filters-box-filter" style="display:flex; align-items:center; gap:8px;"><input type="checkbox"> <label>Moderators</label></div>
+                  <div class="overview__filters-box-filter" style="display:flex; align-items:center; gap:8px;"><input type="checkbox"> <label>Registered Users</label></div>
+                  <a style="font-size:14px; color:#0369E9; padding: 8px 0; display:block;">Show all</a>
+                </div>
+                <div class="overview__filters-box-filter form-group" style="display:flex; align-items:center; gap:8px;">
+                  <input type="radio" name="role-op-demo"> <label>Is not one of</label>
+                </div>
+              </div>
+              <div class="overview__filters-box-buttons" style="display:flex; gap:8px; padding: 8px 16px;">
+                <button class="button-control-new button-control-new--small button-control-new--primary"><div><div><span class="button-control__title-text">Apply</span></div></div></button>
+                <button class="button-control-new button-control-new--small button-control-new--secondary"><div><div><span class="button-control__title-text">Cancel</span></div></div></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;!-- Step 2 with multiselect --&gt;
+&lt;div class="overview__filters-box"&gt;
+  &lt;div class="overview__filters-box-header-back"&gt;
+    &lt;svg …&gt;&lt;/svg&gt; Primary Role
+  &lt;/div&gt;
+  &lt;!-- Operator radio --&gt;
+  &lt;div class="overview__filters-box-filter form-group"&gt;
+    &lt;input type="radio" name="op" checked&gt; &lt;label&gt;Is one of&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;!-- Search + checkboxes --&gt;
+  &lt;div class="search-box--table"&gt;
+    &lt;svg …&gt;&lt;/svg&gt;
+    &lt;input type="text" placeholder="Search for Primary Role"&gt;
+  &lt;/div&gt;
+  &lt;div class="overview__filters-box-filter"&gt;
+    &lt;input type="checkbox"&gt; &lt;label&gt;Administrators&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;p class="select-all"&gt;Show all&lt;/p&gt;
+  &lt;div class="overview__filters-box-buttons"&gt;
+    &lt;button …primary…&gt;Apply&lt;/button&gt;
+    &lt;button …secondary…&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <table class="docs-props">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>.overview__filters-box</code></td><td>Panel — 380px wide, white, 4px radius, 1px #C7C7C7 border, shadow 0 0 16px rgba(0,0,0,.08)</td></tr>
+          <tr><td><code>.overview__filters-box-header-back</code></td><td>Step-2 header with back arrow + property name — 44px tall, padding 12px 16px</td></tr>
+          <tr><td><code>.overview__filters-box-filter</code></td><td>Row item — 43px tall, padding 12px 16px; hover bg #F5F7F9</td></tr>
+          <tr><td><code>.overview__filters-box-buttons</code></td><td>Footer row with Apply + Cancel buttons</td></tr>
+          <tr><td><code>.m-calendar</code></td><td>Calendar — 280px, white; month header + 7-col day grid</td></tr>
+          <tr><td><code>.a-day</code></td><td>Day cell — 40×40px, 4px radius; today = blue text; selected = blue bg</td></tr>
+          <tr><td><code>.a-day--disabled</code></td><td>Empty/out-of-month cell</td></tr>
+          <tr><td><code>.a-day--today</code></td><td>Today — primary blue text</td></tr>
+          <tr><td><code>.a-day--selected</code></td><td>Selected date — primary blue bg, white text</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== RULE CARD ===== -->
+    <section class="docs-section" id="rule-card">
+      <h2>Rule card <span class="docs-badge docs-badge--stable">Stable</span></h2>
+      <p class="docs-section__desc">Collapsible sentence-style config card. Header shows a status badge (ON/OFF) and expand chevron. Body contains inline editable fields within a natural-language sentence.</p>
+
+      <div class="docs-variant">
+        <div>
+          <div class="docs-variant__label">Collapsed / expanded</div>
+          <div class="docs-preview" style="flex-direction: column; align-items: stretch; gap: 8px;">
+            <!-- Collapsed -->
+            <div class="rule-card">
+              <div class="rule-card__header" style="display:flex; align-items:center; gap:8px; padding:12px 16px; cursor:pointer;">
+                <span style="color:#12995B;">✓</span>
+                <span style="flex:1; font-size:14px; font-weight:600;">Ask end users to mark best answer via email</span>
+                <span style="background:#EBFBEE; color:#12995B; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; text-transform:uppercase;">ON</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>
+              </div>
+            </div>
+            <!-- Expanded -->
+            <div class="rule-card">
+              <div class="rule-card__header" style="display:flex; align-items:center; gap:8px; padding:12px 16px; cursor:pointer; border-bottom:1px solid #E8E8E8;">
+                <span style="color:#12995B;">✓</span>
+                <span style="flex:1; font-size:14px; font-weight:600;">Ask end users to mark best answer via email</span>
+                <span style="background:#EBFBEE; color:#12995B; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; text-transform:uppercase;">ON</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+              </div>
+              <div class="rule-card__body" style="padding:16px; font-size:14px; color:var(--hz-text-color-primary); line-height:1.6;">
+                If a question has one or more replies from a user other than the question author,
+                after this topic is inactive for <input class="ds-input" type="text" value="7" style="width:56px; display:inline-block;"> days,
+                send the topic author the 'Is your problem solved?' email.
+                <div style="display:flex; align-items:flex-start; gap:8px; margin-top:12px; padding:10px 12px; background:#F2F8FF; border-radius:4px; font-size:13px; color:#3C4A57;">
+                  <span>ⓘ</span>
+                  <span>You can customize the <a href="#" style="color:#0369E9;">'Is your problem solved?' email template</a> that is sent out, to match your brand.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code">
+          <button class="docs-copy-btn">Copy</button>
+          <pre><code class="language-html">&lt;div class="rule-card"&gt;
+  &lt;div class="rule-card__header"&gt;
+    &lt;span&gt;✓&lt;/span&gt;
+    &lt;span class="title"&gt;Ask end users to mark best answer via email&lt;/span&gt;
+    &lt;span class="status-badge"&gt;ON&lt;/span&gt;
+    &lt;svg …chevron…&gt;&lt;/svg&gt;
+  &lt;/div&gt;
+  &lt;div class="rule-card__body"&gt;
+    If a question has one or more replies from a user other than the
+    question author, after this topic is inactive for
+    &lt;input class="ds-input" type="text" value="7" style="width:56px;"&gt;
+    days, send the topic author the 'Is your problem solved?' email.
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </div>
       </div>
